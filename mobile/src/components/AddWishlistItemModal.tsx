@@ -9,63 +9,65 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { X, Image as ImageIcon, Music2, Link2, Camera, Quote } from 'lucide-react-native';
+import { X } from 'lucide-react-native';
 import { colors, fonts, radii, spacing } from '../theme/theme';
 import { TextField } from './TextField';
 import { Button } from './Button';
 import { ClipboardPasteBanner } from './ClipboardPasteBanner';
 import { useClipboardUrl } from '../utils/useClipboardUrl';
-import { DreamBoardItem } from '../types/index';
-import { BOARD_CATEGORIES, priceToRangeTag } from '../utils/priceRanges';
+import { WishlistItem } from '../types/index';
+import { WISHLIST_CATEGORIES } from '../utils/wishlistCategories';
+import { priceToRangeTag } from '../utils/priceRanges';
 
-interface AddPinModalProps {
+interface AddWishlistItemModalProps {
   visible: boolean;
   onClose: () => void;
-  onSave: (item: DreamBoardItem) => void;
+  onSave: (item: WishlistItem) => void;
 }
 
-const TYPE_OPTIONS: { value: DreamBoardItem['type']; label: string; icon: React.ComponentType<{ size?: number; color?: string }> }[] = [
-  { value: 'photo', label: 'Photo', icon: ImageIcon },
-  { value: 'tiktok_idea', label: 'TikTok idea', icon: Music2 },
-  { value: 'link', label: 'Link', icon: Link2 },
-  { value: 'screenshot', label: 'Screenshot', icon: Camera },
-  { value: 'quote', label: 'Quote', icon: Quote },
-];
-
-export function AddPinModal({ visible, onClose, onSave }: AddPinModalProps) {
+export function AddWishlistItemModal({ visible, onClose, onSave }: AddWishlistItemModalProps) {
   const [title, setTitle] = useState('');
-  const [type, setType] = useState<DreamBoardItem['type']>('photo');
-  const [mediaUrl, setMediaUrl] = useState('');
+  const [category, setCategory] = useState<(typeof WISHLIST_CATEGORIES)[number]>(WISHLIST_CATEGORIES[0]);
   const [price, setPrice] = useState('');
-  const [category, setCategory] = useState<(typeof BOARD_CATEGORIES)[number]>(BOARD_CATEGORIES[0]);
-  const [linkUrl, setLinkUrl] = useState('');
+  const [store, setStore] = useState('');
+  const [url, setUrl] = useState('');
   const [notes, setNotes] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [eventVenue, setEventVenue] = useState('');
+
   const { detectedUrl, checkClipboard, clearDetected } = useClipboardUrl();
+
+  const isEvent = category === 'Experiences & Events';
 
   const reset = () => {
     setTitle('');
-    setType('photo');
-    setMediaUrl('');
+    setCategory(WISHLIST_CATEGORIES[0]);
     setPrice('');
-    setCategory(BOARD_CATEGORIES[0]);
-    setLinkUrl('');
+    setStore('');
+    setUrl('');
     setNotes('');
+    setEventDate('');
+    setEventVenue('');
     clearDetected();
   };
 
   const handleSave = () => {
-    if (!title.trim() || !mediaUrl.trim()) return;
+    if (!title.trim()) return;
     const priceNum = price ? Number(price) : 0;
 
     onSave({
-      id: `db-${Date.now()}`,
+      id: `wish-${Date.now()}`,
       title: title.trim(),
-      type,
-      mediaUrl: mediaUrl.trim(),
       price: priceNum,
       priceRangeTag: priceToRangeTag(priceNum),
-      boardCategory: category,
-      linkUrl: linkUrl.trim() || undefined,
+      store: store.trim() || 'Not specified',
+      url: url.trim() || undefined,
+      category,
+      eventDate: isEvent && eventDate.trim() ? eventDate.trim() : undefined,
+      eventVenue: isEvent && eventVenue.trim() ? eventVenue.trim() : undefined,
+      claimedBy: null,
+      claimedStatus: 'unclaimed',
+      priority: 'medium',
       notes: notes.trim() || undefined,
     });
 
@@ -82,15 +84,12 @@ export function AddPinModal({ visible, onClose, onSave }: AddPinModalProps) {
       onShow={checkClipboard}
     >
       <View style={styles.overlay}>
-        <KeyboardAvoidingView
-          style={styles.sheetWrap}
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        >
+        <KeyboardAvoidingView style={styles.sheetWrap} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
           <View style={styles.sheet}>
             <View style={styles.header}>
               <View>
-                <Text style={styles.title}>Save New Dream Pin 📌</Text>
-                <Text style={styles.subtitle}>Save trends, screenshots or finds with a price.</Text>
+                <Text style={styles.title}>Add to Wishlist</Text>
+                <Text style={styles.subtitle}>A product, an experience — anything she'd actually want.</Text>
               </View>
               <Pressable onPress={onClose} hitSlop={10} style={styles.closeButton}>
                 <X size={18} color={colors.textSecondary} />
@@ -98,57 +97,9 @@ export function AddPinModal({ visible, onClose, onSave }: AddPinModalProps) {
             </View>
 
             <ScrollView contentContainerStyle={styles.form} keyboardShouldPersistTaps="handled">
-              <Field label="What kind of pin is this?">
-                <View style={styles.typeWrap}>
-                  {TYPE_OPTIONS.map((opt) => {
-                    const Icon = opt.icon;
-                    const isActive = type === opt.value;
-                    return (
-                      <Pressable
-                        key={opt.value}
-                        onPress={() => setType(opt.value)}
-                        style={[styles.typeChip, isActive && styles.typeChipActive]}
-                      >
-                        <Icon size={13} color={isActive ? colors.white : colors.textPrimary} />
-                        <Text style={[styles.typeChipText, isActive && styles.typeChipTextActive]}>
-                          {opt.label}
-                        </Text>
-                      </Pressable>
-                    );
-                  })}
-                </View>
-              </Field>
-
-              <Field label="Title / Product Name *">
-                <TextField
-                  placeholder="e.g. TikTok Viral Bow Hair Clips"
-                  value={title}
-                  onChangeText={setTitle}
-                />
-              </Field>
-
-              <Field label="Image URL *">
-                <TextField
-                  placeholder="https://..."
-                  value={mediaUrl}
-                  onChangeText={setMediaUrl}
-                  autoCapitalize="none"
-                  keyboardType="url"
-                />
-              </Field>
-
-              <Field label="Price ($)">
-                <TextField
-                  placeholder="24"
-                  value={price}
-                  onChangeText={setPrice}
-                  keyboardType="numeric"
-                />
-              </Field>
-
               <Field label="Category">
                 <View style={styles.categoryWrap}>
-                  {BOARD_CATEGORIES.map((cat) => (
+                  {WISHLIST_CATEGORIES.map((cat) => (
                     <Pressable
                       key={cat}
                       onPress={() => setCategory(cat)}
@@ -164,12 +115,47 @@ export function AddPinModal({ visible, onClose, onSave }: AddPinModalProps) {
                 </View>
               </Field>
 
-              <Field label="Store Link (optional)">
+              <Field label={isEvent ? 'Event / Activity Name *' : 'Title / Product Name *'}>
+                <TextField
+                  placeholder={isEvent ? 'e.g. Sabrina Carpenter Concert Tickets' : 'e.g. Sol de Janeiro Body Mist'}
+                  value={title}
+                  onChangeText={setTitle}
+                />
+              </Field>
+
+              {isEvent && (
+                <>
+                  <Field label="Date (optional)">
+                    <TextField placeholder="e.g. 2026-09-14" value={eventDate} onChangeText={setEventDate} />
+                  </Field>
+                  <Field label="Venue / Location (optional)">
+                    <TextField
+                      placeholder="e.g. Water park, downtown venue..."
+                      value={eventVenue}
+                      onChangeText={setEventVenue}
+                    />
+                  </Field>
+                </>
+              )}
+
+              <Field label="Price ($)">
+                <TextField placeholder="24" value={price} onChangeText={setPrice} keyboardType="numeric" />
+              </Field>
+
+              <Field label={isEvent ? 'Where to book' : 'Store'}>
+                <TextField
+                  placeholder={isEvent ? 'e.g. Ticketmaster' : 'e.g. Sephora'}
+                  value={store}
+                  onChangeText={setStore}
+                />
+              </Field>
+
+              <Field label="Link (optional)">
                 {detectedUrl && (
                   <ClipboardPasteBanner
                     url={detectedUrl}
                     onPaste={() => {
-                      setLinkUrl(detectedUrl);
+                      setUrl(detectedUrl);
                       clearDetected();
                     }}
                     onDismiss={clearDetected}
@@ -177,8 +163,8 @@ export function AddPinModal({ visible, onClose, onSave }: AddPinModalProps) {
                 )}
                 <TextField
                   placeholder="https://..."
-                  value={linkUrl}
-                  onChangeText={setLinkUrl}
+                  value={url}
+                  onChangeText={setUrl}
                   autoCapitalize="none"
                   keyboardType="url"
                 />
@@ -186,13 +172,13 @@ export function AddPinModal({ visible, onClose, onSave }: AddPinModalProps) {
 
               <Field label="Notes">
                 <TextField
-                  placeholder="e.g. Saw this on TikTok, so cute!"
+                  placeholder="e.g. Saw this and mentioned wanting it!"
                   value={notes}
                   onChangeText={setNotes}
                 />
               </Field>
 
-              <Button label="Save Pin 📌" onPress={handleSave} />
+              <Button label="Add to Wishlist" onPress={handleSave} />
             </ScrollView>
           </View>
         </KeyboardAvoidingView>
@@ -292,34 +278,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   categoryChipTextActive: {
-    color: colors.white,
-  },
-  typeWrap: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  typeChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: colors.surfaceRaised,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.pill,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-  },
-  typeChipActive: {
-    backgroundColor: colors.accent,
-    borderColor: colors.accent,
-  },
-  typeChipText: {
-    fontFamily: fonts.bodyMedium,
-    fontSize: 12,
-    color: colors.textPrimary,
-  },
-  typeChipTextActive: {
     color: colors.white,
   },
 });

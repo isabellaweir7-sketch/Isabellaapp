@@ -34,5 +34,6 @@ export const BOARD_CATEGORIES = [
   'Room & Cozy',
   'Jewelry & Sparkle',
   'Tasty Treats',
+  'Experiences & Events',
   'Random Obsessions',
 ] as const;

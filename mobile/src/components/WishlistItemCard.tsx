@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, Pressable, StyleSheet, Linking } from 'react-native';
-import { ExternalLink, CheckCircle2 } from 'lucide-react-native';
+import { ExternalLink, CheckCircle2, CalendarDays, Users } from 'lucide-react-native';
 import { WishlistItem } from '../types/index';
 import { colors, fonts, radii, spacing } from '../theme/theme';
 
@@ -9,11 +9,15 @@ const ME = 'You';
 interface WishlistItemCardProps {
   item: WishlistItem;
   onToggleClaim: () => void;
+  onToggleChipIn: () => void;
 }
 
-export function WishlistItemCard({ item, onToggleClaim }: WishlistItemCardProps) {
+export function WishlistItemCard({ item, onToggleClaim, onToggleChipIn }: WishlistItemCardProps) {
   const isClaimedByMe = item.claimedBy === ME;
   const isClaimedByOther = Boolean(item.claimedBy) && item.claimedBy !== ME;
+  const isChippingIn = item.claimedStatus === 'chipping_in';
+  const isInChipIn = Boolean(item.chipInParticipants?.includes(ME));
+  const chipInDisplayCount = item.chipInParticipants?.length ?? item.chipInCount ?? 1;
 
   return (
     <View
@@ -37,47 +41,77 @@ export function WishlistItemCard({ item, onToggleClaim }: WishlistItemCardProps)
             {item.title}
           </Text>
           <Text style={styles.store}>{item.store}</Text>
+          {item.eventDate ? (
+            <View style={styles.eventRow}>
+              <CalendarDays size={11} color={colors.accent} />
+              <Text style={styles.eventText} numberOfLines={1}>
+                {item.eventDate}
+                {item.eventVenue ? ` · ${item.eventVenue}` : ''}
+              </Text>
+            </View>
+          ) : null}
           {item.notes ? <Text style={styles.notes}>"{item.notes}"</Text> : null}
         </View>
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.status}>
-          {isClaimedByMe
-            ? 'Claimed by you!'
-            : isClaimedByOther
-            ? `Reserved by ${item.claimedBy}`
-            : item.claimedStatus === 'chipping_in'
-            ? `Chipping in (${item.chipInCount || 2} friends)`
-            : 'Unclaimed'}
-        </Text>
-
-        <View style={styles.footerActions}>
+        <View style={styles.statusRow}>
+          <Text style={styles.status}>
+            {isClaimedByMe
+              ? 'Claimed by you!'
+              : isClaimedByOther
+              ? `Reserved by ${item.claimedBy}`
+              : isChippingIn
+              ? `Chipping in (${chipInDisplayCount} ${chipInDisplayCount === 1 ? 'friend' : 'friends'})`
+              : 'Unclaimed'}
+          </Text>
           {item.url ? (
             <Pressable onPress={() => Linking.openURL(item.url!)} hitSlop={8} style={styles.linkButton}>
               <ExternalLink size={16} color={colors.textSecondary} />
             </Pressable>
           ) : null}
+        </View>
 
-          <Pressable
-            onPress={onToggleClaim}
-            disabled={isClaimedByOther}
-            style={[
-              styles.claimButton,
-              isClaimedByMe && styles.claimButtonMine,
-              isClaimedByOther && styles.claimButtonDisabled,
-            ]}
-          >
-            {isClaimedByMe && <CheckCircle2 size={14} color={colors.white} />}
-            <Text
+        <View style={styles.actionsRow}>
+          {!item.claimedBy && !isChippingIn && (
+            <Pressable onPress={onToggleChipIn} style={styles.chipInSecondaryButton}>
+              <Users size={13} color={colors.accent} />
+              <Text style={styles.chipInSecondaryButtonText}>Chip in</Text>
+            </Pressable>
+          )}
+
+          {isChippingIn ? (
+            <Pressable
+              onPress={onToggleChipIn}
+              style={[styles.claimButton, isInChipIn && styles.claimButtonMine, { flex: 1 }]}
+            >
+              {isInChipIn && <CheckCircle2 size={14} color={colors.white} />}
+              <Text style={styles.claimButtonText}>
+                {isInChipIn ? "You're in — Leave" : `Join chip-in`}
+              </Text>
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={onToggleClaim}
+              disabled={isClaimedByOther}
               style={[
-                styles.claimButtonText,
-                isClaimedByOther && styles.claimButtonTextDisabled,
+                styles.claimButton,
+                isClaimedByMe && styles.claimButtonMine,
+                isClaimedByOther && styles.claimButtonDisabled,
+                { flex: 1 },
               ]}
             >
-              {isClaimedByMe ? 'Release' : isClaimedByOther ? 'Reserved' : 'Claim gift'}
-            </Text>
-          </Pressable>
+              {isClaimedByMe && <CheckCircle2 size={14} color={colors.white} />}
+              <Text
+                style={[
+                  styles.claimButtonText,
+                  isClaimedByOther && styles.claimButtonTextDisabled,
+                ]}
+              >
+                {isClaimedByMe ? 'Release' : isClaimedByOther ? 'Reserved' : 'Claim gift'}
+              </Text>
+            </Pressable>
+          )}
         </View>
       </View>
     </View>
@@ -150,6 +184,18 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: colors.textSecondary,
   },
+  eventRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginTop: 2,
+  },
+  eventText: {
+    fontFamily: fonts.bodyMedium,
+    fontSize: 10,
+    color: colors.accent,
+    flexShrink: 1,
+  },
   notes: {
     fontFamily: fonts.body,
     fontStyle: 'italic',
@@ -158,12 +204,15 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     borderTopWidth: 1,
     borderTopColor: colors.border,
     paddingTop: spacing.sm,
+    gap: spacing.sm,
+  },
+  statusRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     gap: spacing.sm,
   },
   status: {
@@ -172,7 +221,7 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     flexShrink: 1,
   },
-  footerActions: {
+  actionsRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
@@ -180,9 +229,27 @@ const styles = StyleSheet.create({
   linkButton: {
     padding: 4,
   },
+  chipInSecondaryButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: colors.background,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radii.pill,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+  },
+  chipInSecondaryButtonText: {
+    fontFamily: fonts.bodyBold,
+    fontSize: 10,
+    textTransform: 'uppercase',
+    color: colors.accent,
+  },
   claimButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: 4,
     backgroundColor: colors.accent,
     borderRadius: radii.pill,

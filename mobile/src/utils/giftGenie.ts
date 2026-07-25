@@ -158,6 +158,28 @@ const hobbyPick: Generator = (friend, tier) => {
   };
 };
 
+const experiencePick: Generator = (friend, tier) => {
+  const hobby = friend.preferences.hobbies[0];
+  const activity = hobby ? `a ${hobby.toLowerCase()} experience` : 'a fun day out';
+  const byTier: Record<PriceRangeTag, { title: string; price: string }> = {
+    under15: { title: hobby ? `Drop-in class pass for ${hobby.toLowerCase()}` : 'Mini golf or arcade pass', price: '$15' },
+    '15to35': { title: 'Water park or trampoline park day pass', price: '$30' },
+    '35to75': { title: 'Concert, show, or event tickets', price: '$65' },
+    splurge75: { title: 'Concert tickets + VIP add-on, or a weekend activity pass', price: '$120' },
+  };
+  const { title, price } = byTier[tier];
+  return {
+    title,
+    price,
+    store: 'Ticketmaster / local venue',
+    reason: `An experience over another thing — ${activity} she'll actually remember.`,
+    category: 'Experiences & Events',
+    imageUrl: '',
+    affiliateUrl: `https://www.google.com/search?tbm=shop&q=${encodeURIComponent(title)}`,
+    priceTag: tier,
+  };
+};
+
 const roomPick: Generator = (friend, tier) => {
   const color = pick(friend.preferences.favoriteColors, 'her favorite color');
   const byTier: Record<PriceRangeTag, { title: string; price: string }> = {
@@ -203,11 +225,11 @@ const pastGiftEcho: Generator = (friend, tier) => {
 };
 
 const VIBE_PRIORITY: Record<Vibe, Generator[]> = {
-  'Aesthetic & thoughtful': [pastGiftEcho, jewelryPick, beautyPick, flowerPick, roomPick, hobbyPick, fashionPick, snackPick],
-  'Viral TikTok favorites': [fashionPick, beautyPick, hobbyPick, pastGiftEcho, snackPick, jewelryPick, roomPick, flowerPick],
-  'Cozy room & self-care': [roomPick, snackPick, beautyPick, pastGiftEcho, hobbyPick, flowerPick, jewelryPick, fashionPick],
-  'Dainty & sparkly jewelry': [jewelryPick, beautyPick, pastGiftEcho, flowerPick, roomPick, hobbyPick, fashionPick, snackPick],
-  'Fun snacks & boba treats': [snackPick, pastGiftEcho, beautyPick, hobbyPick, roomPick, fashionPick, jewelryPick, flowerPick],
+  'Aesthetic & thoughtful': [pastGiftEcho, jewelryPick, beautyPick, flowerPick, roomPick, experiencePick, hobbyPick, fashionPick, snackPick],
+  'Viral TikTok favorites': [fashionPick, experiencePick, beautyPick, hobbyPick, pastGiftEcho, snackPick, jewelryPick, roomPick, flowerPick],
+  'Cozy room & self-care': [roomPick, snackPick, beautyPick, pastGiftEcho, hobbyPick, experiencePick, flowerPick, jewelryPick, fashionPick],
+  'Dainty & sparkly jewelry': [jewelryPick, beautyPick, pastGiftEcho, flowerPick, roomPick, experiencePick, hobbyPick, fashionPick, snackPick],
+  'Fun snacks & boba treats': [snackPick, pastGiftEcho, experiencePick, beautyPick, hobbyPick, roomPick, fashionPick, jewelryPick, flowerPick],
 };
 
 export function generateGiftSuggestions(

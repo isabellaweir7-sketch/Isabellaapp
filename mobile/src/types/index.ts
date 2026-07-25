@@ -16,9 +16,12 @@ export interface WishlistItem {
   url?: string;
   imageUrl?: string;
   category: string;
+  eventDate?: string; // YYYY-MM-DD, for concert tickets, water parks, activities, etc.
+  eventVenue?: string;
   claimedBy: string | null; // e.g. "Sophia" or null
   claimedStatus: 'unclaimed' | 'claimed' | 'chipping_in';
   chipInCount?: number;
+  chipInParticipants?: string[]; // names of people chipping in together
   priority: 'high' | 'medium' | 'low';
   notes?: string;
 }
@@ -32,7 +35,7 @@ export interface DreamBoardItem {
   priceRangeTag: PriceRangeTag;
   linkUrl?: string;
   notes?: string;
-  boardCategory: 'Beauty & Glow' | 'Fashion & Style' | 'Room & Cozy' | 'Jewelry & Sparkle' | 'Tasty Treats' | 'Random Obsessions';
+  boardCategory: 'Beauty & Glow' | 'Fashion & Style' | 'Room & Cozy' | 'Jewelry & Sparkle' | 'Tasty Treats' | 'Random Obsessions' | 'Experiences & Events';
 }
 
 export interface ProfileTheme {

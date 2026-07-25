@@ -16,6 +16,7 @@ import { colors, fonts, radii, spacing, shadow } from '../theme/theme';
 import { Avatar } from '../components/Avatar';
 import { PreferenceCard, PreferenceLine, PreferenceChips } from '../components/PreferenceCard';
 import { WishlistItemCard } from '../components/WishlistItemCard';
+import { AddWishlistItemModal } from '../components/AddWishlistItemModal';
 import { useAppData } from '../context/AppDataContext';
 import { formatBirthdayFull, getZodiacSign } from '../utils/dateUtils';
 import { WhispersNote } from '../types/index';
@@ -27,9 +28,10 @@ const ME = 'You';
 type Props = BottomTabScreenProps<MainTabParamList, 'Profiles'>;
 
 export function ProfilesScreen({ route }: Props) {
-  const { friends, updateFriend } = useAppData();
+  const { friends, updateFriend, addWishlistItem } = useAppData();
   const [selectedId, setSelectedId] = useState<string>(route.params?.friendId || friends[0]?.id);
   const [noteText, setNoteText] = useState('');
+  const [isAddItemOpen, setIsAddItemOpen] = useState(false);
 
   useEffect(() => {
     if (route.params?.friendId) setSelectedId(route.params.friendId);
@@ -56,6 +58,50 @@ export function ProfilesScreen({ route }: Props) {
         };
       }
       return item;
+    });
+    updateFriend({ ...friend, wishlistItems: updatedWishlist });
+  };
+
+  const handleToggleChipIn = (itemId: string) => {
+    const updatedWishlist = friend.wishlistItems.map((item) => {
+      if (item.id !== itemId) return item;
+
+      const isInIt = Boolean(item.chipInParticipants?.includes(ME));
+
+      if (item.claimedStatus !== 'chipping_in') {
+        // Starting a fresh chip-in from an unclaimed item
+        return {
+          ...item,
+          claimedStatus: 'chipping_in' as const,
+          chipInParticipants: [ME],
+          chipInCount: 1,
+        };
+      }
+
+      if (isInIt) {
+        // Leaving the chip-in
+        const remaining = (item.chipInParticipants || []).filter((name) => name !== ME);
+        if (remaining.length === 0) {
+          return {
+            ...item,
+            claimedStatus: 'unclaimed' as const,
+            chipInParticipants: undefined,
+            chipInCount: undefined,
+          };
+        }
+        return { ...item, chipInParticipants: remaining, chipInCount: remaining.length };
+      }
+
+      // Joining an existing chip-in (seed anonymous placeholders if this item came
+      // pre-seeded with just a chipInCount and no named participants yet)
+      const existingParticipants =
+        item.chipInParticipants ?? Array.from({ length: item.chipInCount ?? 0 }, () => 'A friend');
+      const updatedParticipants = [...existingParticipants, ME];
+      return {
+        ...item,
+        chipInParticipants: updatedParticipants,
+        chipInCount: updatedParticipants.length,
+      };
     });
     updateFriend({ ...friend, wishlistItems: updatedWishlist });
   };
@@ -177,7 +223,7 @@ export function ProfilesScreen({ route }: Props) {
         {/* Wishlist */}
         <View style={styles.section}>
           <View style={styles.sectionHeaderRow}>
-            <View>
+            <View style={{ flex: 1 }}>
               <View style={styles.sectionHeader}>
                 <Gift size={18} color={colors.accent} />
                 <Text style={styles.sectionTitle}>Wishlist & Claiming</Text>
@@ -186,11 +232,20 @@ export function ProfilesScreen({ route }: Props) {
                 Surprise safe — claimed status is invisible to {friend.name.split(' ')[0]}
               </Text>
             </View>
+            <Pressable style={styles.addItemButton} onPress={() => setIsAddItemOpen(true)}>
+              <Plus size={14} color={colors.white} />
+              <Text style={styles.addItemButtonText}>Add Item</Text>
+            </Pressable>
           </View>
 
           <View style={styles.wishlistGrid}>
             {friend.wishlistItems.map((item) => (
-              <WishlistItemCard key={item.id} item={item} onToggleClaim={() => handleToggleClaim(item.id)} />
+              <WishlistItemCard
+                key={item.id}
+                item={item}
+                onToggleClaim={() => handleToggleClaim(item.id)}
+                onToggleChipIn={() => handleToggleChipIn(item.id)}
+              />
             ))}
           </View>
         </View>
@@ -236,6 +291,12 @@ export function ProfilesScreen({ route }: Props) {
           </View>
         </View>
       </ScrollView>
+
+      <AddWishlistItemModal
+        visible={isAddItemOpen}
+        onClose={() => setIsAddItemOpen(false)}
+        onSave={(item) => addWishlistItem(friend.id, item)}
+      />
     </SafeAreaView>
   );
 }
@@ -432,6 +493,21 @@ const styles = StyleSheet.create({
   },
   wishlistGrid: {
     gap: spacing.sm,
+  },
+  addItemButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: colors.accent,
+    borderRadius: radii.pill,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+  },
+  addItemButtonText: {
+    fontFamily: fonts.bodyBold,
+    fontSize: 10,
+    textTransform: 'uppercase',
+    color: colors.white,
   },
   noteInputRow: {
     flexDirection: 'row',
