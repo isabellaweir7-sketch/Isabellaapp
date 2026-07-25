@@ -19,14 +19,24 @@ preferences, secret gift claiming, and more — built with Expo + React Native.
 - **Onboarding**: Welcome screen and Sign in / Sign up screens (UI only —
   Google/email sign-in currently just marks you as signed in locally; no
   backend auth yet).
-- **Birthdays tab**: live countdown cards for each friend, searchable, with
-  reminder toggles.
+- **Birthdays tab**: a horizontal "coming up" strip of upcoming birthdays plus
+  a month-by-month calendar grid underneath. Tapping a friend (from the strip
+  or a calendar day) opens a quick-view sheet with a countdown, key
+  preferences, a reminder toggle, and shortcuts to their profile or Gift
+  Genie.
 - **Profiles tab**: full friend profile — sizes, favorite shops/snacks/
   drinks/flowers, jewellery preferences, allergies, a strict "do not want"
   list, wishlist items with secret gift claiming, and a whispers/mentions
   notes log.
-- **Dream Board / Gift Genie / Badges tabs**: placeholder screens — not yet
-  built.
+- **Dream Board tab**: a private, price-filterable pin board for saving
+  photos, TikTok ideas, links, screenshots and quotes.
+- **Gift Genie tab**: suggests gifts from a friend's own saved preferences
+  (shops, jewellery style, snacks, flowers, hobbies) plus an echo of what
+  other friends already bought them, filtered by budget and vibe. This is a
+  rules-based recommender, not a live AI call — there's no backend yet to
+  hold an API key securely, so it doesn't hit a real LLM. Suggestions add
+  straight to the wishlist or open a real shopping search link.
+- **Badges tab**: giver level and unlocked badges (read-only for now).
 
 Data is mock data (ported from the `../mockData.ts` web prototype) persisted
 locally on-device via AsyncStorage. There is no shared backend yet, so
@@ -40,8 +50,6 @@ headings, Inter for body text.
 
 ## Next up
 
-- Birthday calendar (month grid) view
-- Dream Board (photo/link/screenshot board organized by price range)
-- Gift Genie AI suggestions + affiliate links
-- Group gift chip-ins, chat, giver badges
+- Wire Gift Genie to a real AI backend (needs a server to hold the API key)
+- Group gift chip-ins, in-app chat, badge-earning logic
 - Real backend + auth so friend data syncs across devices
