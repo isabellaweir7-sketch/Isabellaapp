@@ -1,0 +1,63 @@
+name: Publish preview to Expo
+
+# Publishes the mobile app to Expo's servers so it can be opened directly in
+# Expo Go on a phone, with no local dev server or computer required. Needs an
+# EXPO_TOKEN repo secret (create at expo.dev > Account Settings > Access
+# Tokens, then add as a GitHub Actions secret named EXPO_TOKEN).
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/wishly-app-concept-0oibbg
+    paths:
+      - "mobile/**"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Write env file
+        run: |
+          cat > .env << 'EOF'
+          EXPO_PUBLIC_SUPABASE_URL=https://cbsktghlpfveulwexcav.supabase.co
+          EXPO_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_Z04pBHwgHa-uHmP-qZaOdg_6Uow5rx5
+          EOF
+
+      - name: Link EAS project (first run only)
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          if ! grep -q '"projectId"' app.json; then
+            npx eas-cli@latest init --non-interactive --force
+          fi
+
+      - name: Commit EAS project link if it changed
+        run: |
+          if ! git diff --quiet -- app.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add app.json
+            git commit -m "Link EAS project [skip ci]"
+            git push
+          fi
+
+      - name: Publish update
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npx eas-cli@latest update --auto --non-interactive --message "CI publish from ${{ github.sha }}"
