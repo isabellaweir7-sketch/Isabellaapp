@@ -6,53 +6,38 @@ import { ProfilesScreen } from '../screens/ProfilesScreen';
 import { DreamBoardScreen } from '../screens/DreamBoardScreen';
 import { GiftGenieScreen } from '../screens/GiftGenieScreen';
 import { BadgesScreen } from '../screens/BadgesScreen';
-import { colors, fonts } from '../theme/theme';
+import { colors } from '../theme/theme';
 import type { MainTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
+
+function tabIcon(Icon: typeof Cake) {
+  return ({ focused, color }: { focused: boolean; color: string }) => (
+    <Icon color={color} size={24} strokeWidth={focused ? 2.4 : 1.8} />
+  );
+}
 
 export function MainTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: false,
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: colors.textMuted,
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopColor: colors.border,
-        },
-        tabBarLabelStyle: {
-          fontFamily: fonts.bodyMedium,
-          fontSize: 10,
+          height: 64,
+          paddingTop: 10,
         },
       }}
     >
-      <Tab.Screen
-        name="Birthdays"
-        component={BirthdaysScreen}
-        options={{ tabBarIcon: ({ color, size }) => <Cake color={color} size={size} /> }}
-      />
-      <Tab.Screen
-        name="Profiles"
-        component={ProfilesScreen}
-        options={{ tabBarIcon: ({ color, size }) => <Users color={color} size={size} /> }}
-      />
-      <Tab.Screen
-        name="DreamBoard"
-        component={DreamBoardScreen}
-        options={{ title: 'Dream Board', tabBarIcon: ({ color, size }) => <Heart color={color} size={size} /> }}
-      />
-      <Tab.Screen
-        name="GiftGenie"
-        component={GiftGenieScreen}
-        options={{ title: 'Gift Genie', tabBarIcon: ({ color, size }) => <Sparkles color={color} size={size} /> }}
-      />
-      <Tab.Screen
-        name="Badges"
-        component={BadgesScreen}
-        options={{ tabBarIcon: ({ color, size }) => <Award color={color} size={size} /> }}
-      />
+      <Tab.Screen name="Birthdays" component={BirthdaysScreen} options={{ tabBarIcon: tabIcon(Cake) }} />
+      <Tab.Screen name="Profiles" component={ProfilesScreen} options={{ tabBarIcon: tabIcon(Users) }} />
+      <Tab.Screen name="DreamBoard" component={DreamBoardScreen} options={{ tabBarIcon: tabIcon(Heart) }} />
+      <Tab.Screen name="GiftGenie" component={GiftGenieScreen} options={{ tabBarIcon: tabIcon(Sparkles) }} />
+      <Tab.Screen name="Badges" component={BadgesScreen} options={{ tabBarIcon: tabIcon(Award) }} />
     </Tab.Navigator>
   );
 }
