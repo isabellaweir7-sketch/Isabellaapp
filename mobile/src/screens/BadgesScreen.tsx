@@ -1,12 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LogOut } from 'lucide-react-native';
 import { colors, fonts, radii, spacing, shadow } from '../theme/theme';
 import { IconBadge } from '../components/IconBadge';
 import { useAppData } from '../context/AppDataContext';
+import { useSession } from '../context/SessionContext';
+import { isSupabaseConfigured } from '../lib/supabase';
 
 export function BadgesScreen() {
   const { userProgress } = useAppData();
+  const { signOut } = useSession();
+
+  const handleSignOut = () => {
+    Alert.alert('Sign out?', undefined, [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Sign out', style: 'destructive', onPress: signOut },
+    ]);
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -31,6 +42,13 @@ export function BadgesScreen() {
             </View>
           ))}
         </View>
+
+        {isSupabaseConfigured && (
+          <Pressable style={styles.signOutButton} onPress={handleSignOut}>
+            <LogOut size={16} color={colors.danger} />
+            <Text style={styles.signOutText}>Sign out</Text>
+          </Pressable>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -88,5 +106,23 @@ const styles = StyleSheet.create({
     fontFamily: fonts.body,
     fontSize: 12,
     color: colors.textSecondary,
+  },
+  signOutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radii.pill,
+    paddingVertical: 12,
+    marginTop: spacing.sm,
+  },
+  signOutText: {
+    fontFamily: fonts.bodyBold,
+    fontSize: 12,
+    textTransform: 'uppercase',
+    letterSpacing: 0.4,
+    color: colors.danger,
   },
 });

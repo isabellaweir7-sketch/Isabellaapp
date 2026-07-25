@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft } from 'lucide-react-native';
 import { colors, fonts, spacing } from '../../theme/theme';
@@ -13,9 +13,23 @@ import type { OnboardingStackParamList } from '../../navigation/types';
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'SignIn'>;
 
 export function SignInScreen({ navigation }: Props) {
-  const { signIn } = useSession();
+  const { signInWithPassword } = useSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSignIn = async () => {
+    if (!email.trim() || !password) {
+      setErrorMessage('Enter your email and password.');
+      return;
+    }
+    setErrorMessage(null);
+    setIsLoading(true);
+    const result = await signInWithPassword(email.trim(), password);
+    setIsLoading(false);
+    if (result.error) setErrorMessage(result.error);
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
@@ -38,7 +52,12 @@ export function SignInScreen({ navigation }: Props) {
             label="Continue with Google"
             variant="secondary"
             icon={<GoogleIcon />}
-            onPress={signIn}
+            onPress={() =>
+              Alert.alert(
+                'Coming soon',
+                'Google sign-in needs a bit more setup on our end — use email for now!'
+              )
+            }
           />
 
           <View style={styles.dividerRow}>
@@ -63,7 +82,9 @@ export function SignInScreen({ navigation }: Props) {
             />
           </View>
 
-          <Button label="Sign in" onPress={signIn} />
+          {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+
+          <Button label="Sign in" onPress={handleSignIn} loading={isLoading} />
 
           <Pressable style={styles.footerLink} onPress={() => navigation.navigate('SignUp')} hitSlop={12}>
             <Text style={styles.footerLinkText}>No account yet? Create one</Text>
@@ -126,6 +147,11 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: spacing.sm,
+  },
+  errorText: {
+    fontFamily: fonts.bodyMedium,
+    fontSize: 12,
+    color: colors.danger,
   },
   footerLink: {
     alignItems: 'center',

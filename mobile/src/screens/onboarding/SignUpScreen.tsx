@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft } from 'lucide-react-native';
 import { colors, fonts, spacing } from '../../theme/theme';
@@ -13,10 +13,40 @@ import type { OnboardingStackParamList } from '../../navigation/types';
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'SignUp'>;
 
 export function SignUpScreen({ navigation }: Props) {
-  const { signIn } = useSession();
+  const { signUpWithPassword } = useSession();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSignUp = async () => {
+    if (!name.trim() || !email.trim() || !password) {
+      setErrorMessage('Fill in your name, email and password.');
+      return;
+    }
+    if (password.length < 6) {
+      setErrorMessage('Password needs to be at least 6 characters.');
+      return;
+    }
+    setErrorMessage(null);
+    setIsLoading(true);
+    const result = await signUpWithPassword(email.trim(), password, name.trim());
+    setIsLoading(false);
+
+    if (result.error) {
+      setErrorMessage(result.error);
+      return;
+    }
+
+    if (result.needsEmailConfirmation) {
+      Alert.alert(
+        'Check your email',
+        "We've sent a confirmation link to your email — tap it, then come back and sign in.",
+        [{ text: 'OK', onPress: () => navigation.navigate('SignIn') }]
+      );
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
@@ -39,7 +69,12 @@ export function SignUpScreen({ navigation }: Props) {
             label="Continue with Google"
             variant="secondary"
             icon={<GoogleIcon />}
-            onPress={signIn}
+            onPress={() =>
+              Alert.alert(
+                'Coming soon',
+                'Google sign-in needs a bit more setup on our end — use email for now!'
+              )
+            }
           />
 
           <View style={styles.dividerRow}>
@@ -65,7 +100,9 @@ export function SignUpScreen({ navigation }: Props) {
             />
           </View>
 
-          <Button label="Create account" onPress={signIn} />
+          {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+
+          <Button label="Create account" onPress={handleSignUp} loading={isLoading} />
 
           <Pressable style={styles.footerLink} onPress={() => navigation.navigate('SignIn')} hitSlop={12}>
             <Text style={styles.footerLinkText}>Already have an account? Sign in</Text>
@@ -128,6 +165,11 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: spacing.sm,
+  },
+  errorText: {
+    fontFamily: fonts.bodyMedium,
+    fontSize: 12,
+    color: colors.danger,
   },
   footerLink: {
     alignItems: 'center',
