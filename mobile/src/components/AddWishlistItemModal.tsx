@@ -117,10 +117,16 @@ export function AddWishlistItemModal({ visible, onClose, onSave }: AddWishlistIt
 
               <Field label={isEvent ? 'Event / Activity Name *' : 'Title / Product Name *'}>
                 <TextField
-                  placeholder={isEvent ? 'e.g. Sabrina Carpenter Concert Tickets' : 'e.g. Sol de Janeiro Body Mist'}
+                  placeholder={isEvent ? 'e.g. Pottery Painting Session' : 'e.g. Sol de Janeiro Body Mist'}
                   value={title}
                   onChangeText={setTitle}
                 />
+                {isEvent && (
+                  <Text style={styles.hintText}>
+                    Concert tickets, pottery painting, a restaurant reservation, water parks, escape
+                    rooms, classes... Pricier ones are great as a group chip-in.
+                  </Text>
+                )}
               </Field>
 
               {isEvent && (
@@ -254,6 +260,13 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     color: colors.accent,
+  },
+  hintText: {
+    fontFamily: fonts.body,
+    fontStyle: 'italic',
+    fontSize: 11,
+    color: colors.textSecondary,
+    lineHeight: 15,
   },
   categoryWrap: {
     flexDirection: 'row',

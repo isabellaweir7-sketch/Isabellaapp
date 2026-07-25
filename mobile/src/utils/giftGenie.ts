@@ -17,7 +17,7 @@ export const VIBE_OPTIONS = [
 
 type Vibe = (typeof VIBE_OPTIONS)[number];
 
-type Generator = (friend: FriendProfile, tier: PriceRangeTag) => GiftSuggestion | null;
+type Generator = (friend: FriendProfile, tier: PriceRangeTag, seed?: number) => GiftSuggestion | null;
 
 function pick<T>(arr: T[], fallback: T): T {
   return arr.length > 0 ? arr[0] : fallback;
@@ -158,21 +158,39 @@ const hobbyPick: Generator = (friend, tier) => {
   };
 };
 
-const experiencePick: Generator = (friend, tier) => {
+const EXPERIENCE_POOL: Record<PriceRangeTag, { title: string; price: string }[]> = {
+  under15: [
+    { title: 'Pottery painting studio session', price: '$14' },
+    { title: 'Mini golf or arcade pass', price: '$12' },
+    { title: 'Drop-in fitness or dance class', price: '$15' },
+  ],
+  '15to35': [
+    { title: 'Water park or trampoline park day pass', price: '$30' },
+    { title: 'Paint-your-own-pottery + take-home piece', price: '$28' },
+    { title: 'Escape room ticket for two', price: '$32' },
+  ],
+  '35to75': [
+    { title: 'Concert, show, or event tickets', price: '$65' },
+    { title: 'Restaurant reservation — her favorite cuisine', price: '$60' },
+    { title: 'Cooking or mixology class for two', price: '$70' },
+  ],
+  splurge75: [
+    { title: 'Concert tickets + VIP add-on', price: '$120' },
+    { title: 'Group restaurant dinner reservation', price: '$150' },
+    { title: 'Weekend activity pass (water park, spa day, or day trip)', price: '$110' },
+  ],
+};
+
+const experiencePick: Generator = (friend, tier, seed = 0) => {
   const hobby = friend.preferences.hobbies[0];
   const activity = hobby ? `a ${hobby.toLowerCase()} experience` : 'a fun day out';
-  const byTier: Record<PriceRangeTag, { title: string; price: string }> = {
-    under15: { title: hobby ? `Drop-in class pass for ${hobby.toLowerCase()}` : 'Mini golf or arcade pass', price: '$15' },
-    '15to35': { title: 'Water park or trampoline park day pass', price: '$30' },
-    '35to75': { title: 'Concert, show, or event tickets', price: '$65' },
-    splurge75: { title: 'Concert tickets + VIP add-on, or a weekend activity pass', price: '$120' },
-  };
-  const { title, price } = byTier[tier];
+  const pool = EXPERIENCE_POOL[tier];
+  const { title, price } = pool[seed % pool.length];
   return {
     title,
     price,
-    store: 'Ticketmaster / local venue',
-    reason: `An experience over another thing — ${activity} she'll actually remember.`,
+    store: 'Ticketmaster / OpenTable / local venue',
+    reason: `An experience over another thing — ${activity} she'll actually remember. Also a great one to split as a group chip-in.`,
     category: 'Experiences & Events',
     imageUrl: '',
     affiliateUrl: `https://www.google.com/search?tbm=shop&q=${encodeURIComponent(title)}`,
@@ -243,7 +261,7 @@ export function generateGiftSuggestions(
 
   const results: GiftSuggestion[] = [];
   for (const gen of rotated) {
-    const suggestion = gen(friend, budget);
+    const suggestion = gen(friend, budget, seed);
     if (suggestion) results.push(suggestion);
     if (results.length >= 4) break;
   }
