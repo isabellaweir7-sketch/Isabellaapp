@@ -8,7 +8,7 @@ export type MainTabParamList = {
   Birthdays: undefined;
   Profiles: { friendId?: string } | undefined;
   DreamBoard: undefined;
-  GiftGenie: undefined;
+  GiftGenie: { friendId?: string } | undefined;
   Badges: undefined;
 };
 
