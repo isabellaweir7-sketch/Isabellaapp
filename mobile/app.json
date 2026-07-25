@@ -20,6 +20,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fd377cd8-c74c-46ae-89cd-83d3137be065"
+      }
+    },
+    "owner": "irweir"
   }
 }
