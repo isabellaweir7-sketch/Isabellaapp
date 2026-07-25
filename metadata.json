@@ -1,0 +1,6 @@
+{
+  "name": "WishList",
+  "description": "Pastel birthday countdowns, friend profile preferences, gift registries, dream moodboards, and smart gift suggestions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
