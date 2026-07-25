@@ -59,7 +59,42 @@ preferences, secret gift claiming, and more — built with Expo + React Native.
 
 Data is mock data (ported from the `../mockData.ts` web prototype) persisted
 locally on-device via AsyncStorage. There is no shared backend yet, so
-friends on different phones won't see each other's data until one is built.
+friends on different phones won't see each other's data until one is built —
+see "Setting up the shared backend" below for where that stands.
+
+## Setting up the shared backend (Supabase)
+
+The app currently stores everything locally per-phone. To make friend data,
+group chip-ins, and (eventually) chat actually sync between different
+people's phones, it needs a shared backend. This project uses
+[Supabase](https://supabase.com) (free to start, no credit card required).
+I can't create this account for you, so here's the one-time setup:
+
+1. Go to [supabase.com](https://supabase.com) and sign up free (GitHub or
+   email both work).
+2. Click **New Project**. Pick any name (e.g. "wishly"), set a database
+   password (save it somewhere — you likely won't need it day-to-day, but
+   keep it safe), and pick a region close to you. Wait ~2 minutes for it to
+   provision.
+3. Open **SQL Editor** (left sidebar) > **New query**, paste in the entire
+   contents of [`supabase/schema.sql`](./supabase/schema.sql) from this
+   repo, and click **Run**. This creates all the tables and security rules.
+4. Open **Project Settings > API**. You'll see a **Project URL** and an
+   **anon / public** key — copy both.
+5. In this `mobile/` folder, copy `.env.example` to a new file named `.env`,
+   and paste the URL and anon key into it.
+6. Restart `npx expo start` so it picks up the new values.
+
+The **anon / public** key is safe to paste into `.env` and even safe to
+share with me if you want help debugging — it's designed to be shipped
+inside client apps and is protected by the row-level security rules in
+`schema.sql`. The **service_role** key (also visible on that same page) is
+different — never put that one in `.env` or share it anywhere; it bypasses
+all security rules and should only ever live on a trusted server, which
+this app doesn't have (or need) yet.
+
+Until `.env` is filled in, the app keeps working exactly as it does now —
+everything just stays local-only.
 
 ## Design system
 
@@ -69,7 +104,15 @@ headings, Inter for body text.
 
 ## Next up
 
-- Wire Gift Genie to a real AI backend (needs a server to hold the API key)
-- In-app chat, badge-earning logic
-- Real backend + auth so friend data (including chip-ins) syncs across devices
+- **Backend, in stages**: schema + Supabase client are scaffolded
+  (`supabase/schema.sql`, `src/lib/supabase.ts`), but not yet wired up —
+  that's the next piece of work once a project exists (see setup above).
+  The plan is: (1) real auth screens, (2) an invite-code flow so a friend
+  group can jointly maintain one "circle" for a person, (3) rewire
+  wishlist/notes/chip-ins to read and write through Supabase instead of
+  local storage, (4) group chat per circle, built on the same realtime
+  connection.
+- Wire Gift Genie to a real AI backend (needs a server to hold the API key
+  — the Supabase project can double as that server via an Edge Function)
+- Badge-earning logic
 - A true native share-sheet extension, once ready to move off plain Expo Go
