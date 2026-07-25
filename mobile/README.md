@@ -16,9 +16,14 @@ preferences, secret gift claiming, and more — built with Expo + React Native.
 
 ## What's built so far
 
-- **Onboarding**: Welcome screen and Sign in / Sign up screens (UI only —
-  Google/email sign-in currently just marks you as signed in locally; no
-  backend auth yet).
+- **Onboarding**: Welcome screen and real Sign in / Sign up via Supabase
+  Auth (email/password). If your Supabase project has "confirm email"
+  turned on (the default for a fresh project), you'll need to tap the link
+  in the confirmation email before you can sign in — the app tells you
+  this rather than failing silently. Google sign-in is a "coming soon" tap
+  target for now (needs a separate Google Cloud OAuth setup). Falls back to
+  the old local-only toggle if `.env` isn't configured, so a fresh clone
+  still works out of the box.
 - **Birthdays tab**: a horizontal "coming up" strip of upcoming birthdays plus
   a month-by-month calendar grid underneath. Tapping a friend (from the strip
   or a calendar day) opens a quick-view sheet with a countdown, key
