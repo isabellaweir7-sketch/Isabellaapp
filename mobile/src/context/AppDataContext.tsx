@@ -5,16 +5,18 @@ import { INITIAL_PROFILES, INITIAL_USER_PROGRESS } from '../data/mockData';
 
 const FRIENDS_KEY = 'wishly_friends_data';
 const PROGRESS_KEY = 'wishly_user_progress';
+const DREAM_BOARD_KEY = 'wishly_dream_board_items';
 
 interface AppDataContextValue {
   friends: FriendProfile[];
   userProgress: UserGiverProgress;
+  dreamBoardItems: DreamBoardItem[];
   isLoaded: boolean;
   addFriend: (friend: FriendProfile) => void;
   updateFriend: (friend: FriendProfile) => void;
   toggleReminder: (friendId: string) => void;
   addWishlistItem: (friendId: string, item: WishlistItem) => void;
-  addDreamBoardItem: (friendId: string, item: DreamBoardItem) => void;
+  addDreamBoardItem: (item: DreamBoardItem) => void;
 }
 
 const AppDataContext = createContext<AppDataContextValue | undefined>(undefined);
@@ -22,17 +24,22 @@ const AppDataContext = createContext<AppDataContextValue | undefined>(undefined)
 export function AppDataProvider({ children }: { children: React.ReactNode }) {
   const [friends, setFriends] = useState<FriendProfile[]>(INITIAL_PROFILES);
   const [userProgress, setUserProgress] = useState<UserGiverProgress>(INITIAL_USER_PROGRESS);
+  const [dreamBoardItems, setDreamBoardItems] = useState<DreamBoardItem[]>(() =>
+    INITIAL_PROFILES.flatMap((f) => f.dreamBoardItems)
+  );
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
-        const [savedFriends, savedProgress] = await Promise.all([
+        const [savedFriends, savedProgress, savedDreamBoard] = await Promise.all([
           AsyncStorage.getItem(FRIENDS_KEY),
           AsyncStorage.getItem(PROGRESS_KEY),
+          AsyncStorage.getItem(DREAM_BOARD_KEY),
         ]);
         if (savedFriends) setFriends(JSON.parse(savedFriends));
         if (savedProgress) setUserProgress(JSON.parse(savedProgress));
+        if (savedDreamBoard) setDreamBoardItems(JSON.parse(savedDreamBoard));
       } catch (e) {
         console.error('Failed to load saved app data', e);
       } finally {
@@ -48,6 +55,10 @@ export function AppDataProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isLoaded) AsyncStorage.setItem(PROGRESS_KEY, JSON.stringify(userProgress));
   }, [userProgress, isLoaded]);
+
+  useEffect(() => {
+    if (isLoaded) AsyncStorage.setItem(DREAM_BOARD_KEY, JSON.stringify(dreamBoardItems));
+  }, [dreamBoardItems, isLoaded]);
 
   const addFriend = useCallback((friend: FriendProfile) => {
     setFriends((prev) => [friend, ...prev]);
@@ -69,10 +80,8 @@ export function AppDataProvider({ children }: { children: React.ReactNode }) {
     );
   }, []);
 
-  const addDreamBoardItem = useCallback((friendId: string, item: DreamBoardItem) => {
-    setFriends((prev) =>
-      prev.map((f) => (f.id === friendId ? { ...f, dreamBoardItems: [item, ...f.dreamBoardItems] } : f))
-    );
+  const addDreamBoardItem = useCallback((item: DreamBoardItem) => {
+    setDreamBoardItems((prev) => [item, ...prev]);
   }, []);
 
   return (
@@ -80,6 +89,7 @@ export function AppDataProvider({ children }: { children: React.ReactNode }) {
       value={{
         friends,
         userProgress,
+        dreamBoardItems,
         isLoaded,
         addFriend,
         updateFriend,
