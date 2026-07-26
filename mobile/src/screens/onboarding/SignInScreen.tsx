@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, Pressable, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowLeft } from 'lucide-react-native';
 import { colors, fonts, spacing } from '../../theme/theme';
@@ -13,10 +13,11 @@ import type { OnboardingStackParamList } from '../../navigation/types';
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'SignIn'>;
 
 export function SignInScreen({ navigation }: Props) {
-  const { signInWithPassword } = useSession();
+  const { signInWithPassword, signInWithGoogle } = useSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSignIn = async () => {
@@ -28,6 +29,14 @@ export function SignInScreen({ navigation }: Props) {
     setIsLoading(true);
     const result = await signInWithPassword(email.trim(), password);
     setIsLoading(false);
+    if (result.error) setErrorMessage(result.error);
+  };
+
+  const handleGoogleSignIn = async () => {
+    setErrorMessage(null);
+    setIsGoogleLoading(true);
+    const result = await signInWithGoogle();
+    setIsGoogleLoading(false);
     if (result.error) setErrorMessage(result.error);
   };
 
@@ -52,12 +61,8 @@ export function SignInScreen({ navigation }: Props) {
             label="Continue with Google"
             variant="secondary"
             icon={<GoogleIcon />}
-            onPress={() =>
-              Alert.alert(
-                'Coming soon',
-                'Google sign-in needs a bit more setup on our end — use email for now!'
-              )
-            }
+            onPress={handleGoogleSignIn}
+            loading={isGoogleLoading}
           />
 
           <View style={styles.dividerRow}>

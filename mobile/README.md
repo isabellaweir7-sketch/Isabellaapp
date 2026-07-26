@@ -17,13 +17,25 @@ preferences, secret gift claiming, and more — built with Expo + React Native.
 ## What's built so far
 
 - **Onboarding**: Welcome screen and real Sign in / Sign up via Supabase
-  Auth (email/password). If your Supabase project has "confirm email"
-  turned on (the default for a fresh project), you'll need to tap the link
-  in the confirmation email before you can sign in — the app tells you
-  this rather than failing silently. Google sign-in is a "coming soon" tap
-  target for now (needs a separate Google Cloud OAuth setup). Falls back to
-  the old local-only toggle if `.env` isn't configured, so a fresh clone
-  still works out of the box.
+  Auth (email/password + Google OAuth). If your Supabase project has
+  "confirm email" turned on (the default for a fresh project), you'll need
+  to tap the link in the confirmation email before you can sign in — the
+  app tells you this rather than failing silently. Falls back to the old
+  local-only toggle if `.env` isn't configured, so a fresh clone still
+  works out of the box.
+
+  Google sign-in needs three things set up, in order: (1) an OAuth client
+  in Google Cloud Console (type: Web application, redirect URI:
+  `https://<your-project-ref>.supabase.co/auth/v1/callback`), (2) that
+  client's ID/secret pasted into Supabase → Authentication → Providers →
+  Google, and (3) `giftling://**` and `exp://**` added to Supabase →
+  Authentication → URL Configuration → Redirect URLs (otherwise Supabase
+  refuses to redirect back into the app after Google auth completes). The
+  app code uses PKCE + `expo-web-browser` + `expo-linking`, which is the
+  pattern Supabase's own Expo guide recommends — but mobile OAuth redirects
+  are a known rough edge, especially loading through Expo Go rather than a
+  standalone build, so budget for a troubleshooting round if it doesn't
+  work first try.
 - **Birthdays tab**: a horizontal "coming up" strip of upcoming birthdays plus
   a month-by-month calendar grid underneath. Tapping a friend (from the strip
   or a calendar day) opens a quick-view sheet with a countdown, key

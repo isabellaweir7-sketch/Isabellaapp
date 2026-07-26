@@ -1,7 +1,11 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as WebBrowser from 'expo-web-browser';
+import * as Linking from 'expo-linking';
 import type { Session, User } from '@supabase/supabase-js';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
+
+WebBrowser.maybeCompleteAuthSession();
 
 const LOCAL_FALLBACK_KEY = 'giftling_session_active';
 
@@ -16,6 +20,7 @@ interface SessionContextValue {
   userId: string | null;
   signInWithPassword: (email: string, password: string) => Promise<AuthResult>;
   signUpWithPassword: (email: string, password: string, displayName: string) => Promise<AuthResult>;
+  signInWithGoogle: () => Promise<AuthResult>;
   signOut: () => void;
 }
 
@@ -100,6 +105,35 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     []
   );
 
+  const signInWithGoogle = useCallback(async (): Promise<AuthResult> => {
+    if (!isSupabaseConfigured) {
+      return { error: 'Google sign-in needs the backend set up first — use email for now.' };
+    }
+
+    const redirectTo = Linking.createURL('auth/callback');
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo, skipBrowserRedirect: true },
+    });
+    if (error) return { error: error.message };
+    if (!data.url) return { error: 'Could not start Google sign-in.' };
+
+    const result = await WebBrowser.openAuthSessionAsync(data.url, redirectTo);
+    if (result.type === 'cancel' || result.type === 'dismiss') return {};
+    if (result.type !== 'success' || !result.url) {
+      return { error: 'Google sign-in was interrupted — please try again.' };
+    }
+
+    const code = new URL(result.url).searchParams.get('code');
+    if (!code) return { error: 'Google sign-in did not return a valid code.' };
+
+    const { data: sessionData, error: sessionError } = await supabase.auth.exchangeCodeForSession(code);
+    if (sessionError) return { error: sessionError.message };
+    if (sessionData.user) await ensureProfile(sessionData.user);
+    return {};
+  }, []);
+
   const signOut = useCallback(() => {
     if (isSupabaseConfigured) {
       supabase.auth.signOut();
@@ -114,7 +148,15 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <SessionContext.Provider
-      value={{ isSignedIn, isReady, userId, signInWithPassword, signUpWithPassword, signOut }}
+      value={{
+        isSignedIn,
+        isReady,
+        userId,
+        signInWithPassword,
+        signUpWithPassword,
+        signInWithGoogle,
+        signOut,
+      }}
     >
       {children}
     </SessionContext.Provider>

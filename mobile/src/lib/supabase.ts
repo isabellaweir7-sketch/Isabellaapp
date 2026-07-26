@@ -27,6 +27,10 @@ export const supabase = createClient(
       autoRefreshToken: true,
       persistSession: true,
       detectSessionInUrl: false,
+      // PKCE is the flow that works reliably with a mobile app's OAuth
+      // redirect (WebBrowser hands back a `code` query param to exchange,
+      // rather than relying on URL-fragment tokens).
+      flowType: 'pkce',
     },
   }
 );

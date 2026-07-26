@@ -13,12 +13,21 @@ import type { OnboardingStackParamList } from '../../navigation/types';
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'SignUp'>;
 
 export function SignUpScreen({ navigation }: Props) {
-  const { signUpWithPassword } = useSession();
+  const { signUpWithPassword, signInWithGoogle } = useSession();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleGoogleSignIn = async () => {
+    setErrorMessage(null);
+    setIsGoogleLoading(true);
+    const result = await signInWithGoogle();
+    setIsGoogleLoading(false);
+    if (result.error) setErrorMessage(result.error);
+  };
 
   const handleSignUp = async () => {
     if (!name.trim() || !email.trim() || !password) {
@@ -69,12 +78,8 @@ export function SignUpScreen({ navigation }: Props) {
             label="Continue with Google"
             variant="secondary"
             icon={<GoogleIcon />}
-            onPress={() =>
-              Alert.alert(
-                'Coming soon',
-                'Google sign-in needs a bit more setup on our end — use email for now!'
-              )
-            }
+            onPress={handleGoogleSignIn}
+            loading={isGoogleLoading}
           />
 
           <View style={styles.dividerRow}>
