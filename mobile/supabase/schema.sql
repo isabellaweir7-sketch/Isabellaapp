@@ -1,4 +1,4 @@
--- Wishly backend schema (Supabase / Postgres)
+-- Giftling backend schema (Supabase / Postgres)
 --
 -- Run this once in the Supabase SQL Editor (Project > SQL Editor > New query)
 -- for a fresh project. Safe to re-run individual "create table if not exists"
@@ -7,15 +7,15 @@
 --
 -- Data model: a "circle" is the shared tracker for one real-world person's
 -- birthday/gifting (what the app currently calls a "friend profile"). Multiple
--- real Wishly users ("circle_members") can jointly maintain one circle -- that's
+-- real Giftling users ("circle_members") can jointly maintain one circle -- that's
 -- what makes secret gift-claiming, group chip-ins, and group chat meaningful:
 -- everyone in the circle sees the same shared wishlist, not their own private
 -- copy of it. The subject of a circle (e.g. "Chloe") does not need to be a
--- Wishly user themselves.
+-- Giftling user themselves.
 
 create extension if not exists "pgcrypto";
 
--- One row per real Wishly user, extending Supabase's built-in auth.users.
+-- One row per real Giftling user, extending Supabase's built-in auth.users.
 create table if not exists profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   display_name text not null,

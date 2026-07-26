@@ -1,6 +1,6 @@
-# Wishly (mobile)
+# Giftling (mobile)
 
-The iPhone app for Wishly — birthday countdowns, friend profiles with gift
+The iPhone app for Giftling — birthday countdowns, friend profiles with gift
 preferences, secret gift claiming, and more — built with Expo + React Native.
 
 ## Run it on your iPhone
@@ -58,7 +58,7 @@ preferences, secret gift claiming, and more — built with Expo + React Native.
 - **Clipboard-paste quick add**: opening "Add Item" or "Save Pin" checks the
   clipboard for a URL and offers a one-tap paste. This is the Expo-Go-
   compatible stand-in for a true iOS share-sheet extension — a real "Share
-  to Wishly" from Safari/TikTok needs a custom native build (EAS Build /
+  to Giftling" from Safari/TikTok needs a custom native build (EAS Build /
   Xcode), which would mean giving up the "just scan the QR code" workflow.
   Worth doing deliberately later, not as a drive-by addition.
 
@@ -77,7 +77,7 @@ I can't create this account for you, so here's the one-time setup:
 
 1. Go to [supabase.com](https://supabase.com) and sign up free (GitHub or
    email both work).
-2. Click **New Project**. Pick any name (e.g. "wishly"), set a database
+2. Click **New Project**. Pick any name (e.g. "giftling"), set a database
    password (save it somewhere — you likely won't need it day-to-day, but
    keep it safe), and pick a region close to you. Wait ~2 minutes for it to
    provision.

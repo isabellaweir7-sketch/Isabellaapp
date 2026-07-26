@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Session, User } from '@supabase/supabase-js';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
-const LOCAL_FALLBACK_KEY = 'wishly_session_active';
+const LOCAL_FALLBACK_KEY = 'giftling_session_active';
 
 interface AuthResult {
   error?: string;
@@ -23,7 +23,7 @@ const SessionContext = createContext<SessionContextValue | undefined>(undefined)
 
 async function ensureProfile(user: User) {
   const displayName =
-    (user.user_metadata?.display_name as string | undefined) || user.email?.split('@')[0] || 'Wishly user';
+    (user.user_metadata?.display_name as string | undefined) || user.email?.split('@')[0] || 'Giftling user';
 
   await supabase.from('profiles').upsert(
     { id: user.id, display_name: displayName },

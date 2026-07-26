@@ -3,9 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FriendProfile, UserGiverProgress, WishlistItem, DreamBoardItem } from '../types/index';
 import { INITIAL_PROFILES, INITIAL_USER_PROGRESS } from '../data/mockData';
 
-const FRIENDS_KEY = 'wishly_friends_data';
-const PROGRESS_KEY = 'wishly_user_progress';
-const DREAM_BOARD_KEY = 'wishly_dream_board_items';
+const FRIENDS_KEY = 'giftling_friends_data';
+const PROGRESS_KEY = 'giftling_user_progress';
+const DREAM_BOARD_KEY = 'giftling_dream_board_items';
 
 interface AppDataContextValue {
   friends: FriendProfile[];
