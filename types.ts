@@ -55,3 +55,8 @@ export interface FeatureTile {
   photo: string;
   fallback: string;
 }
+
+export interface DayPlan {
+  day: string;
+  recipe: Recipe;
+}

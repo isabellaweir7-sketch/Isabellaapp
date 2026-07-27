@@ -39,7 +39,7 @@ export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
               </h2>
               <div className="flex gap-1.5 mt-1.5 mb-1.5 flex-wrap">
                 {recipe.tags.map((t) => (
-                  <span key={t} className="receipt-tag">
+                  <span key={t} className="tag-pill">
                     {t}
                   </span>
                 ))}

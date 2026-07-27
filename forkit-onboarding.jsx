@@ -178,7 +178,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
       )}
       <div className="flex gap-1.5 mb-2">
         {dish.tags.map((t) => (
-          <span key={t} className="receipt-tag">
+          <span key={t} className="tag-pill">
             {t}
           </span>
         ))}

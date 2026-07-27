@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700;900&family=Quicksand:wght@600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -22,6 +22,7 @@
   --font-display: 'Bodoni Moda', Georgia, serif;
   --font-body: 'Bodoni Moda', Georgia, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-tag: 'Quicksand', system-ui, sans-serif;
 }
 
 @layer base {
@@ -62,7 +63,7 @@
 }
 
 /* Receipt-style price tag: solid cream chip, monospace, small, rounded —
-   reads like a till receipt against the dark surfaces. */
+   reads like a till receipt against the dark surfaces. Numbers/prices only. */
 .receipt-tag {
   font-family: var(--font-mono);
   font-weight: 600;
@@ -72,6 +73,22 @@
   color: var(--color-ink-dark);
   border-radius: 6px;
   padding: 0.15rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+/* Word tags (Budget, Quick, Vegan, ...) — same pill shape as receipt-tag but
+   a rounded, curvy sans instead of the blocky monospace reserved for numbers. */
+.tag-pill {
+  font-family: var(--font-tag);
+  font-weight: 700;
+  font-size: 0.75rem;
+  background-color: var(--color-ink);
+  color: var(--color-ink-dark);
+  border-radius: 8px;
+  padding: 0.15rem 0.55rem;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;

@@ -86,7 +86,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           <div className="absolute bottom-0 left-0 right-0 p-6">
             <div className="flex gap-1.5 mb-2">
               {recipe.tags.map((t) => (
-                <span key={t} className="receipt-tag">
+                <span key={t} className="tag-pill">
                   {t}
                 </span>
               ))}

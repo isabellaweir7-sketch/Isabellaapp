@@ -94,7 +94,7 @@ function HeroSection({ onOpenRecipe }) {
   );
 }
 
-function BottomNav({ active, onChange }) {
+function BottomNav({ active, onChange, onNavigate }) {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 flex items-center justify-around px-2 py-3 border-t"
@@ -106,7 +106,10 @@ function BottomNav({ active, onChange }) {
           <button
             key={id}
             type="button"
-            onClick={() => onChange(id)}
+            onClick={() => {
+              onChange(id);
+              onNavigate(id);
+            }}
             className="flex flex-col items-center gap-1 px-2"
           >
             <Icon size={20} color={isActive ? '#9ACB4B' : '#8FA087'} />
@@ -120,9 +123,14 @@ function BottomNav({ active, onChange }) {
   );
 }
 
-export default function ForkitHome({ onOpenRecipe, onOpenSaved }) {
+export default function ForkitHome({ onOpenRecipe, onOpenSaved, onOpenPlan, onOpenPantry }) {
   const [activeTab, setActiveTab] = useState('home');
   const [plan, pantry, saved, community] = HOME_TILES;
+
+  const handleNavTap = (id) => {
+    if (id === 'pantry') onOpenPantry();
+    if (id === 'recipes') onOpenSaved();
+  };
 
   return (
     <div className="min-h-screen pb-24" style={{ backgroundColor: '#F3ECDA' }}>
@@ -131,8 +139,8 @@ export default function ForkitHome({ onOpenRecipe, onOpenSaved }) {
         <HeroSection onOpenRecipe={onOpenRecipe} />
 
         <div className="grid grid-cols-3 gap-3">
-          <PhotoTile {...plan} className="col-span-2 h-44" />
-          <PhotoTile {...pantry} className="col-span-1 h-44" />
+          <PhotoTile {...plan} className="col-span-2 h-44" onClick={onOpenPlan} />
+          <PhotoTile {...pantry} className="col-span-1 h-44" onClick={onOpenPantry} />
         </div>
 
         <div className="grid grid-cols-3 gap-3">
@@ -144,7 +152,7 @@ export default function ForkitHome({ onOpenRecipe, onOpenSaved }) {
           3 new budget recipes shared today
         </p>
       </div>
-      <BottomNav active={activeTab} onChange={setActiveTab} />
+      <BottomNav active={activeTab} onChange={setActiveTab} onNavigate={handleNavTap} />
     </div>
   );
 }

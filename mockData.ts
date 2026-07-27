@@ -5,6 +5,7 @@ import {
   SampleDish,
   Recipe,
   FeatureTile,
+  DayPlan,
 } from './types';
 
 export const ONBOARDING_REASONS: OnboardingReason[] = [
@@ -233,6 +234,34 @@ export const HOME_TILES: FeatureTile[] = [
     photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=600',
     fallback: '#274038',
   },
+];
+
+export const WEEKLY_PLAN: DayPlan[] = [
+  { day: 'Monday', recipe: CUPBOARD_HERO },
+  { day: 'Tuesday', recipe: SAVED_RECIPES[0] },
+  { day: 'Wednesday', recipe: SAVED_RECIPES[1] },
+  { day: 'Thursday', recipe: SAVED_RECIPES[2] },
+  { day: 'Friday', recipe: CUPBOARD_HERO },
+  { day: 'Saturday', recipe: SAVED_RECIPES[0] },
+  { day: 'Sunday', recipe: SAVED_RECIPES[1] },
+];
+
+export const PANTRY_INGREDIENTS: string[] = [
+  'Pasta',
+  'Rice',
+  'Tinned tomatoes',
+  'Chickpeas',
+  'Lentils',
+  'Onions',
+  'Garlic',
+  'Eggs',
+  'Cheese',
+  'Bread',
+  'Frozen veg',
+  'Stock cubes',
+  'Oats',
+  'Peanut butter',
+  'Tuna',
 ];
 
 export const WEEKLY_BUDGET = {
