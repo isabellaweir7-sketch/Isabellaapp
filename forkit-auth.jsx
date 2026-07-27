@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut } from 'lucide-react';
+import { supabase } from './supabaseClient';
 
 function GoogleIcon() {
   return (
@@ -41,7 +42,10 @@ function TextField({ icon: Icon, ...props }) {
 }
 
 function AccountView({ session, onBack, onLogOut }) {
-  const initial = session.email.trim()[0]?.toUpperCase() || '?';
+  const email = session.user.email || '';
+  const provider = session.user.app_metadata?.provider === 'google' ? 'Google' : 'email';
+  const initial = email.trim()[0]?.toUpperCase() || '?';
+
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F3ECDA' }}>
       <div className="flex items-center gap-3 px-6 pt-8 pb-5" style={{ backgroundColor: '#161D14' }}>
@@ -67,10 +71,10 @@ function AccountView({ session, onBack, onLogOut }) {
           {initial}
         </div>
         <p className="text-sm font-semibold" style={{ color: '#232B1D' }}>
-          {session.email}
+          {email}
         </p>
         <p className="text-xs font-semibold mt-1" style={{ color: '#93876B' }}>
-          Signed in with {session.method === 'google' ? 'Google' : 'email'}
+          Signed in with {provider}
         </p>
 
         <button
@@ -87,26 +91,53 @@ function AccountView({ session, onBack, onLogOut }) {
   );
 }
 
-export default function ForkitAuth({ session, onBack, onSignedIn, onLogOut }) {
+export default function ForkitAuth({ session, onBack, onLogOut }) {
   const [mode, setMode] = useState('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   if (session) {
     return <AccountView session={session} onBack={onBack} onLogOut={onLogOut} />;
   }
 
-  const canSubmit = email.trim().length > 3 && password.length >= 6;
+  const canSubmit = email.trim().length > 3 && password.length >= 6 && !submitting;
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (!canSubmit) return;
-    onSignedIn({ email: email.trim(), method: 'email' });
+    setError('');
+    setNotice('');
+    setSubmitting(true);
+
+    const { data, error: authError } =
+      mode === 'signin'
+        ? await supabase.auth.signInWithPassword({ email: email.trim(), password })
+        : await supabase.auth.signUp({ email: email.trim(), password });
+
+    setSubmitting(false);
+
+    if (authError) {
+      setError(authError.message);
+      return;
+    }
+    if (mode === 'signup' && !data.session) {
+      setNotice('Check your email to confirm your account.');
+      return;
+    }
+    onBack();
   };
 
-  const continueWithGoogle = () => {
-    onSignedIn({ email: 'you@gmail.com', method: 'google' });
+  const continueWithGoogle = async () => {
+    setError('');
+    const { error: authError } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: window.location.origin },
+    });
+    if (authError) setError(authError.message);
   };
 
   return (
@@ -132,7 +163,11 @@ export default function ForkitAuth({ session, onBack, onSignedIn, onLogOut }) {
             <button
               key={m}
               type="button"
-              onClick={() => setMode(m)}
+              onClick={() => {
+                setMode(m);
+                setError('');
+                setNotice('');
+              }}
               className="flex-1 py-2 rounded-full text-sm font-bold transition-colors"
               style={{
                 backgroundColor: mode === m ? '#9ACB4B' : 'transparent',
@@ -190,13 +225,24 @@ export default function ForkitAuth({ session, onBack, onSignedIn, onLogOut }) {
             </button>
           </div>
 
+          {error && (
+            <p className="text-xs font-semibold" style={{ color: '#B3452F' }}>
+              {error}
+            </p>
+          )}
+          {notice && (
+            <p className="text-xs font-semibold" style={{ color: '#5A7A3A' }}>
+              {notice}
+            </p>
+          )}
+
           <button
             type="submit"
             disabled={!canSubmit}
             className="w-full py-3.5 rounded-full font-display text-base mt-2 transition-opacity"
             style={{ backgroundColor: '#9ACB4B', color: '#161D14', opacity: canSubmit ? 1 : 0.4 }}
           >
-            {mode === 'signin' ? 'Sign in' : 'Create account'}
+            {submitting ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
           </button>
         </form>
 

@@ -46,7 +46,7 @@ function Header({ onOpenAuth, session }) {
           style={{ backgroundColor: '#212B1D', border: '1px solid #33422C', color: '#9ACB4B' }}
           aria-label="Account"
         >
-          {session ? session.email.trim()[0]?.toUpperCase() : <User size={18} color="#9ACB4B" />}
+          {session ? session.user.email.trim()[0]?.toUpperCase() : <User size={18} color="#9ACB4B" />}
         </button>
         <div>
           <p className="text-[11px] leading-none font-semibold" style={{ color: '#8FA087' }}>

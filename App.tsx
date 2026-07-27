@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { Session } from '@supabase/supabase-js';
 import ForkitOnboarding from './forkit-onboarding.jsx';
 import ForkitHome from './forkit-home-mockup.jsx';
 import ForkitRecipeDetail from './forkit-recipe-detail.jsx';
@@ -8,10 +9,10 @@ import ForkitPantry from './forkit-pantry.jsx';
 import ForkitCommunity from './forkit-community.jsx';
 import ForkitHousehold from './forkit-household.jsx';
 import ForkitAuth from './forkit-auth.jsx';
-import { OnboardingAnswers, Recipe, Session } from './types';
+import { supabase } from './supabaseClient';
+import { OnboardingAnswers, Recipe } from './types';
 
 const ONBOARDING_KEY = 'forkit_onboarding_answers';
-const SESSION_KEY = 'forkit_session';
 
 type View = 'home' | 'saved' | 'plan' | 'pantry' | 'community' | 'household' | 'auth';
 
@@ -27,23 +28,25 @@ function readJSON<T>(key: string): T | null {
 
 export default function App() {
   const [answers, setAnswers] = useState<OnboardingAnswers | null>(() => readJSON(ONBOARDING_KEY));
-  const [session, setSession] = useState<Session | null>(() => readJSON(SESSION_KEY));
+  const [session, setSession] = useState<Session | null>(null);
   const [view, setView] = useState<View>('home');
   const [openRecipe, setOpenRecipe] = useState<Recipe | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession);
+    });
+    return () => listener.subscription.unsubscribe();
+  }, []);
 
   const handleOnboardingComplete = (result: OnboardingAnswers) => {
     localStorage.setItem(ONBOARDING_KEY, JSON.stringify(result));
     setAnswers(result);
   };
 
-  const handleSignedIn = (result: Session) => {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(result));
-    setSession(result);
-  };
-
   const handleLogOut = () => {
-    localStorage.removeItem(SESSION_KEY);
-    setSession(null);
+    supabase.auth.signOut();
   };
 
   if (!answers) {
@@ -75,14 +78,7 @@ export default function App() {
   }
 
   if (view === 'auth') {
-    return (
-      <ForkitAuth
-        session={session}
-        onBack={() => setView('home')}
-        onSignedIn={handleSignedIn}
-        onLogOut={handleLogOut}
-      />
-    );
+    return <ForkitAuth session={session} onBack={() => setView('home')} onLogOut={handleLogOut} />;
   }
 
   return (
