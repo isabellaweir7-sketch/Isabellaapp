@@ -34,17 +34,20 @@ function PhotoTile({ photo, fallback, label, className = '', onClick }) {
   );
 }
 
-function Header() {
+function Header({ onOpenAuth, session }) {
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;
   return (
     <div className="flex items-center justify-between px-6 pt-8 pb-5" style={{ backgroundColor: '#161D14' }}>
       <div className="flex items-center gap-3">
-        <div
-          className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-          style={{ backgroundColor: '#212B1D', border: '1px solid #33422C' }}
+        <button
+          type="button"
+          onClick={onOpenAuth}
+          className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 font-display text-sm"
+          style={{ backgroundColor: '#212B1D', border: '1px solid #33422C', color: '#9ACB4B' }}
+          aria-label="Account"
         >
-          <User size={18} color="#9ACB4B" />
-        </div>
+          {session ? session.email.trim()[0]?.toUpperCase() : <User size={18} color="#9ACB4B" />}
+        </button>
         <div>
           <p className="text-[11px] leading-none font-semibold" style={{ color: '#8FA087' }}>
             Welcome back
@@ -151,6 +154,8 @@ export default function ForkitHome({
   onOpenPantry,
   onOpenCommunity,
   onOpenHousehold,
+  onOpenAuth,
+  session,
 }) {
   const [activeTab, setActiveTab] = useState('home');
   const [plan, pantry, saved, community] = HOME_TILES;
@@ -163,7 +168,7 @@ export default function ForkitHome({
 
   return (
     <div className="min-h-screen pb-24" style={{ backgroundColor: '#F3ECDA' }}>
-      <Header />
+      <Header onOpenAuth={onOpenAuth} session={session} />
       <div className="px-6 pt-6 flex flex-col gap-4">
         <HeroSection onOpenRecipe={onOpenRecipe} />
 

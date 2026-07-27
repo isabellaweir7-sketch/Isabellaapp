@@ -7,28 +7,43 @@ import ForkitWeeklyPlan from './forkit-weekly-plan.jsx';
 import ForkitPantry from './forkit-pantry.jsx';
 import ForkitCommunity from './forkit-community.jsx';
 import ForkitHousehold from './forkit-household.jsx';
-import { OnboardingAnswers, Recipe } from './types';
+import ForkitAuth from './forkit-auth.jsx';
+import { OnboardingAnswers, Recipe, Session } from './types';
 
-const STORAGE_KEY = 'forkit_onboarding_answers';
+const ONBOARDING_KEY = 'forkit_onboarding_answers';
+const SESSION_KEY = 'forkit_session';
 
-type View = 'home' | 'saved' | 'plan' | 'pantry' | 'community' | 'household';
+type View = 'home' | 'saved' | 'plan' | 'pantry' | 'community' | 'household' | 'auth';
+
+function readJSON<T>(key: string): T | null {
+  const raw = localStorage.getItem(key);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
 
 export default function App() {
-  const [answers, setAnswers] = useState<OnboardingAnswers | null>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) return null;
-    try {
-      return JSON.parse(saved);
-    } catch {
-      return null;
-    }
-  });
+  const [answers, setAnswers] = useState<OnboardingAnswers | null>(() => readJSON(ONBOARDING_KEY));
+  const [session, setSession] = useState<Session | null>(() => readJSON(SESSION_KEY));
   const [view, setView] = useState<View>('home');
   const [openRecipe, setOpenRecipe] = useState<Recipe | null>(null);
 
   const handleOnboardingComplete = (result: OnboardingAnswers) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+    localStorage.setItem(ONBOARDING_KEY, JSON.stringify(result));
     setAnswers(result);
+  };
+
+  const handleSignedIn = (result: Session) => {
+    localStorage.setItem(SESSION_KEY, JSON.stringify(result));
+    setSession(result);
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem(SESSION_KEY);
+    setSession(null);
   };
 
   if (!answers) {
@@ -59,6 +74,17 @@ export default function App() {
     return <ForkitHousehold onBack={() => setView('home')} />;
   }
 
+  if (view === 'auth') {
+    return (
+      <ForkitAuth
+        session={session}
+        onBack={() => setView('home')}
+        onSignedIn={handleSignedIn}
+        onLogOut={handleLogOut}
+      />
+    );
+  }
+
   return (
     <ForkitHome
       onOpenRecipe={setOpenRecipe}
@@ -67,6 +93,8 @@ export default function App() {
       onOpenPantry={() => setView('pantry')}
       onOpenCommunity={() => setView('community')}
       onOpenHousehold={() => setView('household')}
+      onOpenAuth={() => setView('auth')}
+      session={session}
     />
   );
 }

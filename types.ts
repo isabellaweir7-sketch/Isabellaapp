@@ -80,3 +80,8 @@ export interface ShoppingListItem {
   price: number;
   addedBy: string;
 }
+
+export interface Session {
+  email: string;
+  method: 'google' | 'email';
+}
