@@ -1,24 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Onest:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #161D14;
-  --color-surface: #212B1D;
-  --color-border: #33422C;
+  /* Dark forest-green chrome: header bars, bottom nav, onboarding top/bottom strips */
+  --color-chrome: #161D14;
+  --color-chrome-card: #212B1D;
+  --color-chrome-border: #33422C;
+
+  /* Warm cream/beige: the main content surface between the dark chrome bands */
+  --color-cream: #F3ECDA;
+  --color-cream-card: #FFFFFF;
+  --color-cream-border: #E3DAC0;
+
   --color-ink: #F2E9DC;
+  --color-ink-dark: #232B1D;
   --color-muted: #8FA087;
+  --color-muted-warm: #93876B;
   --color-accent: #9ACB4B;
   --color-accent-deep: #5A7A3A;
 
-  --font-display: 'Onest', system-ui, sans-serif;
+  --font-display: 'Baloo 2', system-ui, sans-serif;
   --font-body: 'Onest', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
 @layer base {
   body {
-    background-color: var(--color-bg);
-    color: var(--color-ink);
+    background-color: var(--color-cream);
+    color: var(--color-ink-dark);
     font-family: var(--font-body);
     font-weight: 500;
   }

@@ -34,7 +34,7 @@ function PhotoTile({ photo, fallback, label, className = '' }) {
 function Header() {
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;
   return (
-    <div className="flex items-center justify-between px-6 pt-8 pb-4">
+    <div className="flex items-center justify-between px-6 pt-8 pb-5" style={{ backgroundColor: '#161D14' }}>
       <div className="flex items-center gap-3">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
@@ -67,7 +67,7 @@ function HeroSection() {
     <div>
       <p
         className="text-xs uppercase font-bold mb-2"
-        style={{ color: '#8FA087', letterSpacing: '0.08em' }}
+        style={{ color: '#5A7A3A', letterSpacing: '0.08em' }}
       >
         From your cupboard
       </p>
@@ -78,7 +78,7 @@ function HeroSection() {
         className="h-56 w-full"
       />
       <div className="flex items-center justify-between mt-2">
-        <span className="text-sm font-semibold" style={{ color: '#F2E9DC' }}>
+        <span className="text-sm font-semibold" style={{ color: '#232B1D' }}>
           {CUPBOARD_HERO.subtitle}
         </span>
         <span className="receipt-tag">
@@ -121,9 +121,9 @@ export default function ForkitHome() {
   const [plan, pantry, saved, community] = HOME_TILES;
 
   return (
-    <div className="min-h-screen pb-24" style={{ backgroundColor: '#161D14', color: '#F2E9DC' }}>
+    <div className="min-h-screen pb-24" style={{ backgroundColor: '#F3ECDA' }}>
       <Header />
-      <div className="px-6 flex flex-col gap-4">
+      <div className="px-6 pt-6 flex flex-col gap-4">
         <HeroSection />
 
         <div className="grid grid-cols-3 gap-3">
@@ -136,7 +136,7 @@ export default function ForkitHome() {
           <PhotoTile {...community} className="col-span-2 h-28" />
         </div>
 
-        <p className="text-xs text-center font-semibold pt-1" style={{ color: '#8FA087' }}>
+        <p className="text-xs text-center font-semibold pt-1" style={{ color: '#93876B' }}>
           3 new budget recipes shared today
         </p>
       </div>
