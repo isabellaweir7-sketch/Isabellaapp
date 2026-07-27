@@ -1,20 +1,19 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# ForkIt
 
-# Run and deploy your AI Studio app
+A meal planner built for university students: auto-generated weekly plans,
+"what's in your cupboard" recipe generation, community recipe sharing, and a
+shared-household mode for splitting the shopping list and cooking nights.
 
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/50e5be56-ef6e-41b0-a854-6d539dc3c651
+See `forkit-onboarding.jsx` (the four-step onboarding flow) and
+`forkit-home-mockup.jsx` (the bento-grid home screen) for the design system
+reference — deep forest green palette, Bricolage Grotesque / Public Sans /
+IBM Plex Mono type, receipt-style price tags.
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
+**Prerequisites:** Node.js
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+2. Run the app:
    `npm run dev`

@@ -1,101 +1,57 @@
-export type PriceRangeTag = 'under15' | '15to35' | '35to75' | 'splurge75';
-
-export interface WhispersNote {
+export interface OnboardingReason {
   id: string;
-  content: string;
-  dateAdded: string;
-  authorName?: string;
+  label: string;
 }
 
-export interface WishlistItem {
+export interface DietaryRestriction {
   id: string;
-  title: string;
-  price: number;
-  priceRangeTag: PriceRangeTag;
-  store: string;
-  url?: string;
-  imageUrl?: string;
-  category: string;
-  claimedBy: string | null; // e.g. "Sophia" or null
-  claimedStatus: 'unclaimed' | 'claimed' | 'chipping_in';
-  chipInCount?: number;
-  priority: 'high' | 'medium' | 'low';
-  notes?: string;
+  label: string;
 }
 
-export interface DreamBoardItem {
+export interface MealWant {
   id: string;
-  title: string;
-  type: 'photo' | 'tiktok_idea' | 'link' | 'screenshot' | 'quote';
-  mediaUrl: string;
-  price?: number;
-  priceRangeTag: PriceRangeTag;
-  linkUrl?: string;
-  notes?: string;
-  boardCategory: 'Beauty & Glow' | 'Fashion & Style' | 'Room & Cozy' | 'Jewelry & Sparkle' | 'Tasty Treats' | 'Random Obsessions';
+  label: string;
+  sublabel: string;
+  gradient: string;
 }
 
-export interface ProfileTheme {
-  color: string; // Background color class or hex
-  accentColor: string;
-  pattern: 'solid' | 'glitter' | 'y2k-hearts' | 'pastel-waves' | 'starry-sky' | 'cherry-blossom' | 'ribbon-stripe';
-  unlocked: boolean;
-}
-
-export interface FriendProfile {
+export interface SampleDish {
   id: string;
   name: string;
-  avatar: string;
-  relationship: 'Bestie' | 'Sister' | 'Partner' | 'Friend' | 'Cousin' | 'Mom' | 'Other';
-  birthday: string; // YYYY-MM-DD
-  zodiacSign: string;
-  bio: string;
-  theme: ProfileTheme;
-  preferences: {
-    favoriteColors: string[];
-    favoriteSnacks: string[];
-    favoriteDrinks: string[];
-    favoriteShops: string[];
-    favoriteFlowers: string[];
-    clothingSize: string;
-    shoeSize: string;
-    jewellery: {
-      metal: string;
-      style: string;
-    };
-    allergies: string[];
-    doNotWant: string[];
-    hobbies: string[];
-  };
-  notes: WhispersNote[];
-  wishlistItems: WishlistItem[];
-  dreamBoardItems: DreamBoardItem[];
-  reminderEnabled: boolean;
-  reminderDaysBefore: number; // e.g. 14, 3, 0
+  tags: string[];
+  gradient: string;
 }
 
-export interface GiverBadge {
+export interface OnboardingAnswers {
+  reasons: string[];
+  restrictions: string[];
+  mealWants: string[];
+  likedDishes: string[];
+  dislikedDishes: string[];
+}
+
+export interface Recipe {
+  id: string;
+  title: string;
+  minutes: number;
+  servings: number;
+  pricePerServing: number;
+  gradient: string;
+  tags: string[];
+}
+
+export interface HouseholdMember {
   id: string;
   name: string;
-  icon: string;
-  description: string;
-  unlockedAt?: string;
+  initials: string;
+  cookingNight: string | null;
 }
 
-export interface UserGiverProgress {
-  giverLevel: number;
-  giftsGivenCount: number;
-  unlockedThemes: string[];
-  badges: GiverBadge[];
-}
-
-export interface GiftSuggestion {
+export interface CommunityRecipe {
+  id: string;
   title: string;
-  price: string;
-  store: string;
-  reason: string;
-  category: string;
-  imageUrl: string;
-  affiliateUrl: string;
-  priceTag: PriceRangeTag;
+  author: string;
+  upvotes: number;
+  pricePerServing: number;
+  gradient: string;
 }
