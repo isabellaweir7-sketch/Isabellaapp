@@ -19,7 +19,8 @@ export interface SampleDish {
   id: string;
   name: string;
   tags: string[];
-  gradient: string;
+  photo: string;
+  fallback: string;
 }
 
 export interface OnboardingAnswers {
@@ -36,7 +37,8 @@ export interface Recipe {
   minutes: number;
   servings: number;
   pricePerServing: number;
-  gradient: string;
+  photo: string;
+  fallback: string;
   tags: string[];
 }
 
@@ -53,5 +55,6 @@ export interface CommunityRecipe {
   author: string;
   upvotes: number;
   pricePerServing: number;
-  gradient: string;
+  photo: string;
+  fallback: string;
 }

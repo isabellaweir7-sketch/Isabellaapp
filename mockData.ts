@@ -39,105 +39,117 @@ export const DIETARY_RESTRICTIONS: DietaryRestriction[] = [
   { id: 'low-fodmap', label: 'Low FODMAP' },
 ];
 
+// Abstract preference cards (not tied to a specific dish), so these stay as
+// soft sage-toned gradients rather than photos.
 export const MEAL_WANTS: MealWant[] = [
   {
     id: 'high-protein',
     label: '45g+ protein',
     sublabel: 'Keeps you full, builds muscle',
-    gradient: 'linear-gradient(135deg, #33422C 0%, #5A7A3A 100%)',
+    gradient: 'linear-gradient(135deg, #EFEBDB 0%, #D8E2C6 100%)',
   },
   {
     id: 'low-carb',
     label: 'Low-carb',
     sublabel: 'Lighter on the bread and rice',
-    gradient: 'linear-gradient(135deg, #212B1D 0%, #33422C 100%)',
+    gradient: 'linear-gradient(135deg, #F3EFE0 0%, #E3E9D4 100%)',
   },
   {
     id: 'under-500',
     label: 'Under 500 kcal',
     sublabel: 'Lighter meals, still satisfying',
-    gradient: 'linear-gradient(150deg, #2A3A24 0%, #5A7A3A 100%)',
+    gradient: 'linear-gradient(150deg, #EEEADA 0%, #CFDCBC 100%)',
   },
   {
     id: 'budget-first',
     label: 'Budget over macros',
     sublabel: "Whatever's cheapest wins",
-    gradient: 'linear-gradient(135deg, #33422C 0%, #212B1D 100%)',
+    gradient: 'linear-gradient(135deg, #F0ECDD 0%, #DDE4CE 100%)',
   },
   {
     id: 'quick',
     label: 'Under 20 minutes',
     sublabel: 'In and out of the kitchen fast',
-    gradient: 'linear-gradient(150deg, #212B1D 0%, #3D4F33 100%)',
+    gradient: 'linear-gradient(150deg, #F2EEDF 0%, #E6EBD8 100%)',
   },
   {
     id: 'meal-prep',
     label: 'Meal-prep friendly',
     sublabel: 'Cook once, eat all week',
-    gradient: 'linear-gradient(135deg, #2A3A24 0%, #33422C 100%)',
+    gradient: 'linear-gradient(135deg, #EEE9D9 0%, #D3DFC3 100%)',
   },
   {
     id: 'comfort',
     label: 'Comfort food',
     sublabel: 'Warm, filling, low effort',
-    gradient: 'linear-gradient(150deg, #33422C 0%, #212B1D 100%)',
+    gradient: 'linear-gradient(150deg, #F1EDDE 0%, #E0E6D2 100%)',
   },
   {
     id: 'one-pan',
     label: 'One-pan only',
     sublabel: 'Minimal washing up',
-    gradient: 'linear-gradient(135deg, #212B1D 0%, #5A7A3A 100%)',
+    gradient: 'linear-gradient(135deg, #EFEBDB 0%, #CBDAB8 100%)',
   },
 ];
 
+// Stock food photography (Unsplash) for anything representing an actual dish,
+// with a pale sage fallback colour if a photo fails to load.
 export const SAMPLE_DISHES: SampleDish[] = [
   {
     id: 'dish-tomato-pasta',
     name: 'One-pan tomato & garlic pasta',
     tags: ['Budget', '15 min'],
-    gradient: 'linear-gradient(160deg, #33422C 0%, #5A7A3A 100%)',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    fallback: '#D8E2C6',
   },
   {
     id: 'dish-chicken-rice',
     name: 'Peri-peri chicken & rice bowl',
     tags: ['High protein'],
-    gradient: 'linear-gradient(160deg, #212B1D 0%, #3D4F33 100%)',
+    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
+    fallback: '#E3E9D4',
   },
   {
     id: 'dish-lentil-curry',
     name: 'Coconut lentil curry',
     tags: ['Vegan', 'Batch cooks'],
-    gradient: 'linear-gradient(160deg, #2A3A24 0%, #5A7A3A 100%)',
+    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
+    fallback: '#CFDCBC',
   },
   {
     id: 'dish-beans-toast',
     name: 'Loaded beans on toast',
     tags: ['Under £1', '5 min'],
-    gradient: 'linear-gradient(160deg, #33422C 0%, #212B1D 100%)',
+    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
+    fallback: '#DDE4CE',
   },
   {
     id: 'dish-stirfry',
     name: 'Veg & egg fried rice stir-fry',
     tags: ['Cupboard mode'],
-    gradient: 'linear-gradient(160deg, #212B1D 0%, #5A7A3A 100%)',
+    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
+    fallback: '#E6EBD8',
   },
   {
     id: 'dish-tuna-pasta-bake',
     name: 'Tuna pasta bake',
     tags: ['Meal-prep friendly'],
-    gradient: 'linear-gradient(160deg, #2A3A24 0%, #33422C 100%)',
+    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
+    fallback: '#D3DFC3',
   },
   {
     id: 'dish-omelette',
     name: 'Cheese & spinach omelette',
     tags: ['5 min', 'High protein'],
-    gradient: 'linear-gradient(160deg, #33422C 0%, #3D4F33 100%)',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    fallback: '#E0E6D2',
   },
   {
     id: 'dish-chilli',
     name: 'Budget beef & bean chilli',
     tags: ['Batch cooks', 'Freezes well'],
-    gradient: 'linear-gradient(160deg, #212B1D 0%, #2A3A24 100%)',
+    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
+    fallback: '#CBDAB8',
   },
 ];
 
@@ -147,7 +159,8 @@ export const THIS_WEEKS_HERO_RECIPE: Recipe = {
   minutes: 35,
   servings: 4,
   pricePerServing: 1.85,
-  gradient: 'linear-gradient(160deg, #2A3A24 0%, #5A7A3A 100%)',
+  photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=1200',
+  fallback: '#CFDCBC',
   tags: ['Batch cooks', 'Freezes well'],
 };
 
@@ -158,7 +171,8 @@ export const SAVED_RECIPES: Recipe[] = [
     minutes: 15,
     servings: 2,
     pricePerServing: 0.95,
-    gradient: 'linear-gradient(160deg, #33422C 0%, #5A7A3A 100%)',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=200',
+    fallback: '#D8E2C6',
     tags: ['Budget', 'Quick'],
   },
   {
@@ -167,7 +181,8 @@ export const SAVED_RECIPES: Recipe[] = [
     minutes: 30,
     servings: 4,
     pricePerServing: 1.2,
-    gradient: 'linear-gradient(160deg, #212B1D 0%, #3D4F33 100%)',
+    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=200',
+    fallback: '#CFDCBC',
     tags: ['Vegan'],
   },
 ];
@@ -179,7 +194,8 @@ export const COMMUNITY_RECIPES: CommunityRecipe[] = [
     author: 'Priya, 2nd year',
     upvotes: 214,
     pricePerServing: 0.6,
-    gradient: 'linear-gradient(160deg, #33422C 0%, #212B1D 100%)',
+    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=400',
+    fallback: '#DDE4CE',
   },
   {
     id: 'community-stirfry',
@@ -187,7 +203,8 @@ export const COMMUNITY_RECIPES: CommunityRecipe[] = [
     author: 'Marcus, 1st year',
     upvotes: 158,
     pricePerServing: 0.85,
-    gradient: 'linear-gradient(160deg, #212B1D 0%, #5A7A3A 100%)',
+    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=400',
+    fallback: '#E3E9D4',
   },
   {
     id: 'community-tuna-bake',
@@ -195,7 +212,8 @@ export const COMMUNITY_RECIPES: CommunityRecipe[] = [
     author: 'Sofia, 3rd year',
     upvotes: 132,
     pricePerServing: 1.1,
-    gradient: 'linear-gradient(160deg, #2A3A24 0%, #33422C 100%)',
+    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=400',
+    fallback: '#D3DFC3',
   },
 ];
 

@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Public+Sans:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Manrope:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #161D14;
-  --color-surface: #212B1D;
-  --color-border: #33422C;
-  --color-ink: #F2E9DC;
-  --color-muted: #8FA087;
-  --color-accent: #9ACB4B;
-  --color-accent-deep: #5A7A3A;
+  --color-bg: #FAF6EC;
+  --color-surface: #FFFFFF;
+  --color-border: #DEE3D2;
+  --color-ink: #33392C;
+  --color-muted: #8B9481;
+  --color-accent: #6F8F52;
+  --color-accent-deep: #465C34;
 
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
-  --font-body: 'Public Sans', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
@@ -44,7 +44,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.18;
+  opacity: 0.1;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
