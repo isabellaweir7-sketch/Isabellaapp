@@ -11,7 +11,6 @@ export interface DietaryRestriction {
 export interface MealWant {
   id: string;
   label: string;
-  sublabel: string;
   gradient: string;
 }
 
@@ -31,30 +30,17 @@ export interface OnboardingAnswers {
   dislikedDishes: string[];
 }
 
-export interface Recipe {
-  id: string;
+export interface CupboardHero {
   title: string;
-  minutes: number;
-  servings: number;
-  pricePerServing: number;
+  subtitle: string;
   photo: string;
   fallback: string;
-  tags: string[];
-}
-
-export interface HouseholdMember {
-  id: string;
-  name: string;
-  initials: string;
-  cookingNight: string | null;
-}
-
-export interface CommunityRecipe {
-  id: string;
-  title: string;
-  author: string;
-  upvotes: number;
   pricePerServing: number;
+}
+
+export interface FeatureTile {
+  id: string;
+  label: string;
   photo: string;
   fallback: string;
 }

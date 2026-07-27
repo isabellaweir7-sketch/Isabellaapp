@@ -3,228 +3,148 @@ import {
   DietaryRestriction,
   MealWant,
   SampleDish,
-  Recipe,
-  HouseholdMember,
-  CommunityRecipe,
+  CupboardHero,
+  FeatureTile,
 } from './types';
 
 export const ONBOARDING_REASONS: OnboardingReason[] = [
-  { id: 'afford-meals', label: "Can't afford meals" },
   { id: 'keep-healthy', label: 'Keeping healthy' },
+  { id: 'afford-meals', label: "Can't afford meals" },
   { id: 'roommate-planning', label: 'Struggling to plan with roommates' },
   { id: 'bored-repeats', label: 'Bored of eating the same thing' },
-  { id: 'building-muscle', label: 'Building muscle' },
-  { id: 'cooking-alone-first-time', label: 'Cooking alone for the first time' },
-  { id: 'save-time', label: 'Saving time on planning' },
+  { id: 'waste-less', label: 'Want to waste less food' },
   { id: 'learn-to-cook', label: 'Learning to cook from scratch' },
-  { id: 'exam-season', label: 'Prepping for exam season' },
-  { id: 'reduce-waste', label: 'Reducing food waste' },
-  { id: 'eat-more-veg', label: 'Eating more vegetables' },
-  { id: 'bulking', label: 'Trying to gain weight / bulk' },
-  { id: 'losing-weight', label: 'Trying to lose weight' },
-  { id: 'shared-shopping', label: 'Splitting shopping with housemates' },
-  { id: 'just-inspiration', label: 'Just want some inspiration' },
+  { id: 'save-time', label: 'Saving time' },
+  { id: 'building-muscle', label: 'Building muscle / gym goals' },
+  { id: 'food-allergy', label: 'Managing a food allergy' },
+  { id: 'cooking-alone-first-time', label: 'Cooking for the first time alone' },
+  { id: 'eating-before-nights-out', label: 'Eating better before nights out' },
+  { id: 'shared-shopping', label: 'Splitting costs with housemates' },
+  { id: 'more-variety', label: 'Want more variety' },
+  { id: 'reduce-takeaway', label: 'Reducing takeaway spend' },
+  { id: 'just-browsing', label: 'Just here to browse' },
 ];
 
 export const DIETARY_RESTRICTIONS: DietaryRestriction[] = [
   { id: 'none', label: 'No restrictions' },
   { id: 'vegetarian', label: 'Vegetarian' },
   { id: 'vegan', label: 'Vegan' },
-  { id: 'pescatarian', label: 'Pescatarian' },
   { id: 'gluten-free', label: 'Gluten-free' },
   { id: 'dairy-free', label: 'Dairy-free' },
-  { id: 'nut-allergy', label: 'Nut allergy' },
   { id: 'halal', label: 'Halal' },
   { id: 'kosher', label: 'Kosher' },
-  { id: 'low-fodmap', label: 'Low FODMAP' },
+  { id: 'nut-allergy', label: 'Nut allergy' },
 ];
 
-// Abstract preference cards (not tied to a specific dish), so these stay as
-// soft sage-toned gradients rather than photos.
+// Earthy forest-green family tones for the meal-want image blocks — a small
+// palette of gradients (not one flat colour) so the grid doesn't feel repetitive.
+const TONES = {
+  a: 'linear-gradient(160deg, #6B8E3D 0%, #354A1F 100%)',
+  b: 'linear-gradient(160deg, #A6844A 0%, #5C4A28 100%)',
+  c: 'linear-gradient(160deg, #8A9A5B 0%, #4E5A34 100%)',
+  d: 'linear-gradient(160deg, #4A7A6B 0%, #274038 100%)',
+};
+
 export const MEAL_WANTS: MealWant[] = [
-  {
-    id: 'high-protein',
-    label: '45g+ protein',
-    sublabel: 'Keeps you full, builds muscle',
-    gradient: 'linear-gradient(135deg, #EFEBDB 0%, #D8E2C6 100%)',
-  },
-  {
-    id: 'low-carb',
-    label: 'Low-carb',
-    sublabel: 'Lighter on the bread and rice',
-    gradient: 'linear-gradient(135deg, #F3EFE0 0%, #E3E9D4 100%)',
-  },
-  {
-    id: 'under-500',
-    label: 'Under 500 kcal',
-    sublabel: 'Lighter meals, still satisfying',
-    gradient: 'linear-gradient(150deg, #EEEADA 0%, #CFDCBC 100%)',
-  },
-  {
-    id: 'budget-first',
-    label: 'Budget over macros',
-    sublabel: "Whatever's cheapest wins",
-    gradient: 'linear-gradient(135deg, #F0ECDD 0%, #DDE4CE 100%)',
-  },
-  {
-    id: 'quick',
-    label: 'Under 20 minutes',
-    sublabel: 'In and out of the kitchen fast',
-    gradient: 'linear-gradient(150deg, #F2EEDF 0%, #E6EBD8 100%)',
-  },
-  {
-    id: 'meal-prep',
-    label: 'Meal-prep friendly',
-    sublabel: 'Cook once, eat all week',
-    gradient: 'linear-gradient(135deg, #EEE9D9 0%, #D3DFC3 100%)',
-  },
-  {
-    id: 'comfort',
-    label: 'Comfort food',
-    sublabel: 'Warm, filling, low effort',
-    gradient: 'linear-gradient(150deg, #F1EDDE 0%, #E0E6D2 100%)',
-  },
-  {
-    id: 'one-pan',
-    label: 'One-pan only',
-    sublabel: 'Minimal washing up',
-    gradient: 'linear-gradient(135deg, #EFEBDB 0%, #CBDAB8 100%)',
-  },
+  { id: 'high-protein', label: '45g+ protein', gradient: TONES.a },
+  { id: 'low-carb', label: 'Low-carb', gradient: TONES.b },
+  { id: 'under-500', label: 'Under 500 kcal', gradient: TONES.c },
+  { id: 'high-fibre', label: 'High fibre', gradient: TONES.d },
+  { id: 'balanced', label: 'Balanced / no target', gradient: TONES.a },
+  { id: 'budget-first', label: 'Budget over macros', gradient: TONES.b },
 ];
 
-// Stock food photography (Unsplash) for anything representing an actual dish,
-// with a pale sage fallback colour if a photo fails to load.
+// Stock food photography (Unsplash) with a forest-green-family fallback
+// colour drawn behind it in case a photo fails to load.
 export const SAMPLE_DISHES: SampleDish[] = [
+  {
+    id: 'dish-chickpea-curry',
+    name: 'One-pan chickpea curry',
+    tags: ['Vegan', 'Budget'],
+    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4E5A34',
+  },
+  {
+    id: 'dish-peanut-noodles',
+    name: 'Peanut noodles',
+    tags: ['15 min'],
+    photo: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+  },
+  {
+    id: 'dish-sausage-traybake',
+    name: 'Sheet-pan sausage traybake',
+    tags: ['One-pan', 'Batch cooks'],
+    photo: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+  },
   {
     id: 'dish-tomato-pasta',
     name: 'One-pan tomato & garlic pasta',
     tags: ['Budget', '15 min'],
     photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
-    fallback: '#D8E2C6',
-  },
-  {
-    id: 'dish-chicken-rice',
-    name: 'Peri-peri chicken & rice bowl',
-    tags: ['High protein'],
-    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
-    fallback: '#E3E9D4',
-  },
-  {
-    id: 'dish-lentil-curry',
-    name: 'Coconut lentil curry',
-    tags: ['Vegan', 'Batch cooks'],
-    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
-    fallback: '#CFDCBC',
+    fallback: '#354A1F',
   },
   {
     id: 'dish-beans-toast',
     name: 'Loaded beans on toast',
     tags: ['Under £1', '5 min'],
     photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
-    fallback: '#DDE4CE',
+    fallback: '#5C4A28',
   },
   {
     id: 'dish-stirfry',
     name: 'Veg & egg fried rice stir-fry',
     tags: ['Cupboard mode'],
     photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
-    fallback: '#E6EBD8',
-  },
-  {
-    id: 'dish-tuna-pasta-bake',
-    name: 'Tuna pasta bake',
-    tags: ['Meal-prep friendly'],
-    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
-    fallback: '#D3DFC3',
-  },
-  {
-    id: 'dish-omelette',
-    name: 'Cheese & spinach omelette',
-    tags: ['5 min', 'High protein'],
-    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
-    fallback: '#E0E6D2',
+    fallback: '#4E5A34',
   },
   {
     id: 'dish-chilli',
     name: 'Budget beef & bean chilli',
     tags: ['Batch cooks', 'Freezes well'],
     photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
-    fallback: '#CBDAB8',
+    fallback: '#274038',
   },
 ];
 
-export const THIS_WEEKS_HERO_RECIPE: Recipe = {
-  id: 'recipe-hero-chilli',
-  title: 'Budget beef & bean chilli',
-  minutes: 35,
-  servings: 4,
-  pricePerServing: 1.85,
+// Hero: a cupboard-mode result, the app's real differentiator.
+export const CUPBOARD_HERO: CupboardHero = {
+  title: 'Tomato & chickpea stew',
+  subtitle: 'Uses 6 things you already have',
   photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=1200',
-  fallback: '#CFDCBC',
-  tags: ['Batch cooks', 'Freezes well'],
+  fallback: '#354A1F',
+  pricePerServing: 1.4,
 };
 
-export const SAVED_RECIPES: Recipe[] = [
+export const HOME_TILES: FeatureTile[] = [
   {
-    id: 'recipe-tomato-pasta',
-    title: 'One-pan tomato & garlic pasta',
-    minutes: 15,
-    servings: 2,
-    pricePerServing: 0.95,
-    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=200',
-    fallback: '#D8E2C6',
-    tags: ['Budget', 'Quick'],
+    id: 'plan',
+    label: "This week's plan",
+    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=600',
+    fallback: '#5C4A28',
   },
   {
-    id: 'recipe-lentil-curry',
-    title: 'Coconut lentil curry',
-    minutes: 30,
-    servings: 4,
-    pricePerServing: 1.2,
-    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=200',
-    fallback: '#CFDCBC',
-    tags: ['Vegan'],
-  },
-];
-
-export const COMMUNITY_RECIPES: CommunityRecipe[] = [
-  {
-    id: 'community-beans-toast',
-    title: 'Loaded beans on toast, three ways',
-    author: 'Priya, 2nd year',
-    upvotes: 214,
-    pricePerServing: 0.6,
-    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=400',
-    fallback: '#DDE4CE',
+    id: 'pantry',
+    label: 'Pantry',
+    photo: 'https://images.unsplash.com/photo-1584473457409-ae5c91d40c3e?auto=format&fit=crop&q=80&w=600',
+    fallback: '#4E5A34',
   },
   {
-    id: 'community-stirfry',
-    title: 'Empty-cupboard fried rice',
-    author: 'Marcus, 1st year',
-    upvotes: 158,
-    pricePerServing: 0.85,
-    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=400',
-    fallback: '#E3E9D4',
+    id: 'saved',
+    label: 'Saved',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600',
+    fallback: '#354A1F',
   },
   {
-    id: 'community-tuna-bake',
-    title: 'Five-ingredient tuna pasta bake',
-    author: 'Sofia, 3rd year',
-    upvotes: 132,
-    pricePerServing: 1.1,
-    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=400',
-    fallback: '#D3DFC3',
+    id: 'community',
+    label: 'From other students',
+    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=600',
+    fallback: '#274038',
   },
-];
-
-export const HOUSEHOLD_MEMBERS: HouseholdMember[] = [
-  { id: 'you', name: 'You', initials: 'IW', cookingNight: 'Tonight' },
-  { id: 'housemate-1', name: 'Dan', initials: 'D', cookingNight: 'Tomorrow' },
-  { id: 'housemate-2', name: 'Freya', initials: 'F', cookingNight: 'Thursday' },
-  { id: 'housemate-3', name: 'Alex', initials: 'A', cookingNight: null },
 ];
 
 export const WEEKLY_BUDGET = {
-  spent: 18.4,
+  spent: 7,
   target: 30,
 };

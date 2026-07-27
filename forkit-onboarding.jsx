@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'motion/react';
-import { ChevronLeft, Heart, X, Check } from 'lucide-react';
+import { ChevronLeft, Heart, X, Check, Leaf } from 'lucide-react';
 import {
   ONBOARDING_REASONS,
   DIETARY_RESTRICTIONS,
@@ -9,11 +9,25 @@ import {
 } from './mockData';
 
 const STEP_META = [
-  { title: 'Why are you here?', subtitle: 'Pick as many as apply — this shapes everything we suggest.' },
-  { title: 'Any dietary restrictions?', subtitle: "We'll filter these out of every plan automatically." },
-  { title: 'What do you want from a meal?', subtitle: 'Pick a few. You can always change your mind later.' },
-  { title: 'Would you eat this?', subtitle: "Swipe through a few dishes so we learn your actual taste." },
+  { title: 'Why are you here?', subtitle: "Pick as many as apply — there's no wrong answer." },
+  { title: 'Any dietary needs?', subtitle: "We'll only suggest meals that fit." },
+  { title: 'What do you want from a meal?', subtitle: 'Optional — skip if you just want variety.' },
+  { title: 'Would you eat this?', subtitle: 'Swipe through a few so we learn your taste.' },
 ];
+
+function StepLabel({ step }) {
+  return (
+    <div className="flex items-center gap-2 mb-1">
+      <Leaf size={18} color="#9ACB4B" />
+      <span
+        className="font-mono text-xs font-bold uppercase"
+        style={{ color: '#9ACB4B', letterSpacing: '0.04em' }}
+      >
+        Step {step + 1} of {STEP_META.length}
+      </span>
+    </div>
+  );
+}
 
 function StepDots({ step }) {
   return (
@@ -24,7 +38,7 @@ function StepDots({ step }) {
           className="h-1.5 rounded-full transition-all duration-300"
           style={{
             width: i === step ? 24 : 8,
-            backgroundColor: i <= step ? '#6F8F52' : '#DEE3D2',
+            backgroundColor: i <= step ? '#9ACB4B' : '#33422C',
           }}
         />
       ))}
@@ -39,10 +53,9 @@ function Chip({ label, selected, onClick }) {
       onClick={onClick}
       className="px-4 py-2.5 rounded-full text-sm font-semibold border transition-colors"
       style={{
-        fontFamily: 'var(--font-body)',
-        backgroundColor: selected ? '#6F8F52' : '#FFFFFF',
-        borderColor: selected ? '#6F8F52' : '#DEE3D2',
-        color: selected ? '#FAF6EC' : '#33392C',
+        backgroundColor: selected ? '#9ACB4B' : '#212B1D',
+        borderColor: selected ? '#9ACB4B' : '#33422C',
+        color: selected ? '#161D14' : '#F2E9DC',
       }}
     >
       {label}
@@ -75,47 +88,53 @@ function RestrictionsStep({ selected, onToggle }) {
   );
 }
 
+function GoalChip({ label, selected, gradient, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="rounded-2xl overflow-hidden text-left transition-all"
+      style={{ border: `2px solid ${selected ? '#9ACB4B' : 'transparent'}` }}
+    >
+      <div className="grain relative h-20 w-full" style={{ background: gradient }}>
+        {selected && (
+          <div
+            className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: '#9ACB4B' }}
+          >
+            <Check size={14} color="#161D14" strokeWidth={3} />
+          </div>
+        )}
+      </div>
+      <div className="px-2.5 py-2" style={{ backgroundColor: selected ? '#9ACB4B' : '#212B1D' }}>
+        <span
+          className="text-xs font-bold"
+          style={{ color: selected ? '#161D14' : '#F2E9DC' }}
+        >
+          {label}
+        </span>
+      </div>
+    </button>
+  );
+}
+
 function MealWantsStep({ selected, onToggle }) {
   return (
     <div className="grid grid-cols-2 gap-3">
-      {MEAL_WANTS.map((want, i) => {
-        const isSelected = selected.includes(want.id);
-        const wide = i % 5 === 0;
-        return (
-          <button
-            key={want.id}
-            type="button"
-            onClick={() => onToggle(want.id)}
-            className={`grain relative overflow-hidden rounded-2xl text-left p-4 h-32 flex flex-col justify-end border-2 transition-transform ${
-              wide ? 'col-span-2' : 'col-span-1'
-            }`}
-            style={{
-              background: want.gradient,
-              borderColor: isSelected ? '#6F8F52' : 'transparent',
-            }}
-          >
-            {isSelected && (
-              <div
-                className="absolute top-3 right-3 w-6 h-6 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: '#6F8F52' }}
-              >
-                <Check size={14} color="#FAF6EC" strokeWidth={3} />
-              </div>
-            )}
-            <span className="font-display font-bold text-base leading-tight" style={{ color: '#33392C' }}>
-              {want.label}
-            </span>
-            <span className="text-xs font-medium mt-1" style={{ color: '#8B9481' }}>
-              {want.sublabel}
-            </span>
-          </button>
-        );
-      })}
+      {MEAL_WANTS.map((want) => (
+        <GoalChip
+          key={want.id}
+          label={want.label}
+          gradient={want.gradient}
+          selected={selected.includes(want.id)}
+          onClick={() => onToggle(want.id)}
+        />
+      ))}
     </div>
   );
 }
 
-const PHOTO_SCRIM = 'linear-gradient(180deg, rgba(38,43,31,0) 35%, rgba(30,34,24,0.85) 100%)';
+const PHOTO_SCRIM = 'linear-gradient(180deg, rgba(22,29,20,0) 40%, rgba(22,29,20,0.88) 100%)';
 
 function SwipeCard({ dish, onSwipe, isTop }) {
   const x = useMotionValue(0);
@@ -131,7 +150,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundColor: dish.fallback,
-        borderColor: '#DEE3D2',
+        borderColor: '#33422C',
         x: isTop ? x : 0,
         rotate: isTop ? rotate : 0,
       }}
@@ -155,7 +174,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
       {isTop && (
         <motion.div
           className="absolute top-5 right-5 px-3 py-1 rounded-lg border-2 font-display font-extrabold text-lg rotate-12"
-          style={{ borderColor: '#FAF6EC', color: '#FAF6EC', opacity: nopeOpacity }}
+          style={{ borderColor: '#F2E9DC', color: '#F2E9DC', opacity: nopeOpacity }}
         >
           PASS
         </motion.div>
@@ -167,7 +186,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
           </span>
         ))}
       </div>
-      <h3 className="font-display font-bold text-2xl leading-tight" style={{ color: '#FAF6EC' }}>
+      <h3 className="font-display font-bold text-2xl leading-tight" style={{ color: '#F2E9DC' }}>
         {dish.name}
       </h3>
     </motion.div>
@@ -183,11 +202,11 @@ function SwipeStep({ dishIndex, onSwipe }) {
       <div className="relative w-full max-w-xs h-80">
         {done ? (
           <div
-            className="grain rounded-3xl border h-full flex flex-col items-center justify-center gap-2"
-            style={{ backgroundColor: '#FFFFFF', borderColor: '#DEE3D2' }}
+            className="rounded-3xl border h-full flex flex-col items-center justify-center gap-2 px-6 text-center"
+            style={{ backgroundColor: '#212B1D', borderColor: '#33422C' }}
           >
             <span className="font-display font-bold text-xl">That's the taste test done</span>
-            <span className="text-sm font-medium" style={{ color: '#8B9481' }}>
+            <span className="text-sm font-medium" style={{ color: '#8FA087' }}>
               We've got a good read on you now
             </span>
           </div>
@@ -206,23 +225,23 @@ function SwipeStep({ dishIndex, onSwipe }) {
           <button
             type="button"
             onClick={() => onSwipe('dislike')}
-            className="w-14 h-14 rounded-full border-2 flex items-center justify-center"
-            style={{ borderColor: '#DEE3D2', color: '#33392C' }}
+            className="w-14 h-14 rounded-full border flex items-center justify-center"
+            style={{ backgroundColor: '#212B1D', borderColor: '#33422C' }}
             aria-label="Pass"
           >
-            <X size={22} />
+            <X size={22} color="#8FA087" />
           </button>
-          <span className="font-mono text-xs" style={{ color: '#8B9481' }}>
+          <span className="font-mono text-xs" style={{ color: '#8FA087' }}>
             {Math.min(dishIndex + 1, SAMPLE_DISHES.length)}/{SAMPLE_DISHES.length}
           </span>
           <button
             type="button"
             onClick={() => onSwipe('like')}
             className="w-14 h-14 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: '#6F8F52', color: '#FAF6EC' }}
+            style={{ backgroundColor: '#9ACB4B' }}
             aria-label="Yum"
           >
-            <Heart size={22} fill="#FAF6EC" />
+            <Heart size={22} color="#161D14" fill="#161D14" />
           </button>
         </div>
       )}
@@ -267,16 +286,15 @@ export default function ForkitOnboarding({ onComplete }) {
   };
 
   const canContinue = step === 0 ? reasons.length > 0 : true;
-  const isLastInteractiveStep = step === 2;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FAF6EC', color: '#33392C' }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#161D14', color: '#F2E9DC' }}>
       <div className="flex items-center justify-between px-6 pt-8 pb-4">
         <button
           type="button"
           onClick={() => step > 0 && setStep(step - 1)}
           className="w-9 h-9 flex items-center justify-center rounded-full"
-          style={{ opacity: step === 0 ? 0 : 1, backgroundColor: '#FFFFFF' }}
+          style={{ opacity: step === 0 ? 0 : 1, backgroundColor: '#212B1D' }}
           disabled={step === 0}
         >
           <ChevronLeft size={18} />
@@ -286,8 +304,9 @@ export default function ForkitOnboarding({ onComplete }) {
       </div>
 
       <div className="flex-1 px-6 pb-6 flex flex-col">
+        <StepLabel step={step} />
         <h1 className="font-display font-extrabold text-3xl leading-tight mb-2">{STEP_META[step].title}</h1>
-        <p className="text-sm font-medium mb-6" style={{ color: '#8B9481' }}>
+        <p className="text-sm font-medium mb-6" style={{ color: '#8FA087' }}>
           {STEP_META[step].subtitle}
         </p>
 
@@ -304,11 +323,11 @@ export default function ForkitOnboarding({ onComplete }) {
           <button
             type="button"
             disabled={!canContinue}
-            onClick={() => (isLastInteractiveStep ? setStep(3) : setStep(step + 1))}
-            className="w-full py-3.5 rounded-2xl font-display font-bold text-base transition-opacity"
+            onClick={() => setStep(step + 1)}
+            className="w-full py-3.5 rounded-full font-display font-bold text-base transition-opacity"
             style={{
-              backgroundColor: '#6F8F52',
-              color: '#FAF6EC',
+              backgroundColor: '#9ACB4B',
+              color: '#161D14',
               opacity: canContinue ? 1 : 0.4,
             }}
           >
