@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import ForkitOnboarding from './forkit-onboarding.jsx';
 import ForkitHome from './forkit-home-mockup.jsx';
 import ForkitRecipeDetail from './forkit-recipe-detail.jsx';
-import { OnboardingAnswers, CupboardHero } from './types';
+import ForkitSavedRecipes from './forkit-saved-recipes.jsx';
+import { OnboardingAnswers, Recipe } from './types';
 
 const STORAGE_KEY = 'forkit_onboarding_answers';
+
+type View = 'home' | 'saved';
 
 export default function App() {
   const [answers, setAnswers] = useState<OnboardingAnswers | null>(() => {
@@ -16,7 +19,8 @@ export default function App() {
       return null;
     }
   });
-  const [openRecipe, setOpenRecipe] = useState<CupboardHero | null>(null);
+  const [view, setView] = useState<View>('home');
+  const [openRecipe, setOpenRecipe] = useState<Recipe | null>(null);
 
   const handleOnboardingComplete = (result: OnboardingAnswers) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
@@ -31,5 +35,9 @@ export default function App() {
     return <ForkitRecipeDetail recipe={openRecipe} onBack={() => setOpenRecipe(null)} />;
   }
 
-  return <ForkitHome onOpenRecipe={setOpenRecipe} />;
+  if (view === 'saved') {
+    return <ForkitSavedRecipes onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
+  }
+
+  return <ForkitHome onOpenRecipe={setOpenRecipe} onOpenSaved={() => setView('saved')} />;
 }

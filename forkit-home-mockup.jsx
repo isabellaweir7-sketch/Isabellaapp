@@ -120,7 +120,7 @@ function BottomNav({ active, onChange }) {
   );
 }
 
-export default function ForkitHome({ onOpenRecipe }) {
+export default function ForkitHome({ onOpenRecipe, onOpenSaved }) {
   const [activeTab, setActiveTab] = useState('home');
   const [plan, pantry, saved, community] = HOME_TILES;
 
@@ -136,7 +136,7 @@ export default function ForkitHome({ onOpenRecipe }) {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          <PhotoTile {...saved} className="col-span-1 h-40" />
+          <PhotoTile {...saved} className="col-span-1 h-40" onClick={onOpenSaved} />
           <PhotoTile {...community} className="col-span-2 h-40" />
         </div>
 

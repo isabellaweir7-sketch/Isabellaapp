@@ -36,10 +36,10 @@ export interface Ingredient {
   unit: string;
 }
 
-export interface CupboardHero {
+export interface Recipe {
   id: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   photo: string;
   fallback: string;
   pricePerServing: number;

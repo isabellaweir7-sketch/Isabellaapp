@@ -3,7 +3,7 @@ import {
   DietaryRestriction,
   MealWant,
   SampleDish,
-  CupboardHero,
+  Recipe,
   FeatureTile,
 } from './types';
 
@@ -109,7 +109,7 @@ export const SAMPLE_DISHES: SampleDish[] = [
 ];
 
 // Hero: a cupboard-mode result, the app's real differentiator.
-export const CUPBOARD_HERO: CupboardHero = {
+export const CUPBOARD_HERO: Recipe = {
   id: 'recipe-tomato-chickpea-stew',
   title: 'Tomato & chickpea stew',
   subtitle: 'Uses 6 things you already have',
@@ -136,6 +136,77 @@ export const CUPBOARD_HERO: CupboardHero = {
     'Season with salt and pepper to taste and serve.',
   ],
 };
+
+export const SAVED_RECIPES: Recipe[] = [
+  {
+    id: 'recipe-tomato-pasta',
+    title: 'One-pan tomato & garlic pasta',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    fallback: '#354A1F',
+    pricePerServing: 0.95,
+    tags: ['Budget', 'Quick'],
+    baseServings: 2,
+    ingredients: [
+      { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
+      { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Olive oil', qtyPerServing: 0.5, unit: 'tbsp' },
+      { name: 'Dried chilli flakes', qtyPerServing: 0.25, unit: 'tsp' },
+      { name: 'Parmesan (optional)', qtyPerServing: 1, unit: 'tbsp' },
+    ],
+    steps: [
+      'Cook the spaghetti in salted boiling water until al dente.',
+      'Meanwhile, fry the sliced garlic and chilli flakes in olive oil for 1 minute until fragrant.',
+      'Add the chopped tomatoes and simmer for 8–10 minutes.',
+      'Drain the pasta, toss through the sauce, and top with parmesan if using.',
+    ],
+  },
+  {
+    id: 'recipe-lentil-curry',
+    title: 'Coconut lentil curry',
+    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+    pricePerServing: 1.2,
+    tags: ['Vegan', 'Batch cooks'],
+    baseServings: 4,
+    ingredients: [
+      { name: 'Red lentils', qtyPerServing: 50, unit: 'g' },
+      { name: 'Coconut milk (canned)', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Onion', qtyPerServing: 0.25, unit: '' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Curry powder', qtyPerServing: 1, unit: 'tsp' },
+      { name: 'Vegetable stock', qtyPerServing: 100, unit: 'ml' },
+    ],
+    steps: [
+      'Fry the diced onion and garlic until soft, then stir in the curry powder for 30 seconds.',
+      'Add the lentils, stock, and coconut milk. Bring to a simmer.',
+      'Cook for 20–25 minutes, stirring occasionally, until the lentils are tender and the curry has thickened.',
+      'Season to taste and serve with rice or flatbread.',
+    ],
+  },
+  {
+    id: 'recipe-sausage-traybake',
+    title: 'Sheet-pan sausage traybake',
+    photo: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+    pricePerServing: 1.6,
+    tags: ['One-pan', 'Batch cooks'],
+    baseServings: 4,
+    ingredients: [
+      { name: 'Sausages', qtyPerServing: 2, unit: '' },
+      { name: 'Potatoes', qtyPerServing: 1, unit: '' },
+      { name: 'Red onion', qtyPerServing: 0.25, unit: '' },
+      { name: 'Mixed peppers', qtyPerServing: 0.5, unit: '' },
+      { name: 'Olive oil', qtyPerServing: 0.5, unit: 'tbsp' },
+      { name: 'Mixed herbs', qtyPerServing: 0.5, unit: 'tsp' },
+    ],
+    steps: [
+      'Preheat the oven to 200°C (fan).',
+      'Chop the potatoes, onion, and peppers into chunks and toss with oil and herbs on a large tray.',
+      'Nestle the sausages among the vegetables and roast for 35–40 minutes, turning once, until everything is golden.',
+    ],
+  },
+];
 
 export const HOME_TILES: FeatureTile[] = [
   {
