@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Karla:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -19,8 +19,8 @@
   --color-accent: #9ACB4B;
   --color-accent-deep: #5A7A3A;
 
-  --font-display: 'Abril Fatface', Georgia, serif;
-  --font-body: 'Karla', system-ui, sans-serif;
+  --font-display: 'Bodoni Moda', Georgia, serif;
+  --font-body: 'Bodoni Moda', Georgia, serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
@@ -29,13 +29,15 @@
     background-color: var(--color-cream);
     color: var(--color-ink-dark);
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: 400;
   }
 }
 
+/* Headings sit at the Black end of the same variable serif family used for
+   body text — thick where body is thin, rather than a separate typeface. */
 .font-display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 900;
 }
 
 .font-mono {
