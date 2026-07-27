@@ -49,7 +49,7 @@ function Header() {
           <p className="text-[11px] leading-none font-semibold" style={{ color: '#8FA087' }}>
             Welcome back
           </p>
-          <h1 className="font-display text-xl leading-tight" style={{ color: '#F2E9DC' }}>
+          <h1 className="font-display text-2xl leading-tight" style={{ color: '#F2E9DC' }}>
             Hey, Isabella
           </h1>
         </div>
