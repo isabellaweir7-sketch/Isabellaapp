@@ -162,7 +162,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
     >
       {isTop && (
         <motion.div
-          className="absolute top-5 left-5 px-3 py-1 rounded-lg border-2 font-display font-extrabold text-lg -rotate-12"
+          className="absolute top-5 left-5 px-3 py-1 rounded-lg border-2 font-display text-lg -rotate-12"
           style={{ borderColor: '#9ACB4B', color: '#9ACB4B', opacity: likeOpacity }}
         >
           YUM
@@ -170,7 +170,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
       )}
       {isTop && (
         <motion.div
-          className="absolute top-5 right-5 px-3 py-1 rounded-lg border-2 font-display font-extrabold text-lg rotate-12"
+          className="absolute top-5 right-5 px-3 py-1 rounded-lg border-2 font-display text-lg rotate-12"
           style={{ borderColor: '#F2E9DC', color: '#F2E9DC', opacity: nopeOpacity }}
         >
           PASS
@@ -183,7 +183,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
           </span>
         ))}
       </div>
-      <h3 className="font-display font-bold text-2xl leading-tight" style={{ color: '#F2E9DC' }}>
+      <h3 className="font-display text-2xl leading-tight" style={{ color: '#F2E9DC' }}>
         {dish.name}
       </h3>
     </motion.div>
@@ -196,13 +196,13 @@ function SwipeStep({ dishIndex, onSwipe }) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <div className="relative w-full max-w-xs h-80">
+      <div className="relative w-full max-w-xs h-[26rem]">
         {done ? (
           <div
             className="rounded-3xl border h-full flex flex-col items-center justify-center gap-2 px-6 text-center"
             style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}
           >
-            <span className="font-display font-bold text-xl" style={{ color: '#232B1D' }}>
+            <span className="font-display text-xl" style={{ color: '#232B1D' }}>
               That's the taste test done
             </span>
             <span className="text-sm font-medium" style={{ color: '#93876B' }}>
@@ -308,7 +308,7 @@ export default function ForkitOnboarding({ onComplete }) {
 
       <div className="flex-1 px-6 pt-6 pb-6 flex flex-col">
         <StepLabel step={step} />
-        <h1 className="font-display font-extrabold text-3xl leading-tight mb-2" style={{ color: '#232B1D' }}>
+        <h1 className="font-display text-3xl leading-tight mb-2" style={{ color: '#232B1D' }}>
           {STEP_META[step].title}
         </h1>
         <p className="text-sm font-medium mb-6" style={{ color: '#93876B' }}>
@@ -330,7 +330,7 @@ export default function ForkitOnboarding({ onComplete }) {
             type="button"
             disabled={!canContinue}
             onClick={() => setStep(step + 1)}
-            className="w-full py-3.5 rounded-full font-display font-bold text-base transition-opacity"
+            className="w-full py-3.5 rounded-full font-display text-base transition-opacity"
             style={{
               backgroundColor: '#9ACB4B',
               color: '#161D14',

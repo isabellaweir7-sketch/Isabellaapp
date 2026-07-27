@@ -68,14 +68,14 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
         >
           <ChevronLeft size={18} color="#F2E9DC" />
         </button>
-        <h1 className="font-display font-bold text-base truncate" style={{ color: '#F2E9DC' }}>
+        <h1 className="font-display text-base truncate" style={{ color: '#F2E9DC' }}>
           {recipe.title}
         </h1>
       </div>
 
       <div className="flex-1 overflow-y-auto pb-10">
         <div
-          className="grain relative h-64 w-full"
+          className="grain relative h-96 w-full"
           style={{
             backgroundImage: `${PHOTO_SCRIM}, url("${recipe.photo}")`,
             backgroundSize: 'cover',
@@ -91,7 +91,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
                 </span>
               ))}
             </div>
-            <h2 className="font-display font-extrabold text-3xl leading-tight" style={{ color: '#F2E9DC' }}>
+            <h2 className="font-display text-3xl leading-tight" style={{ color: '#F2E9DC' }}>
               {recipe.title}
             </h2>
           </div>
@@ -109,7 +109,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           </div>
 
           <div>
-            <h3 className="font-display font-bold text-lg mb-3" style={{ color: '#232B1D' }}>
+            <h3 className="font-display text-lg mb-3" style={{ color: '#232B1D' }}>
               Ingredients
             </h3>
             <div className="rounded-2xl border overflow-hidden" style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}>
@@ -131,7 +131,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           </div>
 
           <div>
-            <h3 className="font-display font-bold text-lg mb-3" style={{ color: '#232B1D' }}>
+            <h3 className="font-display text-lg mb-3" style={{ color: '#232B1D' }}>
               Steps
             </h3>
             <div className="flex flex-col gap-3">

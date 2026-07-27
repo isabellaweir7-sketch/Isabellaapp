@@ -26,7 +26,7 @@ function PhotoTile({ photo, fallback, label, className = '', onClick }) {
       }}
     >
       <div className="absolute bottom-0 left-0 right-0 p-3">
-        <span className="font-display font-bold text-sm tracking-wide" style={{ color: '#F2E9DC' }}>
+        <span className="font-display text-sm tracking-wide" style={{ color: '#F2E9DC' }}>
           {label}
         </span>
       </div>
@@ -49,7 +49,7 @@ function Header() {
           <p className="text-[11px] leading-none font-semibold" style={{ color: '#8FA087' }}>
             Welcome back
           </p>
-          <h1 className="font-display font-extrabold text-xl leading-tight" style={{ color: '#F2E9DC' }}>
+          <h1 className="font-display text-xl leading-tight" style={{ color: '#F2E9DC' }}>
             Hey, Isabella
           </h1>
         </div>
@@ -78,7 +78,7 @@ function HeroSection({ onOpenRecipe }) {
         photo={CUPBOARD_HERO.photo}
         fallback={CUPBOARD_HERO.fallback}
         label={CUPBOARD_HERO.title}
-        className="h-56 w-full"
+        className="h-80 w-full"
         onClick={() => onOpenRecipe(CUPBOARD_HERO)}
       />
       <div className="flex items-center justify-between mt-2">
@@ -131,13 +131,13 @@ export default function ForkitHome({ onOpenRecipe }) {
         <HeroSection onOpenRecipe={onOpenRecipe} />
 
         <div className="grid grid-cols-3 gap-3">
-          <PhotoTile {...plan} className="col-span-2 h-32" />
-          <PhotoTile {...pantry} className="col-span-1 h-32" />
+          <PhotoTile {...plan} className="col-span-2 h-44" />
+          <PhotoTile {...pantry} className="col-span-1 h-44" />
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          <PhotoTile {...saved} className="col-span-1 h-28" />
-          <PhotoTile {...community} className="col-span-2 h-28" />
+          <PhotoTile {...saved} className="col-span-1 h-40" />
+          <PhotoTile {...community} className="col-span-2 h-40" />
         </div>
 
         <p className="text-xs text-center font-semibold pt-1" style={{ color: '#93876B' }}>
