@@ -47,6 +47,8 @@ export interface Recipe {
   baseServings: number;
   ingredients: Ingredient[];
   steps: string[];
+  author?: string;
+  upvotes?: number;
 }
 
 export interface FeatureTile {

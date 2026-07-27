@@ -5,11 +5,12 @@ import ForkitRecipeDetail from './forkit-recipe-detail.jsx';
 import ForkitSavedRecipes from './forkit-saved-recipes.jsx';
 import ForkitWeeklyPlan from './forkit-weekly-plan.jsx';
 import ForkitPantry from './forkit-pantry.jsx';
+import ForkitCommunity from './forkit-community.jsx';
 import { OnboardingAnswers, Recipe } from './types';
 
 const STORAGE_KEY = 'forkit_onboarding_answers';
 
-type View = 'home' | 'saved' | 'plan' | 'pantry';
+type View = 'home' | 'saved' | 'plan' | 'pantry' | 'community';
 
 export default function App() {
   const [answers, setAnswers] = useState<OnboardingAnswers | null>(() => {
@@ -49,12 +50,17 @@ export default function App() {
     return <ForkitPantry onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
   }
 
+  if (view === 'community') {
+    return <ForkitCommunity onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
+  }
+
   return (
     <ForkitHome
       onOpenRecipe={setOpenRecipe}
       onOpenSaved={() => setView('saved')}
       onOpenPlan={() => setView('plan')}
       onOpenPantry={() => setView('pantry')}
+      onOpenCommunity={() => setView('community')}
     />
   );
 }

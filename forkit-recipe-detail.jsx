@@ -16,7 +16,7 @@ function formatQty(qtyPerServing, servings) {
   return `${whole}${fracLabel}`;
 }
 
-const PLURAL_UNITS = ['can', 'clove', 'handful'];
+const PLURAL_UNITS = ['can', 'clove', 'handful', 'slice'];
 
 function formatUnit(unit, qtyPerServing, servings) {
   if (!unit) return '';

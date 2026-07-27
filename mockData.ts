@@ -209,6 +209,81 @@ export const SAVED_RECIPES: Recipe[] = [
   },
 ];
 
+// Student-submitted recipes. Light moderation happens off-screen; upvoting
+// is the in-app quality signal that surfaces the best ones first.
+export const COMMUNITY_RECIPES: Recipe[] = [
+  {
+    id: 'community-beans-toast',
+    title: 'Loaded beans on toast, three ways',
+    author: 'Priya, 2nd year',
+    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+    pricePerServing: 0.6,
+    tags: ['Under £1', '5 min'],
+    baseServings: 1,
+    upvotes: 214,
+    ingredients: [
+      { name: 'Baked beans (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
+      { name: 'Cheese', qtyPerServing: 20, unit: 'g' },
+      { name: 'Chilli flakes (optional)', qtyPerServing: 0.25, unit: 'tsp' },
+    ],
+    steps: [
+      'Toast the bread.',
+      'Heat the beans in a pan or microwave until bubbling.',
+      'Spoon over the toast, top with cheese, and grill for 2 minutes until melted.',
+      'Finish with chilli flakes if you like a bit of heat.',
+    ],
+  },
+  {
+    id: 'community-stirfry',
+    title: 'Empty-cupboard fried rice',
+    author: 'Marcus, 1st year',
+    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4E5A34',
+    pricePerServing: 0.85,
+    tags: ['Cupboard mode', '15 min'],
+    baseServings: 2,
+    upvotes: 158,
+    ingredients: [
+      { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
+      { name: 'Egg', qtyPerServing: 1, unit: '' },
+      { name: 'Frozen veg', qtyPerServing: 50, unit: 'g' },
+      { name: 'Soy sauce', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Oil', qtyPerServing: 0.5, unit: 'tbsp' },
+    ],
+    steps: [
+      'Heat the oil in a pan or wok until hot.',
+      'Add the frozen veg and stir-fry for 2–3 minutes.',
+      'Push to one side, crack in the egg, and scramble until just set.',
+      'Add the rice and soy sauce, and stir-fry for 2–3 minutes until heated through.',
+    ],
+  },
+  {
+    id: 'community-tuna-bake',
+    title: 'Five-ingredient tuna pasta bake',
+    author: 'Sofia, 3rd year',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    fallback: '#354A1F',
+    pricePerServing: 1.1,
+    tags: ['Batch cooks', 'Freezes well'],
+    baseServings: 4,
+    upvotes: 132,
+    ingredients: [
+      { name: 'Pasta', qtyPerServing: 75, unit: 'g' },
+      { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Condensed soup or cheese sauce', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Cheese', qtyPerServing: 15, unit: 'g' },
+    ],
+    steps: [
+      'Preheat the oven to 190°C (fan) and cook the pasta until al dente.',
+      'Mix the drained pasta with tuna, sweetcorn, and soup or cheese sauce.',
+      'Transfer to a baking dish, top with cheese, and bake for 15–20 minutes until golden.',
+    ],
+  },
+];
+
 export const HOME_TILES: FeatureTile[] = [
   {
     id: 'plan',

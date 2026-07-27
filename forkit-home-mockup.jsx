@@ -123,13 +123,14 @@ function BottomNav({ active, onChange, onNavigate }) {
   );
 }
 
-export default function ForkitHome({ onOpenRecipe, onOpenSaved, onOpenPlan, onOpenPantry }) {
+export default function ForkitHome({ onOpenRecipe, onOpenSaved, onOpenPlan, onOpenPantry, onOpenCommunity }) {
   const [activeTab, setActiveTab] = useState('home');
   const [plan, pantry, saved, community] = HOME_TILES;
 
   const handleNavTap = (id) => {
     if (id === 'pantry') onOpenPantry();
     if (id === 'recipes') onOpenSaved();
+    if (id === 'community') onOpenCommunity();
   };
 
   return (
@@ -145,7 +146,7 @@ export default function ForkitHome({ onOpenRecipe, onOpenSaved, onOpenPlan, onOp
 
         <div className="grid grid-cols-3 gap-3">
           <PhotoTile {...saved} className="col-span-1 h-40" onClick={onOpenSaved} />
-          <PhotoTile {...community} className="col-span-2 h-40" />
+          <PhotoTile {...community} className="col-span-2 h-40" onClick={onOpenCommunity} />
         </div>
 
         <p className="text-xs text-center font-semibold pt-1" style={{ color: '#93876B' }}>
