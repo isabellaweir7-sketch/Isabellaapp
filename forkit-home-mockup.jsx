@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Home as HomeIcon, ShoppingBasket, ChefHat, Users, Flame, User } from 'lucide-react';
-import { CUPBOARD_HERO, HOME_TILES, WEEKLY_BUDGET } from './mockData';
+import { Home as HomeIcon, ShoppingBasket, ChefHat, Users, Flame, User, ChevronRight } from 'lucide-react';
+import { CUPBOARD_HERO, HOME_TILES, WEEKLY_BUDGET, SHOPPING_LIST } from './mockData';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', icon: HomeIcon },
@@ -94,6 +94,27 @@ function HeroSection({ onOpenRecipe }) {
   );
 }
 
+function HouseholdCard({ onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="rounded-2xl border p-4 flex items-center justify-between text-left"
+      style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}
+    >
+      <div className="min-w-0">
+        <p className="font-display text-lg leading-tight" style={{ color: '#232B1D' }}>
+          Household
+        </p>
+        <p className="text-xs font-semibold mt-1" style={{ color: '#93876B' }}>
+          Dan's cooking tonight · {SHOPPING_LIST.length} items on the shared list
+        </p>
+      </div>
+      <ChevronRight size={18} color="#5A7A3A" />
+    </button>
+  );
+}
+
 function BottomNav({ active, onChange, onNavigate }) {
   return (
     <div
@@ -123,7 +144,14 @@ function BottomNav({ active, onChange, onNavigate }) {
   );
 }
 
-export default function ForkitHome({ onOpenRecipe, onOpenSaved, onOpenPlan, onOpenPantry, onOpenCommunity }) {
+export default function ForkitHome({
+  onOpenRecipe,
+  onOpenSaved,
+  onOpenPlan,
+  onOpenPantry,
+  onOpenCommunity,
+  onOpenHousehold,
+}) {
   const [activeTab, setActiveTab] = useState('home');
   const [plan, pantry, saved, community] = HOME_TILES;
 
@@ -148,6 +176,8 @@ export default function ForkitHome({ onOpenRecipe, onOpenSaved, onOpenPlan, onOp
           <PhotoTile {...saved} className="col-span-1 h-40" onClick={onOpenSaved} />
           <PhotoTile {...community} className="col-span-2 h-40" onClick={onOpenCommunity} />
         </div>
+
+        <HouseholdCard onClick={onOpenHousehold} />
 
         <p className="text-xs text-center font-semibold pt-1" style={{ color: '#93876B' }}>
           3 new budget recipes shared today

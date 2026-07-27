@@ -6,6 +6,9 @@ import {
   Recipe,
   FeatureTile,
   DayPlan,
+  HouseholdMember,
+  CookingNight,
+  ShoppingListItem,
 } from './types';
 
 export const ONBOARDING_REASONS: OnboardingReason[] = [
@@ -337,6 +340,32 @@ export const PANTRY_INGREDIENTS: string[] = [
   'Oats',
   'Peanut butter',
   'Tuna',
+];
+
+export const HOUSEHOLD_MEMBERS: HouseholdMember[] = [
+  { id: 'you', name: 'You', initials: 'IW' },
+  { id: 'dan', name: 'Dan', initials: 'D' },
+  { id: 'freya', name: 'Freya', initials: 'F' },
+  { id: 'alex', name: 'Alex', initials: 'A' },
+];
+
+export const COOKING_NIGHTS: CookingNight[] = [
+  { day: 'Monday', memberId: 'you' },
+  { day: 'Tuesday', memberId: 'dan' },
+  { day: 'Wednesday', memberId: 'freya' },
+  { day: 'Thursday', memberId: 'alex' },
+  { day: 'Friday', memberId: 'you' },
+  { day: 'Saturday', memberId: 'dan' },
+  { day: 'Sunday', memberId: 'freya' },
+];
+
+export const SHOPPING_LIST: ShoppingListItem[] = [
+  { id: 'item-milk', name: 'Milk (2L)', price: 1.3, addedBy: 'freya' },
+  { id: 'item-bread', name: 'Bread', price: 1.1, addedBy: 'dan' },
+  { id: 'item-pasta', name: 'Pasta (2kg)', price: 2.4, addedBy: 'you' },
+  { id: 'item-washingup', name: 'Washing-up liquid', price: 1.5, addedBy: 'alex' },
+  { id: 'item-loo-roll', name: 'Loo roll (9-pack)', price: 4.2, addedBy: 'freya' },
+  { id: 'item-bin-bags', name: 'Bin bags', price: 2.0, addedBy: 'you' },
 ];
 
 export const WEEKLY_BUDGET = {

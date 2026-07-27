@@ -62,3 +62,21 @@ export interface DayPlan {
   day: string;
   recipe: Recipe;
 }
+
+export interface HouseholdMember {
+  id: string;
+  name: string;
+  initials: string;
+}
+
+export interface CookingNight {
+  day: string;
+  memberId: string;
+}
+
+export interface ShoppingListItem {
+  id: string;
+  name: string;
+  price: number;
+  addedBy: string;
+}

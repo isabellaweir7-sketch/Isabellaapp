@@ -6,11 +6,12 @@ import ForkitSavedRecipes from './forkit-saved-recipes.jsx';
 import ForkitWeeklyPlan from './forkit-weekly-plan.jsx';
 import ForkitPantry from './forkit-pantry.jsx';
 import ForkitCommunity from './forkit-community.jsx';
+import ForkitHousehold from './forkit-household.jsx';
 import { OnboardingAnswers, Recipe } from './types';
 
 const STORAGE_KEY = 'forkit_onboarding_answers';
 
-type View = 'home' | 'saved' | 'plan' | 'pantry' | 'community';
+type View = 'home' | 'saved' | 'plan' | 'pantry' | 'community' | 'household';
 
 export default function App() {
   const [answers, setAnswers] = useState<OnboardingAnswers | null>(() => {
@@ -54,6 +55,10 @@ export default function App() {
     return <ForkitCommunity onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
   }
 
+  if (view === 'household') {
+    return <ForkitHousehold onBack={() => setView('home')} />;
+  }
+
   return (
     <ForkitHome
       onOpenRecipe={setOpenRecipe}
@@ -61,6 +66,7 @@ export default function App() {
       onOpenPlan={() => setView('plan')}
       onOpenPantry={() => setView('pantry')}
       onOpenCommunity={() => setView('community')}
+      onOpenHousehold={() => setView('household')}
     />
   );
 }
