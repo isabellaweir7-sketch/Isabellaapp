@@ -11,10 +11,13 @@ const NAV_ITEMS = [
 
 // Photo tile with a dark-to-transparent scrim so the label stays legible over
 // real stock photography, and a solid forest-green fallback if a photo 404s.
-function PhotoTile({ photo, fallback, label, className = '' }) {
+function PhotoTile({ photo, fallback, label, className = '', onClick }) {
+  const Tag = onClick ? 'button' : 'div';
   return (
-    <div
-      className={`grain relative overflow-hidden rounded-2xl ${className}`}
+    <Tag
+      type={onClick ? 'button' : undefined}
+      onClick={onClick}
+      className={`grain relative overflow-hidden rounded-2xl text-left ${className}`}
       style={{
         backgroundImage: `linear-gradient(180deg, rgba(22,29,20,0) 45%, rgba(22,29,20,0.75) 100%), url("${photo}")`,
         backgroundSize: 'cover',
@@ -27,7 +30,7 @@ function PhotoTile({ photo, fallback, label, className = '' }) {
           {label}
         </span>
       </div>
-    </div>
+    </Tag>
   );
 }
 
@@ -62,7 +65,7 @@ function Header() {
   );
 }
 
-function HeroSection() {
+function HeroSection({ onOpenRecipe }) {
   return (
     <div>
       <p
@@ -76,6 +79,7 @@ function HeroSection() {
         fallback={CUPBOARD_HERO.fallback}
         label={CUPBOARD_HERO.title}
         className="h-56 w-full"
+        onClick={() => onOpenRecipe(CUPBOARD_HERO)}
       />
       <div className="flex items-center justify-between mt-2">
         <span className="text-sm font-semibold" style={{ color: '#232B1D' }}>
@@ -116,7 +120,7 @@ function BottomNav({ active, onChange }) {
   );
 }
 
-export default function ForkitHome() {
+export default function ForkitHome({ onOpenRecipe }) {
   const [activeTab, setActiveTab] = useState('home');
   const [plan, pantry, saved, community] = HOME_TILES;
 
@@ -124,7 +128,7 @@ export default function ForkitHome() {
     <div className="min-h-screen pb-24" style={{ backgroundColor: '#F3ECDA' }}>
       <Header />
       <div className="px-6 pt-6 flex flex-col gap-4">
-        <HeroSection />
+        <HeroSection onOpenRecipe={onOpenRecipe} />
 
         <div className="grid grid-cols-3 gap-3">
           <PhotoTile {...plan} className="col-span-2 h-32" />

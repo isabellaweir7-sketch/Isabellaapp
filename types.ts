@@ -30,12 +30,23 @@ export interface OnboardingAnswers {
   dislikedDishes: string[];
 }
 
+export interface Ingredient {
+  name: string;
+  qtyPerServing: number;
+  unit: string;
+}
+
 export interface CupboardHero {
+  id: string;
   title: string;
   subtitle: string;
   photo: string;
   fallback: string;
   pricePerServing: number;
+  tags: string[];
+  baseServings: number;
+  ingredients: Ingredient[];
+  steps: string[];
 }
 
 export interface FeatureTile {

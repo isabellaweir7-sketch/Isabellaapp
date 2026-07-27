@@ -110,11 +110,31 @@ export const SAMPLE_DISHES: SampleDish[] = [
 
 // Hero: a cupboard-mode result, the app's real differentiator.
 export const CUPBOARD_HERO: CupboardHero = {
+  id: 'recipe-tomato-chickpea-stew',
   title: 'Tomato & chickpea stew',
   subtitle: 'Uses 6 things you already have',
   photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=1200',
   fallback: '#354A1F',
   pricePerServing: 1.4,
+  tags: ['Vegan', 'Cupboard mode', 'Batch cooks'],
+  baseServings: 2,
+  ingredients: [
+    { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
+    { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
+    { name: 'Onion', qtyPerServing: 0.5, unit: '' },
+    { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+    { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
+    { name: 'Smoked paprika', qtyPerServing: 0.5, unit: 'tsp' },
+    { name: 'Kale or spinach', qtyPerServing: 0.5, unit: 'handful' },
+    { name: 'Oil', qtyPerServing: 0.5, unit: 'tbsp' },
+  ],
+  steps: [
+    'Dice the onion and slice the garlic. Fry in oil over medium heat for 3–4 minutes until soft.',
+    'Stir in the cumin and smoked paprika and cook for 30 seconds until fragrant.',
+    'Add the chopped tomatoes and chickpeas (with their liquid). Simmer for 12–15 minutes, stirring occasionally.',
+    'Stir in the kale or spinach and cook for 2 more minutes until wilted.',
+    'Season with salt and pepper to taste and serve.',
+  ],
 };
 
 export const HOME_TILES: FeatureTile[] = [

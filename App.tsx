@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ForkitOnboarding from './forkit-onboarding.jsx';
 import ForkitHome from './forkit-home-mockup.jsx';
-import { OnboardingAnswers } from './types';
+import ForkitRecipeDetail from './forkit-recipe-detail.jsx';
+import { OnboardingAnswers, CupboardHero } from './types';
 
 const STORAGE_KEY = 'forkit_onboarding_answers';
 
@@ -15,6 +16,7 @@ export default function App() {
       return null;
     }
   });
+  const [openRecipe, setOpenRecipe] = useState<CupboardHero | null>(null);
 
   const handleOnboardingComplete = (result: OnboardingAnswers) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
@@ -25,5 +27,9 @@ export default function App() {
     return <ForkitOnboarding onComplete={handleOnboardingComplete} />;
   }
 
-  return <ForkitHome />;
+  if (openRecipe) {
+    return <ForkitRecipeDetail recipe={openRecipe} onBack={() => setOpenRecipe(null)} />;
+  }
+
+  return <ForkitHome onOpenRecipe={setOpenRecipe} />;
 }
