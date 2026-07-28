@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, Sparkles, ArrowRight, ChevronRight, GraduationCap } from 'lucide-react';
+import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, Sparkles, ArrowRight, ChevronRight, GraduationCap, Search } from 'lucide-react';
 import { COMMUNITY_RECIPES, WEEKLY_BUDGET, SHOPPING_LIST, generateTodayMeals } from './mockData';
 
 const NAV_ITEMS = [
@@ -30,6 +30,29 @@ function Header({ onOpenAuth, onOpenNotifications, session }) {
         </button>
       </div>
     </header>
+  );
+}
+
+function SearchBar({ onSearch }) {
+  const [query, setQuery] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(query);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="px-gutter pb-md bg-surface border-b border-outline-variant">
+      <div className="max-w-[1200px] mx-auto relative">
+        <Search size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-primary opacity-60" />
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search recipes, ingredients, or people..."
+          className="w-full bg-surface-container-low border border-outline-variant rounded-xl py-3 pl-12 pr-4 text-base text-on-surface-variant outline-none focus:border-primary transition-colors"
+        />
+      </div>
+    </form>
   );
 }
 
@@ -217,6 +240,7 @@ export default function ForkitHome({
   onOpenNotifications,
   onOpenBudget,
   onOpenSkillLab,
+  onOpenSearch,
   session,
 }) {
   const [activeTab, setActiveTab] = useState('home');
@@ -232,6 +256,7 @@ export default function ForkitHome({
   return (
     <div className="bg-surface min-h-screen pb-32">
       <Header onOpenAuth={onOpenAuth} onOpenNotifications={onOpenNotifications} session={session} />
+      <SearchBar onSearch={onOpenSearch} />
       <main className="max-w-[1200px] mx-auto px-gutter py-md space-y-xl">
         <TodayPlan meals={todayMeals} onOpenPlan={onOpenPlan} onOpenRecipe={onOpenRecipe} />
         <CupboardBudgetRow onOpenPantry={onOpenPantry} onOpenBudget={onOpenBudget} />

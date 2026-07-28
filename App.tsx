@@ -15,6 +15,7 @@ import ForkitNotifications from './forkit-notifications.jsx';
 import ForkitBudgetTips from './forkit-budget-tips.jsx';
 import ForkitSkillLab from './forkit-skill-lab.jsx';
 import ForkitFreshersMode from './forkit-freshers-mode.jsx';
+import ForkitSearchResults from './forkit-search-results.jsx';
 import { supabase } from './supabaseClient';
 import { OnboardingAnswers, Recipe } from './types';
 
@@ -34,7 +35,8 @@ type View =
   | 'notifications'
   | 'tips'
   | 'skilllab'
-  | 'freshers';
+  | 'freshers'
+  | 'search';
 
 function readJSON<T>(key: string): T | null {
   const raw = localStorage.getItem(key);
@@ -52,6 +54,7 @@ export default function App() {
   const [view, setView] = useState<View>('home');
   const [openRecipe, setOpenRecipe] = useState<Recipe | null>(null);
   const [freshersMode, setFreshersMode] = useState<boolean>(() => localStorage.getItem(FRESHERS_KEY) === 'true');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -156,6 +159,16 @@ export default function App() {
     );
   }
 
+  if (view === 'search') {
+    return (
+      <ForkitSearchResults
+        initialQuery={searchQuery}
+        onBack={() => setView('home')}
+        onOpenRecipe={setOpenRecipe}
+      />
+    );
+  }
+
   return (
     <ForkitHome
       answers={answers}
@@ -169,6 +182,10 @@ export default function App() {
       onOpenNotifications={() => setView('notifications')}
       onOpenBudget={() => setView('budget')}
       onOpenSkillLab={() => setView('skilllab')}
+      onOpenSearch={(query: string) => {
+        setSearchQuery(query);
+        setView('search');
+      }}
       session={session}
     />
   );
