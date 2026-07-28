@@ -2701,24 +2701,6 @@ export function generateWeeklyPlan(restrictionIds: string[] = []): DayPlan[] {
 // Kept for anything that wants a default, unfiltered plan.
 export const WEEKLY_PLAN: DayPlan[] = generateWeeklyPlan([]);
 
-export const PANTRY_INGREDIENTS: string[] = [
-  'Pasta',
-  'Rice',
-  'Tinned tomatoes',
-  'Chickpeas',
-  'Lentils',
-  'Onions',
-  'Garlic',
-  'Eggs',
-  'Cheese',
-  'Bread',
-  'Frozen veg',
-  'Stock cubes',
-  'Oats',
-  'Peanut butter',
-  'Tuna',
-];
-
 // Scores how well a recipe matches the ingredients someone says they have,
 // via simple case-insensitive substring matching against each ingredient
 // name. Used by Cupboard Cooker to pick a real match instead of always

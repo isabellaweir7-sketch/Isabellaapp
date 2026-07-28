@@ -1,27 +1,15 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Sparkles, CheckCircle2, Utensils, Timer, Zap } from 'lucide-react';
-import { PANTRY_INGREDIENTS, SAVED_RECIPES, generateCupboardRecipe } from './mockData';
-
-function Chip({ label, selected, onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold tracking-wider transition-colors ${
-        selected ? 'bg-primary text-on-primary' : 'bg-surface-container-lowest text-on-surface border border-outline-variant'
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
+import { ChevronLeft, Search, CheckCircle2, Utensils, Timer, Zap } from 'lucide-react';
+import { SAVED_RECIPES, generateCupboardRecipe } from './mockData';
 
 export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
-  const [selected, setSelected] = useState([]);
+  const [ingredientsText, setIngredientsText] = useState('');
   const [staples, setStaples] = useState(true);
 
-  const toggle = (item) =>
-    setSelected((prev) => (prev.includes(item) ? prev.filter((x) => x !== item) : [...prev, item]));
+  const parsedIngredients = ingredientsText
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
@@ -50,14 +38,17 @@ export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
           <div className="lg:col-span-7 flex flex-col gap-4">
             <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
-              <span className="block text-sm font-semibold uppercase tracking-widest text-primary mb-3">
-                What's in your kitchen?
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {PANTRY_INGREDIENTS.map((item) => (
-                  <Chip key={item} label={item} selected={selected.includes(item)} onClick={() => toggle(item)} />
-                ))}
-              </div>
+              <label htmlFor="cupboard-input" className="block text-sm font-semibold uppercase tracking-widest text-primary mb-3">
+                What's in your cupboard?
+              </label>
+              <textarea
+                id="cupboard-input"
+                value={ingredientsText}
+                onChange={(e) => setIngredientsText(e.target.value)}
+                placeholder="e.g. Pasta, Spinach, Garlic, Eggs..."
+                className="w-full bg-transparent border-2 border-outline-variant focus:border-primary focus:ring-0 p-4 text-lg transition-all outline-none rounded-lg min-h-[120px] resize-none text-on-surface placeholder:text-on-surface-variant/60"
+              />
+              <p className="mt-2 text-xs text-on-surface-variant">Separate ingredients with commas</p>
             </div>
 
             <div className="flex items-center justify-between p-3 bg-surface rounded-lg border border-outline-variant/30">
@@ -81,13 +72,13 @@ export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
 
             <button
               type="button"
-              disabled={selected.length === 0}
-              onClick={() => onOpenRecipe(generateCupboardRecipe(selected, answers?.restrictions ?? []))}
+              disabled={parsedIngredients.length === 0}
+              onClick={() => onOpenRecipe(generateCupboardRecipe(parsedIngredients, answers?.restrictions ?? []))}
               className="w-full py-3.5 rounded-xl font-semibold text-lg tracking-wider transition-opacity bg-primary-container text-on-primary-container flex items-center justify-center gap-2"
-              style={{ opacity: selected.length === 0 ? 0.4 : 1 }}
+              style={{ opacity: parsedIngredients.length === 0 ? 0.4 : 1 }}
             >
-              <Sparkles size={18} />
-              Generate a recipe
+              <Search size={18} />
+              Find Recipes
             </button>
           </div>
 
