@@ -1,14 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@theme {
+  /* Surfaces: warm off-white paper, stepping up through stone-toned containers */
+  --color-surface: #FAF9F5;
+  --color-surface-dim: #DBDAD6;
+  --color-surface-bright: #FAF9F5;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F4F4F0;
+  --color-surface-container: #EFEEEA;
+  --color-surface-container-high: #E9E8E4;
+  --color-surface-container-highest: #E3E2DF;
+  --color-surface-variant: #E3E2DF;
+  --color-surface-tint: #476558;
+
+  --color-on-surface: #1B1C1A;
+  --color-on-surface-variant: #424844;
+  --color-inverse-surface: #2F312E;
+  --color-inverse-on-surface: #F2F1ED;
+
+  --color-outline: #727974;
+  --color-outline-variant: #C1C8C3;
+
+  /* Primary: deep sage forest */
+  --color-primary: #163328;
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #2D4A3E;
+  --color-on-primary-container: #99B9A9;
+  --color-inverse-primary: #ADCEBE;
+  --color-primary-fixed: #C9EAD9;
+  --color-primary-fixed-dim: #ADCEBE;
+  --color-on-primary-fixed: #022016;
+  --color-on-primary-fixed-variant: #304D40;
+
+  /* Secondary: burnt terracotta */
+  --color-secondary: #984623;
+  --color-on-secondary: #FFFFFF;
+  --color-secondary-container: #FD956C;
+  --color-on-secondary-container: #752C0B;
+  --color-secondary-fixed: #FFDBCE;
+  --color-secondary-fixed-dim: #FFB599;
+  --color-on-secondary-fixed: #370E00;
+  --color-on-secondary-fixed-variant: #7A300E;
+
+  /* Tertiary: lemon zest accent */
+  --color-tertiary: #705D00;
+  --color-on-tertiary: #FFFFFF;
+  --color-tertiary-container: #C9A810;
+  --color-on-tertiary-container: #4C3E00;
+  --color-tertiary-fixed: #FFE174;
+  --color-tertiary-fixed-dim: #E7C433;
+  --color-on-tertiary-fixed: #221B00;
+  --color-on-tertiary-fixed-variant: #554500;
+
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #93000A;
+
+  --color-background: #FAF9F5;
+  --color-on-background: #1B1C1A;
+
+  /* Typography: high-contrast editorial serif/sans pairing */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Named spacing scale, matching the import 1:1 (base 4px unit) */
+  --spacing-base: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 64px;
+  --spacing-gutter: 20px;
+
+  /* Corner radii are Tailwind's stock scale (0.25/0.5/0.75rem, full) —
+     the import doesn't customise these, so no overrides here. */
+}
 
 @layer base {
   body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    font-family: var(--font-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 .font-display {
-  font-family: 'Plus Jakarta Sans', 'Playfair Display', sans-serif;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+/* Soft, primary-tinted elevation used instead of neutral drop shadows */
+.soft-shadow {
+  box-shadow: 0 10px 30px rgba(22, 51, 40, 0.08);
+}
+
+/* A faint wash of the primary color over a card surface, for quotes/callouts */
+.tonal-layer {
+  background-color: rgba(22, 51, 40, 0.05);
+}
+
+.press-effect:active {
+  transform: translateY(2px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Small pill label used for "cheap"/"quick"-style value callouts */
+.chip-value {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  background-color: var(--color-tertiary-fixed);
+  color: var(--color-on-tertiary-fixed);
+  border-radius: 9999px;
+  padding: 0.25rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* Neutral tag chip for dietary type, cook time, etc. */
+.chip-tag {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  background-color: var(--color-surface-container);
+  color: var(--color-on-surface-variant);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 9999px;
+  padding: 0.25rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
 }
 
 @keyframes fadeIn {
@@ -28,4 +166,3 @@
 .animate-scale-up {
   animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-

@@ -1,6 +1,6 @@
 {
-  "name": "WishList",
-  "description": "Pastel birthday countdowns, friend profile preferences, gift registries, dream moodboards, and smart gift suggestions.",
+  "name": "ForkIt",
+  "description": "A student meal-planning app: auto-generated weekly plans, cupboard-mode recipe generation, community recipe sharing, and shared-household meal coordination.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }
