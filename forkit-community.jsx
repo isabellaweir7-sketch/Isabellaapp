@@ -1,88 +1,120 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ThumbsUp } from 'lucide-react';
+import { ChevronLeft, Search, ThumbsUp, Lightbulb } from 'lucide-react';
 import { COMMUNITY_RECIPES } from './mockData';
 
-export default function ForkitCommunity({ onBack, onOpenRecipe }) {
+export default function ForkitCommunity({ onBack, onOpenRecipe, onOpenTips }) {
   const [voted, setVoted] = useState([]);
+  const [query, setQuery] = useState('');
 
-  const toggleVote = (id) =>
+  const toggleVote = (id, e) => {
+    e.stopPropagation();
     setVoted((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  };
 
   const displayUpvotes = (recipe) => recipe.upvotes + (voted.includes(recipe.id) ? 1 : 0);
 
-  const sorted = [...COMMUNITY_RECIPES].sort((a, b) => displayUpvotes(b) - displayUpvotes(a));
+  const sorted = [...COMMUNITY_RECIPES]
+    .filter((r) => r.title.toLowerCase().includes(query.toLowerCase()))
+    .sort((a, b) => displayUpvotes(b) - displayUpvotes(a));
+
+  const [featured, ...rest] = sorted;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F3ECDA' }}>
-      <div className="flex items-center gap-3 px-6 pt-8 pb-5" style={{ backgroundColor: '#161D14' }}>
-        <button
-          type="button"
-          onClick={onBack}
-          className="w-9 h-9 flex items-center justify-center rounded-full shrink-0"
-          style={{ backgroundColor: '#212B1D' }}
-          aria-label="Back"
-        >
-          <ChevronLeft size={18} color="#F2E9DC" />
+    <div className="min-h-screen flex flex-col bg-surface">
+      <header className="flex items-center gap-3 px-5 py-4">
+        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
+          <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl" style={{ color: '#F2E9DC' }}>
-          From other students
-        </h1>
-      </div>
+        <h1 className="font-display text-xl text-primary">From Other Students</h1>
+      </header>
 
-      <div className="flex-1 px-6 pt-6 flex flex-col gap-3 pb-10">
-        <p className="text-sm font-medium mb-1" style={{ color: '#93876B' }}>
-          Budget recipes shared by other students. Upvote the ones worth keeping.
-        </p>
+      <div className="flex-1 px-5 pb-10 max-w-3xl mx-auto w-full flex flex-col gap-5">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-sm text-on-surface-variant">
+            Budget recipes shared by other students. Upvotes do the moderating — the best ones rise to the top.
+          </p>
+          {onOpenTips && (
+            <button type="button" onClick={onOpenTips} className="flex items-center gap-1.5 text-xs font-semibold text-secondary shrink-0">
+              <Lightbulb size={14} /> Budget tips
+            </button>
+          )}
+        </div>
 
-        {sorted.map((recipe) => {
-          const isVoted = voted.includes(recipe.id);
-          return (
+        <div className="flex items-center gap-2 border-b border-outline-variant py-2">
+          <Search size={18} className="text-outline" />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search recipes or authors..."
+            className="bg-transparent outline-none w-full text-base text-on-surface placeholder:text-outline"
+          />
+        </div>
+
+        {featured && (
+          <button type="button" onClick={() => onOpenRecipe(featured)} className="relative rounded-xl overflow-hidden h-72 text-left group">
             <div
-              key={recipe.id}
-              className="rounded-2xl border overflow-hidden flex items-center gap-4 p-3"
-              style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}
-            >
+              className="absolute inset-0 group-hover:scale-105 transition-transform duration-500"
+              style={{ backgroundColor: featured.fallback, backgroundImage: `url("${featured.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-5 flex justify-between items-end">
+              <div>
+                <span className="chip-value mb-2 inline-block">{featured.tags[0]}</span>
+                <h2 className="font-display text-2xl text-white leading-tight mb-1">{featured.title}</h2>
+                <p className="text-white/90 text-sm">
+                  {featured.author} · {featured.prepMinutes ?? 15} mins · £{featured.pricePerServing.toFixed(2)}/serving
+                </p>
+              </div>
               <button
                 type="button"
+                onClick={(e) => toggleVote(featured.id, e)}
+                className={`w-12 h-12 rounded-full backdrop-blur-md flex flex-col items-center justify-center shrink-0 ${
+                  voted.includes(featured.id) ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-white/20 text-white'
+                }`}
+                aria-label="Upvote"
+              >
+                <ThumbsUp size={16} fill={voted.includes(featured.id) ? 'currentColor' : 'none'} />
+              </button>
+            </div>
+          </button>
+        )}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {rest.map((recipe) => {
+            const isVoted = voted.includes(recipe.id);
+            return (
+              <button
+                key={recipe.id}
+                type="button"
                 onClick={() => onOpenRecipe(recipe)}
-                className="flex items-center gap-4 flex-1 min-w-0 text-left"
+                className="bg-surface-container-low rounded-xl p-2 soft-shadow text-left transition-transform hover:-translate-y-1"
               >
                 <div
-                  className="grain w-20 h-20 rounded-xl shrink-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url("${recipe.photo}")`, backgroundColor: recipe.fallback }}
-                />
-                <div className="flex-1 min-w-0">
-                  <h2 className="font-display text-lg leading-tight truncate" style={{ color: '#232B1D' }}>
-                    {recipe.title}
-                  </h2>
-                  <p className="text-xs font-semibold mt-0.5" style={{ color: '#93876B' }}>
-                    {recipe.author}
-                  </p>
-                  <div className="flex gap-1.5 mt-1.5 flex-wrap">
-                    {recipe.tags.map((t) => (
-                      <span key={t} className="tag-pill">
-                        {t}
-                      </span>
-                    ))}
+                  className="relative h-40 rounded-lg overflow-hidden mb-2"
+                  style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                  <button
+                    type="button"
+                    onClick={(e) => toggleVote(recipe.id, e)}
+                    className={`absolute top-2 right-2 w-9 h-9 rounded-full backdrop-blur-sm flex items-center justify-center ${
+                      isVoted ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-white/85 text-primary'
+                    }`}
+                    aria-label="Upvote"
+                  >
+                    <ThumbsUp size={15} fill={isVoted ? 'currentColor' : 'none'} />
+                  </button>
+                </div>
+                <div className="px-1 pb-1">
+                  <h3 className="font-display text-base text-primary mb-1 truncate">{recipe.title}</h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-on-surface-variant">{recipe.author}</span>
+                    <span className="text-xs font-semibold text-secondary">{displayUpvotes(recipe)} upvotes</span>
                   </div>
                 </div>
               </button>
-              <button
-                type="button"
-                onClick={() => toggleVote(recipe.id)}
-                className="flex flex-col items-center gap-0.5 shrink-0 px-2 py-1.5 rounded-xl"
-                style={{ backgroundColor: isVoted ? '#9ACB4B' : '#F3ECDA' }}
-                aria-label="Upvote"
-                aria-pressed={isVoted}
-              >
-                <ThumbsUp size={16} color={isVoted ? '#161D14' : '#5A7A3A'} fill={isVoted ? '#161D14' : 'none'} />
-                <span className="font-mono text-xs font-bold" style={{ color: isVoted ? '#161D14' : '#5A7A3A' }}>
-                  {displayUpvotes(recipe)}
-                </span>
-              </button>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

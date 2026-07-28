@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut } from 'lucide-react';
+import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart } from 'lucide-react';
 import { supabase } from './supabaseClient';
+import { SAVED_RECIPES, DIETARY_RESTRICTIONS } from './mockData';
 
 function GoogleIcon() {
   return (
@@ -27,61 +28,77 @@ function GoogleIcon() {
 
 function TextField({ icon: Icon, ...props }) {
   return (
-    <div
-      className="flex items-center gap-2.5 rounded-xl px-3.5 py-3 border"
-      style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}
-    >
-      <Icon size={16} color="#93876B" />
-      <input
-        {...props}
-        className="flex-1 min-w-0 bg-transparent outline-none text-sm font-semibold"
-        style={{ color: '#232B1D' }}
-      />
+    <div className="flex items-center gap-2.5 rounded-lg px-3.5 py-3 bg-surface-container-lowest border-b-2 border-outline-variant focus-within:border-primary transition-colors">
+      <Icon size={16} className="text-outline" />
+      <input {...props} className="flex-1 min-w-0 bg-transparent outline-none text-sm font-semibold text-on-surface" />
     </div>
   );
 }
 
-function AccountView({ session, onBack, onLogOut }) {
+function AccountView({ session, answers, onBack, onLogOut }) {
   const email = session.user.email || '';
   const provider = session.user.app_metadata?.provider === 'google' ? 'Google' : 'email';
   const initial = email.trim()[0]?.toUpperCase() || '?';
+  const restrictionLabels = (answers?.restrictions || [])
+    .map((id) => DIETARY_RESTRICTIONS.find((r) => r.id === id)?.label)
+    .filter(Boolean);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F3ECDA' }}>
-      <div className="flex items-center gap-3 px-6 pt-8 pb-5" style={{ backgroundColor: '#161D14' }}>
-        <button
-          type="button"
-          onClick={onBack}
-          className="w-9 h-9 flex items-center justify-center rounded-full shrink-0"
-          style={{ backgroundColor: '#212B1D' }}
-          aria-label="Back"
-        >
-          <ChevronLeft size={18} color="#F2E9DC" />
+    <div className="min-h-screen flex flex-col bg-surface">
+      <header className="flex items-center gap-3 px-5 py-4">
+        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
+          <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl" style={{ color: '#F2E9DC' }}>
-          Account
-        </h1>
-      </div>
+        <h1 className="font-display text-xl text-primary">Profile</h1>
+      </header>
 
-      <div className="flex-1 px-6 pt-8 flex flex-col items-center">
-        <div
-          className="w-16 h-16 rounded-full flex items-center justify-center font-display text-2xl mb-4"
-          style={{ backgroundColor: '#9ACB4B', color: '#161D14' }}
-        >
-          {initial}
-        </div>
-        <p className="text-sm font-semibold" style={{ color: '#232B1D' }}>
-          {email}
-        </p>
-        <p className="text-xs font-semibold mt-1" style={{ color: '#93876B' }}>
-          Signed in with {provider}
-        </p>
+      <div className="flex-1 px-5 pb-10 max-w-2xl mx-auto w-full flex flex-col gap-6">
+        <section className="flex flex-col items-center text-center gap-2 mt-2">
+          <div className="w-20 h-20 rounded-full bg-primary text-on-primary flex items-center justify-center font-display text-3xl soft-shadow">
+            {initial}
+          </div>
+          <p className="text-base font-semibold text-primary">{email}</p>
+          <p className="text-xs text-on-surface-variant">Signed in with {provider}</p>
+        </section>
+
+        <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
+          <div className="flex justify-between items-end mb-3">
+            <h3 className="font-display text-lg text-primary">Saved Recipes</h3>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {SAVED_RECIPES.slice(0, 3).map((recipe) => (
+              <div key={recipe.id}>
+                <div
+                  className="relative aspect-square rounded-lg overflow-hidden mb-1"
+                  style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                  <span className="absolute top-1.5 right-1.5 bg-white/90 p-1 rounded-full">
+                    <Heart size={12} className="text-primary" fill="currentColor" />
+                  </span>
+                </div>
+                <p className="text-xs font-semibold text-primary truncate">{recipe.title}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {restrictionLabels.length > 0 && (
+          <section className="bg-primary text-on-primary rounded-xl p-4">
+            <h3 className="font-display text-lg mb-3">Dietary</h3>
+            <div className="flex flex-wrap gap-2">
+              {restrictionLabels.map((label) => (
+                <span key={label} className="bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg text-sm font-semibold">
+                  {label}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
 
         <button
           type="button"
           onClick={onLogOut}
-          className="mt-8 flex items-center gap-2 px-5 py-3 rounded-full border font-semibold text-sm"
-          style={{ borderColor: '#E3DAC0', color: '#232B1D', backgroundColor: '#FFFFFF' }}
+          className="mt-2 flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest font-semibold text-sm text-on-surface"
         >
           <LogOut size={16} />
           Log out
@@ -91,7 +108,7 @@ function AccountView({ session, onBack, onLogOut }) {
   );
 }
 
-export default function ForkitAuth({ session, onBack, onLogOut }) {
+export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
   const [mode, setMode] = useState('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -101,7 +118,7 @@ export default function ForkitAuth({ session, onBack, onLogOut }) {
   const [submitting, setSubmitting] = useState(false);
 
   if (session) {
-    return <AccountView session={session} onBack={onBack} onLogOut={onLogOut} />;
+    return <AccountView session={session} answers={answers} onBack={onBack} onLogOut={onLogOut} />;
   }
 
   const canSubmit = email.trim().length > 3 && password.length >= 6 && !submitting;
@@ -141,24 +158,16 @@ export default function ForkitAuth({ session, onBack, onLogOut }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F3ECDA' }}>
-      <div className="flex items-center gap-3 px-6 pt-8 pb-5" style={{ backgroundColor: '#161D14' }}>
-        <button
-          type="button"
-          onClick={onBack}
-          className="w-9 h-9 flex items-center justify-center rounded-full shrink-0"
-          style={{ backgroundColor: '#212B1D' }}
-          aria-label="Back"
-        >
-          <ChevronLeft size={18} color="#F2E9DC" />
+    <div className="min-h-screen flex flex-col bg-surface">
+      <header className="flex items-center gap-3 px-5 py-4">
+        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
+          <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl" style={{ color: '#F2E9DC' }}>
-          {mode === 'signin' ? 'Sign in' : 'Create account'}
-        </h1>
-      </div>
+        <h1 className="font-display text-xl text-primary">{mode === 'signin' ? 'Sign in' : 'Create account'}</h1>
+      </header>
 
-      <div className="flex-1 px-6 pt-8 flex flex-col">
-        <div className="flex rounded-full p-1 mb-6" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E3DAC0' }}>
+      <div className="flex-1 px-5 pt-4 pb-10 max-w-md mx-auto w-full flex flex-col">
+        <div className="flex rounded-full p-1 mb-6 bg-surface-container-lowest border border-outline-variant">
           {['signin', 'signup'].map((m) => (
             <button
               key={m}
@@ -168,11 +177,9 @@ export default function ForkitAuth({ session, onBack, onLogOut }) {
                 setError('');
                 setNotice('');
               }}
-              className="flex-1 py-2 rounded-full text-sm font-bold transition-colors"
-              style={{
-                backgroundColor: mode === m ? '#9ACB4B' : 'transparent',
-                color: '#232B1D',
-              }}
+              className={`flex-1 py-2 rounded-full text-sm font-bold transition-colors ${
+                mode === m ? 'bg-primary text-on-primary' : 'text-primary'
+              }`}
             >
               {m === 'signin' ? 'Sign in' : 'Create account'}
             </button>
@@ -182,19 +189,16 @@ export default function ForkitAuth({ session, onBack, onLogOut }) {
         <button
           type="button"
           onClick={continueWithGoogle}
-          className="flex items-center justify-center gap-2.5 rounded-full py-3 border font-semibold text-sm mb-5"
-          style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0', color: '#232B1D' }}
+          className="flex items-center justify-center gap-2.5 rounded-lg py-3 border border-outline-variant bg-surface-container-lowest font-semibold text-sm text-on-surface mb-5"
         >
           <GoogleIcon />
           Continue with Google
         </button>
 
         <div className="flex items-center gap-3 mb-5">
-          <div className="flex-1 h-px" style={{ backgroundColor: '#E3DAC0' }} />
-          <span className="text-xs font-semibold" style={{ color: '#93876B' }}>
-            or
-          </span>
-          <div className="flex-1 h-px" style={{ backgroundColor: '#E3DAC0' }} />
+          <div className="flex-1 h-px bg-outline-variant" />
+          <span className="text-xs font-semibold text-outline">or</span>
+          <div className="flex-1 h-px bg-outline-variant" />
         </div>
 
         <form onSubmit={submit} className="flex flex-col gap-3">
@@ -218,35 +222,27 @@ export default function ForkitAuth({ session, onBack, onLogOut }) {
             <button
               type="button"
               onClick={() => setShowPassword((s) => !s)}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-outline"
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              {showPassword ? <EyeOff size={16} color="#93876B" /> : <Eye size={16} color="#93876B" />}
+              {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
           </div>
 
-          {error && (
-            <p className="text-xs font-semibold" style={{ color: '#B3452F' }}>
-              {error}
-            </p>
-          )}
-          {notice && (
-            <p className="text-xs font-semibold" style={{ color: '#5A7A3A' }}>
-              {notice}
-            </p>
-          )}
+          {error && <p className="text-xs font-semibold text-error">{error}</p>}
+          {notice && <p className="text-xs font-semibold text-primary">{notice}</p>}
 
           <button
             type="submit"
             disabled={!canSubmit}
-            className="w-full py-3.5 rounded-full font-display text-base mt-2 transition-opacity"
-            style={{ backgroundColor: '#9ACB4B', color: '#161D14', opacity: canSubmit ? 1 : 0.4 }}
+            className="w-full py-3.5 rounded-lg font-semibold text-base mt-2 transition-opacity bg-primary text-on-primary"
+            style={{ opacity: canSubmit ? 1 : 0.4 }}
           >
             {submitting ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
           </button>
         </form>
 
-        <p className="text-xs font-medium text-center mt-4" style={{ color: '#93876B' }}>
+        <p className="text-xs font-medium text-center mt-4 text-on-surface-variant">
           Password must be at least 6 characters.
         </p>
       </div>

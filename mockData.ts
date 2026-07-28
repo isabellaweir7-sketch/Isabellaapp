@@ -1,7 +1,6 @@
 import {
   OnboardingReason,
   DietaryRestriction,
-  MealWant,
   SampleDish,
   Recipe,
   FeatureTile,
@@ -9,6 +8,10 @@ import {
   HouseholdMember,
   CookingNight,
   ShoppingListItem,
+  TodayMeal,
+  NotificationItem,
+  BudgetTip,
+  ShoppingAisle,
 } from './types';
 
 export const ONBOARDING_REASONS: OnboardingReason[] = [
@@ -38,24 +41,6 @@ export const DIETARY_RESTRICTIONS: DietaryRestriction[] = [
   { id: 'halal', label: 'Halal' },
   { id: 'kosher', label: 'Kosher' },
   { id: 'nut-allergy', label: 'Nut allergy' },
-];
-
-// Earthy forest-green family tones for the meal-want image blocks — a small
-// palette of gradients (not one flat colour) so the grid doesn't feel repetitive.
-const TONES = {
-  a: 'linear-gradient(160deg, #6B8E3D 0%, #354A1F 100%)',
-  b: 'linear-gradient(160deg, #A6844A 0%, #5C4A28 100%)',
-  c: 'linear-gradient(160deg, #8A9A5B 0%, #4E5A34 100%)',
-  d: 'linear-gradient(160deg, #4A7A6B 0%, #274038 100%)',
-};
-
-export const MEAL_WANTS: MealWant[] = [
-  { id: 'high-protein', label: '45g+ protein', gradient: TONES.a },
-  { id: 'low-carb', label: 'Low-carb', gradient: TONES.b },
-  { id: 'under-500', label: 'Under 500 kcal', gradient: TONES.c },
-  { id: 'high-fibre', label: 'High fibre', gradient: TONES.d },
-  { id: 'balanced', label: 'Balanced / no target', gradient: TONES.a },
-  { id: 'budget-first', label: 'Budget over macros', gradient: TONES.b },
 ];
 
 // Stock food photography (Unsplash) with a forest-green-family fallback
@@ -120,6 +105,7 @@ export const CUPBOARD_HERO: Recipe = {
   photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=1200',
   fallback: '#354A1F',
   pricePerServing: 1.4,
+  prepMinutes: 20,
   tags: ['Vegan', 'Cupboard mode', 'Batch cooks'],
   baseServings: 2,
   ingredients: [
@@ -148,6 +134,7 @@ export const SAVED_RECIPES: Recipe[] = [
     photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
     fallback: '#354A1F',
     pricePerServing: 0.95,
+    prepMinutes: 15,
     tags: ['Budget', 'Quick'],
     baseServings: 2,
     ingredients: [
@@ -171,6 +158,7 @@ export const SAVED_RECIPES: Recipe[] = [
     photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
     fallback: '#274038',
     pricePerServing: 1.2,
+    prepMinutes: 25,
     tags: ['Vegan', 'Batch cooks'],
     baseServings: 4,
     ingredients: [
@@ -194,6 +182,7 @@ export const SAVED_RECIPES: Recipe[] = [
     photo: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&q=80&w=800',
     fallback: '#5C4A28',
     pricePerServing: 1.6,
+    prepMinutes: 40,
     tags: ['One-pan', 'Batch cooks'],
     baseServings: 4,
     ingredients: [
@@ -222,6 +211,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
     fallback: '#5C4A28',
     pricePerServing: 0.6,
+    prepMinutes: 5,
     tags: ['Under £1', '5 min'],
     baseServings: 1,
     upvotes: 214,
@@ -245,6 +235,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
     fallback: '#4E5A34',
     pricePerServing: 0.85,
+    prepMinutes: 15,
     tags: ['Cupboard mode', '15 min'],
     baseServings: 2,
     upvotes: 158,
@@ -269,6 +260,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
     fallback: '#354A1F',
     pricePerServing: 1.1,
+    prepMinutes: 30,
     tags: ['Batch cooks', 'Freezes well'],
     baseServings: 4,
     upvotes: 132,
@@ -360,15 +352,99 @@ export const COOKING_NIGHTS: CookingNight[] = [
 ];
 
 export const SHOPPING_LIST: ShoppingListItem[] = [
-  { id: 'item-milk', name: 'Milk (2L)', price: 1.3, addedBy: 'freya' },
-  { id: 'item-bread', name: 'Bread', price: 1.1, addedBy: 'dan' },
-  { id: 'item-pasta', name: 'Pasta (2kg)', price: 2.4, addedBy: 'you' },
-  { id: 'item-washingup', name: 'Washing-up liquid', price: 1.5, addedBy: 'alex' },
-  { id: 'item-loo-roll', name: 'Loo roll (9-pack)', price: 4.2, addedBy: 'freya' },
-  { id: 'item-bin-bags', name: 'Bin bags', price: 2.0, addedBy: 'you' },
+  { id: 'item-milk', name: 'Milk (2L)', price: 1.3, addedBy: 'freya', aisle: 'Dairy & Chilled' },
+  { id: 'item-bread', name: 'Bread', price: 1.1, addedBy: 'dan', aisle: 'Grains & Pantry' },
+  { id: 'item-pasta', name: 'Pasta (2kg)', price: 2.4, addedBy: 'you', aisle: 'Grains & Pantry' },
+  { id: 'item-washingup', name: 'Washing-up liquid', price: 1.5, addedBy: 'alex', aisle: 'Household' },
+  { id: 'item-loo-roll', name: 'Loo roll (9-pack)', price: 4.2, addedBy: 'freya', aisle: 'Household' },
+  { id: 'item-bin-bags', name: 'Bin bags', price: 2.0, addedBy: 'you', aisle: 'Household' },
+  { id: 'item-spinach', name: 'Spinach', price: 0.9, addedBy: 'dan', aisle: 'Produce' },
+  { id: 'item-onions', name: 'Onions (net)', price: 0.7, addedBy: 'you', aisle: 'Produce' },
 ];
+
+// The same shared list, grouped by aisle for the full-screen Shopping Mode view.
+export const SHOPPING_AISLES: ShoppingAisle[] = ['Produce', 'Dairy & Chilled', 'Grains & Pantry', 'Household'].map(
+  (name) => ({
+    name,
+    items: SHOPPING_LIST.filter((item) => item.aisle === name),
+  })
+);
 
 export const WEEKLY_BUDGET = {
   spent: 7,
   target: 30,
+};
+
+// Three meals the plan has already picked out for today, shown on Home.
+export const TODAY_MEALS: TodayMeal[] = [
+  { slot: 'Breakfast', recipe: { ...SAVED_RECIPES[0], prepMinutes: 10 } },
+  { slot: 'Lunch', recipe: { ...SAVED_RECIPES[1], prepMinutes: 20 } },
+  { slot: 'Dinner', recipe: CUPBOARD_HERO },
+];
+
+export const NOTIFICATIONS: NotificationItem[] = [
+  {
+    id: 'notif-cook-swap',
+    group: 'Household',
+    title: "Dan can't cook tonight",
+    detail: "He's marked Thursday as up for grabs — tap to claim it.",
+    time: '20m ago',
+  },
+  {
+    id: 'notif-shopping-add',
+    group: 'Household',
+    title: 'Freya added 2 items',
+    detail: 'Milk and loo roll are now on the shared shopping list.',
+    time: '2h ago',
+  },
+  {
+    id: 'notif-budget-warning',
+    group: 'Budget',
+    title: "You're close to your weekly budget",
+    detail: "£23 of your £30 is spent, with 2 days left in the week.",
+    time: 'Yesterday',
+  },
+  {
+    id: 'notif-community-upvote',
+    group: 'Community',
+    title: 'Your recipe got 10 more upvotes',
+    detail: '"Loaded beans on toast, three ways" is climbing the feed.',
+    time: '2 days ago',
+  },
+];
+
+export const BUDGET_TIPS: BudgetTip[] = [
+  {
+    id: 'tip-regrow-onions',
+    title: 'How to regrow spring onions on your windowsill, indefinitely',
+    excerpt: 'Keep the root end in a jar of water and you never have to buy them again.',
+    photo: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4E5A34',
+  },
+  {
+    id: 'tip-bulk-grains',
+    title: 'Where to buy bulk grains near campus',
+    excerpt: 'Rice, oats, and lentils cost half as much from the bulk bins as the branded bags.',
+    photo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+  },
+  {
+    id: 'tip-oat-milk',
+    title: 'Make your own oat milk for 15p a litre',
+    excerpt: 'Blend oats and water, strain, and it works in tea, cereal, or baking.',
+    photo: 'https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+  },
+];
+
+export const BUDGET_ANALYTICS = {
+  monthSpent: 82.5,
+  monthBudget: 120,
+  weekAverage: 20.6,
+  categories: [
+    { label: 'Groceries', amount: 48.0 },
+    { label: 'Household', amount: 18.5 },
+    { label: 'Takeaway', amount: 16.0 },
+  ],
+  weeklyTrend: [12, 18, 9, 22, 14, 20, 7],
 };

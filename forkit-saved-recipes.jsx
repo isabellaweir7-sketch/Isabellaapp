@@ -1,55 +1,63 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Heart, BookOpen } from 'lucide-react';
 import { SAVED_RECIPES } from './mockData';
 
-export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
+function EmptySaved({ onBack }) {
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F3ECDA' }}>
-      <div className="flex items-center gap-3 px-6 pt-8 pb-5" style={{ backgroundColor: '#161D14' }}>
-        <button
-          type="button"
-          onClick={onBack}
-          className="w-9 h-9 flex items-center justify-center rounded-full shrink-0"
-          style={{ backgroundColor: '#212B1D' }}
-          aria-label="Back"
-        >
-          <ChevronLeft size={18} color="#F2E9DC" />
+    <div className="min-h-screen flex flex-col bg-surface">
+      <header className="flex items-center gap-3 px-5 py-4">
+        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container" aria-label="Back">
+          <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl" style={{ color: '#F2E9DC' }}>
-          Saved
-        </h1>
-      </div>
+        <h1 className="font-display text-xl text-primary">My Recipes</h1>
+      </header>
+      <main className="flex-1 flex flex-col items-center justify-center px-6 text-center gap-4">
+        <div className="w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center">
+          <BookOpen size={36} className="text-primary" />
+        </div>
+        <h2 className="font-display text-2xl text-primary">Your digital cookbook is empty</h2>
+        <p className="text-sm text-on-surface-variant max-w-sm">
+          Save recipes you love so they're easy to find again when it's time to cook.
+        </p>
+        <button type="button" onClick={onBack} className="bg-primary text-on-primary font-semibold px-6 py-3 rounded-xl">
+          Browse Recipes
+        </button>
+      </main>
+    </div>
+  );
+}
 
-      <div className="flex-1 px-6 pt-6 flex flex-col gap-3">
-        {SAVED_RECIPES.map((recipe) => (
-          <button
-            key={recipe.id}
-            type="button"
-            onClick={() => onOpenRecipe(recipe)}
-            className="rounded-2xl border overflow-hidden flex items-center gap-4 p-3 text-left"
-            style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}
-          >
-            <div
-              className="grain w-20 h-20 rounded-xl shrink-0 bg-cover bg-center"
-              style={{ backgroundImage: `url("${recipe.photo}")`, backgroundColor: recipe.fallback }}
-            />
-            <div className="flex-1 min-w-0">
-              <h2 className="font-display text-lg leading-tight truncate" style={{ color: '#232B1D' }}>
-                {recipe.title}
-              </h2>
-              <div className="flex gap-1.5 mt-1.5 mb-1.5 flex-wrap">
-                {recipe.tags.map((t) => (
-                  <span key={t} className="tag-pill">
-                    {t}
-                  </span>
-                ))}
+export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
+  if (SAVED_RECIPES.length === 0) return <EmptySaved onBack={onBack} />;
+
+  return (
+    <div className="min-h-screen flex flex-col bg-surface">
+      <header className="flex items-center gap-3 px-5 py-4">
+        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
+          <ChevronLeft size={18} className="text-primary" />
+        </button>
+        <h1 className="font-display text-xl text-primary">My Recipes</h1>
+      </header>
+
+      <div className="flex-1 px-5 pb-8 max-w-2xl mx-auto w-full">
+        <div className="grid grid-cols-2 gap-4">
+          {SAVED_RECIPES.map((recipe) => (
+            <button key={recipe.id} type="button" onClick={() => onOpenRecipe(recipe)} className="text-left group">
+              <div
+                className="relative aspect-square rounded-lg overflow-hidden mb-2"
+                style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+              >
+                <span className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-full">
+                  <Heart size={16} className="text-primary" fill="currentColor" />
+                </span>
               </div>
-              <p className="text-xs font-semibold" style={{ color: '#93876B' }}>
-                £{recipe.pricePerServing.toFixed(2)}/serving
+              <h4 className="font-display text-base text-primary leading-tight">{recipe.title}</h4>
+              <p className="text-xs text-on-surface-variant">
+                {recipe.prepMinutes ?? 15} mins · £{recipe.pricePerServing.toFixed(2)}
               </p>
-            </div>
-          </button>
-        ))}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

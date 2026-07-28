@@ -4,8 +4,8 @@
   "description": "A meal planner built for students on a budget.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#161D14",
-  "theme_color": "#161D14",
+  "background_color": "#FAF9F5",
+  "theme_color": "#FAF9F5",
   "icons": [
     {
       "src": "/icon-192.png?v=3",

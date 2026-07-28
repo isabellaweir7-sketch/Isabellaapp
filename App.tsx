@@ -9,12 +9,27 @@ import ForkitPantry from './forkit-pantry.jsx';
 import ForkitCommunity from './forkit-community.jsx';
 import ForkitHousehold from './forkit-household.jsx';
 import ForkitAuth from './forkit-auth.jsx';
+import ForkitBudgetAnalytics from './forkit-budget-analytics.jsx';
+import ForkitShoppingMode from './forkit-shopping-mode.jsx';
+import ForkitNotifications from './forkit-notifications.jsx';
+import ForkitBudgetTips from './forkit-budget-tips.jsx';
 import { supabase } from './supabaseClient';
 import { OnboardingAnswers, Recipe } from './types';
 
 const ONBOARDING_KEY = 'forkit_onboarding_answers';
 
-type View = 'home' | 'saved' | 'plan' | 'pantry' | 'community' | 'household' | 'auth';
+type View =
+  | 'home'
+  | 'saved'
+  | 'plan'
+  | 'pantry'
+  | 'community'
+  | 'household'
+  | 'auth'
+  | 'budget'
+  | 'shopping'
+  | 'notifications'
+  | 'tips';
 
 function readJSON<T>(key: string): T | null {
   const raw = localStorage.getItem(key);
@@ -39,6 +54,10 @@ export default function App() {
     });
     return () => listener.subscription.unsubscribe();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view, openRecipe]);
 
   const handleOnboardingComplete = (result: OnboardingAnswers) => {
     localStorage.setItem(ONBOARDING_KEY, JSON.stringify(result));
@@ -70,15 +89,37 @@ export default function App() {
   }
 
   if (view === 'community') {
-    return <ForkitCommunity onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
+    return (
+      <ForkitCommunity
+        onBack={() => setView('home')}
+        onOpenRecipe={setOpenRecipe}
+        onOpenTips={() => setView('tips')}
+      />
+    );
   }
 
   if (view === 'household') {
-    return <ForkitHousehold onBack={() => setView('home')} />;
+    return <ForkitHousehold onBack={() => setView('home')} onOpenShopping={() => setView('shopping')} />;
   }
 
   if (view === 'auth') {
-    return <ForkitAuth session={session} onBack={() => setView('home')} onLogOut={handleLogOut} />;
+    return <ForkitAuth session={session} answers={answers} onBack={() => setView('home')} onLogOut={handleLogOut} />;
+  }
+
+  if (view === 'budget') {
+    return <ForkitBudgetAnalytics onBack={() => setView('home')} />;
+  }
+
+  if (view === 'shopping') {
+    return <ForkitShoppingMode onBack={() => setView('household')} />;
+  }
+
+  if (view === 'notifications') {
+    return <ForkitNotifications onBack={() => setView('home')} />;
+  }
+
+  if (view === 'tips') {
+    return <ForkitBudgetTips onBack={() => setView('community')} />;
   }
 
   return (
@@ -90,6 +131,8 @@ export default function App() {
       onOpenCommunity={() => setView('community')}
       onOpenHousehold={() => setView('household')}
       onOpenAuth={() => setView('auth')}
+      onOpenNotifications={() => setView('notifications')}
+      onOpenBudget={() => setView('budget')}
       session={session}
     />
   );

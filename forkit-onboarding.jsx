@@ -1,33 +1,52 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'motion/react';
-import { ChevronLeft, Heart, X, Check, Leaf } from 'lucide-react';
+import {
+  ChevronLeft,
+  Heart,
+  X,
+  Utensils,
+  Salad,
+  Leaf,
+  Wheat,
+  Droplet,
+  BadgeCheck,
+  Star,
+  ShieldAlert,
+  Dumbbell,
+  TrendingUp,
+  Scale,
+  ArrowRight,
+} from 'lucide-react';
 import {
   ONBOARDING_REASONS,
   DIETARY_RESTRICTIONS,
-  MEAL_WANTS,
   SAMPLE_DISHES,
 } from './mockData';
 
 const STEP_META = [
-  { title: 'Why are you here?', subtitle: "Pick as many as apply — there's no wrong answer." },
-  { title: 'Any dietary needs?', subtitle: "We'll only suggest meals that fit." },
-  { title: 'What do you want from a meal?', subtitle: 'Optional — skip if you just want variety.' },
+  { title: 'What brings you to ForkIt?', subtitle: "Pick as many as apply — there's no wrong answer." },
+  { title: 'Any deal-breakers?', subtitle: "We'll only suggest meals that fit." },
+  { title: 'What are your goals?', subtitle: 'Tell us what to optimise for so your plan actually fits your week.' },
   { title: 'Would you eat this?', subtitle: 'Swipe through a few so we learn your taste.' },
 ];
 
-function StepLabel({ step }) {
-  return (
-    <div className="flex items-center gap-2 mb-1">
-      <Leaf size={18} color="#5A7A3A" />
-      <span
-        className="font-mono text-xs font-bold uppercase"
-        style={{ color: '#5A7A3A', letterSpacing: '0.04em' }}
-      >
-        Step {step + 1} of {STEP_META.length}
-      </span>
-    </div>
-  );
-}
+const RESTRICTION_ICONS = {
+  none: Utensils,
+  vegetarian: Salad,
+  vegan: Leaf,
+  'gluten-free': Wheat,
+  'dairy-free': Droplet,
+  halal: BadgeCheck,
+  kosher: Star,
+  'nut-allergy': ShieldAlert,
+};
+
+const NUTRITION_GOALS = [
+  { id: 'high-protein', label: 'High Protein', sublabel: '45g+ per meal', icon: Dumbbell },
+  { id: 'low-carb', label: 'Low Carb', sublabel: 'Under 30g/day', icon: Wheat },
+  { id: 'high-fibre', label: 'High Fibre', sublabel: 'Digestive health', icon: Leaf },
+  { id: 'bulk-up', label: 'Bulk Up', sublabel: 'Growth phase', icon: TrendingUp },
+];
 
 function StepDots({ step }) {
   return (
@@ -36,11 +55,10 @@ function StepDots({ step }) {
         <div
           key={i}
           className="h-1.5 rounded-full transition-all duration-300"
-          style={{
-            width: i === step ? 24 : 8,
-            backgroundColor: i <= step ? '#9ACB4B' : '#33422C',
-          }}
-        />
+          style={{ width: i === step ? 24 : 8 }}
+        >
+          <div className={`h-full w-full rounded-full ${i <= step ? 'bg-tertiary-container' : 'bg-surface-container-highest'}`} />
+        </div>
       ))}
     </div>
   );
@@ -51,12 +69,11 @@ function Chip({ label, selected, onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="px-4 py-2.5 rounded-full text-sm font-semibold border transition-colors"
-      style={{
-        backgroundColor: selected ? '#9ACB4B' : '#FFFFFF',
-        borderColor: selected ? '#9ACB4B' : '#E3DAC0',
-        color: '#232B1D',
-      }}
+      className={`px-4 py-2.5 rounded-full text-sm font-semibold border transition-colors ${
+        selected
+          ? 'bg-primary text-on-primary border-primary'
+          : 'bg-surface-container-lowest text-on-surface border-outline-variant'
+      }`}
     >
       {label}
     </button>
@@ -78,60 +95,123 @@ function ReasonsStep({ selected, onToggle }) {
   );
 }
 
-function RestrictionsStep({ selected, onToggle }) {
-  return (
-    <div className="flex flex-wrap gap-2.5">
-      {DIETARY_RESTRICTIONS.map((r) => (
-        <Chip key={r.id} label={r.label} selected={selected.includes(r.id)} onClick={() => onToggle(r.id)} />
-      ))}
-    </div>
-  );
-}
-
-function GoalChip({ label, selected, gradient, onClick }) {
+function RestrictionCard({ label, selected, Icon, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="rounded-2xl overflow-hidden text-left transition-all"
-      style={{ border: `2px solid ${selected ? '#9ACB4B' : 'transparent'}` }}
+      className={`flex flex-col justify-between h-28 rounded-lg border p-4 text-left transition-all ${
+        selected ? 'bg-primary text-on-primary border-primary' : 'bg-surface border-outline-variant text-on-surface'
+      }`}
     >
-      <div className="grain relative h-20 w-full" style={{ background: gradient }}>
-        {selected && (
-          <div
-            className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: '#9ACB4B' }}
-          >
-            <Check size={14} color="#161D14" strokeWidth={3} />
-          </div>
-        )}
-      </div>
-      <div className="px-2.5 py-2" style={{ backgroundColor: selected ? '#9ACB4B' : '#FFFFFF' }}>
-        <span className="text-xs font-bold" style={{ color: '#232B1D' }}>
-          {label}
-        </span>
-      </div>
+      <Icon size={22} className={selected ? 'text-on-primary' : 'text-primary'} />
+      <span className="text-sm font-semibold">{label}</span>
     </button>
   );
 }
 
-function MealWantsStep({ selected, onToggle }) {
+function RestrictionsStep({ selected, onToggle }) {
   return (
     <div className="grid grid-cols-2 gap-3">
-      {MEAL_WANTS.map((want) => (
-        <GoalChip
-          key={want.id}
-          label={want.label}
-          gradient={want.gradient}
-          selected={selected.includes(want.id)}
-          onClick={() => onToggle(want.id)}
+      {DIETARY_RESTRICTIONS.map((r) => (
+        <RestrictionCard
+          key={r.id}
+          label={r.label}
+          Icon={RESTRICTION_ICONS[r.id] ?? Utensils}
+          selected={selected.includes(r.id)}
+          onClick={() => onToggle(r.id)}
         />
       ))}
     </div>
   );
 }
 
-const PHOTO_SCRIM = 'linear-gradient(180deg, rgba(22,29,20,0) 40%, rgba(22,29,20,0.88) 100%)';
+function GoalCard({ label, sublabel, Icon, selected, onClick, wide = false }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex flex-col p-4 text-left rounded-xl border transition-all ${wide ? 'col-span-2 flex-row items-center justify-between' : ''} ${
+        selected ? 'bg-primary text-on-primary border-primary' : 'bg-surface border-outline-variant text-on-surface'
+      }`}
+    >
+      <div className={wide ? 'flex flex-col' : ''}>
+        <span className="text-sm font-semibold">{label}</span>
+        <span className={`text-xs ${selected ? 'opacity-80' : 'text-outline'}`}>{sublabel}</span>
+      </div>
+      <Icon size={20} className={`${wide ? '' : 'mb-2 order-first'} ${selected ? 'text-on-primary' : 'text-secondary'}`} />
+    </button>
+  );
+}
+
+function MacroSlider({ label, value, onChange, colorClass }) {
+  return (
+    <div>
+      <div className="flex justify-between mb-1">
+        <label className="text-sm font-semibold text-on-surface">{label}</label>
+        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${colorClass}`}>{value}%</span>
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={100}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="w-full h-1 rounded-lg appearance-none cursor-pointer bg-outline-variant accent-primary"
+      />
+    </div>
+  );
+}
+
+function NutritionGoalsStep({ selected, onToggle, macros, onMacroChange }) {
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="grid grid-cols-2 gap-3">
+        {NUTRITION_GOALS.map((goal) => (
+          <GoalCard
+            key={goal.id}
+            label={goal.label}
+            sublabel={goal.sublabel}
+            Icon={goal.icon}
+            selected={selected.includes(goal.id)}
+            onClick={() => onToggle(goal.id)}
+          />
+        ))}
+        <GoalCard
+          label="Calorie Conscious"
+          sublabel="Smart weight management"
+          Icon={Scale}
+          selected={selected.includes('calorie-conscious')}
+          onClick={() => onToggle('calorie-conscious')}
+          wide
+        />
+      </div>
+      <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
+        <h3 className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Priority Tuning</h3>
+        <div className="flex flex-col gap-4">
+          <MacroSlider
+            label="Protein"
+            value={macros.protein}
+            onChange={(v) => onMacroChange('protein', v)}
+            colorClass="bg-primary-fixed text-primary"
+          />
+          <MacroSlider
+            label="Carbohydrates"
+            value={macros.carbs}
+            onChange={(v) => onMacroChange('carbs', v)}
+            colorClass="bg-secondary-fixed text-secondary"
+          />
+          <MacroSlider
+            label="Healthy Fats"
+            value={macros.fat}
+            onChange={(v) => onMacroChange('fat', v)}
+            colorClass="bg-tertiary-fixed text-tertiary"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function SwipeCard({ dish, onSwipe, isTop }) {
   const x = useMotionValue(0);
@@ -141,13 +221,12 @@ function SwipeCard({ dish, onSwipe, isTop }) {
 
   return (
     <motion.div
-      className="grain absolute inset-0 rounded-3xl border overflow-hidden flex flex-col justify-end p-5"
+      className="absolute inset-0 rounded-xl border border-outline-variant overflow-hidden flex flex-col justify-end soft-shadow"
       style={{
-        backgroundImage: `${PHOTO_SCRIM}, url("${dish.photo}")`,
+        backgroundImage: `linear-gradient(180deg, rgba(22,29,20,0) 40%, rgba(22,29,20,0.85) 100%), url("${dish.photo}")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundColor: dish.fallback,
-        borderColor: '#E3DAC0',
         x: isTop ? x : 0,
         rotate: isTop ? rotate : 0,
       }}
@@ -162,30 +241,30 @@ function SwipeCard({ dish, onSwipe, isTop }) {
     >
       {isTop && (
         <motion.div
-          className="absolute top-5 left-5 px-3 py-1 rounded-lg border-2 font-display text-lg -rotate-12"
-          style={{ borderColor: '#9ACB4B', color: '#9ACB4B', opacity: likeOpacity }}
+          className="absolute top-5 left-5 px-3 py-1 rounded-lg border-2 border-tertiary-fixed text-tertiary-fixed font-display text-lg -rotate-12"
+          style={{ opacity: likeOpacity }}
         >
           YUM
         </motion.div>
       )}
       {isTop && (
         <motion.div
-          className="absolute top-5 right-5 px-3 py-1 rounded-lg border-2 font-display text-lg rotate-12"
-          style={{ borderColor: '#F2E9DC', color: '#F2E9DC', opacity: nopeOpacity }}
+          className="absolute top-5 right-5 px-3 py-1 rounded-lg border-2 border-white text-white font-display text-lg rotate-12"
+          style={{ opacity: nopeOpacity }}
         >
           PASS
         </motion.div>
       )}
-      <div className="flex gap-1.5 mb-2">
-        {dish.tags.map((t) => (
-          <span key={t} className="tag-pill">
-            {t}
-          </span>
-        ))}
+      <div className="p-5">
+        <div className="flex gap-1.5 mb-2">
+          {dish.tags.map((t) => (
+            <span key={t} className="chip-value">
+              {t}
+            </span>
+          ))}
+        </div>
+        <h3 className="font-display text-2xl leading-tight text-white">{dish.name}</h3>
       </div>
-      <h3 className="font-display text-2xl leading-tight" style={{ color: '#F2E9DC' }}>
-        {dish.name}
-      </h3>
     </motion.div>
   );
 }
@@ -193,21 +272,15 @@ function SwipeCard({ dish, onSwipe, isTop }) {
 function SwipeStep({ dishIndex, onSwipe }) {
   const visible = SAMPLE_DISHES.slice(dishIndex, dishIndex + 2);
   const done = dishIndex >= SAMPLE_DISHES.length;
+  const progressed = Math.min(dishIndex, SAMPLE_DISHES.length);
 
   return (
     <div className="flex flex-col items-center gap-6">
       <div className="relative w-full max-w-xs h-[26rem]">
         {done ? (
-          <div
-            className="rounded-3xl border h-full flex flex-col items-center justify-center gap-2 px-6 text-center"
-            style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}
-          >
-            <span className="font-display text-xl" style={{ color: '#232B1D' }}>
-              That's the taste test done
-            </span>
-            <span className="text-sm font-medium" style={{ color: '#93876B' }}>
-              We've got a good read on you now
-            </span>
+          <div className="rounded-xl border border-outline-variant bg-surface-container-lowest h-full flex flex-col items-center justify-center gap-2 px-6 text-center">
+            <span className="font-display text-xl text-primary">That's the taste test done</span>
+            <span className="text-sm font-medium text-on-surface-variant">We've got a good read on you now</span>
           </div>
         ) : (
           <AnimatePresence>
@@ -224,26 +297,35 @@ function SwipeStep({ dishIndex, onSwipe }) {
           <button
             type="button"
             onClick={() => onSwipe('dislike')}
-            className="w-14 h-14 rounded-full border flex items-center justify-center"
-            style={{ backgroundColor: '#FFFFFF', borderColor: '#E3DAC0' }}
+            className="w-14 h-14 rounded-full border-2 border-secondary flex items-center justify-center text-secondary"
             aria-label="Pass"
           >
-            <X size={22} color="#93876B" />
+            <X size={22} />
           </button>
-          <span className="font-mono text-xs" style={{ color: '#93876B' }}>
-            {Math.min(dishIndex + 1, SAMPLE_DISHES.length)}/{SAMPLE_DISHES.length}
-          </span>
           <button
             type="button"
             onClick={() => onSwipe('like')}
-            className="w-14 h-14 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: '#9ACB4B' }}
+            className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-on-primary soft-shadow"
             aria-label="Yum"
           >
-            <Heart size={22} color="#161D14" fill="#161D14" />
+            <Heart size={22} fill="currentColor" />
           </button>
         </div>
       )}
+      <div className="w-full max-w-[200px]">
+        <div className="flex justify-between items-end mb-1">
+          <span className="text-xs font-semibold text-primary">Your Palate</span>
+          <span className="text-xs font-semibold text-on-surface-variant">
+            {progressed}/{SAMPLE_DISHES.length}
+          </span>
+        </div>
+        <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+          <div
+            className="h-full bg-tertiary-container"
+            style={{ width: `${(progressed / SAMPLE_DISHES.length) * 100}%` }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -252,7 +334,8 @@ export default function ForkitOnboarding({ onComplete }) {
   const [step, setStep] = useState(0);
   const [reasons, setReasons] = useState([]);
   const [restrictions, setRestrictions] = useState([]);
-  const [mealWants, setMealWants] = useState([]);
+  const [nutritionGoals, setNutritionGoals] = useState([]);
+  const [macros, setMacros] = useState({ protein: 40, carbs: 35, fat: 25 });
   const [dishIndex, setDishIndex] = useState(0);
   const [liked, setLiked] = useState([]);
   const [disliked, setDisliked] = useState([]);
@@ -260,11 +343,14 @@ export default function ForkitOnboarding({ onComplete }) {
   const toggleIn = (setArr) => (id) =>
     setArr((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
+  const handleMacroChange = (key, value) => setMacros((prev) => ({ ...prev, [key]: value }));
+
   const finish = (finalLiked, finalDisliked) => {
     onComplete({
       reasons,
       restrictions,
-      mealWants,
+      nutritionGoals,
+      macros,
       likedDishes: finalLiked,
       dislikedDishes: finalDisliked,
     });
@@ -287,57 +373,63 @@ export default function ForkitOnboarding({ onComplete }) {
   const canContinue = step === 0 ? reasons.length > 0 : true;
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F3ECDA' }}>
-      {/* Dark chrome header strip */}
-      <div
-        className="flex items-center justify-between px-6 pt-8 pb-5"
-        style={{ backgroundColor: '#161D14' }}
-      >
+    <div className="min-h-screen flex flex-col bg-surface">
+      <header className="flex items-center justify-between px-5 py-4">
         <button
           type="button"
           onClick={() => step > 0 && setStep(step - 1)}
-          className="w-9 h-9 flex items-center justify-center rounded-full"
-          style={{ opacity: step === 0 ? 0 : 1, backgroundColor: '#212B1D' }}
+          className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container"
+          style={{ opacity: step === 0 ? 0 : 1 }}
           disabled={step === 0}
         >
-          <ChevronLeft size={18} color="#F2E9DC" />
+          <ChevronLeft size={18} className="text-primary" />
         </button>
-        <StepDots step={step} />
+        <h1 className="font-display text-xl text-primary">ForkIt</h1>
         <div className="w-9 h-9" />
+      </header>
+
+      <div className="px-5">
+        <div className="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+          <div
+            className="h-full bg-tertiary-container transition-all duration-700 ease-out rounded-full"
+            style={{ width: `${((step + 1) / STEP_META.length) * 100}%` }}
+          />
+        </div>
+        <p className="text-xs text-outline mt-1 text-center uppercase tracking-widest">
+          Step {step + 1} of {STEP_META.length}
+        </p>
       </div>
 
-      <div className="flex-1 px-6 pt-6 pb-6 flex flex-col">
-        <StepLabel step={step} />
-        <h1 className="font-display text-3xl leading-tight mb-2" style={{ color: '#232B1D' }}>
-          {STEP_META[step].title}
-        </h1>
-        <p className="text-sm font-medium mb-6" style={{ color: '#93876B' }}>
-          {STEP_META[step].subtitle}
-        </p>
+      <div className="flex-1 px-5 pt-6 pb-6 flex flex-col max-w-2xl mx-auto w-full">
+        <h1 className="font-display text-3xl leading-tight mb-2 text-primary">{STEP_META[step].title}</h1>
+        <p className="text-sm font-medium mb-6 text-on-surface-variant">{STEP_META[step].subtitle}</p>
 
         <div className="flex-1">
           {step === 0 && <ReasonsStep selected={reasons} onToggle={toggleIn(setReasons)} />}
           {step === 1 && <RestrictionsStep selected={restrictions} onToggle={toggleIn(setRestrictions)} />}
-          {step === 2 && <MealWantsStep selected={mealWants} onToggle={toggleIn(setMealWants)} />}
+          {step === 2 && (
+            <NutritionGoalsStep
+              selected={nutritionGoals}
+              onToggle={toggleIn(setNutritionGoals)}
+              macros={macros}
+              onMacroChange={handleMacroChange}
+            />
+          )}
           {step === 3 && <SwipeStep dishIndex={dishIndex} onSwipe={handleSwipe} />}
         </div>
       </div>
 
-      {/* Dark chrome footer strip with the CTA, mirroring the header band */}
       {step < 3 && (
-        <div className="px-6 pt-4 pb-8" style={{ backgroundColor: '#161D14' }}>
+        <div className="px-5 pt-2 pb-8 max-w-2xl mx-auto w-full">
           <button
             type="button"
             disabled={!canContinue}
             onClick={() => setStep(step + 1)}
-            className="w-full py-3.5 rounded-full font-display text-base transition-opacity"
-            style={{
-              backgroundColor: '#9ACB4B',
-              color: '#161D14',
-              opacity: canContinue ? 1 : 0.4,
-            }}
+            className="w-full py-3.5 rounded-lg font-semibold text-base transition-opacity bg-primary text-on-primary flex items-center justify-center gap-2"
+            style={{ opacity: canContinue ? 1 : 0.4 }}
           >
             Continue
+            <ArrowRight size={18} />
           </button>
         </div>
       )}

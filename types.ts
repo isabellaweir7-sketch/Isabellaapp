@@ -8,12 +8,6 @@ export interface DietaryRestriction {
   label: string;
 }
 
-export interface MealWant {
-  id: string;
-  label: string;
-  gradient: string;
-}
-
 export interface SampleDish {
   id: string;
   name: string;
@@ -25,7 +19,8 @@ export interface SampleDish {
 export interface OnboardingAnswers {
   reasons: string[];
   restrictions: string[];
-  mealWants: string[];
+  nutritionGoals: string[];
+  macros: { protein: number; carbs: number; fat: number };
   likedDishes: string[];
   dislikedDishes: string[];
 }
@@ -43,12 +38,39 @@ export interface Recipe {
   photo: string;
   fallback: string;
   pricePerServing: number;
+  prepMinutes?: number;
   tags: string[];
   baseServings: number;
   ingredients: Ingredient[];
   steps: string[];
   author?: string;
   upvotes?: number;
+}
+
+export interface TodayMeal {
+  slot: string;
+  recipe: Recipe;
+}
+
+export interface NotificationItem {
+  id: string;
+  group: string;
+  title: string;
+  detail: string;
+  time: string;
+}
+
+export interface BudgetTip {
+  id: string;
+  title: string;
+  excerpt: string;
+  photo: string;
+  fallback: string;
+}
+
+export interface ShoppingAisle {
+  name: string;
+  items: ShoppingListItem[];
 }
 
 export interface FeatureTile {
@@ -79,4 +101,5 @@ export interface ShoppingListItem {
   name: string;
   price: number;
   addedBy: string;
+  aisle: string;
 }
