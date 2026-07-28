@@ -26,6 +26,10 @@ export interface TasteProfile {
   nutritionGoals: string[];
   likedDishes: string[];
   dislikedDishes: string[];
+  // The onboarding "Priority Tuning" sliders (0-100 each, independent —
+  // not required to sum to 100). Relative weights, not literal gram targets:
+  // scoring compares them against each recipe's real calorie-share split.
+  macroPriority?: { protein: number; carbs: number; fat: number };
 }
 
 export interface OnboardingAnswers {

@@ -79,6 +79,7 @@ export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
                     nutritionGoals: answers?.nutritionGoals ?? [],
                     likedDishes: answers?.likedDishes ?? [],
                     dislikedDishes: answers?.dislikedDishes ?? [],
+                    macroPriority: answers?.macros,
                   })
                 )
               }

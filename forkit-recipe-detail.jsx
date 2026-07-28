@@ -121,6 +121,9 @@ function NutritionCard({ macros }) {
           </div>
         ))}
       </div>
+      <p className="text-[11px] text-on-surface-variant/60 mt-2 leading-snug">
+        Calculated from the ingredients listed above — sides mentioned only in the method (e.g. "serve with rice") aren't included.
+      </p>
     </div>
   );
 }

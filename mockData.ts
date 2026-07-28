@@ -9859,10 +9859,52 @@ function tagsOf(recipeId: string): string[] {
   return RECIPE_LIBRARY.find((r) => r.id === recipeId)?.tags ?? [];
 }
 
+// Converts a recipe's real per-serving macros into calorie shares (what
+// fraction of its energy comes from protein/carbs/fat), using the standard
+// 4/4/9 kcal-per-gram conversion. Returns null if there's nothing to share
+// (shouldn't happen post-#75, but guards div-by-zero regardless).
+function macroShares(recipe: Recipe): { protein: number; carbs: number; fat: number } | null {
+  const { protein, carbs, fat } = recipe.macros;
+  const proteinKcal = protein * 4;
+  const carbsKcal = carbs * 4;
+  const fatKcal = fat * 9;
+  const total = proteinKcal + carbsKcal + fatKcal;
+  if (total <= 0) return null;
+  return { protein: proteinKcal / total, carbs: carbsKcal / total, fat: fatKcal / total };
+}
+
+// Scores 0-3: how closely a recipe's real macro split matches the relative
+// weight the user gave protein/carbs/fat on the "Priority Tuning" sliders.
+// Sliders are 0-100 each and independent (not required to sum to 100), so
+// both sides are normalised to shares before comparing. 3 = near-identical
+// emphasis, 0 = opposite emphasis (e.g. all-protein priority vs a carb-heavy
+// dish). Returns 0 if there's no slider signal to compare against.
+function macroAlignmentBonus(recipe: Recipe, priority?: { protein: number; carbs: number; fat: number }): number {
+  if (!priority) return 0;
+  const priorityTotal = priority.protein + priority.carbs + priority.fat;
+  if (priorityTotal <= 0) return 0;
+  const wantShares = {
+    protein: priority.protein / priorityTotal,
+    carbs: priority.carbs / priorityTotal,
+    fat: priority.fat / priorityTotal,
+  };
+  const actualShares = macroShares(recipe);
+  if (!actualShares) return 0;
+  const distance =
+    Math.abs(wantShares.protein - actualShares.protein) +
+    Math.abs(wantShares.carbs - actualShares.carbs) +
+    Math.abs(wantShares.fat - actualShares.fat);
+  // Manhattan distance between two 3-part share vectors maxes out at 2.
+  const similarity = 1 - distance / 2;
+  return Math.round(similarity * 3);
+}
+
 // Scores how well a recipe fits someone's taste profile: +2 for each
 // nutrition goal it satisfies, +1 for every tag it shares with a recipe they
-// swiped "yum" on, -1 for every tag shared with one they passed on. Used to
-// rank an already-safe (restriction/allergy-filtered) pool, not to filter it.
+// swiped "yum" on, -1 for every tag shared with one they passed on, plus up
+// to +3 for how closely its real macro split matches their priority sliders.
+// Used to rank an already-safe (restriction/allergy-filtered) pool, not to
+// filter it.
 export function scoreRecipeForProfile(recipe: Recipe, profile: TasteProfile): number {
   let score = 0;
   for (const goal of profile.nutritionGoals) {
@@ -9875,6 +9917,7 @@ export function scoreRecipeForProfile(recipe: Recipe, profile: TasteProfile): nu
     if (likedTags.has(tag)) score += 1;
     if (dislikedTags.has(tag)) score -= 1;
   }
+  score += macroAlignmentBonus(recipe, profile.macroPriority);
   return score;
 }
 

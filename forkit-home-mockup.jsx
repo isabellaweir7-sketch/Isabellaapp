@@ -248,6 +248,7 @@ export default function ForkitHome({
     nutritionGoals: answers?.nutritionGoals ?? [],
     likedDishes: answers?.likedDishes ?? [],
     dislikedDishes: answers?.dislikedDishes ?? [],
+    macroPriority: answers?.macros,
   });
 
   const handleNavTap = (id) => {

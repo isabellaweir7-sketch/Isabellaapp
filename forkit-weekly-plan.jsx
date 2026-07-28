@@ -31,6 +31,7 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe }) {
     nutritionGoals: answers?.nutritionGoals ?? [],
     likedDishes: answers?.likedDishes ?? [],
     dislikedDishes: answers?.dislikedDishes ?? [],
+    macroPriority: answers?.macros,
   });
   if (WEEKLY_PLAN.length === 0) return <EmptyPlan onBack={onBack} />;
 
