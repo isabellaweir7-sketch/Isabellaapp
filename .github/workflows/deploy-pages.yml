@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/forkit-project-brief-vuj199
   workflow_dispatch:
 
 permissions:
