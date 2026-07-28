@@ -3,8 +3,11 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(() => {
+export default defineConfig(({ command }) => {
   return {
+    // GitHub Pages serves this repo from a /Isabellaapp/ subpath, so
+    // production builds need asset URLs rooted there; local dev keeps '/'.
+    base: command === 'build' ? '/Isabellaapp/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
