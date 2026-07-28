@@ -26,7 +26,7 @@ export function HouseholdHeaderButton({ onClick }) {
 function Header({ onOpenAuth, onOpenNotifications, onOpenHousehold, session }) {
   return (
     <header className="bg-surface sticky top-0 z-40 w-full">
-      <div className="flex items-center justify-between px-gutter py-sm w-full max-w-[1200px] mx-auto">
+      <div className="relative flex items-center justify-between px-gutter py-sm w-full max-w-[1200px] mx-auto">
         <div className="flex items-center gap-xs">
           <button
             type="button"
@@ -38,7 +38,9 @@ function Header({ onOpenAuth, onOpenNotifications, onOpenHousehold, session }) {
           </button>
           <HouseholdHeaderButton onClick={onOpenHousehold} />
         </div>
-        <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">ForkIt</h1>
+        <h1 className="absolute left-1/2 -translate-x-1/2 font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">
+          ForkIt
+        </h1>
         <button type="button" onClick={onOpenNotifications} className="text-primary" aria-label="Notifications">
           <Bell size={24} />
         </button>
