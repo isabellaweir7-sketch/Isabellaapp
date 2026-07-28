@@ -48,28 +48,12 @@ const NUTRITION_GOALS = [
   { id: 'bulk-up', label: 'Bulk Up', sublabel: 'Growth phase', icon: TrendingUp },
 ];
 
-function StepDots({ step }) {
-  return (
-    <div className="flex items-center gap-1.5">
-      {STEP_META.map((_, i) => (
-        <div
-          key={i}
-          className="h-1.5 rounded-full transition-all duration-300"
-          style={{ width: i === step ? 24 : 8 }}
-        >
-          <div className={`h-full w-full rounded-full ${i <= step ? 'bg-tertiary-container' : 'bg-surface-container-highest'}`} />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function Chip({ label, selected, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`px-4 py-2.5 rounded-full text-sm font-semibold border transition-colors ${
+      className={`px-4 py-2.5 rounded-full text-sm font-semibold tracking-wider border transition-colors ${
         selected
           ? 'bg-primary text-on-primary border-primary'
           : 'bg-surface-container-lowest text-on-surface border-outline-variant'
@@ -82,7 +66,7 @@ function Chip({ label, selected, onClick }) {
 
 function ReasonsStep({ selected, onToggle }) {
   return (
-    <div className="flex flex-wrap gap-2.5">
+    <div className="flex flex-wrap gap-sm">
       {ONBOARDING_REASONS.map((reason) => (
         <Chip
           key={reason.id}
@@ -105,14 +89,14 @@ function RestrictionCard({ label, selected, Icon, onClick }) {
       }`}
     >
       <Icon size={22} className={selected ? 'text-on-primary' : 'text-primary'} />
-      <span className="text-sm font-semibold">{label}</span>
+      <span className="text-sm font-semibold tracking-wider">{label}</span>
     </button>
   );
 }
 
 function RestrictionsStep({ selected, onToggle }) {
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-2 gap-sm">
       {DIETARY_RESTRICTIONS.map((r) => (
         <RestrictionCard
           key={r.id}
@@ -136,8 +120,8 @@ function GoalCard({ label, sublabel, Icon, selected, onClick, wide = false }) {
       }`}
     >
       <div className="flex flex-col">
-        <span className="text-sm font-semibold">{label}</span>
-        <span className={`text-xs ${selected ? 'opacity-80' : 'text-outline'}`}>{sublabel}</span>
+        <span className="text-sm font-semibold tracking-wider">{label}</span>
+        <span className={`text-xs font-medium ${selected ? 'opacity-80' : 'text-outline'}`}>{sublabel}</span>
       </div>
       <Icon size={20} className={`${wide ? '' : 'mb-2 order-first'} ${selected ? 'text-on-primary' : 'text-secondary'}`} />
     </button>
@@ -148,8 +132,8 @@ function MacroSlider({ label, value, onChange, colorClass }) {
   return (
     <div>
       <div className="flex justify-between mb-1">
-        <label className="text-sm font-semibold text-on-surface">{label}</label>
-        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${colorClass}`}>{value}%</span>
+        <label className="text-sm font-semibold tracking-wider text-on-surface">{label}</label>
+        <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colorClass}`}>{value}%</span>
       </div>
       <input
         type="range"
@@ -166,7 +150,7 @@ function MacroSlider({ label, value, onChange, colorClass }) {
 function NutritionGoalsStep({ selected, onToggle, macros, onMacroChange }) {
   return (
     <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-sm">
         {NUTRITION_GOALS.map((goal) => (
           <GoalCard
             key={goal.id}
@@ -187,7 +171,7 @@ function NutritionGoalsStep({ selected, onToggle, macros, onMacroChange }) {
         />
       </div>
       <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Priority Tuning</h3>
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Priority Tuning</h3>
         <div className="flex flex-col gap-4">
           <MacroSlider
             label="Protein"
@@ -263,7 +247,7 @@ function SwipeCard({ dish, onSwipe, isTop }) {
             </span>
           ))}
         </div>
-        <h3 className="font-display text-2xl leading-tight text-white">{dish.name}</h3>
+        <h3 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-white">{dish.name}</h3>
       </div>
     </motion.div>
   );
@@ -314,8 +298,8 @@ function SwipeStep({ dishIndex, onSwipe }) {
       )}
       <div className="w-full max-w-[200px]">
         <div className="flex justify-between items-end mb-1">
-          <span className="text-xs font-semibold text-primary">Your Palate</span>
-          <span className="text-xs font-semibold text-on-surface-variant">
+          <span className="text-xs font-medium text-primary">Your Palate</span>
+          <span className="text-xs font-medium text-on-surface-variant">
             {progressed}/{SAMPLE_DISHES.length}
           </span>
         </div>
@@ -384,7 +368,7 @@ export default function ForkitOnboarding({ onComplete }) {
         >
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">ForkIt</h1>
+        <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">ForkIt</h1>
         <div className="w-9 h-9" />
       </header>
 
@@ -395,14 +379,16 @@ export default function ForkitOnboarding({ onComplete }) {
             style={{ width: `${((step + 1) / STEP_META.length) * 100}%` }}
           />
         </div>
-        <p className="text-xs text-outline mt-1 text-center uppercase tracking-widest">
+        <p className="text-xs font-medium text-outline mt-1 text-center uppercase tracking-widest">
           Step {step + 1} of {STEP_META.length}
         </p>
       </div>
 
       <div className="flex-1 px-5 pt-6 pb-6 flex flex-col max-w-2xl mx-auto w-full">
-        <h1 className="font-display text-3xl leading-tight mb-2 text-primary">{STEP_META[step].title}</h1>
-        <p className="text-sm font-medium mb-6 text-on-surface-variant">{STEP_META[step].subtitle}</p>
+        <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold mb-2 text-primary">
+          {STEP_META[step].title}
+        </h1>
+        <p className="text-lg mb-6 text-on-surface-variant">{STEP_META[step].subtitle}</p>
 
         <div className="flex-1">
           {step === 0 && <ReasonsStep selected={reasons} onToggle={toggleIn(setReasons)} />}
@@ -425,7 +411,7 @@ export default function ForkitOnboarding({ onComplete }) {
             type="button"
             disabled={!canContinue}
             onClick={() => setStep(step + 1)}
-            className="w-full py-3.5 rounded-lg font-semibold text-base transition-opacity bg-primary text-on-primary flex items-center justify-center gap-2"
+            className="w-full py-3.5 rounded-lg text-sm font-semibold tracking-wider transition-opacity bg-primary text-on-primary flex items-center justify-center gap-2"
             style={{ opacity: canContinue ? 1 : 0.4 }}
           >
             Continue

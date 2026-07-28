@@ -12,7 +12,7 @@ function NightCard({ night, onOpenNight, onAssign }) {
 
   return (
     <div className="flex-1 min-w-[140px] bg-surface-container-low rounded-lg p-3 border border-outline-variant/30">
-      <span className="block text-xs font-semibold uppercase tracking-wide text-outline mb-2">{night.day.slice(0, 3)}</span>
+      <span className="block text-xs font-medium text-outline mb-2">{night.day.slice(0, 3)}</span>
       {!night.open ? (
         <>
           <div
@@ -22,18 +22,18 @@ function NightCard({ night, onOpenNight, onAssign }) {
           >
             {member.initials}
           </div>
-          <p className="text-sm font-semibold text-primary">{member.name}</p>
+          <p className="text-sm font-semibold tracking-wider text-primary">{member.name}</p>
         </>
       ) : (
         <>
           <div className="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center mb-2">
             <UtensilsCrossed size={16} className="text-on-tertiary-fixed" />
           </div>
-          <p className="text-xs text-on-surface-variant">Up for grabs</p>
+          <p className="text-xs font-medium text-on-surface-variant">Up for grabs</p>
         </>
       )}
       {member.id === 'you' && !night.open && (
-        <button type="button" onClick={() => onOpenNight(night.day)} className="text-xs font-semibold text-secondary underline mt-2 block">
+        <button type="button" onClick={() => onOpenNight(night.day)} className="text-sm font-semibold tracking-wider text-secondary underline mt-2 block">
           Can't cook tonight?
         </button>
       )}
@@ -60,8 +60,8 @@ function ShoppingItemRow({ item, optedOut, onToggle }) {
   return (
     <div className="flex items-center justify-between gap-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 p-3">
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold truncate text-primary">{item.name}</p>
-        <p className="text-xs text-on-surface-variant mt-0.5">
+        <p className="text-base font-medium truncate text-primary">{item.name}</p>
+        <p className="text-xs font-medium text-on-surface-variant mt-0.5">
           Added by <span className="font-semibold text-primary">{addedByMember.name}</span>
         </p>
       </div>
@@ -70,7 +70,7 @@ function ShoppingItemRow({ item, optedOut, onToggle }) {
         <button
           type="button"
           onClick={onToggle}
-          className={`px-2.5 py-1.5 rounded-full text-[11px] font-bold ${
+          className={`px-2.5 py-1.5 rounded-full text-xs font-semibold ${
             optedOut ? 'bg-surface-container border border-outline-variant text-on-surface-variant' : 'bg-primary text-on-primary'
           }`}
         >
@@ -108,17 +108,23 @@ export default function ForkitHousehold({ onBack, onOpenShopping }) {
         <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">Household Hub</h1>
+        <h1 className="font-display text-2xl font-semibold text-primary">ForkIt</h1>
       </header>
 
       <div className="flex-1 px-5 pb-10 max-w-3xl mx-auto w-full flex flex-col gap-6">
-        <p className="text-sm text-on-surface-variant max-w-[32rem]">
-          Manage your shared kitchen — who's cooking, and who's paying for what.
-        </p>
+        <section>
+          <span className="block text-sm font-semibold uppercase tracking-widest text-primary mb-1">
+            Your shared household
+          </span>
+          <h2 className="font-display text-4xl font-semibold text-primary mb-2">Household Hub</h2>
+          <p className="text-lg text-outline max-w-[32rem]">
+            Manage your shared kitchen — who's cooking, and who's paying for what.
+          </p>
+        </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           <div className="lg:col-span-8 bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4">
-            <h3 className="font-display text-lg text-primary mb-3">Dinner Rota</h3>
+            <h3 className="font-display text-2xl font-semibold text-primary mb-3">Dinner Rota</h3>
             <div className="flex flex-col md:flex-row gap-2 overflow-x-auto pb-1">
               {nights.map((night) => (
                 <NightCard key={night.day} night={night} onOpenNight={openNight} onAssign={assignNight} />
@@ -129,11 +135,13 @@ export default function ForkitHousehold({ onBack, onOpenShopping }) {
           <div className="lg:col-span-4 bg-primary text-on-primary rounded-xl p-4 flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-start mb-3">
-                <h3 className="font-display text-lg">Household Kitty</h3>
+                <h3 className="font-display text-2xl font-semibold">Household Kitty</h3>
                 <Wallet size={20} className="opacity-60" />
               </div>
-              <p className="text-xs uppercase tracking-widest text-primary-fixed mb-1">Added to shared list</p>
-              <h4 className="font-display text-3xl text-tertiary-fixed mb-4">£{totalAdded.toFixed(2)}</h4>
+              <p className="text-xs font-medium uppercase tracking-widest text-primary-fixed mb-1">Added to shared list</p>
+              <h4 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-tertiary-fixed mb-4">
+                £{totalAdded.toFixed(2)}
+              </h4>
               <div className="flex flex-col gap-1.5">
                 {memberTotals.map(({ member, total }) => (
                   <div key={member.id} className="flex justify-between items-center text-sm opacity-90">
@@ -150,9 +158,9 @@ export default function ForkitHousehold({ onBack, onOpenShopping }) {
 
         <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-display text-lg text-primary">Shared Shopping List</h3>
+            <h3 className="font-display text-2xl font-semibold text-primary">Shared Shopping List</h3>
             {onOpenShopping && (
-              <button type="button" onClick={onOpenShopping} className="flex items-center gap-1.5 text-xs font-semibold text-secondary">
+              <button type="button" onClick={onOpenShopping} className="flex items-center gap-1.5 text-sm font-semibold tracking-wider text-secondary">
                 <ShoppingCart size={14} /> Shopping mode
               </button>
             )}
@@ -163,7 +171,7 @@ export default function ForkitHousehold({ onBack, onOpenShopping }) {
             ))}
           </div>
           <div className="flex items-center justify-between rounded-lg p-3 mt-3 bg-primary">
-            <span className="text-sm font-semibold text-on-primary">Your share this week</span>
+            <span className="text-sm font-semibold tracking-wider text-on-primary">Your share this week</span>
             <span className="chip-value">£{yourShare.toFixed(2)}</span>
           </div>
         </div>

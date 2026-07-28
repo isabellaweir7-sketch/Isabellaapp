@@ -18,22 +18,22 @@ export default function ForkitShoppingMode({ onBack }) {
           <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
             <ChevronLeft size={18} className="text-primary" />
           </button>
-          <h1 className="font-display text-xl text-primary">Grocery List</h1>
+          <h1 className="font-display text-2xl font-semibold text-primary">Grocery List</h1>
         </div>
       </header>
 
       <div className="flex-1 px-5 pb-28 max-w-2xl mx-auto w-full flex flex-col gap-6">
         <div className="bg-primary-container text-on-primary p-4 rounded-xl flex items-center justify-between">
           <div>
-            <h2 className="font-display text-lg leading-tight">Weekly Essentials</h2>
-            <span className="text-xs opacity-80">{allItems.length} items across {SHOPPING_AISLES.length} aisles</span>
+            <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold">Weekly Essentials</h2>
+            <span className="text-xs font-medium opacity-80">{allItems.length} items across {SHOPPING_AISLES.length} aisles</span>
           </div>
-          <span className="font-display text-2xl">£{total.toFixed(2)}</span>
+          <span className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold">£{total.toFixed(2)}</span>
         </div>
 
         {SHOPPING_AISLES.filter((aisle) => aisle.items.length > 0).map((aisle) => (
           <section key={aisle.name}>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">{aisle.name}</h3>
+            <h3 className="font-display text-2xl font-semibold uppercase tracking-tighter text-primary mb-2">{aisle.name}</h3>
             <div className="flex flex-col gap-2">
               {aisle.items.map((item) => {
                 const isChecked = checked.includes(item.id);
@@ -54,7 +54,7 @@ export default function ForkitShoppingMode({ onBack }) {
                       >
                         {isChecked && <Check size={13} className="text-on-primary" />}
                       </span>
-                      <span className={`text-sm font-semibold text-on-surface ${isChecked ? 'line-through' : ''}`}>
+                      <span className={`text-base font-medium text-on-surface ${isChecked ? 'line-through' : ''}`}>
                         {item.name}
                       </span>
                     </div>
@@ -68,8 +68,8 @@ export default function ForkitShoppingMode({ onBack }) {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 px-5 py-4 bg-surface border-t border-outline-variant flex items-center justify-between">
-        <span className="text-sm font-semibold text-on-surface-variant">Still to buy</span>
-        <span className="font-display text-xl text-primary">£{remaining.toFixed(2)}</span>
+        <span className="text-sm font-semibold tracking-wider text-on-surface-variant">Still to buy</span>
+        <span className="font-display text-5xl leading-[56px] tracking-[-0.02em] font-bold text-primary">£{remaining.toFixed(2)}</span>
       </div>
     </div>
   );

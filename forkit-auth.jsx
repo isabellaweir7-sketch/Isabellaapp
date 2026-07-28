@@ -49,7 +49,7 @@ function AccountView({ session, answers, onBack, onLogOut }) {
         <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">Profile</h1>
+        <h1 className="font-display text-2xl font-semibold text-primary">Profile</h1>
       </header>
 
       <div className="flex-1 px-5 pb-10 max-w-2xl mx-auto w-full flex flex-col gap-6">
@@ -58,12 +58,12 @@ function AccountView({ session, answers, onBack, onLogOut }) {
             {initial}
           </div>
           <p className="text-base font-semibold text-primary">{email}</p>
-          <p className="text-xs text-on-surface-variant">Signed in with {provider}</p>
+          <p className="text-xs font-medium text-on-surface-variant">Signed in with {provider}</p>
         </section>
 
         <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
           <div className="flex justify-between items-end mb-3">
-            <h3 className="font-display text-lg text-primary">Saved Recipes</h3>
+            <h3 className="font-display text-2xl font-semibold text-primary">Saved Recipes</h3>
           </div>
           <div className="grid grid-cols-3 gap-3">
             {SAVED_RECIPES.slice(0, 3).map((recipe) => (
@@ -76,7 +76,7 @@ function AccountView({ session, answers, onBack, onLogOut }) {
                     <Heart size={12} className="text-primary" fill="currentColor" />
                   </span>
                 </div>
-                <p className="text-xs font-semibold text-primary truncate">{recipe.title}</p>
+                <p className="text-sm font-medium text-primary truncate">{recipe.title}</p>
               </div>
             ))}
           </div>
@@ -84,10 +84,10 @@ function AccountView({ session, answers, onBack, onLogOut }) {
 
         {restrictionLabels.length > 0 && (
           <section className="bg-primary text-on-primary rounded-xl p-4">
-            <h3 className="font-display text-lg mb-3">Dietary</h3>
+            <h3 className="font-display text-2xl font-semibold mb-3">Dietary</h3>
             <div className="flex flex-wrap gap-2">
               {restrictionLabels.map((label) => (
-                <span key={label} className="bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg text-sm font-semibold">
+                <span key={label} className="bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg text-sm font-semibold tracking-wider">
                   {label}
                 </span>
               ))}
@@ -98,7 +98,7 @@ function AccountView({ session, answers, onBack, onLogOut }) {
         <button
           type="button"
           onClick={onLogOut}
-          className="mt-2 flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest font-semibold text-sm text-on-surface"
+          className="mt-2 flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest font-semibold tracking-wider text-sm text-on-surface"
         >
           <LogOut size={16} />
           Log out
@@ -163,7 +163,7 @@ export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
         <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">{mode === 'signin' ? 'Sign in' : 'Create account'}</h1>
+        <h1 className="font-display text-2xl font-semibold text-primary">{mode === 'signin' ? 'Sign in' : 'Create account'}</h1>
       </header>
 
       <div className="flex-1 px-5 pt-4 pb-10 max-w-[28rem] mx-auto w-full flex flex-col">
@@ -177,7 +177,7 @@ export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
                 setError('');
                 setNotice('');
               }}
-              className={`flex-1 py-2 rounded-full text-sm font-bold transition-colors ${
+              className={`flex-1 py-2 rounded-full text-sm font-semibold tracking-wider transition-colors ${
                 mode === m ? 'bg-primary text-on-primary' : 'text-primary'
               }`}
             >
@@ -189,7 +189,7 @@ export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
         <button
           type="button"
           onClick={continueWithGoogle}
-          className="flex items-center justify-center gap-2.5 rounded-lg py-3 border border-outline-variant bg-surface-container-lowest font-semibold text-sm text-on-surface mb-5"
+          className="flex items-center justify-center gap-2.5 rounded-lg py-3 border border-outline-variant bg-surface-container-lowest font-semibold tracking-wider text-sm text-on-surface mb-5"
         >
           <GoogleIcon />
           Continue with Google
@@ -197,7 +197,7 @@ export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
 
         <div className="flex items-center gap-3 mb-5">
           <div className="flex-1 h-px bg-outline-variant" />
-          <span className="text-xs font-semibold text-outline">or</span>
+          <span className="text-xs font-medium text-outline">or</span>
           <div className="flex-1 h-px bg-outline-variant" />
         </div>
 
@@ -229,13 +229,13 @@ export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
             </button>
           </div>
 
-          {error && <p className="text-xs font-semibold text-error">{error}</p>}
-          {notice && <p className="text-xs font-semibold text-primary">{notice}</p>}
+          {error && <p className="text-xs font-medium text-error">{error}</p>}
+          {notice && <p className="text-xs font-medium text-primary">{notice}</p>}
 
           <button
             type="submit"
             disabled={!canSubmit}
-            className="w-full py-3.5 rounded-lg font-semibold text-base mt-2 transition-opacity bg-primary text-on-primary"
+            className="w-full py-3.5 rounded-lg font-semibold tracking-wider text-sm mt-2 transition-opacity bg-primary text-on-primary"
             style={{ opacity: canSubmit ? 1 : 0.4 }}
           >
             {submitting ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}

@@ -11,11 +11,16 @@ export default function ForkitBudgetTips({ onBack }) {
         <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">Budget Tips</h1>
+        <h1 className="font-display text-2xl font-semibold text-primary">Budget Tips</h1>
       </header>
 
       <div className="flex-1 px-5 pb-10 max-w-2xl mx-auto w-full flex flex-col gap-6">
-        <p className="text-sm text-on-surface-variant">The Thrifty Student — real ways to spend less without eating worse.</p>
+        <section>
+          <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary mb-1">
+            The Thrifty Student
+          </h2>
+          <p className="text-lg text-on-surface-variant">Real ways to spend less without eating worse.</p>
+        </section>
 
         {featured && (
           <div className="rounded-xl overflow-hidden">
@@ -24,8 +29,8 @@ export default function ForkitBudgetTips({ onBack }) {
               style={{ backgroundColor: featured.fallback, backgroundImage: `url("${featured.photo}")` }}
             />
             <div className="bg-surface-container-low p-4 border border-t-0 border-outline-variant/40 rounded-b-xl">
-              <h2 className="font-display text-xl text-primary leading-tight mb-2 italic">{featured.title}</h2>
-              <p className="text-sm text-on-surface-variant">{featured.excerpt}</p>
+              <h3 className="font-display text-2xl font-semibold text-primary leading-tight mb-2 italic">{featured.title}</h3>
+              <p className="text-base text-on-surface-variant">{featured.excerpt}</p>
             </div>
           </div>
         )}
@@ -38,8 +43,8 @@ export default function ForkitBudgetTips({ onBack }) {
                 style={{ backgroundColor: tip.fallback, backgroundImage: `url("${tip.photo}")` }}
               />
               <div className="min-w-0">
-                <h3 className="font-display text-base text-primary leading-tight mb-1">{tip.title}</h3>
-                <p className="text-xs text-on-surface-variant">{tip.excerpt}</p>
+                <h4 className="font-display text-lg text-primary leading-tight mb-1">{tip.title}</h4>
+                <p className="text-xs font-medium text-on-surface-variant">{tip.excerpt}</p>
               </div>
             </div>
           ))}

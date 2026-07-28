@@ -15,25 +15,29 @@ export default function ForkitBudgetAnalytics({ onBack }) {
         <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">Budget Analytics</h1>
+        <h1 className="font-display text-2xl font-semibold text-primary">Budget Analytics</h1>
       </header>
 
       <div className="flex-1 px-5 pb-10 max-w-2xl mx-auto w-full flex flex-col gap-6">
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
-            <span className="text-xs font-semibold uppercase tracking-wide text-outline">Spent this month</span>
-            <h2 className="font-display text-3xl text-primary mt-1">£{monthSpent.toFixed(2)}</h2>
-            <span className="text-xs text-on-surface-variant">of £{monthBudget.toFixed(2)} budget</span>
+            <span className="text-sm font-semibold tracking-wider text-outline">Spent this month</span>
+            <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary mt-1">
+              £{monthSpent.toFixed(2)}
+            </h2>
+            <span className="text-xs font-medium text-on-surface-variant">of £{monthBudget.toFixed(2)} budget</span>
           </div>
           <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
-            <span className="text-xs font-semibold uppercase tracking-wide text-outline">Weekly average</span>
-            <h2 className="font-display text-3xl text-primary mt-1">£{weekAverage.toFixed(2)}</h2>
-            <span className="text-xs text-on-surface-variant">per week so far</span>
+            <span className="text-sm font-semibold tracking-wider text-outline">Weekly average</span>
+            <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary mt-1">
+              £{weekAverage.toFixed(2)}
+            </h2>
+            <span className="text-xs font-medium text-on-surface-variant">per week so far</span>
           </div>
         </div>
 
         <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
-          <h3 className="font-display text-lg text-primary mb-4">Weekly Spend Trend</h3>
+          <h3 className="font-display text-2xl font-semibold text-primary mb-4">Weekly Spend Trend</h3>
           <div className="h-32 flex items-end justify-between gap-2">
             {weeklyTrend.map((value, i) => (
               <div key={DAYS[i]} className="flex-1 h-full flex items-end">
@@ -46,7 +50,7 @@ export default function ForkitBudgetAnalytics({ onBack }) {
           </div>
           <div className="flex justify-between gap-2 mt-2">
             {DAYS.map((d) => (
-              <span key={d} className="flex-1 text-center text-[10px] text-outline uppercase">
+              <span key={d} className="flex-1 text-center text-xs font-medium text-outline uppercase">
                 {d}
               </span>
             ))}
@@ -54,13 +58,13 @@ export default function ForkitBudgetAnalytics({ onBack }) {
         </section>
 
         <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
-          <h3 className="font-display text-lg text-primary mb-4">Spending Allocation</h3>
+          <h3 className="font-display text-2xl font-semibold text-primary mb-4">Spending Allocation</h3>
           <div className="flex flex-col gap-3">
             {categories.map((category) => (
               <div key={category.label}>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="font-semibold text-on-surface">{category.label}</span>
-                  <span className="font-semibold text-primary">£{category.amount.toFixed(2)}</span>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-base text-on-surface">{category.label}</span>
+                  <span className="font-display text-2xl font-semibold text-primary">£{category.amount.toFixed(2)}</span>
                 </div>
                 <div className="h-2 w-full bg-surface-container rounded-full overflow-hidden">
                   <div

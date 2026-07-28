@@ -26,7 +26,7 @@ function ServingStepper({ servings, onChange }) {
   return (
     <div className="bg-surface-container rounded-xl p-4">
       <div className="flex justify-between items-center mb-2">
-        <h3 className="text-xs font-semibold uppercase tracking-widest text-primary">Adjust Yield</h3>
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-primary">Adjust Yield</h3>
         <span className="text-primary font-bold text-sm">
           {servings} {servings === 1 ? 'serving' : 'servings'}
         </span>
@@ -68,7 +68,9 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
         <button type="button" onClick={onBack} className="text-primary" aria-label="Back">
           <ArrowLeft size={22} />
         </button>
-        <h1 className="font-display text-lg text-primary truncate max-w-[60%]">{recipe.title}</h1>
+        <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary truncate max-w-[60%]">
+          {recipe.title}
+        </h1>
         <Bookmark size={22} className="text-primary" />
       </header>
 
@@ -82,8 +84,10 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
 
         <div className="px-5 -mt-10 relative z-10 flex flex-col gap-6">
           <section>
-            <h2 className="font-display text-3xl leading-tight mb-2 text-primary">{recipe.title}</h2>
-            <div className="flex items-center gap-4 text-sm font-semibold text-on-surface-variant">
+            <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold mb-2 text-primary">
+              {recipe.title}
+            </h2>
+            <div className="flex items-center gap-4 text-sm font-semibold tracking-wider text-on-surface-variant">
               <span className="flex items-center gap-1">
                 <Clock size={16} /> {recipe.prepMinutes ?? 15} mins
               </span>
@@ -100,13 +104,13 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
 
           <div className="flex items-center justify-between">
             <span className="chip-value">£{total.toFixed(2)} total</span>
-            <span className="text-xs font-semibold text-on-surface-variant">
+            <span className="text-xs font-medium text-on-surface-variant">
               £{recipe.pricePerServing.toFixed(2)}/serving
             </span>
           </div>
 
           <section>
-            <h3 className="font-display text-xl mb-3 text-primary">Ingredients</h3>
+            <h3 className="font-display text-2xl font-semibold mb-3 text-primary">Ingredients</h3>
             <ul className="flex flex-col gap-1">
               {recipe.ingredients.map((ing) => {
                 const isChecked = checked.includes(ing.name);
@@ -116,7 +120,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
                     onClick={() => toggleChecked(ing.name)}
                     className="flex items-center justify-between py-2 border-b border-outline-variant/30 cursor-pointer"
                   >
-                    <span className={`text-base text-on-surface ${isChecked ? 'line-through opacity-50' : ''}`}>
+                    <span className={`text-lg text-on-surface ${isChecked ? 'line-through opacity-50' : ''}`}>
                       {formatQty(ing.qtyPerServing, servings)} {formatUnit(ing.unit, ing.qtyPerServing, servings)} {ing.name}
                     </span>
                     {isChecked ? (
@@ -131,14 +135,14 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           </section>
 
           <section>
-            <h3 className="font-display text-xl mb-3 text-primary italic">Method</h3>
+            <h3 className="font-display text-2xl font-semibold mb-3 text-primary italic">Method</h3>
             <div className="flex flex-col gap-4">
               {recipe.steps.map((step, i) => (
                 <div key={i} className="flex gap-4">
-                  <span className="font-display text-2xl text-primary-fixed-dim leading-none">
+                  <span className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary-fixed-dim">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="text-sm text-on-surface-variant leading-relaxed pt-1">{step}</p>
+                  <p className="text-base text-on-surface-variant leading-relaxed pt-1">{step}</p>
                 </div>
               ))}
             </div>
@@ -147,9 +151,9 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           <section className="bg-secondary-container rounded-xl p-4 relative overflow-hidden">
             <div className="flex items-center gap-2 mb-1">
               <Lightbulb size={18} className="text-on-secondary-container" />
-              <h4 className="text-xs font-semibold uppercase text-on-secondary-container">Pro-tip for student kitchens</h4>
+              <h4 className="text-sm font-semibold uppercase tracking-widest text-on-secondary-container">Pro-tip for student kitchens</h4>
             </div>
-            <p className="text-sm text-on-secondary-container italic">
+            <p className="text-base text-on-secondary-container italic">
               {recipe.subtitle || 'Swap in whatever you already have — this recipe is built to flex around your cupboard.'}
             </p>
           </section>

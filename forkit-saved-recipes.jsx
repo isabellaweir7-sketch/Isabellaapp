@@ -9,14 +9,16 @@ function EmptySaved({ onBack }) {
         <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container" aria-label="Back">
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">My Recipes</h1>
+        <h1 className="font-display text-2xl font-semibold text-primary">My Recipes</h1>
       </header>
       <main className="flex-1 flex flex-col items-center justify-center px-6 text-center gap-4">
         <div className="w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center">
           <BookOpen size={36} className="text-primary" />
         </div>
-        <h2 className="font-display text-2xl text-primary">Your digital cookbook is empty</h2>
-        <p className="text-sm text-on-surface-variant max-w-[24rem]">
+        <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">
+          Your digital cookbook is empty
+        </h2>
+        <p className="text-lg text-on-surface-variant max-w-[24rem]">
           Save recipes you love so they're easy to find again when it's time to cook.
         </p>
         <button type="button" onClick={onBack} className="bg-primary text-on-primary font-semibold px-6 py-3 rounded-xl">
@@ -36,7 +38,7 @@ export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
         <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
           <ChevronLeft size={18} className="text-primary" />
         </button>
-        <h1 className="font-display text-xl text-primary">My Recipes</h1>
+        <h1 className="font-display text-2xl font-semibold text-primary">My Recipes</h1>
       </header>
 
       <div className="flex-1 px-5 pb-8 max-w-2xl mx-auto w-full">
@@ -52,7 +54,7 @@ export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
                 </span>
               </div>
               <h4 className="font-display text-base text-primary leading-tight">{recipe.title}</h4>
-              <p className="text-xs text-on-surface-variant">
+              <p className="text-xs font-medium text-on-surface-variant">
                 {recipe.prepMinutes ?? 15} mins · £{recipe.pricePerServing.toFixed(2)}
               </p>
             </button>
