@@ -445,7 +445,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
       { name: 'Flour tortillas', qtyPerServing: 2, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.25, unit: 'can' },
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
-      { name: 'Cheese', qtyPerServing: 40, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 40, unit: 'g' },
       { name: 'Chilli powder', qtyPerServing: 0.25, unit: 'tsp' },
     ],
     steps: [
@@ -564,7 +564,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
       { name: 'Condensed soup or cheese sauce', qtyPerServing: 0.25, unit: 'can' },
-      { name: 'Cheese', qtyPerServing: 15, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 15, unit: 'g' },
     ],
     steps: [
       'Preheat the oven to 190°C (fan) and cook the pasta until al dente.',
@@ -1002,7 +1002,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Rice noodles', qtyPerServing: 70, unit: 'g' },
-      { name: 'Gluten-free miso paste', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Miso paste (gluten-free)', qtyPerServing: 1, unit: 'tbsp' },
       { name: 'Pak choi', qtyPerServing: 1, unit: '' },
       { name: 'Spring onion', qtyPerServing: 1, unit: '' },
       { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 0.5, unit: 'tbsp' },
@@ -1075,11 +1075,12 @@ export const RECIPE_LIBRARY: Recipe[] = [
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Banana', qtyPerServing: 1, unit: '' },
-      { name: 'Gluten-free oat flour', qtyPerServing: 60, unit: 'g' },
+      { name: 'Gluten-free oats', qtyPerServing: 60, unit: 'g' },
       { name: 'Oat milk', qtyPerServing: 80, unit: 'ml' },
       { name: 'Baking powder', qtyPerServing: 0.5, unit: 'tsp' },
     ],
     steps: [
+      'Blitz the oats to a rough flour in a blender or food processor.',
       'Mash the banana, then whisk in the oat flour, oat milk, and baking powder to a smooth batter.',
       'Cook spoonfuls in a lightly oiled pan for 2 minutes per side until golden.',
       'Serve stacked with extra banana or maple syrup.',
@@ -1168,7 +1169,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
       { name: 'Ricotta', qtyPerServing: 60, unit: 'g' },
       { name: 'Spinach', qtyPerServing: 1, unit: 'handful' },
       { name: 'Passata', qtyPerServing: 100, unit: 'ml' },
-      { name: 'Cheese', qtyPerServing: 20, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 20, unit: 'g' },
     ],
     steps: [
       'Boil the pasta shells for 2 minutes less than the packet says, then drain.',
@@ -1214,7 +1215,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Macaroni', qtyPerServing: 100, unit: 'g' },
-      { name: 'Cheese', qtyPerServing: 60, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 60, unit: 'g' },
       { name: 'Milk', qtyPerServing: 100, unit: 'ml' },
       { name: 'Butter', qtyPerServing: 0.5, unit: 'tbsp' },
       { name: 'Plain flour', qtyPerServing: 0.5, unit: 'tbsp' },
@@ -1261,7 +1262,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
-      { name: 'Cheese', qtyPerServing: 25, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 25, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.25, unit: '' },
       { name: 'Butter', qtyPerServing: 0.5, unit: 'tsp' },
     ],
@@ -1309,7 +1310,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
       { name: 'Fajita seasoning', qtyPerServing: 1, unit: 'tsp' },
       { name: 'Flour tortillas', qtyPerServing: 2, unit: '' },
       { name: 'Sour cream', qtyPerServing: 1, unit: 'tbsp' },
-      { name: 'Cheese', qtyPerServing: 30, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 30, unit: 'g' },
     ],
     steps: [
       'Slice the peppers and onion and fry with the fajita seasoning for 6–8 minutes until softened and charred at the edges.',
@@ -1330,7 +1331,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     ingredients: [
       { name: 'Egg', qtyPerServing: 1.5, unit: '' },
       { name: 'Milk', qtyPerServing: 40, unit: 'ml' },
-      { name: 'Cheese', qtyPerServing: 30, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 30, unit: 'g' },
       { name: 'Spinach', qtyPerServing: 0.5, unit: 'handful' },
       { name: 'Cherry tomatoes', qtyPerServing: 50, unit: 'g' },
     ],
@@ -1496,7 +1497,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
       { name: 'Mushrooms', qtyPerServing: 75, unit: 'g' },
       { name: 'Passata', qtyPerServing: 150, unit: 'ml' },
       { name: 'Cheese sauce', qtyPerServing: 100, unit: 'ml' },
-      { name: 'Cheese', qtyPerServing: 30, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 30, unit: 'g' },
     ],
     steps: [
       'Fry the diced courgette and mushrooms until softened, then stir through the passata.',
@@ -1660,7 +1661,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
-      { name: 'Cheese', qtyPerServing: 30, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 30, unit: 'g' },
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
     ],
     steps: [
@@ -1786,7 +1787,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
   },
   {
     id: 'recipe-salmon-poke-bowl',
-    title: 'Salmon poke bowl',
+    title: 'Salmon poke-style bowl',
     photo: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800',
     fallback: '#354A1F',
     pricePerServing: 2.3,
@@ -1795,7 +1796,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
     ingredients: [
-      { name: 'Sushi-grade salmon', qtyPerServing: 100, unit: 'g' },
+      { name: 'Salmon fillet', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Cucumber', qtyPerServing: 0.25, unit: '' },
       { name: 'Avocado', qtyPerServing: 0.25, unit: '' },
@@ -1804,8 +1805,8 @@ export const RECIPE_LIBRARY: Recipe[] = [
     ],
     steps: [
       'Cook the rice and leave to cool slightly.',
-      'Cube the salmon and toss with a little tamari.',
-      'Build the bowl with rice, salmon, sliced cucumber, and avocado, scattered with sesame seeds.',
+      'Pan-fry or grill the salmon for 3–4 minutes per side until just cooked through, then flake into chunks.',
+      'Build the bowl with rice, salmon, sliced cucumber, and avocado, drizzled with tamari and scattered with sesame seeds.',
     ],
   },
   {
@@ -2130,7 +2131,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Flour tortillas', qtyPerServing: 2, unit: '' },
-      { name: 'Cheese', qtyPerServing: 40, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 40, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.25, unit: '' },
       { name: 'Chilli powder', qtyPerServing: 0.25, unit: 'tsp' },
     ],
@@ -2225,7 +2226,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
       { name: 'Beef mince', qtyPerServing: 100, unit: 'g' },
       { name: 'Taco seasoning', qtyPerServing: 1, unit: 'tsp' },
       { name: 'Corn tortillas', qtyPerServing: 3, unit: '' },
-      { name: 'Cheese', qtyPerServing: 30, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 30, unit: 'g' },
       { name: 'Lettuce', qtyPerServing: 1, unit: 'handful' },
     ],
     steps: [
@@ -2295,7 +2296,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Burger bun', qtyPerServing: 1, unit: '' },
-      { name: 'Cheese', qtyPerServing: 20, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 20, unit: 'g' },
       { name: 'Lettuce', qtyPerServing: 1, unit: 'leaf' },
       { name: 'Tomato ketchup', qtyPerServing: 1, unit: 'tbsp' },
     ],
@@ -2583,7 +2584,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     ingredients: [
       { name: 'Baked beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
-      { name: 'Cheese', qtyPerServing: 20, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 20, unit: 'g' },
       { name: 'Chilli flakes (optional)', qtyPerServing: 0.25, unit: 'tsp' },
     ],
     steps: [
@@ -2636,7 +2637,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
       { name: 'Condensed soup or cheese sauce', qtyPerServing: 0.25, unit: 'can' },
-      { name: 'Cheese', qtyPerServing: 15, unit: 'g' },
+      { name: 'Cheddar (grated)', qtyPerServing: 15, unit: 'g' },
     ],
     steps: [
       'Preheat the oven to 190°C (fan) and cook the pasta until al dente.',
