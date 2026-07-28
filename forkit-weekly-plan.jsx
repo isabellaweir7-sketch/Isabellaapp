@@ -27,7 +27,7 @@ function EmptyPlan({ onBack }) {
 }
 
 export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe }) {
-  const WEEKLY_PLAN = generateWeeklyPlan(answers?.restrictions ?? []);
+  const WEEKLY_PLAN = generateWeeklyPlan(answers?.restrictions ?? [], answers?.allergies ?? []);
   if (WEEKLY_PLAN.length === 0) return <EmptyPlan onBack={onBack} />;
 
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;

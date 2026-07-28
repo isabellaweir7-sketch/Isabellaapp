@@ -29,6 +29,7 @@ export interface SampleDish {
 }
 
 export interface OnboardingAnswers {
+  allergies: string[];
   reasons: string[];
   restrictions: string[];
   nutritionGoals: string[];

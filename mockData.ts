@@ -92,6 +92,74 @@ export function filterByRestrictions<T extends { dietary: DietaryFlags }>(items:
   return items.filter((item) => matchesRestrictions(item.dietary, restrictionIds));
 }
 
+export const ALLERGENS = [
+  { id: 'peanuts', label: 'Peanuts' },
+  { id: 'tree-nuts', label: 'Tree Nuts' },
+  { id: 'dairy', label: 'Dairy' },
+  { id: 'eggs', label: 'Eggs' },
+  { id: 'soy', label: 'Soy' },
+  { id: 'wheat', label: 'Wheat' },
+  { id: 'fish', label: 'Fish' },
+  { id: 'shellfish', label: 'Shellfish' },
+  { id: 'gluten', label: 'Gluten' },
+];
+
+// Allergens that already map cleanly onto an existing DIETARY_RESTRICTIONS id
+// (and therefore a DietaryFlags key) — no extra logic needed for these.
+const ALLERGY_TO_RESTRICTION: Record<string, string> = {
+  peanuts: 'nut-allergy',
+  'tree-nuts': 'nut-allergy',
+  dairy: 'dairy-free',
+  wheat: 'gluten-free',
+  gluten: 'gluten-free',
+};
+
+// Allergens with no dedicated DietaryFlags field — matched by keyword against
+// ingredient names instead. Best-effort, same caveat as halal/kosher: good
+// enough to filter a recipe list, not a substitute for checking labels.
+const ALLERGY_KEYWORDS: Record<string, string[]> = {
+  eggs: ['egg'],
+  soy: ['soy', 'tofu', 'tempeh', 'edamame', 'miso'],
+  fish: ['salmon', 'cod', 'tuna', 'mackerel', 'haddock', 'anchovy', 'anchovies', 'sardine', 'fish'],
+  shellfish: ['prawn', 'shrimp', 'crab', 'mussel', 'scallop', 'squid'],
+};
+
+export function allergyRestrictionIds(allergyIds: string[]): string[] {
+  const mapped = allergyIds.map((id) => ALLERGY_TO_RESTRICTION[id]).filter((id): id is string => Boolean(id));
+  return [...new Set(mapped)];
+}
+
+function recipeContainsAllergen(recipe: Recipe, allergyId: string): boolean {
+  const keywords = ALLERGY_KEYWORDS[allergyId];
+  if (!keywords) return false; // handled via allergyRestrictionIds instead
+  return recipe.ingredients.some((ing) => keywords.some((kw) => ing.name.toLowerCase().includes(kw)));
+}
+
+export function matchesAllergies(recipe: Recipe, allergyIds: string[]): boolean {
+  return !allergyIds.some((id) => recipeContainsAllergen(recipe, id));
+}
+
+// For lightweight objects with no ingredient list (e.g. the onboarding taste-
+// swipe's SampleDish) — falls back to keyword-matching the dish name itself.
+export function matchesAllergiesByName(name: string, allergyIds: string[]): boolean {
+  const lower = name.toLowerCase();
+  return !allergyIds.some((id) => {
+    const keywords = ALLERGY_KEYWORDS[id];
+    return keywords ? keywords.some((kw) => lower.includes(kw)) : false;
+  });
+}
+
+// Combines dietary restrictions with allergy-derived exclusions — the one
+// filter every screen that surfaces recipes should call.
+export function filterByRestrictionsAndAllergies(
+  recipes: Recipe[],
+  restrictionIds: string[] = [],
+  allergyIds: string[] = []
+): Recipe[] {
+  const combinedRestrictions = [...restrictionIds, ...allergyRestrictionIds(allergyIds)];
+  return filterByRestrictions(recipes, combinedRestrictions).filter((r) => matchesAllergies(r, allergyIds));
+}
+
 // Stock food photography (Unsplash) with a forest-green-family fallback
 // colour drawn behind it in case a photo fails to load.
 export const SAMPLE_DISHES: SampleDish[] = [
@@ -9591,8 +9659,8 @@ const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satu
 // Generates a 7-day plan from RECIPE_LIBRARY, filtered by dietary
 // restrictions, cycling through the filtered pool so days vary without
 // repeating until the pool runs out.
-export function generateWeeklyPlan(restrictionIds: string[] = []): DayPlan[] {
-  const pool = filterByRestrictions(RECIPE_LIBRARY, restrictionIds);
+export function generateWeeklyPlan(restrictionIds: string[] = [], allergyIds: string[] = []): DayPlan[] {
+  const pool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
   return DAY_NAMES.map((day, i) => ({ day, recipe: safePool[i % safePool.length] }));
 }
@@ -9612,8 +9680,12 @@ export function scoreIngredientMatch(recipe: Recipe, selectedIngredients: string
   ).length;
 }
 
-export function generateCupboardRecipe(selectedIngredients: string[], restrictionIds: string[] = []): Recipe {
-  const pool = filterByRestrictions(RECIPE_LIBRARY, restrictionIds);
+export function generateCupboardRecipe(
+  selectedIngredients: string[],
+  restrictionIds: string[] = [],
+  allergyIds: string[] = []
+): Recipe {
+  const pool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
   const ranked = [...safePool].sort(
     (a, b) => scoreIngredientMatch(b, selectedIngredients) - scoreIngredientMatch(a, selectedIngredients)
@@ -9664,8 +9736,8 @@ export const WEEKLY_BUDGET = {
 
 // Generates today's Breakfast/Lunch/Dinner from RECIPE_LIBRARY, filtered by
 // dietary restrictions.
-export function generateTodayMeals(restrictionIds: string[] = []): TodayMeal[] {
-  const pool = filterByRestrictions(RECIPE_LIBRARY, restrictionIds);
+export function generateTodayMeals(restrictionIds: string[] = [], allergyIds: string[] = []): TodayMeal[] {
+  const pool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
   const slots = ['Breakfast', 'Lunch', 'Dinner'];
   return slots.map((slot, i) => ({ slot, recipe: safePool[i % safePool.length] }));

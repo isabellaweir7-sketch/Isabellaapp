@@ -28,6 +28,14 @@ import {
   Home as HomeIcon,
   Users,
   Fish,
+  Nut,
+  Milk,
+  Egg,
+  Sprout,
+  Croissant,
+  Shell,
+  Ban,
+  CheckCircle2,
 } from 'lucide-react';
 import {
   ONBOARDING_REASONS,
@@ -36,10 +44,14 @@ import {
   EQUIPMENT_ITEMS,
   STUDENT_STATUS_OPTIONS,
   ACCOMMODATION_OPTIONS,
+  ALLERGENS,
   filterByRestrictions,
+  allergyRestrictionIds,
+  matchesAllergiesByName,
 } from './mockData';
 
 const STEP_META = [
+  { title: 'Any Allergies?', subtitle: "We'll filter out recipes that aren't safe for you. You can update these anytime in your profile." },
   { title: 'What brings you to ForkIt?', subtitle: "Pick as many as apply — there's no wrong answer." },
   { title: 'Any deal-breakers?', subtitle: "We'll only suggest meals that fit." },
   { title: 'What are your goals?', subtitle: 'Tell us what to optimise for so your plan actually fits your week.' },
@@ -47,6 +59,18 @@ const STEP_META = [
   { title: 'A bit about your setup', subtitle: 'This helps us tailor suggestions to where and how you live.' },
   { title: 'Would you eat this?', subtitle: 'Swipe through a few so we learn your taste.' },
 ];
+
+const ALLERGEN_ICONS = {
+  peanuts: Nut,
+  'tree-nuts': Leaf,
+  dairy: Milk,
+  eggs: Egg,
+  soy: Sprout,
+  wheat: Croissant,
+  fish: Fish,
+  shellfish: Shell,
+  gluten: Wheat,
+};
 
 const EQUIPMENT_ICONS = {
   hob: Flame,
@@ -91,6 +115,54 @@ function Chip({ label, selected, onClick }) {
     >
       {label}
     </button>
+  );
+}
+
+function AllergyCard({ label, Icon, selected, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex flex-col justify-between h-28 rounded-lg border p-4 text-left transition-all ${
+        selected ? 'bg-primary-fixed border-primary scale-[0.98]' : 'bg-surface-container-low border-outline-variant text-on-surface'
+      }`}
+    >
+      <div className="flex items-center justify-between w-full">
+        <Icon size={26} className="text-secondary" />
+        {selected && <CheckCircle2 size={20} className="text-primary" />}
+      </div>
+      <span className="text-sm font-semibold tracking-wider text-primary">{label}</span>
+    </button>
+  );
+}
+
+function AllergiesStep({ selected, onToggle, onClearAll }) {
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-2 gap-sm">
+        {ALLERGENS.map((a) => (
+          <AllergyCard
+            key={a.id}
+            label={a.label}
+            Icon={ALLERGEN_ICONS[a.id] ?? Utensils}
+            selected={selected.includes(a.id)}
+            onClick={() => onToggle(a.id)}
+          />
+        ))}
+      </div>
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={onClearAll}
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-semibold tracking-wider transition-colors ${
+            selected.length === 0 ? 'bg-primary text-on-primary border-primary' : 'border-outline text-primary'
+          }`}
+        >
+          <Ban size={18} />
+          I don't have any allergies
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -436,6 +508,7 @@ function SwipeStep({ dishes, dishIndex, onSwipe }) {
 
 export default function ForkitOnboarding({ onComplete }) {
   const [step, setStep] = useState(0);
+  const [allergies, setAllergies] = useState([]);
   const [reasons, setReasons] = useState([]);
   const [restrictions, setRestrictions] = useState([]);
   const [nutritionGoals, setNutritionGoals] = useState([]);
@@ -452,14 +525,19 @@ export default function ForkitOnboarding({ onComplete }) {
     setArr((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const handleMacroChange = (key, value) => setMacros((prev) => ({ ...prev, [key]: value }));
+  const handleClearAllergies = () => setAllergies([]);
 
   const dishes = (() => {
-    const filtered = filterByRestrictions(SAMPLE_DISHES, restrictions);
+    const combinedRestrictions = [...restrictions, ...allergyRestrictionIds(allergies)];
+    const filtered = filterByRestrictions(SAMPLE_DISHES, combinedRestrictions).filter((d) =>
+      matchesAllergiesByName(d.name, allergies)
+    );
     return filtered.length > 0 ? filtered : SAMPLE_DISHES;
   })();
 
   const finish = (finalLiked, finalDisliked) => {
     onComplete({
+      allergies,
       reasons,
       restrictions,
       nutritionGoals,
@@ -487,7 +565,7 @@ export default function ForkitOnboarding({ onComplete }) {
     }
   };
 
-  const canContinue = step === 0 ? reasons.length > 0 : true;
+  const canContinue = step === 1 ? reasons.length > 0 : true;
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
@@ -524,9 +602,12 @@ export default function ForkitOnboarding({ onComplete }) {
         <p className="text-lg mb-6 text-on-surface-variant">{STEP_META[step].subtitle}</p>
 
         <div className="flex-1">
-          {step === 0 && <ReasonsStep selected={reasons} onToggle={toggleIn(setReasons)} />}
-          {step === 1 && <RestrictionsStep selected={restrictions} onToggle={toggleIn(setRestrictions)} />}
-          {step === 2 && (
+          {step === 0 && (
+            <AllergiesStep selected={allergies} onToggle={toggleIn(setAllergies)} onClearAll={handleClearAllergies} />
+          )}
+          {step === 1 && <ReasonsStep selected={reasons} onToggle={toggleIn(setReasons)} />}
+          {step === 2 && <RestrictionsStep selected={restrictions} onToggle={toggleIn(setRestrictions)} />}
+          {step === 3 && (
             <NutritionGoalsStep
               selected={nutritionGoals}
               onToggle={toggleIn(setNutritionGoals)}
@@ -534,8 +615,8 @@ export default function ForkitOnboarding({ onComplete }) {
               onMacroChange={handleMacroChange}
             />
           )}
-          {step === 3 && <KitchenEssentialsStep selected={equipment} onToggle={toggleIn(setEquipment)} />}
-          {step === 4 && (
+          {step === 4 && <KitchenEssentialsStep selected={equipment} onToggle={toggleIn(setEquipment)} />}
+          {step === 5 && (
             <StudentContextStep
               studentStatus={studentStatus}
               onStatus={setStudentStatus}
@@ -545,7 +626,7 @@ export default function ForkitOnboarding({ onComplete }) {
               onAccommodation={setAccommodation}
             />
           )}
-          {step === 5 && <SwipeStep dishes={dishes} dishIndex={dishIndex} onSwipe={handleSwipe} />}
+          {step === 6 && <SwipeStep dishes={dishes} dishIndex={dishIndex} onSwipe={handleSwipe} />}
         </div>
       </div>
 

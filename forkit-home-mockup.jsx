@@ -244,7 +244,7 @@ export default function ForkitHome({
   session,
 }) {
   const [activeTab, setActiveTab] = useState('home');
-  const todayMeals = generateTodayMeals(answers?.restrictions ?? []);
+  const todayMeals = generateTodayMeals(answers?.restrictions ?? [], answers?.allergies ?? []);
 
   const handleNavTap = (id) => {
     if (id === 'pantry') onOpenPantry();

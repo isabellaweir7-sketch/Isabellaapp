@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart, GraduationCap, ChevronRight, Award } from 'lucide-react';
 import { supabase } from './supabaseClient';
-import { SAVED_RECIPES, DIETARY_RESTRICTIONS } from './mockData';
+import { SAVED_RECIPES, DIETARY_RESTRICTIONS, ALLERGENS } from './mockData';
 
 const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
 
@@ -43,6 +43,9 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
   const initial = email.trim()[0]?.toUpperCase() || '?';
   const restrictionLabels = (answers?.restrictions || [])
     .map((id) => DIETARY_RESTRICTIONS.find((r) => r.id === id)?.label)
+    .filter(Boolean);
+  const allergyLabels = (answers?.allergies || [])
+    .map((id) => ALLERGENS.find((a) => a.id === id)?.label)
     .filter(Boolean);
   const batchProUnlocked = (() => {
     try {
@@ -97,6 +100,22 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
             <div className="flex flex-wrap gap-2">
               {restrictionLabels.map((label) => (
                 <span key={label} className="bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg text-sm font-semibold tracking-wider">
+                  {label}
+                </span>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {allergyLabels.length > 0 && (
+          <section className="bg-secondary-container rounded-xl p-4">
+            <h3 className="font-display text-2xl font-semibold mb-3 text-on-secondary-container">Allergies</h3>
+            <div className="flex flex-wrap gap-2">
+              {allergyLabels.map((label) => (
+                <span
+                  key={label}
+                  className="bg-white/40 border border-white/40 px-3 py-1.5 rounded-lg text-sm font-semibold tracking-wider text-on-secondary-container"
+                >
                   {label}
                 </span>
               ))}
