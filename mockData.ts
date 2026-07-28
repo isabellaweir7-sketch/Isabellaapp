@@ -12,7 +12,26 @@ import {
   NotificationItem,
   BudgetTip,
   ShoppingAisle,
+  EquipmentItem,
+  Technique,
+  SkillLevel,
+  ProTip,
 } from './types';
+
+export const EQUIPMENT_ITEMS: EquipmentItem[] = [
+  { id: 'hob', label: 'Hob / Stovetop' },
+  { id: 'oven', label: 'Oven' },
+  { id: 'microwave', label: 'Microwave' },
+  { id: 'air-fryer', label: 'Air Fryer' },
+  { id: 'slow-cooker', label: 'Slow Cooker' },
+  { id: 'kettle', label: 'Kettle' },
+  { id: 'blender', label: 'Blender' },
+  { id: 'rice-cooker', label: 'Rice Cooker' },
+];
+
+export const STUDENT_STATUS_OPTIONS = ['University', 'College', 'Sixth Form', 'Not currently studying'];
+
+export const ACCOMMODATION_OPTIONS = ['Halls of residence', 'Private rental (shared)', 'Private rental (solo)', 'Living at home'];
 
 export const ONBOARDING_REASONS: OnboardingReason[] = [
   { id: 'keep-healthy', label: 'Keeping healthy' },
@@ -125,6 +144,8 @@ export const CUPBOARD_HERO: Recipe = {
     'Stir in the kale or spinach and cook for 2 more minutes until wilted.',
     'Season with salt and pepper to taste and serve.',
   ],
+  preservationTip:
+    'Keeps in the fridge for up to 3 days in an airtight container. Reheat gently on the hob with a splash of water, or microwave in 60-second bursts, stirring in between.',
 };
 
 export const SAVED_RECIPES: Recipe[] = [
@@ -175,6 +196,8 @@ export const SAVED_RECIPES: Recipe[] = [
       'Cook for 20–25 minutes, stirring occasionally, until the lentils are tender and the curry has thickened.',
       'Season to taste and serve with rice or flatbread.',
     ],
+    preservationTip:
+      'Freezes well for up to 3 months — portion into containers once cooled. Fridge: up to 4 days. Reheat from frozen in the microwave, or overnight in the fridge first then reheat until piping hot throughout.',
   },
   {
     id: 'recipe-sausage-traybake',
@@ -198,6 +221,8 @@ export const SAVED_RECIPES: Recipe[] = [
       'Chop the potatoes, onion, and peppers into chunks and toss with oil and herbs on a large tray.',
       'Nestle the sausages among the vegetables and roast for 35–40 minutes, turning once, until everything is golden.',
     ],
+    preservationTip:
+      'Keeps in the fridge for up to 3 days. Reheat in the oven at 180°C for 10–12 minutes to keep the sausages from going rubbery — microwaving works in a pinch but softens the crisp edges.',
   },
 ];
 
@@ -440,11 +465,70 @@ export const BUDGET_TIPS: BudgetTip[] = [
 export const BUDGET_ANALYTICS = {
   monthSpent: 82.5,
   monthBudget: 120,
+  monthSavings: 37.5,
   weekAverage: 20.6,
+  topSavingTip: 'Batch cooking your dinners twice this week saved you an estimated £9.40 versus buying each meal separately.',
   categories: [
-    { label: 'Groceries', amount: 48.0 },
-    { label: 'Household', amount: 18.5 },
-    { label: 'Takeaway', amount: 16.0 },
+    { label: 'Bulk Buys', amount: 34.0 },
+    { label: 'Social Cooking', amount: 22.5 },
+    { label: 'Essentials', amount: 26.0 },
   ],
   weeklyTrend: [12, 18, 9, 22, 14, 20, 7],
 };
+
+// Technique Library: short how-to clips. Real video is a future content step —
+// these render as placeholder thumbnail cards, never fake or AI-generated video.
+export const TECHNIQUES: Technique[] = [
+  {
+    id: 'technique-dice',
+    name: 'The Perfect Dice',
+    durationLabel: '1:20',
+    photo: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4E5A34',
+  },
+  {
+    id: 'technique-deglaze',
+    name: 'Deglazing 101',
+    durationLabel: '0:55',
+    photo: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+  },
+  {
+    id: 'technique-acidity',
+    name: 'Balancing Acidity',
+    durationLabel: '1:05',
+    photo: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+  },
+  {
+    id: 'technique-knife-care',
+    name: 'Keeping a Knife Sharp',
+    durationLabel: '1:40',
+    photo: 'https://images.unsplash.com/photo-1594385208974-2e75f8d7bb48?auto=format&fit=crop&q=80&w=800',
+    fallback: '#354A1F',
+  },
+];
+
+export const SKILL_LEVELS: SkillLevel[] = [
+  { id: 'novice', name: 'Novice', requirement: 'Complete onboarding' },
+  { id: 'sous-chef', name: 'Sous Chef', requirement: 'Cook 5 recipes using at least 3 techniques' },
+  { id: 'kitchen-master', name: 'Kitchen Master', requirement: 'Cook 20 recipes across every technique' },
+];
+
+export const PRO_TIPS: ProTip[] = [
+  {
+    id: 'pro-tip-rest-meat',
+    title: 'Always rest meat before cutting',
+    excerpt: 'Resting for 5 minutes lets the juices redistribute instead of spilling out onto the board.',
+  },
+  {
+    id: 'pro-tip-salt-pasta-water',
+    title: 'Salt your pasta water properly',
+    excerpt: 'It should taste like the sea — this is your only chance to season the pasta itself.',
+  },
+  {
+    id: 'pro-tip-mise-en-place',
+    title: 'Prep everything before the heat goes on',
+    excerpt: 'Mise en place turns a stressful cook into a calm one, especially in a shared kitchen.',
+  },
+];

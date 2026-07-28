@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb } from 'lucide-react';
+import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User } from 'lucide-react';
+
+const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
 
 const FRACTIONS = { 0.25: '¼', 0.5: '½', 0.75: '¾' };
 
@@ -54,6 +56,44 @@ function ServingStepper({ servings, onChange }) {
   );
 }
 
+function BatchCookRow({ servings, onSetServings }) {
+  const handlePick = (value) => {
+    onSetServings(value);
+    try {
+      localStorage.setItem(BATCH_PRO_KEY, 'true');
+    } catch {
+      // ignore storage errors (private browsing, etc.)
+    }
+  };
+
+  return (
+    <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
+      <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Batch Cook This</h3>
+      <p className="text-sm text-on-surface-variant mb-3">Cook once, eat for three days.</p>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => handlePick(3)}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-semibold tracking-wider transition-colors ${
+            servings === 3 ? 'bg-primary text-on-primary' : 'bg-surface-container-lowest border border-outline-variant text-on-surface'
+          }`}
+        >
+          <User size={16} /> 3 Portions Solo
+        </button>
+        <button
+          type="button"
+          onClick={() => handlePick(6)}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-sm font-semibold tracking-wider transition-colors ${
+            servings === 6 ? 'bg-primary text-on-primary' : 'bg-surface-container-lowest border border-outline-variant text-on-surface'
+          }`}
+        >
+          <Users size={16} /> 6 Portions Shared
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function ForkitRecipeDetail({ recipe, onBack }) {
   const [servings, setServings] = useState(recipe.baseServings);
   const [checked, setChecked] = useState([]);
@@ -87,6 +127,9 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
             <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold mb-2 text-primary">
               {recipe.title}
             </h2>
+            {recipe.ingredients.length <= 5 && (
+              <span className="chip-value mb-2 inline-flex">Fresher Friendly</span>
+            )}
             <div className="flex items-center gap-4 text-sm font-semibold tracking-wider text-on-surface-variant">
               <span className="flex items-center gap-1">
                 <Clock size={16} /> {recipe.prepMinutes ?? 15} mins
@@ -101,6 +144,8 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           </section>
 
           <ServingStepper servings={servings} onChange={setServings} />
+
+          <BatchCookRow servings={servings} onSetServings={setServings} />
 
           <div className="flex items-center justify-between">
             <span className="chip-value">£{total.toFixed(2)} total</span>
@@ -157,6 +202,16 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
               {recipe.subtitle || 'Swap in whatever you already have — this recipe is built to flex around your cupboard.'}
             </p>
           </section>
+
+          {recipe.preservationTip && (
+            <section className="bg-primary-container text-on-primary rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-1">
+                <Refrigerator size={18} />
+                <h4 className="text-sm font-semibold uppercase tracking-widest">Preservation Protocol</h4>
+              </div>
+              <p className="text-base opacity-90">{recipe.preservationTip}</p>
+            </section>
+          )}
         </div>
       </div>
     </div>

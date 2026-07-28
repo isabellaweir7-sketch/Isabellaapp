@@ -23,6 +23,35 @@ export interface OnboardingAnswers {
   macros: { protein: number; carbs: number; fat: number };
   likedDishes: string[];
   dislikedDishes: string[];
+  equipment: string[];
+  studentStatus: string;
+  school: string;
+  accommodation: string;
+}
+
+export interface EquipmentItem {
+  id: string;
+  label: string;
+}
+
+export interface Technique {
+  id: string;
+  name: string;
+  durationLabel: string;
+  photo: string;
+  fallback: string;
+}
+
+export interface SkillLevel {
+  id: string;
+  name: string;
+  requirement: string;
+}
+
+export interface ProTip {
+  id: string;
+  title: string;
+  excerpt: string;
 }
 
 export interface Ingredient {
@@ -45,6 +74,7 @@ export interface Recipe {
   steps: string[];
   author?: string;
   upvotes?: number;
+  preservationTip?: string;
 }
 
 export interface TodayMeal {

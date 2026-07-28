@@ -13,10 +13,13 @@ import ForkitBudgetAnalytics from './forkit-budget-analytics.jsx';
 import ForkitShoppingMode from './forkit-shopping-mode.jsx';
 import ForkitNotifications from './forkit-notifications.jsx';
 import ForkitBudgetTips from './forkit-budget-tips.jsx';
+import ForkitSkillLab from './forkit-skill-lab.jsx';
+import ForkitFreshersMode from './forkit-freshers-mode.jsx';
 import { supabase } from './supabaseClient';
 import { OnboardingAnswers, Recipe } from './types';
 
 const ONBOARDING_KEY = 'forkit_onboarding_answers';
+const FRESHERS_KEY = 'forkit_freshers_mode';
 
 type View =
   | 'home'
@@ -29,7 +32,9 @@ type View =
   | 'budget'
   | 'shopping'
   | 'notifications'
-  | 'tips';
+  | 'tips'
+  | 'skilllab'
+  | 'freshers';
 
 function readJSON<T>(key: string): T | null {
   const raw = localStorage.getItem(key);
@@ -46,6 +51,7 @@ export default function App() {
   const [session, setSession] = useState<Session | null>(null);
   const [view, setView] = useState<View>('home');
   const [openRecipe, setOpenRecipe] = useState<Recipe | null>(null);
+  const [freshersMode, setFreshersMode] = useState<boolean>(() => localStorage.getItem(FRESHERS_KEY) === 'true');
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -66,6 +72,11 @@ export default function App() {
 
   const handleLogOut = () => {
     supabase.auth.signOut();
+  };
+
+  const handleToggleFreshers = (value: boolean) => {
+    localStorage.setItem(FRESHERS_KEY, String(value));
+    setFreshersMode(value);
   };
 
   if (!answers) {
@@ -103,7 +114,16 @@ export default function App() {
   }
 
   if (view === 'auth') {
-    return <ForkitAuth session={session} answers={answers} onBack={() => setView('home')} onLogOut={handleLogOut} />;
+    return (
+      <ForkitAuth
+        session={session}
+        answers={answers}
+        freshersMode={freshersMode}
+        onOpenFreshers={() => setView('freshers')}
+        onBack={() => setView('home')}
+        onLogOut={handleLogOut}
+      />
+    );
   }
 
   if (view === 'budget') {
@@ -122,6 +142,20 @@ export default function App() {
     return <ForkitBudgetTips onBack={() => setView('community')} />;
   }
 
+  if (view === 'skilllab') {
+    return <ForkitSkillLab onBack={() => setView('home')} />;
+  }
+
+  if (view === 'freshers') {
+    return (
+      <ForkitFreshersMode
+        enabled={freshersMode}
+        onToggle={handleToggleFreshers}
+        onBack={() => setView('auth')}
+      />
+    );
+  }
+
   return (
     <ForkitHome
       onOpenRecipe={setOpenRecipe}
@@ -133,6 +167,7 @@ export default function App() {
       onOpenAuth={() => setView('auth')}
       onOpenNotifications={() => setView('notifications')}
       onOpenBudget={() => setView('budget')}
+      onOpenSkillLab={() => setView('skilllab')}
       session={session}
     />
   );

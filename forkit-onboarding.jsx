@@ -16,19 +16,46 @@ import {
   TrendingUp,
   Scale,
   ArrowRight,
+  Flame,
+  CookingPot,
+  Microwave,
+  Wind,
+  Soup,
+  Coffee,
+  Zap,
+  GraduationCap,
+  Building2,
+  Home as HomeIcon,
+  Users,
 } from 'lucide-react';
 import {
   ONBOARDING_REASONS,
   DIETARY_RESTRICTIONS,
   SAMPLE_DISHES,
+  EQUIPMENT_ITEMS,
+  STUDENT_STATUS_OPTIONS,
+  ACCOMMODATION_OPTIONS,
 } from './mockData';
 
 const STEP_META = [
   { title: 'What brings you to ForkIt?', subtitle: "Pick as many as apply — there's no wrong answer." },
   { title: 'Any deal-breakers?', subtitle: "We'll only suggest meals that fit." },
   { title: 'What are your goals?', subtitle: 'Tell us what to optimise for so your plan actually fits your week.' },
+  { title: 'Kitchen Essentials', subtitle: "Select what you've got — we'll only suggest recipes you can actually cook." },
+  { title: 'A bit about your setup', subtitle: 'This helps us tailor suggestions to where and how you live.' },
   { title: 'Would you eat this?', subtitle: 'Swipe through a few so we learn your taste.' },
 ];
+
+const EQUIPMENT_ICONS = {
+  hob: Flame,
+  oven: CookingPot,
+  microwave: Microwave,
+  'air-fryer': Wind,
+  'slow-cooker': Soup,
+  kettle: Coffee,
+  blender: Zap,
+  'rice-cooker': Utensils,
+};
 
 const RESTRICTION_ICONS = {
   none: Utensils,
@@ -197,6 +224,96 @@ function NutritionGoalsStep({ selected, onToggle, macros, onMacroChange }) {
   );
 }
 
+function KitchenEssentialsStep({ selected, onToggle }) {
+  return (
+    <div className="grid grid-cols-2 gap-sm">
+      {EQUIPMENT_ITEMS.map((item) => (
+        <RestrictionCard
+          key={item.id}
+          label={item.label}
+          Icon={EQUIPMENT_ICONS[item.id] ?? Utensils}
+          selected={selected.includes(item.id)}
+          onClick={() => onToggle(item.id)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function OptionRow({ label, Icon, selected, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`w-full flex items-center gap-3 p-4 rounded-lg border text-left transition-all ${
+        selected ? 'bg-primary text-on-primary border-primary' : 'bg-surface border-outline-variant text-on-surface'
+      }`}
+    >
+      <Icon size={20} className={selected ? 'text-on-primary' : 'text-primary'} />
+      <span className="text-sm font-semibold tracking-wider">{label}</span>
+    </button>
+  );
+}
+
+const STATUS_ICONS = {
+  University: GraduationCap,
+  College: GraduationCap,
+  'Sixth Form': GraduationCap,
+  'Not currently studying': Utensils,
+};
+
+const ACCOMMODATION_ICONS = {
+  'Halls of residence': Building2,
+  'Private rental (shared)': Users,
+  'Private rental (solo)': HomeIcon,
+  'Living at home': HomeIcon,
+};
+
+function StudentContextStep({ studentStatus, onStatus, school, onSchool, accommodation, onAccommodation }) {
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Educational status</h3>
+        <div className="flex flex-col gap-2">
+          {STUDENT_STATUS_OPTIONS.map((status) => (
+            <OptionRow
+              key={status}
+              label={status}
+              Icon={STATUS_ICONS[status] ?? GraduationCap}
+              selected={studentStatus === status}
+              onClick={() => onStatus(status)}
+            />
+          ))}
+        </div>
+        {studentStatus && studentStatus !== 'Not currently studying' && (
+          <input
+            type="text"
+            value={school}
+            onChange={(e) => onSchool(e.target.value)}
+            placeholder="Your school or university (optional)"
+            className="mt-3 w-full rounded-lg px-3.5 py-3 bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary transition-colors outline-none text-sm font-semibold text-on-surface"
+          />
+        )}
+      </div>
+
+      <div>
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Where you live</h3>
+        <div className="flex flex-col gap-2">
+          {ACCOMMODATION_OPTIONS.map((option) => (
+            <OptionRow
+              key={option}
+              label={option}
+              Icon={ACCOMMODATION_ICONS[option] ?? HomeIcon}
+              selected={accommodation === option}
+              onClick={() => onAccommodation(option)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SwipeCard({ dish, onSwipe, isTop }) {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-12, 12]);
@@ -320,6 +437,10 @@ export default function ForkitOnboarding({ onComplete }) {
   const [restrictions, setRestrictions] = useState([]);
   const [nutritionGoals, setNutritionGoals] = useState([]);
   const [macros, setMacros] = useState({ protein: 40, carbs: 35, fat: 25 });
+  const [equipment, setEquipment] = useState([]);
+  const [studentStatus, setStudentStatus] = useState('');
+  const [school, setSchool] = useState('');
+  const [accommodation, setAccommodation] = useState('');
   const [dishIndex, setDishIndex] = useState(0);
   const [liked, setLiked] = useState([]);
   const [disliked, setDisliked] = useState([]);
@@ -337,6 +458,10 @@ export default function ForkitOnboarding({ onComplete }) {
       macros,
       likedDishes: finalLiked,
       dislikedDishes: finalDisliked,
+      equipment,
+      studentStatus,
+      school,
+      accommodation,
     });
   };
 
@@ -401,11 +526,22 @@ export default function ForkitOnboarding({ onComplete }) {
               onMacroChange={handleMacroChange}
             />
           )}
-          {step === 3 && <SwipeStep dishIndex={dishIndex} onSwipe={handleSwipe} />}
+          {step === 3 && <KitchenEssentialsStep selected={equipment} onToggle={toggleIn(setEquipment)} />}
+          {step === 4 && (
+            <StudentContextStep
+              studentStatus={studentStatus}
+              onStatus={setStudentStatus}
+              school={school}
+              onSchool={setSchool}
+              accommodation={accommodation}
+              onAccommodation={setAccommodation}
+            />
+          )}
+          {step === 5 && <SwipeStep dishIndex={dishIndex} onSwipe={handleSwipe} />}
         </div>
       </div>
 
-      {step < 3 && (
+      {step < STEP_META.length - 1 && (
         <div className="px-5 pt-2 pb-8 max-w-2xl mx-auto w-full">
           <button
             type="button"

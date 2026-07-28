@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart } from 'lucide-react';
+import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart, GraduationCap, ChevronRight, Award } from 'lucide-react';
 import { supabase } from './supabaseClient';
 import { SAVED_RECIPES, DIETARY_RESTRICTIONS } from './mockData';
+
+const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
 
 function GoogleIcon() {
   return (
@@ -35,13 +37,20 @@ function TextField({ icon: Icon, ...props }) {
   );
 }
 
-function AccountView({ session, answers, onBack, onLogOut }) {
+function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut }) {
   const email = session.user.email || '';
   const provider = session.user.app_metadata?.provider === 'google' ? 'Google' : 'email';
   const initial = email.trim()[0]?.toUpperCase() || '?';
   const restrictionLabels = (answers?.restrictions || [])
     .map((id) => DIETARY_RESTRICTIONS.find((r) => r.id === id)?.label)
     .filter(Boolean);
+  const batchProUnlocked = (() => {
+    try {
+      return localStorage.getItem(BATCH_PRO_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  })();
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
@@ -95,6 +104,38 @@ function AccountView({ session, answers, onBack, onLogOut }) {
           </section>
         )}
 
+        {batchProUnlocked && (
+          <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
+            <h3 className="font-display text-2xl font-semibold text-primary mb-3">Achievements</h3>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0">
+                <Award size={20} className="text-on-tertiary-fixed" />
+              </div>
+              <div>
+                <p className="text-base font-semibold text-primary">Batch Pro</p>
+                <p className="text-sm text-on-surface-variant">Cooked a recipe in batch portions</p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <button
+          type="button"
+          onClick={onOpenFreshers}
+          className="flex items-center justify-between gap-3 bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4 text-left"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center shrink-0">
+              <GraduationCap size={18} className="text-on-primary-fixed" />
+            </div>
+            <div>
+              <p className="text-base font-semibold text-primary">Freshers Mode</p>
+              <p className="text-sm text-on-surface-variant">{freshersMode ? 'On' : 'Off'} — simplified recipes for beginners</p>
+            </div>
+          </div>
+          <ChevronRight size={18} className="text-outline shrink-0" />
+        </button>
+
         <button
           type="button"
           onClick={onLogOut}
@@ -108,7 +149,7 @@ function AccountView({ session, answers, onBack, onLogOut }) {
   );
 }
 
-export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
+export default function ForkitAuth({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut }) {
   const [mode, setMode] = useState('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -118,7 +159,16 @@ export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
   const [submitting, setSubmitting] = useState(false);
 
   if (session) {
-    return <AccountView session={session} answers={answers} onBack={onBack} onLogOut={onLogOut} />;
+    return (
+      <AccountView
+        session={session}
+        answers={answers}
+        freshersMode={freshersMode}
+        onOpenFreshers={onOpenFreshers}
+        onBack={onBack}
+        onLogOut={onLogOut}
+      />
+    );
   }
 
   const canSubmit = email.trim().length > 3 && password.length >= 6 && !submitting;

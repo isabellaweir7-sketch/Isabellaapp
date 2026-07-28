@@ -1,6 +1,54 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Check } from 'lucide-react';
-import { SHOPPING_AISLES } from './mockData';
+import { ChevronLeft, Check, HandCoins } from 'lucide-react';
+import { SHOPPING_AISLES, HOUSEHOLD_MEMBERS } from './mockData';
+
+function SplitCosts({ allItems }) {
+  const [settled, setSettled] = useState(false);
+  const total = allItems.reduce((sum, item) => sum + item.price, 0);
+  const fairShare = total / HOUSEHOLD_MEMBERS.length;
+
+  const balances = HOUSEHOLD_MEMBERS.map((member) => {
+    const paid = allItems.filter((item) => item.addedBy === member.id).reduce((sum, item) => sum + item.price, 0);
+    return { member, owes: fairShare - paid };
+  });
+
+  return (
+    <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
+      <h3 className="font-display text-2xl font-semibold text-primary mb-1">Split Costs</h3>
+      <p className="text-sm text-on-surface-variant mb-3">
+        Based on what's already been bought, here's what balances out.
+      </p>
+      {settled ? (
+        <p className="text-base font-semibold text-primary py-2">Everyone's settled up for this list.</p>
+      ) : (
+        <>
+          <div className="flex flex-col gap-2 mb-3">
+            {balances.map(({ member, owes }) => (
+              <div key={member.id} className="flex items-center justify-between">
+                <span className="text-base text-on-surface">{member.name}</span>
+                {owes > 0.01 ? (
+                  <span className="chip-value">owes £{owes.toFixed(2)}</span>
+                ) : owes < -0.01 ? (
+                  <span className="text-sm font-semibold text-secondary">is owed £{Math.abs(owes).toFixed(2)}</span>
+                ) : (
+                  <span className="text-sm font-medium text-outline">all square</span>
+                )}
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => setSettled(true)}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-on-primary text-sm font-semibold tracking-wider"
+          >
+            <HandCoins size={16} />
+            Settle Up
+          </button>
+        </>
+      )}
+    </section>
+  );
+}
 
 export default function ForkitShoppingMode({ onBack }) {
   const [checked, setChecked] = useState([]);
@@ -65,6 +113,8 @@ export default function ForkitShoppingMode({ onBack }) {
             </div>
           </section>
         ))}
+
+        <SplitCosts allItems={allItems} />
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 px-5 py-4 bg-surface border-t border-outline-variant flex items-center justify-between">

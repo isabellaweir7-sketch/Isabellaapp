@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, Sparkles, ArrowRight, ChevronRight } from 'lucide-react';
+import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, Sparkles, ArrowRight, ChevronRight, GraduationCap } from 'lucide-react';
 import { TODAY_MEALS, COMMUNITY_RECIPES, WEEKLY_BUDGET, SHOPPING_LIST } from './mockData';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', icon: HomeIcon },
   { id: 'pantry', label: 'Pantry', icon: ChefHat },
   { id: 'recipes', label: 'Recipes', icon: BookOpen },
+  { id: 'skilllab', label: 'Academy', icon: GraduationCap },
   { id: 'community', label: 'Community', icon: Users },
 ];
 
@@ -214,6 +215,7 @@ export default function ForkitHome({
   onOpenAuth,
   onOpenNotifications,
   onOpenBudget,
+  onOpenSkillLab,
   session,
 }) {
   const [activeTab, setActiveTab] = useState('home');
@@ -222,6 +224,7 @@ export default function ForkitHome({
     if (id === 'pantry') onOpenPantry();
     if (id === 'recipes') onOpenSaved();
     if (id === 'community') onOpenCommunity();
+    if (id === 'skilllab') onOpenSkillLab();
   };
 
   return (

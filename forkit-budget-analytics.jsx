@@ -1,11 +1,11 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, PiggyBank } from 'lucide-react';
 import { BUDGET_ANALYTICS } from './mockData';
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 export default function ForkitBudgetAnalytics({ onBack }) {
-  const { monthSpent, monthBudget, weekAverage, categories, weeklyTrend } = BUDGET_ANALYTICS;
+  const { monthSpent, monthBudget, monthSavings, weekAverage, topSavingTip, categories, weeklyTrend } = BUDGET_ANALYTICS;
   const maxTrend = Math.max(...weeklyTrend);
   const categoryTotal = categories.reduce((sum, c) => sum + c.amount, 0);
 
@@ -27,14 +27,29 @@ export default function ForkitBudgetAnalytics({ onBack }) {
             </h2>
             <span className="text-xs font-medium text-on-surface-variant">of £{monthBudget.toFixed(2)} budget</span>
           </div>
-          <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
-            <span className="text-sm font-semibold tracking-wider text-outline">Weekly average</span>
-            <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary mt-1">
-              £{weekAverage.toFixed(2)}
+          <div className="bg-primary-container text-on-primary rounded-xl p-4">
+            <span className="text-sm font-semibold tracking-wider text-primary-fixed">Total savings</span>
+            <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-tertiary-fixed mt-1">
+              £{monthSavings.toFixed(2)}
             </h2>
-            <span className="text-xs font-medium text-on-surface-variant">per week so far</span>
+            <span className="text-xs font-medium opacity-80">vs. eating out every meal</span>
           </div>
         </div>
+
+        <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40 flex items-center justify-between">
+          <span className="text-sm font-semibold tracking-wider text-outline">Weekly average</span>
+          <span className="font-display text-2xl font-semibold text-primary">£{weekAverage.toFixed(2)}</span>
+        </div>
+
+        {topSavingTip && (
+          <section className="bg-secondary-container rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-1">
+              <PiggyBank size={18} className="text-on-secondary-container" />
+              <h4 className="text-sm font-semibold uppercase tracking-widest text-on-secondary-container">Top Saving Tip</h4>
+            </div>
+            <p className="text-base text-on-secondary-container italic">{topSavingTip}</p>
+          </section>
+        )}
 
         <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
           <h3 className="font-display text-2xl font-semibold text-primary mb-4">Weekly Spend Trend</h3>
