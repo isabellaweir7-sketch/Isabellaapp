@@ -34,15 +34,21 @@ export default function ForkitBudgetAnalytics({ onBack }) {
 
         <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
           <h3 className="font-display text-lg text-primary mb-4">Weekly Spend Trend</h3>
-          <div className="flex items-end justify-between gap-2 h-32">
+          <div className="h-32 flex items-end justify-between gap-2">
             {weeklyTrend.map((value, i) => (
-              <div key={DAYS[i]} className="flex-1 flex flex-col items-center gap-2">
+              <div key={DAYS[i]} className="flex-1 h-full flex items-end">
                 <div
                   className="w-full rounded-t-md bg-primary"
                   style={{ height: `${(value / maxTrend) * 100}%` }}
                 />
-                <span className="text-[10px] text-outline uppercase">{DAYS[i]}</span>
               </div>
+            ))}
+          </div>
+          <div className="flex justify-between gap-2 mt-2">
+            {DAYS.map((d) => (
+              <span key={d} className="flex-1 text-center text-[10px] text-outline uppercase">
+                {d}
+              </span>
             ))}
           </div>
         </section>

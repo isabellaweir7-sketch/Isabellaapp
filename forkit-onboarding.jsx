@@ -135,7 +135,7 @@ function GoalCard({ label, sublabel, Icon, selected, onClick, wide = false }) {
         selected ? 'bg-primary text-on-primary border-primary' : 'bg-surface border-outline-variant text-on-surface'
       }`}
     >
-      <div className={wide ? 'flex flex-col' : ''}>
+      <div className="flex flex-col">
         <span className="text-sm font-semibold">{label}</span>
         <span className={`text-xs ${selected ? 'opacity-80' : 'text-outline'}`}>{sublabel}</span>
       </div>
