@@ -40,14 +40,11 @@ import {
 import {
   ONBOARDING_REASONS,
   DIETARY_RESTRICTIONS,
-  SAMPLE_DISHES,
   EQUIPMENT_ITEMS,
   STUDENT_STATUS_OPTIONS,
   ACCOMMODATION_OPTIONS,
   ALLERGENS,
-  filterByRestrictions,
-  allergyRestrictionIds,
-  matchesAllergiesByName,
+  generateSwipeDeck,
 } from './mockData';
 
 const STEP_META = [
@@ -432,14 +429,14 @@ function SwipeCard({ dish, onSwipe, isTop }) {
         </motion.div>
       )}
       <div className="p-5">
-        <div className="flex gap-1.5 mb-2">
-          {dish.tags.map((t) => (
+        <div className="flex gap-1.5 mb-2 flex-wrap">
+          {dish.tags.slice(0, 3).map((t) => (
             <span key={t} className="chip-value">
               {t}
             </span>
           ))}
         </div>
-        <h3 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-white">{dish.name}</h3>
+        <h3 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-white">{dish.title}</h3>
       </div>
     </motion.div>
   );
@@ -527,13 +524,7 @@ export default function ForkitOnboarding({ onComplete }) {
   const handleMacroChange = (key, value) => setMacros((prev) => ({ ...prev, [key]: value }));
   const handleClearAllergies = () => setAllergies([]);
 
-  const dishes = (() => {
-    const combinedRestrictions = [...restrictions, ...allergyRestrictionIds(allergies)];
-    const filtered = filterByRestrictions(SAMPLE_DISHES, combinedRestrictions).filter((d) =>
-      matchesAllergiesByName(d.name, allergies)
-    );
-    return filtered.length > 0 ? filtered : SAMPLE_DISHES;
-  })();
+  const dishes = generateSwipeDeck(restrictions, allergies);
 
   const finish = (finalLiked, finalDisliked) => {
     onComplete({

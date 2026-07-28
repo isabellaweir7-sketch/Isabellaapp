@@ -1,9 +1,9 @@
 import {
   OnboardingReason,
   DietaryRestriction,
-  SampleDish,
   Recipe,
   DietaryFlags,
+  TasteProfile,
   FeatureTile,
   DayPlan,
   HouseholdMember,
@@ -139,16 +139,6 @@ export function matchesAllergies(recipe: Recipe, allergyIds: string[]): boolean 
   return !allergyIds.some((id) => recipeContainsAllergen(recipe, id));
 }
 
-// For lightweight objects with no ingredient list (e.g. the onboarding taste-
-// swipe's SampleDish) — falls back to keyword-matching the dish name itself.
-export function matchesAllergiesByName(name: string, allergyIds: string[]): boolean {
-  const lower = name.toLowerCase();
-  return !allergyIds.some((id) => {
-    const keywords = ALLERGY_KEYWORDS[id];
-    return keywords ? keywords.some((kw) => lower.includes(kw)) : false;
-  });
-}
-
 // Combines dietary restrictions with allergy-derived exclusions — the one
 // filter every screen that surfaces recipes should call.
 export function filterByRestrictionsAndAllergies(
@@ -159,83 +149,6 @@ export function filterByRestrictionsAndAllergies(
   const combinedRestrictions = [...restrictionIds, ...allergyRestrictionIds(allergyIds)];
   return filterByRestrictions(recipes, combinedRestrictions).filter((r) => matchesAllergies(r, allergyIds));
 }
-
-// Stock food photography (Unsplash) with a forest-green-family fallback
-// colour drawn behind it in case a photo fails to load.
-export const SAMPLE_DISHES: SampleDish[] = [
-  {
-    id: 'dish-chickpea-curry',
-    name: 'One-pan chickpea curry',
-    tags: ['Vegan', 'Budget'],
-    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
-    fallback: '#4E5A34',
-    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
-  },
-  {
-    id: 'dish-peanut-noodles',
-    name: 'Peanut noodles',
-    tags: ['15 min'],
-    photo: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800',
-    fallback: '#5C4A28',
-    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
-  },
-  {
-    id: 'dish-sausage-traybake',
-    name: 'Sheet-pan sausage traybake',
-    tags: ['One-pan', 'Batch cooks'],
-    photo: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&q=80&w=800',
-    fallback: '#274038',
-    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
-  },
-  {
-    id: 'dish-tomato-pasta',
-    name: 'One-pan tomato & garlic pasta',
-    tags: ['Budget', '15 min'],
-    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
-    fallback: '#354A1F',
-    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
-  },
-  {
-    id: 'dish-beans-toast',
-    name: 'Loaded beans on toast',
-    tags: ['Under £1', '5 min'],
-    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
-    fallback: '#5C4A28',
-    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
-  },
-  {
-    id: 'dish-stirfry',
-    name: 'Veg & egg fried rice stir-fry',
-    tags: ['Cupboard mode'],
-    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
-    fallback: '#4E5A34',
-    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
-  },
-  {
-    id: 'dish-chilli',
-    name: 'Budget beef & bean chilli',
-    tags: ['Batch cooks', 'Freezes well'],
-    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
-    fallback: '#274038',
-    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
-  },
-  {
-    id: 'dish-salmon-traybake',
-    name: 'Salmon & new potato traybake',
-    tags: ['Pescatarian', 'Gluten-free'],
-    photo: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800',
-    fallback: '#4A7A6B',
-    dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
-  },
-  {
-    id: 'dish-halloumi-couscous',
-    name: 'Halloumi & roasted veg couscous',
-    tags: ['Vegetarian'],
-    photo: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=800',
-    fallback: '#5C4A28',
-    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
-  },
-];
 
 // The single master pool every screen draws from: Home's Today's Plan, the
 // Weekly Plan, and Cupboard Cooker all filter this list by dietary
@@ -9531,6 +9444,68 @@ export const RECIPE_LIBRARY: Recipe[] = [
   },
 ];
 
+// Maps a nutrition-goal id from onboarding to the recipe tag it corresponds
+// to. 'calorie-conscious' has no dedicated goal-only field in DietaryFlags,
+// so — like halal/kosher — this is a tag match, not a nutritional calculation.
+const NUTRITION_GOAL_TAGS: Record<string, string> = {
+  'high-protein': 'High Protein',
+  'low-carb': 'Low Carb',
+  'high-fibre': 'High Fibre',
+  'bulk-up': 'Bulk Up',
+  'calorie-conscious': 'Calorie Conscious',
+};
+
+function tagsOf(recipeId: string): string[] {
+  return RECIPE_LIBRARY.find((r) => r.id === recipeId)?.tags ?? [];
+}
+
+// Scores how well a recipe fits someone's taste profile: +2 for each
+// nutrition goal it satisfies, +1 for every tag it shares with a recipe they
+// swiped "yum" on, -1 for every tag shared with one they passed on. Used to
+// rank an already-safe (restriction/allergy-filtered) pool, not to filter it.
+export function scoreRecipeForProfile(recipe: Recipe, profile: TasteProfile): number {
+  let score = 0;
+  for (const goal of profile.nutritionGoals) {
+    const tag = NUTRITION_GOAL_TAGS[goal];
+    if (tag && recipe.tags.includes(tag)) score += 2;
+  }
+  const likedTags = new Set(profile.likedDishes.flatMap(tagsOf));
+  const dislikedTags = new Set(profile.dislikedDishes.flatMap(tagsOf));
+  for (const tag of recipe.tags) {
+    if (likedTags.has(tag)) score += 1;
+    if (dislikedTags.has(tag)) score -= 1;
+  }
+  return score;
+}
+
+// Stable-sorts a pool by taste-profile fit, highest first. Recipes that tie
+// (e.g. no profile signal yet) keep their original relative order, which is
+// already diverse since RECIPE_LIBRARY is grouped by cuisine/diet.
+function rankByProfile(pool: Recipe[], profile?: TasteProfile): Recipe[] {
+  if (!profile) return pool;
+  return pool
+    .map((recipe, index) => ({ recipe, index, score: scoreRecipeForProfile(recipe, profile) }))
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .map((entry) => entry.recipe);
+}
+
+// Builds the onboarding taste-swipe deck from real recipes (already filtered
+// by whatever restrictions/allergies were picked earlier in onboarding)
+// instead of a small fixed set, so swiping actually teaches us something.
+// Picks evenly-spaced recipes across the filtered pool for variety, since
+// RECIPE_LIBRARY is grouped in blocks by diet/cuisine.
+export function generateSwipeDeck(restrictionIds: string[] = [], allergyIds: string[] = [], count = 20): Recipe[] {
+  const pool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
+  const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
+  if (safePool.length <= count) return safePool;
+  const step = safePool.length / count;
+  const picked: Recipe[] = [];
+  for (let i = 0; i < count; i++) {
+    picked.push(safePool[Math.floor(i * step)]);
+  }
+  return picked;
+}
+
 // Student-submitted recipes for the Community feed. Light moderation happens
 // off-screen; upvoting is the in-app quality signal that surfaces the best
 // ones first. These are also part of RECIPE_LIBRARY so they can surface
@@ -9659,9 +9634,9 @@ const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satu
 // Generates a 7-day plan from RECIPE_LIBRARY, filtered by dietary
 // restrictions, cycling through the filtered pool so days vary without
 // repeating until the pool runs out.
-export function generateWeeklyPlan(restrictionIds: string[] = [], allergyIds: string[] = []): DayPlan[] {
+export function generateWeeklyPlan(restrictionIds: string[] = [], allergyIds: string[] = [], profile?: TasteProfile): DayPlan[] {
   const pool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
-  const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
+  const safePool = rankByProfile(pool.length > 0 ? pool : RECIPE_LIBRARY, profile);
   return DAY_NAMES.map((day, i) => ({ day, recipe: safePool[i % safePool.length] }));
 }
 
@@ -9683,13 +9658,18 @@ export function scoreIngredientMatch(recipe: Recipe, selectedIngredients: string
 export function generateCupboardRecipe(
   selectedIngredients: string[],
   restrictionIds: string[] = [],
-  allergyIds: string[] = []
+  allergyIds: string[] = [],
+  profile?: TasteProfile
 ): Recipe {
   const pool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
-  const ranked = [...safePool].sort(
-    (a, b) => scoreIngredientMatch(b, selectedIngredients) - scoreIngredientMatch(a, selectedIngredients)
-  );
+  // Ingredient match comes first (that's the point of Cupboard Cooker) —
+  // taste profile only breaks ties between equally-good ingredient matches.
+  const ranked = [...safePool].sort((a, b) => {
+    const ingredientDiff = scoreIngredientMatch(b, selectedIngredients) - scoreIngredientMatch(a, selectedIngredients);
+    if (ingredientDiff !== 0) return ingredientDiff;
+    return profile ? scoreRecipeForProfile(b, profile) - scoreRecipeForProfile(a, profile) : 0;
+  });
   return ranked[0];
 }
 
@@ -9736,9 +9716,9 @@ export const WEEKLY_BUDGET = {
 
 // Generates today's Breakfast/Lunch/Dinner from RECIPE_LIBRARY, filtered by
 // dietary restrictions.
-export function generateTodayMeals(restrictionIds: string[] = [], allergyIds: string[] = []): TodayMeal[] {
+export function generateTodayMeals(restrictionIds: string[] = [], allergyIds: string[] = [], profile?: TasteProfile): TodayMeal[] {
   const pool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
-  const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
+  const safePool = rankByProfile(pool.length > 0 ? pool : RECIPE_LIBRARY, profile);
   const slots = ['Breakfast', 'Lunch', 'Dinner'];
   return slots.map((slot, i) => ({ slot, recipe: safePool[i % safePool.length] }));
 }

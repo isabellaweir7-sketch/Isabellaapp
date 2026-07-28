@@ -74,7 +74,13 @@ export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
               type="button"
               disabled={parsedIngredients.length === 0}
               onClick={() =>
-                onOpenRecipe(generateCupboardRecipe(parsedIngredients, answers?.restrictions ?? [], answers?.allergies ?? []))
+                onOpenRecipe(
+                  generateCupboardRecipe(parsedIngredients, answers?.restrictions ?? [], answers?.allergies ?? [], {
+                    nutritionGoals: answers?.nutritionGoals ?? [],
+                    likedDishes: answers?.likedDishes ?? [],
+                    dislikedDishes: answers?.dislikedDishes ?? [],
+                  })
+                )
               }
               className="w-full py-3.5 rounded-xl font-semibold text-lg tracking-wider transition-opacity bg-primary-container text-on-primary-container flex items-center justify-center gap-2"
               style={{ opacity: parsedIngredients.length === 0 ? 0.4 : 1 }}

@@ -19,13 +19,13 @@ export interface DietaryFlags {
   nutFree: boolean;
 }
 
-export interface SampleDish {
-  id: string;
-  name: string;
-  tags: string[];
-  photo: string;
-  fallback: string;
-  dietary: DietaryFlags;
+// The signals gathered during onboarding that shape recommendations beyond
+// hard dietary/allergy filtering: which nutrition goals were picked, and
+// which recipes were liked/disliked in the taste-swipe step.
+export interface TasteProfile {
+  nutritionGoals: string[];
+  likedDishes: string[];
+  dislikedDishes: string[];
 }
 
 export interface OnboardingAnswers {
