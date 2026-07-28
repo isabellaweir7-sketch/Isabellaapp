@@ -167,6 +167,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Cupboard mode', 'Batch cooks'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 450, protein: 19.6, carbs: 65.1, fat: 13.8 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -197,6 +198,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 410, protein: 16.2, carbs: 39.6, fat: 21.5 },
     ingredients: [
       { name: 'Red lentils', qtyPerServing: 50, unit: 'g' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -224,6 +226,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Budget', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 285, protein: 18.4, carbs: 48.6, fat: 1.9 },
     ingredients: [
       { name: 'Red lentils', qtyPerServing: 60, unit: 'g' },
       { name: 'Onion', qtyPerServing: 0.25, unit: '' },
@@ -253,6 +256,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 395, protein: 21.2, carbs: 28.7, fat: 24.4 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 100, unit: 'g' },
       { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
@@ -278,6 +282,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 555, protein: 19.3, carbs: 55.7, fat: 30.1 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Spinach', qtyPerServing: 1, unit: 'handful' },
@@ -302,6 +307,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 515, protein: 26.2, carbs: 99.6, fat: 4.2 },
     ingredients: [
       { name: 'Black beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Corn tortillas', qtyPerServing: 3, unit: '' },
@@ -326,6 +332,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick', 'High protein'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 385, protein: 12.3, carbs: 57.1, fat: 12.9 },
     ingredients: [
       { name: 'Gluten-free oats', qtyPerServing: 50, unit: 'g' },
       { name: 'Oat milk', qtyPerServing: 120, unit: 'ml' },
@@ -349,6 +356,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Budget', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 575, protein: 22.2, carbs: 87.8, fat: 14.1 },
     ingredients: [
       { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -374,6 +382,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 350, protein: 11.6, carbs: 41.4, fat: 15.7 },
     ingredients: [
       { name: 'Mushrooms', qtyPerServing: 150, unit: 'g' },
       { name: 'Butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -397,6 +406,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 645, protein: 26.1, carbs: 55.7, fat: 34.6 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 75, unit: 'g' },
       { name: 'Couscous', qtyPerServing: 60, unit: 'g' },
@@ -422,6 +432,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 655, protein: 29.2, carbs: 85.7, fat: 22.4 },
     ingredients: [
       { name: 'Flour tortillas', qtyPerServing: 2, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -445,6 +456,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Cupboard mode', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 370, protein: 14.3, carbs: 47, fat: 13.8 },
     ingredients: [
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -469,6 +481,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 590, protein: 34.4, carbs: 32, fat: 35.1 },
     ingredients: [
       { name: 'Salmon fillets', qtyPerServing: 1, unit: '' },
       { name: 'New potatoes', qtyPerServing: 150, unit: 'g' },
@@ -493,6 +506,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 530, protein: 31.6, carbs: 62.1, fat: 17.3 },
     ingredients: [
       { name: 'Orzo', qtyPerServing: 75, unit: 'g' },
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
@@ -517,6 +531,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 255, protein: 27.7, carbs: 2.5, fat: 14.6 },
     ingredients: [
       { name: 'Cod fillet', qtyPerServing: 1, unit: '' },
       { name: 'Butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -540,6 +555,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Batch cooks', 'Freezes well'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 740, protein: 71.4, carbs: 78.6, fat: 14.8 },
     ingredients: [
       { name: 'Pasta', qtyPerServing: 75, unit: 'g' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -564,6 +580,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 625, protein: 21.5, carbs: 40.2, fat: 40.6 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Potatoes', qtyPerServing: 1, unit: '' },
@@ -590,6 +607,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Freezes well'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 605, protein: 48, carbs: 63.9, fat: 19.2 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 100, unit: 'g' },
       { name: 'Kidney beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -617,6 +635,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 425, protein: 32, carbs: 14.5, fat: 27.6 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 120, unit: 'g' },
       { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
@@ -641,6 +660,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 450, protein: 42.7, carbs: 55.3, fat: 6.5 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 50, unit: 'g' },
@@ -666,6 +686,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks', 'Freezes well'],
     baseServings: 4,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 420, protein: 23.4, carbs: 78.8, fat: 2.3 },
     ingredients: [
       { name: 'Sweet potato', qtyPerServing: 0.5, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -693,6 +714,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 555, protein: 21.6, carbs: 80.3, fat: 16.5 },
     ingredients: [
       { name: 'Noodles', qtyPerServing: 100, unit: 'g' },
       { name: 'Peanut butter', qtyPerServing: 1.5, unit: 'tbsp' },
@@ -718,6 +740,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks', 'Comfort food'],
     baseServings: 4,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 560, protein: 22.2, carbs: 78, fat: 17 },
     ingredients: [
       { name: 'Green or brown lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Carrot', qtyPerServing: 0.5, unit: '' },
@@ -744,6 +767,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 675, protein: 22.8, carbs: 110.3, fat: 16.1 },
     ingredients: [
       { name: 'Sweet potato', qtyPerServing: 0.5, unit: '' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -768,6 +792,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 445, protein: 9.1, carbs: 64.6, fat: 16.4 },
     ingredients: [
       { name: 'Risotto rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Frozen peas', qtyPerServing: 50, unit: 'g' },
@@ -792,6 +817,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 530, protein: 23.8, carbs: 88.3, fat: 9.9 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
@@ -817,6 +843,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 505, protein: 12, carbs: 60.5, fat: 25.1 },
     ingredients: [
       { name: 'Mushrooms', qtyPerServing: 150, unit: 'g' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -841,6 +868,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Budget', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 365, protein: 14.5, carbs: 60.8, fat: 6.4 },
     ingredients: [
       { name: 'Baking potato', qtyPerServing: 1, unit: '' },
       { name: 'Baked beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -863,6 +891,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 625, protein: 20.9, carbs: 61.5, fat: 33.3 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 80, unit: 'g' },
       { name: 'Green curry paste', qtyPerServing: 1, unit: 'tbsp' },
@@ -887,6 +916,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick', 'Budget'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 385, protein: 12.2, carbs: 54.3, fat: 13.2 },
     ingredients: [
       { name: 'Gluten-free oats', qtyPerServing: 50, unit: 'g' },
       { name: 'Oat milk', qtyPerServing: 200, unit: 'ml' },
@@ -909,6 +939,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 365, protein: 11.3, carbs: 48.7, fat: 13.9 },
     ingredients: [
       { name: 'Flatbread', qtyPerServing: 1, unit: '' },
       { name: 'Hummus', qtyPerServing: 2, unit: 'tbsp' },
@@ -932,6 +963,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 630, protein: 28.6, carbs: 106.8, fat: 10.9 },
     ingredients: [
       { name: 'Black beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -956,6 +988,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks', 'One-pan'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 275, protein: 6.7, carbs: 27.6, fat: 16.4 },
     ingredients: [
       { name: 'Aubergine', qtyPerServing: 0.5, unit: '' },
       { name: 'Courgette', qtyPerServing: 0.5, unit: '' },
@@ -981,6 +1014,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 315, protein: 9.5, carbs: 67.2, fat: 1.7 },
     ingredients: [
       { name: 'Rice noodles', qtyPerServing: 70, unit: 'g' },
       { name: 'Miso paste (gluten-free)', qtyPerServing: 1, unit: 'tbsp' },
@@ -1005,6 +1039,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Batch cooks', 'Budget'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 675, protein: 33, carbs: 123.8, fat: 3.7 },
     ingredients: [
       { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
       { name: 'Green lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -1030,6 +1065,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 465, protein: 16.8, carbs: 57.4, fat: 20.6 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Cucumber', qtyPerServing: 0.5, unit: '' },
@@ -1054,6 +1090,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 370, protein: 10.2, carbs: 73.4, fat: 5.7 },
     ingredients: [
       { name: 'Banana', qtyPerServing: 1, unit: '' },
       { name: 'Gluten-free oats', qtyPerServing: 60, unit: 'g' },
@@ -1077,6 +1114,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'One-pan', 'Gluten-free'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 18.6, carbs: 57.3, fat: 21.4 },
     ingredients: [
       { name: 'Cauliflower', qtyPerServing: 0.33, unit: 'head' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -1100,6 +1138,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 395, protein: 25.4, carbs: 42.2, fat: 13.4 },
     ingredients: [
       { name: 'Flatbread', qtyPerServing: 1, unit: '' },
       { name: 'Passata', qtyPerServing: 2, unit: 'tbsp' },
@@ -1122,6 +1161,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 660, protein: 30.4, carbs: 73.5, fat: 26.9 },
     ingredients: [
       { name: 'Pasta', qtyPerServing: 90, unit: 'g' },
       { name: 'Cherry tomatoes', qtyPerServing: 100, unit: 'g' },
@@ -1145,6 +1185,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 375, protein: 19.5, carbs: 38.9, fat: 15.5 },
     ingredients: [
       { name: 'Pasta shells', qtyPerServing: 8, unit: '' },
       { name: 'Ricotta', qtyPerServing: 60, unit: 'g' },
@@ -1170,6 +1211,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 185, protein: 11.2, carbs: 20.2, fat: 6.7 },
     ingredients: [
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -1194,6 +1236,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Comfort food', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 750, protein: 32.2, carbs: 85.6, fat: 29.9 },
     ingredients: [
       { name: 'Macaroni', qtyPerServing: 100, unit: 'g' },
       { name: 'Cheddar (grated)', qtyPerServing: 60, unit: 'g' },
@@ -1217,6 +1260,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 425, protein: 24, carbs: 18.6, fat: 28.4 },
     ingredients: [
       { name: 'Paneer', qtyPerServing: 100, unit: 'g' },
       { name: 'Frozen peas', qtyPerServing: 50, unit: 'g' },
@@ -1241,6 +1285,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 285, protein: 19.6, carbs: 2.9, fat: 21.6 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
       { name: 'Cheddar (grated)', qtyPerServing: 25, unit: 'g' },
@@ -1263,6 +1308,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Sharing'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 575, protein: 31.5, carbs: 36.9, fat: 32.3 },
     ingredients: [
       { name: 'Camembert', qtyPerServing: 0.5, unit: 'whole' },
       { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
@@ -1285,6 +1331,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 510, protein: 17.6, carbs: 60.7, fat: 21.5 },
     ingredients: [
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
       { name: 'Red onion', qtyPerServing: 0.5, unit: '' },
@@ -1309,6 +1356,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 275, protein: 19.5, carbs: 5.3, fat: 19.3 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 1.5, unit: '' },
       { name: 'Milk', qtyPerServing: 40, unit: 'ml' },
@@ -1333,6 +1381,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 455, protein: 12.4, carbs: 61.7, fat: 17 },
     ingredients: [
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
       { name: 'Rice', qtyPerServing: 60, unit: 'g' },
@@ -1357,6 +1406,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 310, protein: 14.5, carbs: 38.4, fat: 10.1 },
     ingredients: [
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -1380,6 +1430,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick', 'Sharing'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 550, protein: 22.2, carbs: 23, fat: 40.1 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 100, unit: 'g' },
       { name: 'Cornflour', qtyPerServing: 1, unit: 'tbsp' },
@@ -1402,6 +1453,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 180, protein: 6.7, carbs: 20, fat: 8.5 },
     ingredients: [
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.66, unit: 'can' },
       { name: 'Vegetable stock', qtyPerServing: 150, unit: 'ml' },
@@ -1427,6 +1479,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 455, protein: 23.8, carbs: 67.1, fat: 9 },
     ingredients: [
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -1449,6 +1502,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 380, protein: 13.1, carbs: 29.7, fat: 23.4 },
     ingredients: [
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
       { name: 'Onion', qtyPerServing: 0.33, unit: '' },
@@ -1472,6 +1526,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks', 'Freezes well'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 500, protein: 23.4, carbs: 61, fat: 17.8 },
     ingredients: [
       { name: 'Lasagne sheets', qtyPerServing: 3, unit: '' },
       { name: 'Courgette', qtyPerServing: 0.5, unit: '' },
@@ -1497,6 +1552,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 435, protein: 16.5, carbs: 61, fat: 13.3 },
     ingredients: [
       { name: 'Risotto rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Frozen peas', qtyPerServing: 50, unit: 'g' },
@@ -1521,6 +1577,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 480, protein: 33.2, carbs: 49.6, fat: 17.7 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Plain flour', qtyPerServing: 2, unit: 'tbsp' },
@@ -1545,6 +1602,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 550, protein: 62.1, carbs: 24.1, fat: 22.4 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'New potatoes', qtyPerServing: 100, unit: 'g' },
@@ -1569,6 +1627,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 450, protein: 17.4, carbs: 37.9, fat: 24.5 },
     ingredients: [
       { name: 'Smoked mackerel', qtyPerServing: 50, unit: 'g' },
       { name: 'Cream cheese', qtyPerServing: 30, unit: 'g' },
@@ -1591,6 +1650,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 280, protein: 23.9, carbs: 9.3, fat: 16.3 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.5, unit: '' },
@@ -1615,6 +1675,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 455, protein: 36, carbs: 42.3, fat: 15.2 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Potatoes', qtyPerServing: 200, unit: 'g' },
@@ -1639,6 +1700,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 625, protein: 68.9, carbs: 51.6, fat: 14.6 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -1661,6 +1723,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 555, protein: 35.3, carbs: 52.9, fat: 19.9 },
     ingredients: [
       { name: 'Salmon fillets', qtyPerServing: 1, unit: '' },
       { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 1, unit: 'tbsp' },
@@ -1684,6 +1747,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 625, protein: 34.8, carbs: 80.1, fat: 17.8 },
     ingredients: [
       { name: 'Linguine', qtyPerServing: 100, unit: 'g' },
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
@@ -1708,6 +1772,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 630, protein: 87.7, carbs: 37.1, fat: 11.5 },
     ingredients: [
       { name: 'Fish fingers', qtyPerServing: 3, unit: '' },
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
@@ -1730,6 +1795,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 505, protein: 34.7, carbs: 57.4, fat: 14.5 },
     ingredients: [
       { name: 'Smoked haddock', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
@@ -1754,6 +1820,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Budget', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 540, protein: 58.5, carbs: 45.5, fat: 14 },
     ingredients: [
       { name: 'Baking potato', qtyPerServing: 1, unit: '' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -1776,6 +1843,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 550, protein: 27.5, carbs: 62.5, fat: 20.3 },
     ingredients: [
       { name: 'Salmon fillet', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
@@ -1800,6 +1868,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 475, protein: 32.6, carbs: 11.9, fat: 33.9 },
     ingredients: [
       { name: 'Cod fillet', qtyPerServing: 1, unit: '' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -1824,6 +1893,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 485, protein: 19, carbs: 88.7, fat: 5.5 },
     ingredients: [
       { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
       { name: 'Anchovy fillets', qtyPerServing: 2, unit: '' },
@@ -1848,6 +1918,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 560, protein: 46.7, carbs: 55.6, fat: 15.5 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
@@ -1871,6 +1942,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 355, protein: 41.6, carbs: 16.9, fat: 13.1 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -1896,6 +1968,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 540, protein: 48, carbs: 6.4, fat: 35.4 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 2, unit: '' },
       { name: 'Piri piri seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -1919,6 +1992,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 420, protein: 39.1, carbs: 24.4, fat: 17.2 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Lettuce', qtyPerServing: 1, unit: 'handful' },
@@ -1941,6 +2015,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: false },
+    macros: { calories: 470, protein: 42.8, carbs: 11.4, fat: 28.3 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Cashew nuts', qtyPerServing: 20, unit: 'g' },
@@ -1965,6 +2040,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Batch cooks', 'Gluten-free'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 550, protein: 38.9, carbs: 30.4, fat: 30.2 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'New potatoes', qtyPerServing: 150, unit: 'g' },
@@ -1990,6 +2066,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Cupboard mode', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 475, protein: 44.9, carbs: 47.7, fat: 9.9 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
@@ -2013,6 +2090,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 530, protein: 38.9, carbs: 13, fat: 35.3 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -2038,6 +2116,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 520, protein: 44.1, carbs: 43, fat: 18.6 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Shawarma seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -2061,6 +2140,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 650, protein: 48.7, carbs: 94.2, fat: 6.8 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Panko breadcrumbs', qtyPerServing: 40, unit: 'g' },
@@ -2085,6 +2165,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Batch cooks', 'Gluten-free'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 485, protein: 38.5, carbs: 29.8, fat: 22.8 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
@@ -2109,6 +2190,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 625, protein: 48.7, carbs: 47.5, fat: 24.6 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Flour tortillas', qtyPerServing: 2, unit: '' },
@@ -2132,6 +2214,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 545, protein: 45.5, carbs: 76.1, fat: 6.5 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Piri piri seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -2155,6 +2238,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 345, protein: 38.1, carbs: 35.8, fat: 4.9 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Orzo', qtyPerServing: 40, unit: 'g' },
@@ -2179,6 +2263,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Gluten-free'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 800, protein: 50.2, carbs: 75.2, fat: 32.3 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Jerk seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -2203,6 +2288,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 555, protein: 38.7, carbs: 35.8, fat: 29.8 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 100, unit: 'g' },
       { name: 'Taco seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -2226,6 +2312,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Freezes well'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 705, protein: 43, carbs: 90.8, fat: 19.3 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 100, unit: 'g' },
       { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
@@ -2251,6 +2338,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 570, protein: 28.7, carbs: 41.6, fat: 31 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
@@ -2274,6 +2362,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 580, protein: 42.4, carbs: 36.4, fat: 30.5 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Burger bun', qtyPerServing: 1, unit: '' },
@@ -2297,6 +2386,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 500, protein: 38.2, carbs: 37, fat: 20.3 },
     ingredients: [
       { name: 'Frying steak', qtyPerServing: 1, unit: '' },
       { name: 'Frozen oven chips', qtyPerServing: 150, unit: 'g' },
@@ -2319,6 +2409,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 375, protein: 28.1, carbs: 16.9, fat: 20.8 },
     ingredients: [
       { name: 'Lamb shoulder, diced', qtyPerServing: 120, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -2344,6 +2435,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 525, protein: 34.4, carbs: 54.5, fat: 18.6 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 120, unit: 'g' },
       { name: 'Mushrooms', qtyPerServing: 100, unit: 'g' },
@@ -2367,6 +2459,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food', 'Freezes well'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 510, protein: 32.3, carbs: 43.5, fat: 23.7 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 100, unit: 'g' },
       { name: 'Potatoes', qtyPerServing: 200, unit: 'g' },
@@ -2391,6 +2484,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 750, protein: 41.2, carbs: 77.3, fat: 29.7 },
     ingredients: [
       { name: 'Bacon', qtyPerServing: 60, unit: 'g' },
       { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
@@ -2414,6 +2508,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 645, protein: 22.8, carbs: 47.6, fat: 39.2 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Potatoes', qtyPerServing: 200, unit: 'g' },
@@ -2438,6 +2533,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 220, protein: 28.1, carbs: 8.8, fat: 7.5 },
     ingredients: [
       { name: 'Pork strips', qtyPerServing: 120, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.5, unit: '' },
@@ -2461,6 +2557,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 520, protein: 26, carbs: 38.9, fat: 27.4 },
     ingredients: [
       { name: 'Bacon', qtyPerServing: 3, unit: 'rasher' },
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
@@ -2483,6 +2580,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 485, protein: 29.2, carbs: 34.9, fat: 24.2 },
     ingredients: [
       { name: 'Pork shoulder, diced', qtyPerServing: 130, unit: 'g' },
       { name: 'BBQ sauce', qtyPerServing: 1.5, unit: 'tbsp' },
@@ -2507,6 +2605,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 920, protein: 54.1, carbs: 36.4, fat: 60.5 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Bacon', qtyPerServing: 2, unit: 'rasher' },
@@ -2530,6 +2629,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: false },
+    macros: { calories: 685, protein: 55.4, carbs: 78.2, fat: 14.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Pasta', qtyPerServing: 100, unit: 'g' },
@@ -2553,6 +2653,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Protein', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 555, protein: 30.2, carbs: 70.3, fat: 18.8 },
     ingredients: [
       { name: 'Tempeh', qtyPerServing: 100, unit: 'g' },
       { name: 'Peanut butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -2577,6 +2678,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Fibre', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 435, protein: 19.2, carbs: 78.8, fat: 6.1 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Sweet potato', qtyPerServing: 0.5, unit: '' },
@@ -2602,6 +2704,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 400, protein: 7, carbs: 16.6, fat: 37.1 },
     ingredients: [
       { name: 'Courgette', qtyPerServing: 1, unit: '' },
       { name: 'Avocado', qtyPerServing: 0.5, unit: '' },
@@ -2626,6 +2729,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Bulk Up', 'Quick'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 515, protein: 16.3, carbs: 66, fat: 22.5 },
     ingredients: [
       { name: 'Frozen banana', qtyPerServing: 1, unit: '' },
       { name: 'Gluten-free oats', qtyPerServing: 40, unit: 'g' },
@@ -2648,6 +2752,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Low Carb', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 420, protein: 21.3, carbs: 46.6, fat: 17.5 },
     ingredients: [
       { name: 'Cauliflower', qtyPerServing: 0.4, unit: 'head' },
       { name: 'Green lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -2672,6 +2777,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 625, protein: 30.1, carbs: 97.4, fat: 12.9 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 120, unit: 'g' },
       { name: 'Panko breadcrumbs', qtyPerServing: 40, unit: 'g' },
@@ -2696,6 +2802,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 555, protein: 24.5, carbs: 84.8, fat: 15 },
     ingredients: [
       { name: 'Rice noodles', qtyPerServing: 90, unit: 'g' },
       { name: 'Firm tofu', qtyPerServing: 80, unit: 'g' },
@@ -2720,6 +2827,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Calorie Conscious', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 115, protein: 5.1, carbs: 15.5, fat: 3.7 },
     ingredients: [
       { name: 'Red pepper', qtyPerServing: 1, unit: '' },
       { name: 'Hummus', qtyPerServing: 2, unit: 'tbsp' },
@@ -2744,6 +2852,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 560, protein: 27, carbs: 90.5, fat: 11.5 },
     ingredients: [
       { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
       { name: 'Mushrooms', qtyPerServing: 80, unit: 'g' },
@@ -2768,6 +2877,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Sharing', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 620, protein: 24.4, carbs: 89.9, fat: 19.1 },
     ingredients: [
       { name: 'Tortilla chips', qtyPerServing: 50, unit: 'g' },
       { name: 'Black beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -2792,6 +2902,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Calorie Conscious', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 310, protein: 12.8, carbs: 31.2, fat: 15.9 },
     ingredients: [
       { name: 'Butter beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
@@ -2815,6 +2926,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 385, protein: 19.3, carbs: 64.7, fat: 6.4 },
     ingredients: [
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -2839,6 +2951,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Bulk Up'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 615, protein: 21.3, carbs: 53.2, fat: 37.7 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.4, unit: 'can' },
       { name: 'Cauliflower', qtyPerServing: 0.3, unit: 'head' },
@@ -2863,6 +2976,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 17, carbs: 57.4, fat: 18.1 },
     ingredients: [
       { name: 'Bread', qtyPerServing: 3, unit: 'slice' },
       { name: 'Vegan mayo', qtyPerServing: 1, unit: 'tbsp' },
@@ -2886,6 +3000,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 435, protein: 18.7, carbs: 66.4, fat: 10.2 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Carrot', qtyPerServing: 0.5, unit: '' },
@@ -2910,6 +3025,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Protein', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 395, protein: 21.3, carbs: 61.5, fat: 6.8 },
     ingredients: [
       { name: 'Meat-free mince', qtyPerServing: 100, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.5, unit: '' },
@@ -2933,6 +3049,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 400, protein: 17.5, carbs: 47.5, fat: 16.6 },
     ingredients: [
       { name: 'Cannellini beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Kale', qtyPerServing: 1, unit: 'handful' },
@@ -2958,6 +3075,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 400, protein: 17.6, carbs: 71.2, fat: 6.5 },
     ingredients: [
       { name: 'Sweet potato', qtyPerServing: 1, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -2981,6 +3099,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 480, protein: 14.2, carbs: 69.1, fat: 16.7 },
     ingredients: [
       { name: 'Orzo', qtyPerServing: 80, unit: 'g' },
       { name: 'Frozen peas', qtyPerServing: 40, unit: 'g' },
@@ -3005,6 +3124,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 285, protein: 6.4, carbs: 61, fat: 2.6 },
     ingredients: [
       { name: 'Jackfruit (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'BBQ sauce', qtyPerServing: 1.5, unit: 'tbsp' },
@@ -3028,6 +3148,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Protein', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 535, protein: 26.6, carbs: 77.9, fat: 12.8 },
     ingredients: [
       { name: 'Green lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
@@ -3052,6 +3173,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 70, protein: 6.4, carbs: 12.4, fat: 1 },
     ingredients: [
       { name: 'Mushrooms', qtyPerServing: 150, unit: 'g' },
       { name: 'Red wine or extra stock', qtyPerServing: 50, unit: 'ml' },
@@ -3077,6 +3199,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'High Protein', 'Gluten-free', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 275, protein: 16.9, carbs: 17.4, fat: 15.8 },
     ingredients: [
       { name: 'Greek yoghurt', qtyPerServing: 150, unit: 'g' },
       { name: 'Honey', qtyPerServing: 1, unit: 'tsp' },
@@ -3099,6 +3222,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 665, protein: 22.7, carbs: 77.6, fat: 29.6 },
     ingredients: [
       { name: 'Feta', qtyPerServing: 60, unit: 'g' },
       { name: 'Cherry tomatoes', qtyPerServing: 150, unit: 'g' },
@@ -3123,6 +3247,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'High Protein', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 235, protein: 14.8, carbs: 34.2, fat: 4.5 },
     ingredients: [
       { name: 'Baking potato', qtyPerServing: 1, unit: '' },
       { name: 'Cottage cheese', qtyPerServing: 100, unit: 'g' },
@@ -3145,6 +3270,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 435, protein: 15.7, carbs: 16.8, fat: 36.7 },
     ingredients: [
       { name: 'Avocado', qtyPerServing: 1, unit: '' },
       { name: 'Cherry tomatoes', qtyPerServing: 60, unit: 'g' },
@@ -3168,6 +3294,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 845, protein: 37.9, carbs: 96.6, fat: 32.5 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 120, unit: 'g' },
       { name: 'Panko breadcrumbs', qtyPerServing: 40, unit: 'g' },
@@ -3192,6 +3319,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'High Protein', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 21.1, carbs: 43.4, fat: 23.9 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
       { name: 'Avocado', qtyPerServing: 0.5, unit: '' },
@@ -3214,6 +3342,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 405, protein: 10.7, carbs: 70.5, fat: 8.1 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Mixed frozen veg', qtyPerServing: 80, unit: 'g' },
@@ -3239,6 +3368,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 700, protein: 35, carbs: 61.5, fat: 34.8 },
     ingredients: [
       { name: 'Veggie sausages', qtyPerServing: 2, unit: '' },
       { name: 'Plain flour', qtyPerServing: 60, unit: 'g' },
@@ -3262,6 +3392,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Fibre', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 305, protein: 15.8, carbs: 14.5, fat: 21.8 },
     ingredients: [
       { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
       { name: 'Cheddar (grated)', qtyPerServing: 40, unit: 'g' },
@@ -3286,6 +3417,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Low Carb'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 200, protein: 13.1, carbs: 12.1, fat: 11.3 },
     ingredients: [
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
       { name: 'Ricotta', qtyPerServing: 60, unit: 'g' },
@@ -3309,6 +3441,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Protein', 'Budget'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 240, protein: 16.8, carbs: 16.2, fat: 12.2 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -3332,6 +3465,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 585, protein: 36.2, carbs: 74.2, fat: 15.1 },
     ingredients: [
       { name: 'Veggie meatballs', qtyPerServing: 6, unit: '' },
       { name: 'Passata', qtyPerServing: 100, unit: 'ml' },
@@ -3354,6 +3488,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Sharing'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 540, protein: 16.6, carbs: 31, fat: 41 },
     ingredients: [
       { name: 'Ready-rolled puff pastry', qtyPerServing: 0.25, unit: 'sheet' },
       { name: 'Mushrooms', qtyPerServing: 100, unit: 'g' },
@@ -3377,6 +3512,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 490, protein: 23.8, carbs: 79.9, fat: 8.3 },
     ingredients: [
       { name: 'Egg noodles', qtyPerServing: 100, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -3400,6 +3536,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Bulk Up'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 675, protein: 25.2, carbs: 10.9, fat: 60 },
     ingredients: [
       { name: 'Paneer', qtyPerServing: 100, unit: 'g' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -3424,6 +3561,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'High Protein', 'Gluten-free', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 220, protein: 16.2, carbs: 3.9, fat: 15.6 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 1.5, unit: '' },
       { name: 'Cherry tomatoes', qtyPerServing: 40, unit: 'g' },
@@ -3448,6 +3586,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 475, protein: 15.6, carbs: 89.5, fat: 6.4 },
     ingredients: [
       { name: 'Flat rice noodles', qtyPerServing: 100, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -3471,6 +3610,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 650, protein: 33.4, carbs: 51.9, fat: 34.3 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 90, unit: 'g' },
       { name: 'Sweet potato', qtyPerServing: 0.5, unit: '' },
@@ -3494,6 +3634,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 380, protein: 19.8, carbs: 19.5, fat: 25.5 },
     ingredients: [
       { name: 'Cauliflower', qtyPerServing: 0.4, unit: 'head' },
       { name: 'Cheddar (grated)', qtyPerServing: 50, unit: 'g' },
@@ -3517,6 +3658,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 365, protein: 8.7, carbs: 28.5, fat: 23.4 },
     ingredients: [
       { name: 'Frozen veggie dumplings', qtyPerServing: 8, unit: '' },
       { name: 'Soy sauce', qtyPerServing: 1, unit: 'tbsp' },
@@ -3540,6 +3682,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 320, protein: 21, carbs: 9.8, fat: 22 },
     ingredients: [
       { name: 'Paneer', qtyPerServing: 100, unit: 'g' },
       { name: 'Natural yoghurt', qtyPerServing: 2, unit: 'tbsp' },
@@ -3562,6 +3705,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 430, protein: 32.3, carbs: 38.5, fat: 15.3 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 120, unit: 'g' },
       { name: 'Butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -3585,6 +3729,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 485, protein: 33.2, carbs: 9.3, fat: 35 },
     ingredients: [
       { name: 'Salmon fillet', qtyPerServing: 1, unit: '' },
       { name: 'Tenderstem broccoli', qtyPerServing: 100, unit: 'g' },
@@ -3608,6 +3753,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 685, protein: 35.6, carbs: 58.2, fat: 34.2 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -3632,6 +3778,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 370, protein: 35.6, carbs: 4.6, fat: 22.7 },
     ingredients: [
       { name: 'Tuna steak', qtyPerServing: 1, unit: '' },
       { name: 'Mixed salad leaves', qtyPerServing: 1, unit: 'handful' },
@@ -3655,6 +3802,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 635, protein: 43.6, carbs: 78, fat: 14.7 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Breadcrumbs', qtyPerServing: 40, unit: 'g' },
@@ -3678,6 +3826,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 390, protein: 29.7, carbs: 10.3, fat: 26 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 120, unit: 'g' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -3701,6 +3850,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'High Protein', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 400, protein: 23.1, carbs: 45.9, fat: 14 },
     ingredients: [
       { name: 'Bagel', qtyPerServing: 1, unit: '' },
       { name: 'Smoked salmon', qtyPerServing: 50, unit: 'g' },
@@ -3723,6 +3873,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Cupboard mode'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 410, protein: 34.9, carbs: 48.2, fat: 7.3 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
@@ -3746,6 +3897,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 340, protein: 29.9, carbs: 11.2, fat: 19.1 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -3769,6 +3921,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 610, protein: 106.5, carbs: 13, fat: 14.4 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 1, unit: 'can' },
       { name: 'Avocado', qtyPerServing: 0.5, unit: '' },
@@ -3792,6 +3945,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 160, protein: 29.3, carbs: 6.3, fat: 2.1 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Natural yoghurt', qtyPerServing: 2, unit: 'tbsp' },
@@ -3814,6 +3968,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 585, protein: 27.9, carbs: 78, fat: 17.5 },
     ingredients: [
       { name: 'Linguine', qtyPerServing: 100, unit: 'g' },
       { name: 'White crab meat', qtyPerServing: 80, unit: 'g' },
@@ -3838,6 +3993,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 370, protein: 42.5, carbs: 42.6, fat: 2.3 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Red lentils', qtyPerServing: 50, unit: 'g' },
@@ -3861,6 +4017,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 63.6, carbs: 23.5, fat: 13.2 },
     ingredients: [
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -3883,6 +4040,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 685, protein: 46.8, carbs: 37.9, fat: 36 },
     ingredients: [
       { name: 'Salmon fillets', qtyPerServing: 1, unit: '' },
       { name: 'Puy lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -3906,6 +4064,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 490, protein: 40.6, carbs: 75.6, fat: 2.6 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Cajun seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -3929,6 +4088,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 450, protein: 20.1, carbs: 88.1, fat: 3 },
     ingredients: [
       { name: 'Orecchiette or pasta', qtyPerServing: 100, unit: 'g' },
       { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
@@ -3952,6 +4112,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 275, protein: 27.5, carbs: 3.4, fat: 16.7 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Red curry paste', qtyPerServing: 1, unit: 'tsp' },
@@ -3975,6 +4136,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'High Protein', 'Budget', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 1035, protein: 105.2, carbs: 37.3, fat: 47.9 },
     ingredients: [
       { name: 'Sardines (canned)', qtyPerServing: 1, unit: 'can' },
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
@@ -3997,6 +4159,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 215, protein: 21.8, carbs: 4.2, fat: 12.4 },
     ingredients: [
       { name: 'Cooked prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Mayonnaise', qtyPerServing: 1, unit: 'tbsp' },
@@ -4020,6 +4183,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'One-pan', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 500, protein: 36.7, carbs: 64.2, fat: 9.1 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -4043,6 +4207,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['High Protein', 'Gluten-free', 'Bulk Up'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 595, protein: 57.3, carbs: 75.4, fat: 6.5 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
@@ -4066,6 +4231,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 300, protein: 33.3, carbs: 9.9, fat: 14.8 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Avocado', qtyPerServing: 0.5, unit: '' },
@@ -4089,6 +4255,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 610, protein: 54.5, carbs: 79.4, fat: 7.1 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 100, unit: 'g' },
@@ -4112,6 +4279,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['High Protein', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: false },
+    macros: { calories: 350, protein: 51.6, carbs: 4.5, fat: 12.9 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Peanut butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -4134,6 +4302,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Calorie Conscious'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 420, protein: 38.7, carbs: 55.4, fat: 4.9 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice noodles', qtyPerServing: 60, unit: 'g' },
@@ -4157,6 +4326,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 520, protein: 60.8, carbs: 29.5, fat: 15.5 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -4180,6 +4350,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 375, protein: 37.4, carbs: 42, fat: 5.9 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -4203,6 +4374,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks', 'Budget'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 375, protein: 36.2, carbs: 44.5, fat: 4.6 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice', qtyPerServing: 50, unit: 'g' },
@@ -4227,6 +4399,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 640, protein: 49.2, carbs: 7.4, fat: 44.9 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Halloumi', qtyPerServing: 60, unit: 'g' },
@@ -4250,6 +4423,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 415, protein: 45.1, carbs: 44.5, fat: 5.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -4273,6 +4447,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 275, protein: 48, carbs: 6.1, fat: 5.9 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Lemon', qtyPerServing: 0.5, unit: '' },
@@ -4296,6 +4471,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 565, protein: 44.4, carbs: 82.9, fat: 5.1 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Rice noodles', qtyPerServing: 90, unit: 'g' },
@@ -4319,6 +4495,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Low Carb'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 445, protein: 48.6, carbs: 13.6, fat: 21 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
@@ -4342,6 +4519,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 340, protein: 35.5, carbs: 24.3, fat: 10.3 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Hot sauce', qtyPerServing: 1, unit: 'tbsp' },
@@ -4365,6 +4543,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 405, protein: 38.9, carbs: 27, fat: 15.4 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Apricots (dried)', qtyPerServing: 3, unit: '' },
@@ -4389,6 +4568,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 510, protein: 46.3, carbs: 60.7, fat: 7.5 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Honey', qtyPerServing: 1, unit: 'tbsp' },
@@ -4412,6 +4592,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'High Protein', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 515, protein: 47.3, carbs: 22.7, fat: 24.8 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Little gem lettuce', qtyPerServing: 1, unit: '' },
@@ -4434,6 +4615,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 565, protein: 60.9, carbs: 7.5, fat: 30.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Bacon', qtyPerServing: 2, unit: 'rasher' },
@@ -4456,6 +4638,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 665, protein: 40.2, carbs: 62.6, fat: 26.1 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1, unit: '' },
       { name: 'Chorizo', qtyPerServing: 40, unit: 'g' },
@@ -4479,6 +4662,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 440, protein: 48.4, carbs: 14.1, fat: 19.7 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 2, unit: '' },
       { name: 'Honey', qtyPerServing: 1, unit: 'tbsp' },
@@ -4501,6 +4685,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['High Protein', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 515, protein: 49, carbs: 9.6, fat: 31.6 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Avocado', qtyPerServing: 0.5, unit: '' },
@@ -4524,6 +4709,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Bulk Up'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: false },
+    macros: { calories: 635, protein: 41.9, carbs: 9.7, fat: 47.8 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -4547,6 +4733,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 390, protein: 49.3, carbs: 4.3, fat: 18.6 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Taco seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -4569,6 +4756,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 495, protein: 40.7, carbs: 17.5, fat: 30.9 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 150, unit: 'g' },
       { name: 'Broccoli', qtyPerServing: 0.75, unit: 'head' },
@@ -4592,6 +4780,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Freezes well'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 855, protein: 53.4, carbs: 102.3, fat: 25.9 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Breadcrumbs', qtyPerServing: 20, unit: 'g' },
@@ -4617,6 +4806,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 215, protein: 31.3, carbs: 7, fat: 7.2 },
     ingredients: [
       { name: 'Beef shin or stewing steak', qtyPerServing: 130, unit: 'g' },
       { name: 'Ale or extra beef stock', qtyPerServing: 100, unit: 'ml' },
@@ -4641,6 +4831,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 510, protein: 34.5, carbs: 59.1, fat: 14.5 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 130, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
@@ -4664,6 +4855,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 635, protein: 45.6, carbs: 76.8, fat: 15.6 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 130, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 100, unit: 'g' },
@@ -4687,6 +4879,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 395, protein: 32.1, carbs: 8, fat: 24.8 },
     ingredients: [
       { name: 'Lamb shoulder, diced', qtyPerServing: 150, unit: 'g' },
       { name: 'Carrot', qtyPerServing: 0.5, unit: '' },
@@ -4711,6 +4904,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 595, protein: 30.7, carbs: 41.5, fat: 33.3 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 130, unit: 'g' },
       { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
@@ -4734,6 +4928,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 595, protein: 36.2, carbs: 79.8, fat: 13.7 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 130, unit: 'g' },
       { name: 'Rice noodles', qtyPerServing: 90, unit: 'g' },
@@ -4757,6 +4952,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'High Fibre'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 580, protein: 39.1, carbs: 49.9, fat: 24.3 },
     ingredients: [
       { name: 'Lamb shoulder, diced', qtyPerServing: 120, unit: 'g' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -4781,6 +4977,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 725, protein: 40.5, carbs: 40.5, fat: 48 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Mushrooms', qtyPerServing: 80, unit: 'g' },
@@ -4805,6 +5002,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 500, protein: 28.9, carbs: 69.7, fat: 11.2 },
     ingredients: [
       { name: 'Beef sirloin, thinly sliced', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice noodles', qtyPerServing: 80, unit: 'g' },
@@ -4828,6 +5026,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 385, protein: 35.6, carbs: 15.2, fat: 21.7 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Spinach', qtyPerServing: 1, unit: 'handful' },
@@ -4852,6 +5051,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 465, protein: 27.3, carbs: 6.1, fat: 36.5 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Feta', qtyPerServing: 40, unit: 'g' },
@@ -4875,6 +5075,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 410, protein: 34.8, carbs: 38.2, fat: 13.3 },
     ingredients: [
       { name: 'Stewing beef, diced', qtyPerServing: 130, unit: 'g' },
       { name: 'Potatoes', qtyPerServing: 200, unit: 'g' },
@@ -4899,6 +5100,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 580, protein: 28.8, carbs: 40.9, fat: 32.6 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 100, unit: 'g' },
       { name: 'Flatbread', qtyPerServing: 1, unit: '' },
@@ -4922,6 +5124,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 340, protein: 32.1, carbs: 15.1, fat: 16.7 },
     ingredients: [
       { name: 'Pork chops', qtyPerServing: 1, unit: '' },
       { name: 'Apple', qtyPerServing: 0.5, unit: '' },
@@ -4944,6 +5147,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 595, protein: 20.3, carbs: 33.7, fat: 40.6 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
@@ -4967,6 +5171,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 465, protein: 30.1, carbs: 39.1, fat: 20.2 },
     ingredients: [
       { name: 'Pork mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Apple', qtyPerServing: 0.25, unit: '' },
@@ -4989,6 +5194,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Cupboard mode', 'Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 520, protein: 27.7, carbs: 47.7, fat: 23.1 },
     ingredients: [
       { name: 'Bacon', qtyPerServing: 60, unit: 'g' },
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
@@ -5012,6 +5218,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 440, protein: 34.9, carbs: 56, fat: 8.7 },
     ingredients: [
       { name: 'Pork strips', qtyPerServing: 100, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 70, unit: 'g' },
@@ -5035,6 +5242,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 780, protein: 33, carbs: 79.5, fat: 34.5 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 1.5, unit: '' },
       { name: 'Pasta', qtyPerServing: 90, unit: 'g' },
@@ -5058,6 +5266,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 490, protein: 34.7, carbs: 53.9, fat: 14.3 },
     ingredients: [
       { name: 'Pork strips', qtyPerServing: 130, unit: 'g' },
       { name: 'Mushrooms', qtyPerServing: 80, unit: 'g' },
@@ -5081,6 +5290,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Gluten-free', 'High Protein'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 500, protein: 43, carbs: 41.9, fat: 16.8 },
     ingredients: [
       { name: 'Gammon steak', qtyPerServing: 1, unit: '' },
       { name: 'Honey', qtyPerServing: 1, unit: 'tsp' },
@@ -5103,6 +5313,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 285, protein: 25.9, carbs: 6.1, fat: 17.2 },
     ingredients: [
       { name: 'Pork mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Lime', qtyPerServing: 0.5, unit: '' },
@@ -5126,6 +5337,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'High Fibre', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 640, protein: 32.8, carbs: 44.6, fat: 34.2 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Green lentils (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -5150,6 +5362,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 575, protein: 41.4, carbs: 77.7, fat: 10.2 },
     ingredients: [
       { name: 'Pork strips', qtyPerServing: 120, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 100, unit: 'g' },
@@ -5173,6 +5386,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 645, protein: 33.2, carbs: 48.7, fat: 33.8 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Cannellini beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -5197,6 +5411,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 545, protein: 29.3, carbs: 63.7, fat: 17.7 },
     ingredients: [
       { name: 'Pork shoulder, diced', qtyPerServing: 130, unit: 'g' },
       { name: 'Chinese five spice', qtyPerServing: 0.5, unit: 'tsp' },
@@ -5220,6 +5435,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 630, protein: 20.5, carbs: 44.5, fat: 40.4 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Apple', qtyPerServing: 0.5, unit: '' },
@@ -5243,6 +5459,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Batch cooks', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 365, protein: 20.1, carbs: 64.7, fat: 1.9 },
     ingredients: [
       { name: 'Green lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Sweet potato', qtyPerServing: 0.75, unit: '' },
@@ -5267,6 +5484,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 480, protein: 24.2, carbs: 71.4, fat: 11 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 120, unit: 'g' },
       { name: 'Orange juice', qtyPerServing: 60, unit: 'ml' },
@@ -5290,6 +5508,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 525, protein: 30.9, carbs: 37.6, fat: 27.3 },
     ingredients: [
       { name: 'Vegan sausages', qtyPerServing: 2, unit: '' },
       { name: 'Butter beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -5312,6 +5531,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Low Carb', 'Calorie Conscious', 'Quick'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 290, protein: 14.4, carbs: 32.4, fat: 13.1 },
     ingredients: [
       { name: 'Little gem lettuce', qtyPerServing: 1, unit: '' },
       { name: 'Cashew nuts', qtyPerServing: 1, unit: 'tbsp' },
@@ -5335,6 +5555,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre', 'Budget'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 270, protein: 16.4, carbs: 48.9, fat: 1.3 },
     ingredients: [
       { name: 'Haricot beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -5359,6 +5580,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 440, protein: 7.8, carbs: 54.1, fat: 24.8 },
     ingredients: [
       { name: 'Butternut squash', qtyPerServing: 0.4, unit: '' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -5383,6 +5605,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 310, protein: 10.6, carbs: 65.4, fat: 0.9 },
     ingredients: [
       { name: 'Mushrooms', qtyPerServing: 150, unit: 'g' },
       { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 1, unit: 'tbsp' },
@@ -5406,6 +5629,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Low Carb', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 290, protein: 10, carbs: 27.4, fat: 16.5 },
     ingredients: [
       { name: 'Portobello mushrooms', qtyPerServing: 2, unit: '' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -5429,6 +5653,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Cupboard mode', 'Quick', 'Budget'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 325, protein: 9.6, carbs: 54.2, fat: 8.6 },
     ingredients: [
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
       { name: 'Broccoli stems, chopped', qtyPerServing: 0.5, unit: 'head' },
@@ -5451,6 +5676,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 320, protein: 7.9, carbs: 67.3, fat: 1.4 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -5474,6 +5700,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Quick', 'Calorie Conscious'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 410, protein: 9.5, carbs: 75.7, fat: 8.1 },
     ingredients: [
       { name: 'Rice noodles', qtyPerServing: 80, unit: 'g' },
       { name: 'Peanut butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -5497,6 +5724,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 725, protein: 23, carbs: 125.4, fat: 16.8 },
     ingredients: [
       { name: 'Ripe plantain', qtyPerServing: 0.5, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -5520,6 +5748,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 570, protein: 27, carbs: 111.2, fat: 4 },
     ingredients: [
       { name: 'Macaroni', qtyPerServing: 100, unit: 'g' },
       { name: 'Butternut squash', qtyPerServing: 0.2, unit: '' },
@@ -5543,6 +5772,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Budget'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 190, protein: 6.8, carbs: 38.3, fat: 1 },
     ingredients: [
       { name: 'Baking potato', qtyPerServing: 1, unit: '' },
       { name: 'Frozen peas', qtyPerServing: 50, unit: 'g' },
@@ -5565,6 +5795,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Budget'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 430, protein: 17.1, carbs: 77.2, fat: 6.1 },
     ingredients: [
       { name: 'Onion', qtyPerServing: 0.5, unit: '' },
       { name: 'Gram flour', qtyPerServing: 40, unit: 'g' },
@@ -5588,6 +5819,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'One-pan', 'Budget'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 380, protein: 15.5, carbs: 73.6, fat: 2.3 },
     ingredients: [
       { name: 'Orzo', qtyPerServing: 80, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -5611,6 +5843,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 1,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 155, protein: 10.1, carbs: 17, fat: 7.2 },
     ingredients: [
       { name: 'Cucumber', qtyPerServing: 1, unit: '' },
       { name: 'Edamame beans (frozen)', qtyPerServing: 60, unit: 'g' },
@@ -5634,6 +5867,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Calorie Conscious'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 300, protein: 9.4, carbs: 64.7, fat: 1.5 },
     ingredients: [
       { name: 'Mushrooms', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice noodles', qtyPerServing: 70, unit: 'g' },
@@ -5657,6 +5891,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 170, protein: 13.9, carbs: 16.8, fat: 6.5 },
     ingredients: [
       { name: 'Cauliflower', qtyPerServing: 0.4, unit: 'head' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -5680,6 +5915,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 465, protein: 17.1, carbs: 93.3, fat: 2.3 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.5, unit: '' },
@@ -5703,6 +5939,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 390, protein: 16.8, carbs: 37.9, fat: 17.5 },
     ingredients: [
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
       { name: 'Cheddar (grated)', qtyPerServing: 40, unit: 'g' },
@@ -5725,6 +5962,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 250, protein: 7.7, carbs: 44.6, fat: 4.3 },
     ingredients: [
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
@@ -5749,6 +5987,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 520, protein: 25.4, carbs: 62.6, fat: 18.5 },
     ingredients: [
       { name: 'Ciabatta roll', qtyPerServing: 1, unit: '' },
       { name: 'Mozzarella', qtyPerServing: 50, unit: 'g' },
@@ -5772,6 +6011,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 375, protein: 12.8, carbs: 64.8, fat: 6.3 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -5795,6 +6035,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 280, protein: 7.2, carbs: 44.1, fat: 8 },
     ingredients: [
       { name: 'Filo pastry', qtyPerServing: 2, unit: 'sheet' },
       { name: 'Potatoes', qtyPerServing: 100, unit: 'g' },
@@ -5819,6 +6060,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 340, protein: 11.2, carbs: 48, fat: 11.8 },
     ingredients: [
       { name: 'Bagel', qtyPerServing: 1, unit: '' },
       { name: 'Cream cheese', qtyPerServing: 30, unit: 'g' },
@@ -5840,6 +6082,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 580, protein: 14.2, carbs: 54.5, fat: 35.3 },
     ingredients: [
       { name: 'Mixed frozen veg', qtyPerServing: 100, unit: 'g' },
       { name: 'Milk', qtyPerServing: 60, unit: 'ml' },
@@ -5864,6 +6107,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Low Carb'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 455, protein: 19.4, carbs: 13.9, fat: 35.4 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 80, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
@@ -5886,6 +6130,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 715, protein: 33.9, carbs: 76.2, fat: 28 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 100, unit: 'g' },
       { name: 'Panko breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -5909,6 +6154,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Sharing'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 640, protein: 29.6, carbs: 80.4, fat: 21.7 },
     ingredients: [
       { name: 'Frozen oven chips', qtyPerServing: 150, unit: 'g' },
       { name: 'Kidney beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -5932,6 +6178,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 550, protein: 26.3, carbs: 66.9, fat: 19 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
       { name: 'Frozen oven chips', qtyPerServing: 150, unit: 'g' },
@@ -5953,6 +6200,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 385, protein: 16.8, carbs: 59.8, fat: 7.5 },
     ingredients: [
       { name: 'Cooked risotto rice (leftover)', qtyPerServing: 120, unit: 'g' },
       { name: 'Mozzarella', qtyPerServing: 20, unit: 'g' },
@@ -5976,6 +6224,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 490, protein: 23.3, carbs: 46.9, fat: 22.1 },
     ingredients: [
       { name: 'Steamed bao buns', qtyPerServing: 2, unit: '' },
       { name: 'Halloumi', qtyPerServing: 80, unit: 'g' },
@@ -5998,6 +6247,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick', 'Calorie Conscious', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 120, protein: 8.7, carbs: 8, fat: 6.2 },
     ingredients: [
       { name: 'Vegetable stock', qtyPerServing: 300, unit: 'ml' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -6021,6 +6271,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 435, protein: 19.2, carbs: 83.5, fat: 2 },
     ingredients: [
       { name: 'Red lentils', qtyPerServing: 50, unit: 'g' },
       { name: 'Rice', qtyPerServing: 60, unit: 'g' },
@@ -6044,6 +6295,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 625, protein: 38.9, carbs: 66.9, fat: 21.2 },
     ingredients: [
       { name: 'Salmon fillets', qtyPerServing: 1, unit: '' },
       { name: 'Rice noodles', qtyPerServing: 70, unit: 'g' },
@@ -6067,6 +6319,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 535, protein: 63, carbs: 30.9, fat: 17.2 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Cannellini beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -6090,6 +6343,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 525, protein: 35.1, carbs: 62.7, fat: 13.4 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Chorizo', qtyPerServing: 30, unit: 'g' },
@@ -6113,6 +6367,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 410, protein: 39, carbs: 52.8, fat: 5.5 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -6137,6 +6392,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 480, protein: 27.3, carbs: 64.6, fat: 12.6 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Avocado', qtyPerServing: 0.5, unit: '' },
@@ -6160,6 +6416,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 770, protein: 46.3, carbs: 79.8, fat: 28.7 },
     ingredients: [
       { name: 'Salmon fillets', qtyPerServing: 1, unit: '' },
       { name: 'Pasta', qtyPerServing: 90, unit: 'g' },
@@ -6183,6 +6440,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 395, protein: 29.4, carbs: 11.9, fat: 25 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -6206,6 +6464,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Budget', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 755, protein: 67.3, carbs: 86.8, fat: 15.3 },
     ingredients: [
       { name: 'Pasta', qtyPerServing: 90, unit: 'g' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -6229,6 +6488,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 480, protein: 34, carbs: 75.8, fat: 3.2 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 120, unit: 'g' },
       { name: 'Panko breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -6252,6 +6512,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Low Carb', 'One-pan'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 410, protein: 31.9, carbs: 6.7, fat: 27.5 },
     ingredients: [
       { name: 'Salmon fillet', qtyPerServing: 1, unit: '' },
       { name: 'Courgette', qtyPerServing: 0.5, unit: '' },
@@ -6275,6 +6536,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 325, protein: 40.7, carbs: 34.6, fat: 2.1 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Red lentils', qtyPerServing: 50, unit: 'g' },
@@ -6298,6 +6560,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick', 'Low Carb'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 595, protein: 32.4, carbs: 39.1, fat: 33.2 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 120, unit: 'g' },
       { name: 'Garlic', qtyPerServing: 2, unit: 'clove' },
@@ -6321,6 +6584,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'High Protein', 'Low Carb', 'Gluten-free'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 755, protein: 117.4, carbs: 2, fat: 29.3 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 1, unit: 'can' },
       { name: 'Egg', qtyPerServing: 2, unit: '' },
@@ -6343,6 +6607,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 360, protein: 32.9, carbs: 44.9, fat: 5.6 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Plain flour', qtyPerServing: 2, unit: 'tbsp' },
@@ -6366,6 +6631,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Protein', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 525, protein: 63.6, carbs: 28.5, fat: 17.3 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Butter beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -6389,6 +6655,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 500, protein: 35.5, carbs: 51.2, fat: 16.6 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Couscous', qtyPerServing: 60, unit: 'g' },
@@ -6412,6 +6679,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 160, protein: 22.4, carbs: 16.4, fat: 1.5 },
     ingredients: [
       { name: 'Cooked prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Mango', qtyPerServing: 0.25, unit: '' },
@@ -6435,6 +6703,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 445, protein: 59.4, carbs: 4.8, fat: 20 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Mozzarella', qtyPerServing: 40, unit: 'g' },
@@ -6458,6 +6727,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 210, protein: 10.3, carbs: 26.6, fat: 7.4 },
     ingredients: [
       { name: 'Frozen chicken gyoza', qtyPerServing: 6, unit: '' },
       { name: 'Chicken stock', qtyPerServing: 350, unit: 'ml' },
@@ -6481,6 +6751,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 755, protein: 54.2, carbs: 54.1, fat: 33.3 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Bacon', qtyPerServing: 2, unit: 'rasher' },
@@ -6504,6 +6775,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 490, protein: 47.1, carbs: 35.3, fat: 16.3 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Corn tortillas', qtyPerServing: 2, unit: '' },
@@ -6527,6 +6799,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 725, protein: 53.4, carbs: 52.3, fat: 33.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Mixed frozen veg', qtyPerServing: 80, unit: 'g' },
@@ -6551,6 +6824,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 310, protein: 36.6, carbs: 5.6, fat: 14.8 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 1, unit: 'tbsp' },
@@ -6572,6 +6846,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Sharing'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 1250, protein: 95.3, carbs: 5.9, fat: 82.2 },
     ingredients: [
       { name: 'Chicken wings', qtyPerServing: 6, unit: '' },
       { name: 'Lemon', qtyPerServing: 0.5, unit: '' },
@@ -6594,6 +6869,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 550, protein: 53.9, carbs: 2.1, fat: 34.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Halloumi', qtyPerServing: 60, unit: 'g' },
@@ -6616,6 +6892,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 765, protein: 45.9, carbs: 62.1, fat: 36.4 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Ready-rolled shortcrust pastry', qtyPerServing: 0.33, unit: 'sheet' },
@@ -6640,6 +6917,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'High Protein', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 325, protein: 41.3, carbs: 15.4, fat: 9.9 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -6663,6 +6941,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 305, protein: 48.5, carbs: 12.5, fat: 5.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Pineapple chunks (canned)', qtyPerServing: 60, unit: 'g' },
@@ -6684,6 +6963,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Cupboard mode', 'Quick', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 545, protein: 50.1, carbs: 48.7, fat: 15.4 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
@@ -6707,6 +6987,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 440, protein: 56.7, carbs: 24.9, fat: 10.8 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
       { name: 'Breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -6730,6 +7011,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: false },
+    macros: { calories: 375, protein: 39.5, carbs: 12, fat: 18.1 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -6753,6 +7035,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 575, protein: 54.4, carbs: 70.4, fat: 7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 90, unit: 'g' },
@@ -6776,6 +7059,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 420, protein: 50.6, carbs: 38.1, fat: 6 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Red lentils', qtyPerServing: 40, unit: 'g' },
@@ -6800,6 +7084,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'Calorie Conscious'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 300, protein: 38.2, carbs: 8.6, fat: 11.9 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Orange', qtyPerServing: 0.5, unit: '' },
@@ -6822,6 +7107,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 380, protein: 39.2, carbs: 19.4, fat: 16.2 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Onion', qtyPerServing: 0.75, unit: '' },
@@ -6845,6 +7131,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 590, protein: 58, carbs: 62, fat: 10.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Orzo', qtyPerServing: 80, unit: 'g' },
@@ -6868,6 +7155,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Low Carb', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 455, protein: 40.2, carbs: 5.9, fat: 31.4 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Taco seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -6890,6 +7178,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 605, protein: 31.3, carbs: 33.7, fat: 37.5 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 130, unit: 'g' },
       { name: 'Mint (optional)', qtyPerServing: 1, unit: 'tbsp' },
@@ -6912,6 +7201,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Low Carb'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 430, protein: 30.4, carbs: 12.3, fat: 28.4 },
     ingredients: [
       { name: 'Beef steak, cubed', qtyPerServing: 130, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
@@ -6933,6 +7223,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 530, protein: 34.2, carbs: 11.6, fat: 39.6 },
     ingredients: [
       { name: 'Stewing beef, diced', qtyPerServing: 130, unit: 'g' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -6957,6 +7248,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 610, protein: 26.2, carbs: 59.2, fat: 28.4 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
@@ -6980,6 +7272,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 320, protein: 33.3, carbs: 3.5, fat: 20.5 },
     ingredients: [
       { name: 'Beef mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Little gem lettuce', qtyPerServing: 4, unit: 'leaf' },
@@ -7003,6 +7296,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 605, protein: 27.4, carbs: 51.3, fat: 31.1 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 130, unit: 'g' },
       { name: 'Shawarma seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -7025,6 +7319,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 465, protein: 35.8, carbs: 4.8, fat: 32.7 },
     ingredients: [
       { name: 'Beef steak, cubed', qtyPerServing: 100, unit: 'g' },
       { name: 'Halloumi', qtyPerServing: 60, unit: 'g' },
@@ -7046,6 +7341,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: false },
+    macros: { calories: 605, protein: 42.9, carbs: 69.3, fat: 17 },
     ingredients: [
       { name: 'Pork strips', qtyPerServing: 120, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 90, unit: 'g' },
@@ -7069,6 +7365,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 360, protein: 30.5, carbs: 39.7, fat: 9.2 },
     ingredients: [
       { name: 'Pork strips', qtyPerServing: 120, unit: 'g' },
       { name: 'Pineapple chunks (canned)', qtyPerServing: 50, unit: 'g' },
@@ -7091,6 +7388,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 680, protein: 28.3, carbs: 31.1, fat: 48.1 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Butter beans (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -7113,6 +7411,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 385, protein: 35.1, carbs: 38.5, fat: 9.8 },
     ingredients: [
       { name: 'Pork chops', qtyPerServing: 1, unit: '' },
       { name: 'Apple', qtyPerServing: 0.5, unit: '' },
@@ -7135,6 +7434,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 830, protein: 41.1, carbs: 85.6, fat: 34.4 },
     ingredients: [
       { name: 'Bacon', qtyPerServing: 50, unit: 'g' },
       { name: 'Macaroni', qtyPerServing: 100, unit: 'g' },
@@ -7158,6 +7458,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 515, protein: 19.2, carbs: 75.8, fat: 15 },
     ingredients: [
       { name: 'Egg noodles', qtyPerServing: 100, unit: 'g' },
       { name: 'Peanut butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -7181,6 +7482,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 16.4, carbs: 56.3, fat: 21.3 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Harissa paste', qtyPerServing: 1, unit: 'tbsp' },
@@ -7204,6 +7506,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre', 'Budget'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 195, protein: 12, carbs: 34.7, fat: 1.2 },
     ingredients: [
       { name: 'Carrot', qtyPerServing: 1, unit: '' },
       { name: 'Red lentils', qtyPerServing: 40, unit: 'g' },
@@ -7228,6 +7531,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 275, protein: 23.7, carbs: 7.7, fat: 18 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 120, unit: 'g' },
       { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 1, unit: 'tbsp' },
@@ -7250,6 +7554,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Budget', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 235, protein: 10.6, carbs: 43.8, fat: 1.8 },
     ingredients: [
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Orzo', qtyPerServing: 40, unit: 'g' },
@@ -7273,6 +7578,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 410, protein: 9.5, carbs: 94.1, fat: 1.4 },
     ingredients: [
       { name: 'Butternut squash', qtyPerServing: 0.3, unit: '' },
       { name: 'Risotto rice', qtyPerServing: 70, unit: 'g' },
@@ -7296,6 +7602,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 535, protein: 18.3, carbs: 71.3, fat: 17.8 },
     ingredients: [
       { name: 'Flour tortillas', qtyPerServing: 2, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -7318,6 +7625,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 525, protein: 16.8, carbs: 53.7, fat: 29.2 },
     ingredients: [
       { name: 'Aubergine', qtyPerServing: 0.5, unit: '' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -7341,6 +7649,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Protein', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 230, protein: 17.1, carbs: 6.7, fat: 16.5 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 100, unit: 'g' },
       { name: 'Turmeric', qtyPerServing: 0.25, unit: 'tsp' },
@@ -7364,6 +7673,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 295, protein: 19.5, carbs: 54, fat: 1.7 },
     ingredients: [
       { name: 'Black beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Vegetable stock', qtyPerServing: 200, unit: 'ml' },
@@ -7388,6 +7698,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 435, protein: 20.5, carbs: 80.4, fat: 6.1 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
@@ -7411,6 +7722,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 295, protein: 9.5, carbs: 62, fat: 1.3 },
     ingredients: [
       { name: 'Mushrooms', qtyPerServing: 100, unit: 'g' },
       { name: 'Risotto rice', qtyPerServing: 70, unit: 'g' },
@@ -7434,6 +7746,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick', 'Budget'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 445, protein: 10.2, carbs: 66.8, fat: 18.2 },
     ingredients: [
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Plain flour', qtyPerServing: 40, unit: 'g' },
@@ -7457,6 +7770,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre', 'Budget'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 355, protein: 18.1, carbs: 59, fat: 6.3 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -7481,6 +7795,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 165, protein: 18, carbs: 5.9, fat: 9 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 100, unit: 'g' },
       { name: 'Basil (optional)', qtyPerServing: 1, unit: 'handful' },
@@ -7504,6 +7819,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'High Fibre', 'Budget'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 575, protein: 20.9, carbs: 82.1, fat: 17 },
     ingredients: [
       { name: 'Green lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Rice', qtyPerServing: 60, unit: 'g' },
@@ -7527,6 +7843,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 360, protein: 18.9, carbs: 35.9, fat: 15.5 },
     ingredients: [
       { name: 'Cannelloni tubes', qtyPerServing: 3, unit: '' },
       { name: 'Ricotta', qtyPerServing: 60, unit: 'g' },
@@ -7551,6 +7868,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 405, protein: 18.4, carbs: 56.8, fat: 13.3 },
     ingredients: [
       { name: 'Cauliflower', qtyPerServing: 0.3, unit: 'head' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -7574,6 +7892,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 570, protein: 31, carbs: 45, fat: 28.9 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 100, unit: 'g' },
       { name: 'Shawarma seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -7597,6 +7916,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Budget'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 350, protein: 19.6, carbs: 40.7, fat: 12.4 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
@@ -7620,6 +7940,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 585, protein: 23.2, carbs: 56.2, fat: 28.1 },
     ingredients: [
       { name: 'Bread', qtyPerServing: 3, unit: 'slice' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -7643,6 +7964,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Comfort food', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 210, protein: 10.3, carbs: 26.6, fat: 7.4 },
     ingredients: [
       { name: 'Frozen veggie gyoza', qtyPerServing: 6, unit: '' },
       { name: 'Vegetable stock', qtyPerServing: 350, unit: 'ml' },
@@ -7666,6 +7988,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 24.9, carbs: 50.3, fat: 18.3 },
     ingredients: [
       { name: 'Veggie sausages', qtyPerServing: 2, unit: '' },
       { name: 'Potatoes', qtyPerServing: 200, unit: 'g' },
@@ -7689,6 +8012,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 230, protein: 16.8, carbs: 14.1, fat: 12.2 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
       { name: 'Spinach', qtyPerServing: 1, unit: 'handful' },
@@ -7712,6 +8036,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Cupboard mode', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 360, protein: 14.8, carbs: 60.4, fat: 7.1 },
     ingredients: [
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -7735,6 +8060,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Budget'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 350, protein: 13.6, carbs: 29.1, fat: 19.9 },
     ingredients: [
       { name: 'Baking potato', qtyPerServing: 1, unit: '' },
       { name: 'Cheddar (grated)', qtyPerServing: 40, unit: 'g' },
@@ -7756,6 +8082,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 545, protein: 30.7, carbs: 37.6, fat: 28.9 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 100, unit: 'g' },
       { name: 'Breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -7779,6 +8106,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 220, protein: 10.1, carbs: 28.6, fat: 7.6 },
     ingredients: [
       { name: 'Frozen veggie dumplings', qtyPerServing: 6, unit: '' },
       { name: 'Miso paste (gluten-free)', qtyPerServing: 1, unit: 'tbsp' },
@@ -7801,6 +8129,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 220, protein: 19.6, carbs: 20.1, fat: 6.7 },
     ingredients: [
       { name: 'Meat-free chicken-style pieces', qtyPerServing: 100, unit: 'g' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -7823,6 +8152,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Fibre'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 505, protein: 27, carbs: 73.3, fat: 11.7 },
     ingredients: [
       { name: 'Baking potato', qtyPerServing: 1, unit: '' },
       { name: 'Kidney beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -7846,6 +8176,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks', 'Comfort food'],
     baseServings: 4,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 725, protein: 37.3, carbs: 106.6, fat: 14.6 },
     ingredients: [
       { name: 'Pasta', qtyPerServing: 90, unit: 'g' },
       { name: 'Green lentils (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -7870,6 +8201,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 625, protein: 43.9, carbs: 47.7, fat: 25.8 },
     ingredients: [
       { name: 'Salmon fillets', qtyPerServing: 1, unit: '' },
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
@@ -7893,6 +8225,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 600, protein: 64.1, carbs: 39.9, fat: 20.8 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -7916,6 +8249,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 330, protein: 37.4, carbs: 13, fat: 13.1 },
     ingredients: [
       { name: 'Cod fillet', qtyPerServing: 1, unit: '' },
       { name: 'Chorizo', qtyPerServing: 30, unit: 'g' },
@@ -7938,6 +8272,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 390, protein: 29.7, carbs: 10.3, fat: 26 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 120, unit: 'g' },
       { name: 'Spinach', qtyPerServing: 1, unit: 'handful' },
@@ -7961,6 +8296,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 305, protein: 34.1, carbs: 35.8, fat: 2.4 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Orzo', qtyPerServing: 40, unit: 'g' },
@@ -7984,6 +8320,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 715, protein: 69, carbs: 74.5, fat: 14.3 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -8007,6 +8344,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Calorie Conscious'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 165, protein: 29.1, carbs: 8.6, fat: 2.2 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 120, unit: 'g' },
       { name: 'Vegetable stock', qtyPerServing: 350, unit: 'ml' },
@@ -8030,6 +8368,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 505, protein: 35.4, carbs: 51.1, fat: 16.6 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Couscous', qtyPerServing: 60, unit: 'g' },
@@ -8053,6 +8392,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 495, protein: 35.5, carbs: 80.9, fat: 2.9 },
     ingredients: [
       { name: 'Linguine', qtyPerServing: 100, unit: 'g' },
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
@@ -8076,6 +8416,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 370, protein: 39.1, carbs: 48.6, fat: 2.8 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -8099,6 +8440,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Low Carb', 'Gluten-free', 'High Protein', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 340, protein: 15.8, carbs: 6.9, fat: 27.7 },
     ingredients: [
       { name: 'Smoked mackerel', qtyPerServing: 80, unit: 'g' },
       { name: 'Cooked beetroot', qtyPerServing: 60, unit: 'g' },
@@ -8121,6 +8463,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 500, protein: 27.6, carbs: 44.3, fat: 26 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Butternut squash', qtyPerServing: 0.3, unit: '' },
@@ -8144,6 +8487,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'High Fibre', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 690, protein: 59.6, carbs: 97.2, fat: 6 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Black beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -8167,6 +8511,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 330, protein: 42.2, carbs: 14.4, fat: 11.1 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Plain flour', qtyPerServing: 1, unit: 'tbsp' },
@@ -8190,6 +8535,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 505, protein: 45.1, carbs: 57.9, fat: 9.1 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Mushrooms', qtyPerServing: 80, unit: 'g' },
@@ -8213,6 +8559,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 590, protein: 48.8, carbs: 51.2, fat: 20.2 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Couscous', qtyPerServing: 60, unit: 'g' },
@@ -8236,6 +8583,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 400, protein: 42.5, carbs: 29.5, fat: 11.8 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.5, unit: '' },
@@ -8259,6 +8607,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 500, protein: 48.7, carbs: 38.1, fat: 15.9 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Cannellini beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -8283,6 +8632,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 605, protein: 53.4, carbs: 77.7, fat: 7.4 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Egg noodles', qtyPerServing: 100, unit: 'g' },
@@ -8306,6 +8656,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 625, protein: 51.5, carbs: 56.6, fat: 20.7 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Orzo', qtyPerServing: 70, unit: 'g' },
@@ -8329,6 +8680,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 525, protein: 45.3, carbs: 60.8, fat: 9.3 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Frozen peas', qtyPerServing: 50, unit: 'g' },
@@ -8352,6 +8704,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 520, protein: 41.2, carbs: 51.3, fat: 15.1 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Soy sauce', qtyPerServing: 1.5, unit: 'tbsp' },
@@ -8376,6 +8729,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'High Fibre', 'High Protein', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 550, protein: 52, carbs: 40.5, fat: 20.2 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Black beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -8398,6 +8752,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 285, protein: 20.7, carbs: 28.1, fat: 10.8 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 120, unit: 'g' },
       { name: 'Pineapple chunks (canned)', qtyPerServing: 50, unit: 'g' },
@@ -8421,6 +8776,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Fibre', 'Budget'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 265, protein: 11, carbs: 55, fat: 1.7 },
     ingredients: [
       { name: 'Pearl barley', qtyPerServing: 60, unit: 'g' },
       { name: 'Mushrooms', qtyPerServing: 100, unit: 'g' },
@@ -8444,6 +8800,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Protein', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 380, protein: 25.9, carbs: 45.6, fat: 13.4 },
     ingredients: [
       { name: 'Tempeh', qtyPerServing: 100, unit: 'g' },
       { name: 'Taco seasoning', qtyPerServing: 1, unit: 'tsp' },
@@ -8467,6 +8824,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 500, protein: 20.9, carbs: 85.2, fat: 8.8 },
     ingredients: [
       { name: 'Chickpeas (canned)', qtyPerServing: 0.4, unit: 'can' },
       { name: 'Sweet potato', qtyPerServing: 0.3, unit: '' },
@@ -8490,6 +8848,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 390, protein: 20.4, carbs: 56.7, fat: 9.6 },
     ingredients: [
       { name: 'Red lentils', qtyPerServing: 60, unit: 'g' },
       { name: 'Breadcrumbs', qtyPerServing: 20, unit: 'g' },
@@ -8513,6 +8872,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 340, protein: 7, carbs: 43.4, fat: 16.1 },
     ingredients: [
       { name: 'Spring roll wrappers', qtyPerServing: 4, unit: '' },
       { name: 'Carrot', qtyPerServing: 0.5, unit: '' },
@@ -8536,6 +8896,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Batch cooks'],
     baseServings: 4,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 22, carbs: 53.7, fat: 18.3 },
     ingredients: [
       { name: 'Green lentils (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Aubergine', qtyPerServing: 0.5, unit: '' },
@@ -8560,6 +8921,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 360, protein: 9.8, carbs: 61.4, fat: 8 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Peanut butter', qtyPerServing: 1, unit: 'tbsp' },
@@ -8583,6 +8945,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 670, protein: 26.7, carbs: 65.5, fat: 35.3 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 100, unit: 'g' },
       { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
@@ -8606,6 +8969,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'Gluten-free', 'Budget'],
     baseServings: 3,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 205, protein: 6.3, carbs: 43.3, fat: 1.1 },
     ingredients: [
       { name: 'Potatoes', qtyPerServing: 200, unit: 'g' },
       { name: 'Mustard seeds', qtyPerServing: 0.5, unit: 'tsp' },
@@ -8629,6 +8993,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegan', 'High Protein'],
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 395, protein: 25.5, carbs: 46.6, fat: 12.3 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 120, unit: 'g' },
       { name: 'Breadcrumbs', qtyPerServing: 40, unit: 'g' },
@@ -8651,6 +9016,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 540, protein: 29.8, carbs: 69.4, fat: 16.3 },
     ingredients: [
       { name: 'Corn tortillas', qtyPerServing: 2, unit: '' },
       { name: 'Black beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -8675,6 +9041,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick', 'Cupboard mode'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 505, protein: 24.9, carbs: 79.9, fat: 8.6 },
     ingredients: [
       { name: 'Egg noodles', qtyPerServing: 100, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -8697,6 +9064,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 575, protein: 26.4, carbs: 65.5, fat: 21.5 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Halloumi', qtyPerServing: 80, unit: 'g' },
@@ -8720,6 +9088,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Fibre'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 370, protein: 16.2, carbs: 67.4, fat: 4.8 },
     ingredients: [
       { name: 'Baking potato', qtyPerServing: 1, unit: '' },
       { name: 'Chickpeas (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -8742,6 +9111,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 470, protein: 23.8, carbs: 74.1, fat: 9 },
     ingredients: [
       { name: 'Ramen noodles', qtyPerServing: 90, unit: 'g' },
       { name: 'Miso paste (gluten-free)', qtyPerServing: 1, unit: 'tbsp' },
@@ -8765,6 +9135,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 230, protein: 11.2, carbs: 35.9, fat: 4.6 },
     ingredients: [
       { name: 'Grated courgette', qtyPerServing: 0.5, unit: '' },
       { name: 'Breadcrumbs', qtyPerServing: 30, unit: 'g' },
@@ -8788,6 +9159,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Sharing'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 465, protein: 14.5, carbs: 40.4, fat: 26.7 },
     ingredients: [
       { name: 'Frozen oven chips', qtyPerServing: 150, unit: 'g' },
       { name: 'Vegetable stock', qtyPerServing: 100, unit: 'ml' },
@@ -8811,6 +9183,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 400, protein: 17.7, carbs: 48.3, fat: 14 },
     ingredients: [
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
       { name: 'Cheddar (grated)', qtyPerServing: 30, unit: 'g' },
@@ -8834,6 +9207,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 555, protein: 17.1, carbs: 66.7, fat: 24.9 },
     ingredients: [
       { name: 'Orzo', qtyPerServing: 80, unit: 'g' },
       { name: 'Feta', qtyPerServing: 40, unit: 'g' },
@@ -8857,6 +9231,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 415, protein: 16.3, carbs: 29.2, fat: 26.2 },
     ingredients: [
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
       { name: 'Egg', qtyPerServing: 2, unit: '' },
@@ -8879,6 +9254,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick', 'Budget'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 755, protein: 68.1, carbs: 79, fat: 18.6 },
     ingredients: [
       { name: 'Pasta', qtyPerServing: 90, unit: 'g' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -8902,6 +9278,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Cupboard mode'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 410, protein: 34.9, carbs: 48.2, fat: 7.3 },
     ingredients: [
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
@@ -8925,6 +9302,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'One-pan'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 280, protein: 28.2, carbs: 5.2, fat: 16.5 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Cherry tomatoes', qtyPerServing: 100, unit: 'g' },
@@ -8947,6 +9325,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'Quick', 'Calorie Conscious'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 415, protein: 27.6, carbs: 72.1, fat: 1.6 },
     ingredients: [
       { name: 'Cooked prawns', qtyPerServing: 100, unit: 'g' },
       { name: 'Rice noodles', qtyPerServing: 80, unit: 'g' },
@@ -8970,6 +9349,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: false },
+    macros: { calories: 475, protein: 33.8, carbs: 9.7, fat: 34.1 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.3, unit: 'can' },
@@ -8993,6 +9373,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'High Protein', 'Quick'],
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 535, protein: 65, carbs: 35.9, fat: 12.6 },
     ingredients: [
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -9015,6 +9396,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 210, protein: 31.4, carbs: 15.2, fat: 2.4 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
       { name: 'Spinach', qtyPerServing: 1, unit: 'handful' },
@@ -9038,6 +9420,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Pescatarian', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 460, protein: 35.1, carbs: 71.1, fat: 2.9 },
     ingredients: [
       { name: 'Orzo', qtyPerServing: 80, unit: 'g' },
       { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
@@ -9061,6 +9444,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Gluten-free', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 570, protein: 38.7, carbs: 38.9, fat: 30.2 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Butternut squash', qtyPerServing: 0.3, unit: '' },
@@ -9084,6 +9468,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'High Fibre'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 535, protein: 51.1, carbs: 44.6, fat: 16.5 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
       { name: 'Black-eyed beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -9108,6 +9493,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Low Carb', 'Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 260, protein: 38.4, carbs: 15.2, fat: 4.7 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Mango', qtyPerServing: 0.25, unit: '' },
@@ -9130,6 +9516,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 625, protein: 52.2, carbs: 69.6, fat: 13 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
@@ -9153,6 +9540,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 835, protein: 63.7, carbs: 86.4, fat: 25.5 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Pasta', qtyPerServing: 100, unit: 'g' },
@@ -9176,6 +9564,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 380, protein: 42.8, carbs: 37.7, fat: 6.6 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 120, unit: 'g' },
       { name: 'Lime', qtyPerServing: 0.5, unit: '' },
@@ -9199,6 +9588,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Comfort food', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 710, protein: 50.2, carbs: 54, fat: 33.2 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 130, unit: 'g' },
       { name: 'Leek', qtyPerServing: 0.5, unit: '' },
@@ -9223,6 +9613,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 505, protein: 46.2, carbs: 58.2, fat: 11.3 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
       { name: 'Sweetcorn (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -9245,6 +9636,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 635, protein: 27, carbs: 63.1, fat: 29.2 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
@@ -9268,6 +9660,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['One-pan', 'Gluten-free'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 380, protein: 31.1, carbs: 15.1, fat: 21.6 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 130, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
@@ -9291,6 +9684,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Low Carb'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 340, protein: 27.8, carbs: 5.4, fat: 21.2 },
     ingredients: [
       { name: 'Lamb, cubed', qtyPerServing: 130, unit: 'g' },
       { name: 'Mixed peppers', qtyPerServing: 0.5, unit: '' },
@@ -9313,6 +9707,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Gluten-free', 'Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
+    macros: { calories: 625, protein: 39.6, carbs: 52.2, fat: 28.2 },
     ingredients: [
       { name: 'Mixed peppers', qtyPerServing: 1, unit: '' },
       { name: 'Beef mince', qtyPerServing: 100, unit: 'g' },
@@ -9337,6 +9732,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick', 'Calorie Conscious'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 485, protein: 31.8, carbs: 71.6, fat: 7.8 },
     ingredients: [
       { name: 'Pork strips', qtyPerServing: 120, unit: 'g' },
       { name: 'Rice noodles', qtyPerServing: 80, unit: 'g' },
@@ -9360,6 +9756,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Quick'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 520, protein: 28.1, carbs: 58.6, fat: 17.2 },
     ingredients: [
       { name: 'Pork mince', qtyPerServing: 120, unit: 'g' },
       { name: 'Ginger', qtyPerServing: 0.5, unit: 'tsp' },
@@ -9382,6 +9779,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks', 'Comfort food'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 685, protein: 27.4, carbs: 80.8, fat: 26.4 },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 1.5, unit: '' },
       { name: 'Pasta', qtyPerServing: 90, unit: 'g' },
@@ -9406,6 +9804,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Batch cooks'],
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: false, kosher: false, nutFree: true },
+    macros: { calories: 500, protein: 34.6, carbs: 50.1, fat: 17.4 },
     ingredients: [
       { name: 'Pork shoulder, diced', qtyPerServing: 120, unit: 'g' },
       { name: 'Black beans (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -9429,6 +9828,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     tags: ['Vegetarian', 'Gluten-free', 'High Fibre'],
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 690, protein: 29.6, carbs: 110.2, fat: 15.4 },
     ingredients: [
       { name: 'Rice', qtyPerServing: 70, unit: 'g' },
       { name: 'Black beans (canned)', qtyPerServing: 0.4, unit: 'can' },
@@ -9523,6 +9923,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     baseServings: 1,
     upvotes: 214,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 450, protein: 21.4, carbs: 65.7, fat: 9.9 },
     ingredients: [
       { name: 'Baked beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
@@ -9548,6 +9949,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     baseServings: 2,
     upvotes: 158,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 385, protein: 14.5, carbs: 48.8, fat: 13.9 },
     ingredients: [
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -9574,6 +9976,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     baseServings: 4,
     upvotes: 132,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    macros: { calories: 740, protein: 71.4, carbs: 78.6, fat: 14.8 },
     ingredients: [
       { name: 'Pasta', qtyPerServing: 75, unit: 'g' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },

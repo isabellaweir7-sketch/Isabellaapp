@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User } from 'lucide-react';
+import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User, Flame } from 'lucide-react';
 
 const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
 
@@ -94,6 +94,37 @@ function BatchCookRow({ servings, onSetServings }) {
   );
 }
 
+function NutritionCard({ macros }) {
+  if (!macros) return null;
+  const stats = [
+    { label: 'Calories', value: macros.calories, unit: 'kcal' },
+    { label: 'Protein', value: macros.protein, unit: 'g' },
+    { label: 'Carbs', value: macros.carbs, unit: 'g' },
+    { label: 'Fat', value: macros.fat, unit: 'g' },
+  ];
+  return (
+    <div className="bg-surface-container rounded-xl p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <Flame size={16} className="text-tertiary" />
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-primary">Nutrition (per serving)</h3>
+      </div>
+      <div className="grid grid-cols-4 gap-2">
+        {stats.map((s) => (
+          <div key={s.label} className="flex flex-col items-center bg-surface-container-lowest rounded-lg py-2.5">
+            <span className="font-display text-xl text-primary leading-tight">
+              {s.value}
+              <span className="text-xs font-body text-on-surface-variant">{s.unit}</span>
+            </span>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant mt-0.5">
+              {s.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ForkitRecipeDetail({ recipe, onBack }) {
   const [servings, setServings] = useState(recipe.baseServings);
   const [checked, setChecked] = useState([]);
@@ -144,6 +175,8 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           </section>
 
           <ServingStepper servings={servings} onChange={setServings} />
+
+          <NutritionCard macros={recipe.macros} />
 
           <BatchCookRow servings={servings} onSetServings={setServings} />
 

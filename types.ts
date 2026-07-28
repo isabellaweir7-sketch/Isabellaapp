@@ -73,6 +73,13 @@ export interface Ingredient {
   unit: string;
 }
 
+export interface Macros {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
 export interface Recipe {
   id: string;
   title: string;
@@ -89,6 +96,7 @@ export interface Recipe {
   upvotes?: number;
   preservationTip?: string;
   dietary: DietaryFlags;
+  macros: Macros;
 }
 
 export interface TodayMeal {
