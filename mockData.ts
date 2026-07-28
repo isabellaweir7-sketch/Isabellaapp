@@ -3,6 +3,7 @@ import {
   DietaryRestriction,
   SampleDish,
   Recipe,
+  DietaryFlags,
   FeatureTile,
   DayPlan,
   HouseholdMember,
@@ -55,12 +56,41 @@ export const DIETARY_RESTRICTIONS: DietaryRestriction[] = [
   { id: 'none', label: 'No restrictions' },
   { id: 'vegetarian', label: 'Vegetarian' },
   { id: 'vegan', label: 'Vegan' },
+  { id: 'pescatarian', label: 'Pescatarian' },
   { id: 'gluten-free', label: 'Gluten-free' },
   { id: 'dairy-free', label: 'Dairy-free' },
   { id: 'halal', label: 'Halal' },
   { id: 'kosher', label: 'Kosher' },
   { id: 'nut-allergy', label: 'Nut allergy' },
 ];
+
+// Maps a DIETARY_RESTRICTIONS id to the DietaryFlags key it must satisfy.
+// 'none' has no corresponding flag — it just means no filtering happens.
+const RESTRICTION_TO_FLAG: Record<string, keyof DietaryFlags> = {
+  vegetarian: 'vegetarian',
+  vegan: 'vegan',
+  pescatarian: 'pescatarian',
+  'gluten-free': 'glutenFree',
+  'dairy-free': 'dairyFree',
+  halal: 'halal',
+  kosher: 'kosher',
+  'nut-allergy': 'nutFree',
+};
+
+// Best-effort classification from standard ingredients — not a certified
+// halal/kosher authority. Good enough to filter a recipe list, not to
+// replace checking labels/sourcing yourself.
+export function matchesRestrictions(dietary: DietaryFlags, restrictionIds: string[]): boolean {
+  return restrictionIds.every((id) => {
+    const flag = RESTRICTION_TO_FLAG[id];
+    if (!flag) return true; // 'none' or unknown id — no constraint
+    return dietary[flag];
+  });
+}
+
+export function filterByRestrictions<T extends { dietary: DietaryFlags }>(items: T[], restrictionIds: string[]): T[] {
+  return items.filter((item) => matchesRestrictions(item.dietary, restrictionIds));
+}
 
 // Stock food photography (Unsplash) with a forest-green-family fallback
 // colour drawn behind it in case a photo fails to load.
@@ -71,6 +101,7 @@ export const SAMPLE_DISHES: SampleDish[] = [
     tags: ['Vegan', 'Budget'],
     photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
     fallback: '#4E5A34',
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
   },
   {
     id: 'dish-peanut-noodles',
@@ -78,6 +109,7 @@ export const SAMPLE_DISHES: SampleDish[] = [
     tags: ['15 min'],
     photo: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800',
     fallback: '#5C4A28',
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: false },
   },
   {
     id: 'dish-sausage-traybake',
@@ -85,6 +117,7 @@ export const SAMPLE_DISHES: SampleDish[] = [
     tags: ['One-pan', 'Batch cooks'],
     photo: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&q=80&w=800',
     fallback: '#274038',
+    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
   },
   {
     id: 'dish-tomato-pasta',
@@ -92,6 +125,7 @@ export const SAMPLE_DISHES: SampleDish[] = [
     tags: ['Budget', '15 min'],
     photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
     fallback: '#354A1F',
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
   },
   {
     id: 'dish-beans-toast',
@@ -99,6 +133,7 @@ export const SAMPLE_DISHES: SampleDish[] = [
     tags: ['Under £1', '5 min'],
     photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
     fallback: '#5C4A28',
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
   },
   {
     id: 'dish-stirfry',
@@ -106,6 +141,7 @@ export const SAMPLE_DISHES: SampleDish[] = [
     tags: ['Cupboard mode'],
     photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
     fallback: '#4E5A34',
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
   },
   {
     id: 'dish-chilli',
@@ -113,65 +149,62 @@ export const SAMPLE_DISHES: SampleDish[] = [
     tags: ['Batch cooks', 'Freezes well'],
     photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
     fallback: '#274038',
+    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+  },
+  {
+    id: 'dish-salmon-traybake',
+    name: 'Salmon & new potato traybake',
+    tags: ['Pescatarian', 'Gluten-free'],
+    photo: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4A7A6B',
+    dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+  },
+  {
+    id: 'dish-halloumi-couscous',
+    name: 'Halloumi & roasted veg couscous',
+    tags: ['Vegetarian'],
+    photo: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
   },
 ];
 
-// Hero: a cupboard-mode result, the app's real differentiator.
-export const CUPBOARD_HERO: Recipe = {
-  id: 'recipe-tomato-chickpea-stew',
-  title: 'Tomato & chickpea stew',
-  subtitle: 'Uses 6 things you already have',
-  photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=1200',
-  fallback: '#354A1F',
-  pricePerServing: 1.4,
-  prepMinutes: 20,
-  tags: ['Vegan', 'Cupboard mode', 'Batch cooks'],
-  baseServings: 2,
-  ingredients: [
-    { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
-    { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
-    { name: 'Onion', qtyPerServing: 0.5, unit: '' },
-    { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
-    { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
-    { name: 'Smoked paprika', qtyPerServing: 0.5, unit: 'tsp' },
-    { name: 'Kale or spinach', qtyPerServing: 0.5, unit: 'handful' },
-    { name: 'Oil', qtyPerServing: 0.5, unit: 'tbsp' },
-  ],
-  steps: [
-    'Dice the onion and slice the garlic. Fry in oil over medium heat for 3–4 minutes until soft.',
-    'Stir in the cumin and smoked paprika and cook for 30 seconds until fragrant.',
-    'Add the chopped tomatoes and chickpeas (with their liquid). Simmer for 12–15 minutes, stirring occasionally.',
-    'Stir in the kale or spinach and cook for 2 more minutes until wilted.',
-    'Season with salt and pepper to taste and serve.',
-  ],
-  preservationTip:
-    'Keeps in the fridge for up to 3 days in an airtight container. Reheat gently on the hob with a splash of water, or microwave in 60-second bursts, stirring in between.',
-};
-
-export const SAVED_RECIPES: Recipe[] = [
+// The single master pool every screen draws from: Home's Today's Plan, the
+// Weekly Plan, and Cupboard Cooker all filter this list by dietary
+// restrictions (and, for Cupboard Cooker, by ingredient overlap) rather than
+// showing the same fixed recipes regardless of what the student told us.
+export const RECIPE_LIBRARY: Recipe[] = [
+  // ---- Vegan ----
   {
-    id: 'recipe-tomato-pasta',
-    title: 'One-pan tomato & garlic pasta',
-    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    id: 'recipe-tomato-chickpea-stew',
+    title: 'Tomato & chickpea stew',
+    subtitle: 'Uses 6 things you already have',
+    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=1200',
     fallback: '#354A1F',
-    pricePerServing: 0.95,
-    prepMinutes: 15,
-    tags: ['Budget', 'Quick'],
+    pricePerServing: 1.4,
+    prepMinutes: 20,
+    tags: ['Vegan', 'Cupboard mode', 'Batch cooks'],
     baseServings: 2,
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
     ingredients: [
-      { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
+      { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Onion', qtyPerServing: 0.5, unit: '' },
       { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
-      { name: 'Olive oil', qtyPerServing: 0.5, unit: 'tbsp' },
-      { name: 'Dried chilli flakes', qtyPerServing: 0.25, unit: 'tsp' },
-      { name: 'Parmesan (optional)', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
+      { name: 'Smoked paprika', qtyPerServing: 0.5, unit: 'tsp' },
+      { name: 'Kale or spinach', qtyPerServing: 0.5, unit: 'handful' },
+      { name: 'Oil', qtyPerServing: 0.5, unit: 'tbsp' },
     ],
     steps: [
-      'Cook the spaghetti in salted boiling water until al dente.',
-      'Meanwhile, fry the sliced garlic and chilli flakes in olive oil for 1 minute until fragrant.',
-      'Add the chopped tomatoes and simmer for 8–10 minutes.',
-      'Drain the pasta, toss through the sauce, and top with parmesan if using.',
+      'Dice the onion and slice the garlic. Fry in oil over medium heat for 3–4 minutes until soft.',
+      'Stir in the cumin and smoked paprika and cook for 30 seconds until fragrant.',
+      'Add the chopped tomatoes and chickpeas (with their liquid). Simmer for 12–15 minutes, stirring occasionally.',
+      'Stir in the kale or spinach and cook for 2 more minutes until wilted.',
+      'Season with salt and pepper to taste and serve.',
     ],
+    preservationTip:
+      'Keeps in the fridge for up to 3 days in an airtight container. Reheat gently on the hob with a splash of water, or microwave in 60-second bursts, stirring in between.',
   },
   {
     id: 'recipe-lentil-curry',
@@ -182,6 +215,7 @@ export const SAVED_RECIPES: Recipe[] = [
     prepMinutes: 25,
     tags: ['Vegan', 'Batch cooks'],
     baseServings: 4,
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Red lentils', qtyPerServing: 50, unit: 'g' },
       { name: 'Coconut milk (canned)', qtyPerServing: 0.25, unit: 'can' },
@@ -200,6 +234,346 @@ export const SAVED_RECIPES: Recipe[] = [
       'Freezes well for up to 3 months — portion into containers once cooled. Fridge: up to 4 days. Reheat from frozen in the microwave, or overnight in the fridge first then reheat until piping hot throughout.',
   },
   {
+    id: 'recipe-dahl',
+    title: 'Spiced red lentil dahl',
+    photo: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+    pricePerServing: 0.75,
+    prepMinutes: 30,
+    tags: ['Vegan', 'Budget', 'Batch cooks'],
+    baseServings: 4,
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Red lentils', qtyPerServing: 60, unit: 'g' },
+      { name: 'Onion', qtyPerServing: 0.25, unit: '' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Ginger', qtyPerServing: 0.5, unit: 'tsp' },
+      { name: 'Turmeric', qtyPerServing: 0.5, unit: 'tsp' },
+      { name: 'Cumin seeds', qtyPerServing: 0.5, unit: 'tsp' },
+      { name: 'Tinned tomatoes', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Vegetable stock', qtyPerServing: 150, unit: 'ml' },
+    ],
+    steps: [
+      'Rinse the lentils. Fry the diced onion, garlic, and ginger in oil until soft.',
+      'Add the turmeric and cumin seeds and cook for 30 seconds until fragrant.',
+      'Stir in the tomatoes, lentils, and stock. Bring to a simmer.',
+      'Cook for 20 minutes, stirring occasionally, until the lentils have broken down into a thick dahl.',
+      'Season with salt and serve with rice or flatbread.',
+    ],
+    preservationTip: 'Freezes well for up to 3 months. Keeps in the fridge for 4 days — reheat until piping hot, adding a splash of water if it has thickened too much.',
+  },
+  {
+    id: 'recipe-tofu-broccoli',
+    title: 'Crispy tofu & broccoli stir-fry',
+    photo: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4E5A34',
+    pricePerServing: 1.5,
+    prepMinutes: 20,
+    tags: ['Vegan', 'Gluten-free'],
+    baseServings: 2,
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Firm tofu', qtyPerServing: 100, unit: 'g' },
+      { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Cornflour', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Oil', qtyPerServing: 1, unit: 'tbsp' },
+    ],
+    steps: [
+      'Press the tofu to remove excess water, then cube and toss in cornflour.',
+      'Fry the tofu in oil until golden and crisp on all sides, then set aside.',
+      'In the same pan, stir-fry the broccoli and garlic for 3–4 minutes until just tender.',
+      'Return the tofu to the pan, add the tamari, and toss everything together for 1 minute.',
+    ],
+  },
+  {
+    id: 'recipe-chickpea-spinach-curry',
+    title: 'Chickpea & spinach coconut curry',
+    photo: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+    pricePerServing: 1.1,
+    prepMinutes: 25,
+    tags: ['Vegan', 'Batch cooks'],
+    baseServings: 3,
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Chickpeas (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Spinach', qtyPerServing: 1, unit: 'handful' },
+      { name: 'Coconut milk (canned)', qtyPerServing: 0.3, unit: 'can' },
+      { name: 'Onion', qtyPerServing: 0.25, unit: '' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Curry powder', qtyPerServing: 1, unit: 'tsp' },
+    ],
+    steps: [
+      'Fry the diced onion and garlic until soft, then add the curry powder and cook for 30 seconds.',
+      'Add the chickpeas and coconut milk. Simmer for 10 minutes.',
+      'Stir in the spinach and cook for 2 minutes until wilted. Season and serve with rice.',
+    ],
+  },
+  {
+    id: 'recipe-black-bean-tacos',
+    title: 'Spicy black bean tacos',
+    photo: 'https://images.unsplash.com/photo-1565299585323-38dee0a4a0b4?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+    pricePerServing: 1.0,
+    prepMinutes: 15,
+    tags: ['Vegan', 'Quick', 'Gluten-free'],
+    baseServings: 2,
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Black beans (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Corn tortillas', qtyPerServing: 3, unit: '' },
+      { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Lime', qtyPerServing: 0.25, unit: '' },
+      { name: 'Chilli powder', qtyPerServing: 0.5, unit: 'tsp' },
+      { name: 'Coriander (optional)', qtyPerServing: 1, unit: 'handful' },
+    ],
+    steps: [
+      'Warm the black beans in a pan with the chilli powder, mashing about half of them.',
+      'Warm the tortillas in a dry pan or the microwave.',
+      'Fill each tortilla with beans and sweetcorn, then squeeze over lime juice and scatter with coriander.',
+    ],
+  },
+  {
+    id: 'recipe-peanut-oat-breakfast',
+    title: 'Peanut butter overnight oats',
+    photo: 'https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4A7A6B',
+    pricePerServing: 0.65,
+    prepMinutes: 5,
+    tags: ['Vegan', 'Quick', 'High protein'],
+    baseServings: 1,
+    dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
+    ingredients: [
+      { name: 'Gluten-free oats', qtyPerServing: 50, unit: 'g' },
+      { name: 'Oat milk', qtyPerServing: 120, unit: 'ml' },
+      { name: 'Peanut butter', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Banana', qtyPerServing: 0.5, unit: '' },
+    ],
+    steps: [
+      'Stir the oats, oat milk, and peanut butter together in a jar or container.',
+      'Cover and leave in the fridge overnight (or at least 4 hours).',
+      'Top with sliced banana before eating.',
+    ],
+  },
+  // ---- Vegetarian (non-vegan) ----
+  {
+    id: 'recipe-tomato-pasta',
+    title: 'One-pan tomato & garlic pasta',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    fallback: '#354A1F',
+    pricePerServing: 0.95,
+    prepMinutes: 15,
+    tags: ['Budget', 'Quick'],
+    baseServings: 2,
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Spaghetti', qtyPerServing: 100, unit: 'g' },
+      { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Olive oil', qtyPerServing: 0.5, unit: 'tbsp' },
+      { name: 'Dried chilli flakes', qtyPerServing: 0.25, unit: 'tsp' },
+      { name: 'Parmesan (optional)', qtyPerServing: 1, unit: 'tbsp' },
+    ],
+    steps: [
+      'Cook the spaghetti in salted boiling water until al dente.',
+      'Meanwhile, fry the sliced garlic and chilli flakes in olive oil for 1 minute until fragrant.',
+      'Add the chopped tomatoes and simmer for 8–10 minutes.',
+      'Drain the pasta, toss through the sauce, and top with parmesan if using.',
+    ],
+  },
+  {
+    id: 'recipe-mushroom-toast',
+    title: 'Garlic butter mushrooms on toast',
+    photo: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+    pricePerServing: 0.9,
+    prepMinutes: 12,
+    tags: ['Vegetarian', 'Quick'],
+    baseServings: 1,
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Mushrooms', qtyPerServing: 150, unit: 'g' },
+      { name: 'Butter', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
+      { name: 'Parsley (optional)', qtyPerServing: 1, unit: 'tsp' },
+    ],
+    steps: [
+      'Slice the mushrooms and fry in butter over high heat for 4–5 minutes until golden.',
+      'Add the crushed garlic and cook for 30 seconds more.',
+      'Toast the bread, pile the mushrooms on top, and scatter with parsley.',
+    ],
+  },
+  {
+    id: 'recipe-halloumi-couscous',
+    title: 'Halloumi & roasted veg couscous',
+    photo: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4E5A34',
+    pricePerServing: 1.75,
+    prepMinutes: 30,
+    tags: ['Vegetarian', 'Batch cooks'],
+    baseServings: 2,
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Halloumi', qtyPerServing: 75, unit: 'g' },
+      { name: 'Couscous', qtyPerServing: 60, unit: 'g' },
+      { name: 'Red pepper', qtyPerServing: 0.5, unit: '' },
+      { name: 'Courgette', qtyPerServing: 0.5, unit: '' },
+      { name: 'Olive oil', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Lemon', qtyPerServing: 0.25, unit: '' },
+    ],
+    steps: [
+      'Roast the chopped pepper and courgette with oil at 200°C for 20 minutes.',
+      'Meanwhile, cover the couscous with boiling water and leave for 5 minutes, then fluff with a fork.',
+      'Fry the sliced halloumi for 2 minutes per side until golden.',
+      'Toss the roasted veg through the couscous, top with halloumi, and squeeze over lemon.',
+    ],
+  },
+  {
+    id: 'recipe-quesadillas',
+    title: 'Black bean & sweetcorn quesadillas',
+    photo: 'https://images.unsplash.com/photo-1565299585323-38dee0a4a0b4?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+    pricePerServing: 1.05,
+    prepMinutes: 15,
+    tags: ['Vegetarian', 'Quick'],
+    baseServings: 2,
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Flour tortillas', qtyPerServing: 2, unit: '' },
+      { name: 'Black beans (canned)', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Cheese', qtyPerServing: 40, unit: 'g' },
+      { name: 'Chilli powder', qtyPerServing: 0.25, unit: 'tsp' },
+    ],
+    steps: [
+      'Mash the black beans lightly and mix with the sweetcorn and chilli powder.',
+      'Spread over half of each tortilla, top with cheese, and fold over.',
+      'Dry-fry in a pan for 2–3 minutes per side until golden and the cheese has melted.',
+    ],
+  },
+  {
+    id: 'recipe-egg-fried-rice',
+    title: 'Egg fried rice with pak choi',
+    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
+    fallback: '#354A1F',
+    pricePerServing: 0.8,
+    prepMinutes: 15,
+    tags: ['Vegetarian', 'Cupboard mode', 'Gluten-free'],
+    baseServings: 2,
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
+      { name: 'Egg', qtyPerServing: 1, unit: '' },
+      { name: 'Pak choi', qtyPerServing: 1, unit: '' },
+      { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Oil', qtyPerServing: 0.5, unit: 'tbsp' },
+    ],
+    steps: [
+      'Heat the oil in a wok or large pan until hot. Add the chopped pak choi and stir-fry for 2 minutes.',
+      'Push to one side, crack in the egg, and scramble until just set.',
+      'Add the rice and tamari, and stir-fry for 2–3 minutes until heated through.',
+    ],
+  },
+  // ---- Pescatarian ----
+  {
+    id: 'recipe-salmon-traybake',
+    title: 'Salmon & new potato traybake',
+    photo: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4A7A6B',
+    pricePerServing: 2.4,
+    prepMinutes: 30,
+    tags: ['Pescatarian', 'Gluten-free', 'One-pan'],
+    baseServings: 2,
+    dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Salmon fillets', qtyPerServing: 1, unit: '' },
+      { name: 'New potatoes', qtyPerServing: 150, unit: 'g' },
+      { name: 'Cherry tomatoes', qtyPerServing: 100, unit: 'g' },
+      { name: 'Lemon', qtyPerServing: 0.25, unit: '' },
+      { name: 'Olive oil', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Dried oregano', qtyPerServing: 0.5, unit: 'tsp' },
+    ],
+    steps: [
+      'Halve the new potatoes and roast with oil at 200°C for 20 minutes.',
+      'Add the cherry tomatoes and salmon fillets to the tray, scatter with oregano, and season.',
+      'Roast for a further 12–15 minutes until the salmon flakes easily. Squeeze over lemon before serving.',
+    ],
+  },
+  {
+    id: 'recipe-prawn-orzo',
+    title: 'Garlic prawn & lemon orzo',
+    photo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+    pricePerServing: 1.9,
+    prepMinutes: 20,
+    tags: ['Pescatarian', 'Quick'],
+    baseServings: 2,
+    dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    ingredients: [
+      { name: 'Orzo', qtyPerServing: 75, unit: 'g' },
+      { name: 'Raw prawns', qtyPerServing: 100, unit: 'g' },
+      { name: 'Garlic', qtyPerServing: 2, unit: 'clove' },
+      { name: 'Lemon', qtyPerServing: 0.5, unit: '' },
+      { name: 'Olive oil', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Chilli flakes', qtyPerServing: 0.25, unit: 'tsp' },
+    ],
+    steps: [
+      'Cook the orzo in salted boiling water until al dente, then drain, reserving a splash of the water.',
+      'Fry the garlic and chilli flakes in olive oil for 30 seconds, then add the prawns and cook for 2–3 minutes until pink.',
+      'Toss through the orzo with a splash of the cooking water and the lemon juice.',
+    ],
+  },
+  {
+    id: 'recipe-baked-cod',
+    title: 'Baked cod with lemon & herb butter',
+    photo: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800',
+    fallback: '#5C4A28',
+    pricePerServing: 2.1,
+    prepMinutes: 20,
+    tags: ['Pescatarian', 'Gluten-free', 'Quick'],
+    baseServings: 1,
+    dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Cod fillet', qtyPerServing: 1, unit: '' },
+      { name: 'Butter', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Lemon', qtyPerServing: 0.25, unit: '' },
+      { name: 'Parsley (optional)', qtyPerServing: 1, unit: 'tsp' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+    ],
+    steps: [
+      'Preheat the oven to 200°C. Place the cod fillet in a small baking dish.',
+      'Melt the butter with the crushed garlic and a squeeze of lemon, then pour over the fish.',
+      'Bake for 12–15 minutes until the fish flakes easily. Scatter with parsley to serve.',
+    ],
+  },
+  {
+    id: 'recipe-tuna-bake',
+    title: 'Five-ingredient tuna pasta bake',
+    photo: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800',
+    fallback: '#354A1F',
+    pricePerServing: 1.1,
+    prepMinutes: 30,
+    tags: ['Pescatarian', 'Batch cooks', 'Freezes well'],
+    baseServings: 4,
+    dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
+    ingredients: [
+      { name: 'Pasta', qtyPerServing: 75, unit: 'g' },
+      { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Condensed soup or cheese sauce', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Cheese', qtyPerServing: 15, unit: 'g' },
+    ],
+    steps: [
+      'Preheat the oven to 190°C (fan) and cook the pasta until al dente.',
+      'Mix the drained pasta with tuna, sweetcorn, and soup or cheese sauce.',
+      'Transfer to a baking dish, top with cheese, and bake for 15–20 minutes until golden.',
+    ],
+  },
+  // ---- Meat / omnivore ----
+  {
     id: 'recipe-sausage-traybake',
     title: 'Sheet-pan sausage traybake',
     photo: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?auto=format&fit=crop&q=80&w=800',
@@ -208,6 +582,7 @@ export const SAVED_RECIPES: Recipe[] = [
     prepMinutes: 40,
     tags: ['One-pan', 'Batch cooks'],
     baseServings: 4,
+    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: false, kosher: false, nutFree: true },
     ingredients: [
       { name: 'Sausages', qtyPerServing: 2, unit: '' },
       { name: 'Potatoes', qtyPerServing: 1, unit: '' },
@@ -224,10 +599,88 @@ export const SAVED_RECIPES: Recipe[] = [
     preservationTip:
       'Keeps in the fridge for up to 3 days. Reheat in the oven at 180°C for 10–12 minutes to keep the sausages from going rubbery — microwaving works in a pinch but softens the crisp edges.',
   },
+  {
+    id: 'recipe-beef-chilli',
+    title: 'Budget beef & bean chilli',
+    photo: 'https://images.unsplash.com/photo-1455853828816-0c301a0a5bb8?auto=format&fit=crop&q=80&w=800',
+    fallback: '#274038',
+    pricePerServing: 1.35,
+    prepMinutes: 35,
+    tags: ['Batch cooks', 'Freezes well'],
+    baseServings: 4,
+    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    ingredients: [
+      { name: 'Beef mince', qtyPerServing: 100, unit: 'g' },
+      { name: 'Kidney beans (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Chopped tomatoes (canned)', qtyPerServing: 0.5, unit: 'can' },
+      { name: 'Onion', qtyPerServing: 0.25, unit: '' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Chilli powder', qtyPerServing: 1, unit: 'tsp' },
+      { name: 'Ground cumin', qtyPerServing: 0.5, unit: 'tsp' },
+    ],
+    steps: [
+      'Fry the diced onion and garlic until soft, then add the beef mince and brown it fully.',
+      'Stir in the chilli powder and cumin and cook for 30 seconds.',
+      'Add the tomatoes and kidney beans. Simmer for 25–30 minutes, stirring occasionally.',
+      'Season to taste and serve with rice.',
+    ],
+    preservationTip: 'Freezes well for up to 3 months. Fridge: up to 3 days — reheat until piping hot throughout.',
+  },
+  {
+    id: 'recipe-beef-broccoli',
+    title: 'Beef & broccoli stir-fry',
+    photo: 'https://images.unsplash.com/photo-1585238341267-fb9ded340f36?auto=format&fit=crop&q=80&w=800',
+    fallback: '#4E5A34',
+    pricePerServing: 1.85,
+    prepMinutes: 20,
+    tags: ['Quick', 'Gluten-free'],
+    baseServings: 2,
+    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    ingredients: [
+      { name: 'Beef strips', qtyPerServing: 120, unit: 'g' },
+      { name: 'Broccoli', qtyPerServing: 0.5, unit: 'head' },
+      { name: 'Garlic', qtyPerServing: 1, unit: 'clove' },
+      { name: 'Tamari (gluten-free soy sauce)', qtyPerServing: 1, unit: 'tbsp' },
+      { name: 'Cornflour', qtyPerServing: 0.5, unit: 'tsp' },
+      { name: 'Oil', qtyPerServing: 1, unit: 'tbsp' },
+    ],
+    steps: [
+      'Toss the beef strips in cornflour. Fry in hot oil for 2–3 minutes until browned, then set aside.',
+      'Stir-fry the broccoli and garlic for 3–4 minutes until just tender.',
+      'Return the beef to the pan with the tamari and toss together for 1 minute.',
+    ],
+  },
+  {
+    id: 'recipe-chicken-noodle-soup',
+    title: 'Chicken & sweetcorn noodle soup',
+    photo: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&q=80&w=800',
+    fallback: '#354A1F',
+    pricePerServing: 1.3,
+    prepMinutes: 25,
+    tags: ['Comfort food', 'Batch cooks'],
+    baseServings: 3,
+    dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: true, halal: true, kosher: false, nutFree: true },
+    ingredients: [
+      { name: 'Chicken breast', qtyPerServing: 100, unit: 'g' },
+      { name: 'Egg noodles', qtyPerServing: 50, unit: 'g' },
+      { name: 'Sweetcorn (canned)', qtyPerServing: 0.25, unit: 'can' },
+      { name: 'Chicken stock', qtyPerServing: 300, unit: 'ml' },
+      { name: 'Spring onion', qtyPerServing: 1, unit: '' },
+      { name: 'Ginger', qtyPerServing: 0.5, unit: 'tsp' },
+    ],
+    steps: [
+      'Bring the stock to a simmer with the ginger. Add the chicken breast and poach for 12–15 minutes until cooked through.',
+      'Remove the chicken, shred it, and return it to the pot with the noodles and sweetcorn.',
+      'Simmer for 4–5 minutes until the noodles are tender. Top with sliced spring onion.',
+    ],
+    preservationTip: 'Keeps in the fridge for 3 days. The noodles will soak up broth as it sits — add a splash of water or stock when reheating.',
+  },
 ];
 
-// Student-submitted recipes. Light moderation happens off-screen; upvoting
-// is the in-app quality signal that surfaces the best ones first.
+// Student-submitted recipes for the Community feed. Light moderation happens
+// off-screen; upvoting is the in-app quality signal that surfaces the best
+// ones first. These are also part of RECIPE_LIBRARY so they can surface
+// elsewhere too.
 export const COMMUNITY_RECIPES: Recipe[] = [
   {
     id: 'community-beans-toast',
@@ -240,6 +693,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     tags: ['Under £1', '5 min'],
     baseServings: 1,
     upvotes: 214,
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Baked beans (canned)', qtyPerServing: 0.5, unit: 'can' },
       { name: 'Bread', qtyPerServing: 2, unit: 'slice' },
@@ -264,6 +718,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     tags: ['Cupboard mode', '15 min'],
     baseServings: 2,
     upvotes: 158,
+    dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Cooked rice (leftover)', qtyPerServing: 150, unit: 'g' },
       { name: 'Egg', qtyPerServing: 1, unit: '' },
@@ -289,6 +744,7 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     tags: ['Batch cooks', 'Freezes well'],
     baseServings: 4,
     upvotes: 132,
+    dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     ingredients: [
       { name: 'Pasta', qtyPerServing: 75, unit: 'g' },
       { name: 'Tuna (canned)', qtyPerServing: 0.5, unit: 'can' },
@@ -303,6 +759,19 @@ export const COMMUNITY_RECIPES: Recipe[] = [
     ],
   },
 ];
+
+// A curated starting point for "Saved Recipes" screens — a mix of diets,
+// pulled straight from the shared library so tags/dietary data stay in sync.
+export const SAVED_RECIPES: Recipe[] = [
+  RECIPE_LIBRARY.find((r) => r.id === 'recipe-tomato-pasta')!,
+  RECIPE_LIBRARY.find((r) => r.id === 'recipe-lentil-curry')!,
+  RECIPE_LIBRARY.find((r) => r.id === 'recipe-sausage-traybake')!,
+];
+
+// The hero cupboard-mode result shown on Home — the app's original
+// differentiator. Cupboard Cooker itself now generates a real match from
+// RECIPE_LIBRARY based on selected ingredients, this is just the default.
+export const CUPBOARD_HERO: Recipe = RECIPE_LIBRARY.find((r) => r.id === 'recipe-tomato-chickpea-stew')!;
 
 export const HOME_TILES: FeatureTile[] = [
   {
@@ -331,15 +800,19 @@ export const HOME_TILES: FeatureTile[] = [
   },
 ];
 
-export const WEEKLY_PLAN: DayPlan[] = [
-  { day: 'Monday', recipe: CUPBOARD_HERO },
-  { day: 'Tuesday', recipe: SAVED_RECIPES[0] },
-  { day: 'Wednesday', recipe: SAVED_RECIPES[1] },
-  { day: 'Thursday', recipe: SAVED_RECIPES[2] },
-  { day: 'Friday', recipe: CUPBOARD_HERO },
-  { day: 'Saturday', recipe: SAVED_RECIPES[0] },
-  { day: 'Sunday', recipe: SAVED_RECIPES[1] },
-];
+const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+// Generates a 7-day plan from RECIPE_LIBRARY, filtered by dietary
+// restrictions, cycling through the filtered pool so days vary without
+// repeating until the pool runs out.
+export function generateWeeklyPlan(restrictionIds: string[] = []): DayPlan[] {
+  const pool = filterByRestrictions(RECIPE_LIBRARY, restrictionIds);
+  const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
+  return DAY_NAMES.map((day, i) => ({ day, recipe: safePool[i % safePool.length] }));
+}
+
+// Kept for anything that wants a default, unfiltered plan.
+export const WEEKLY_PLAN: DayPlan[] = generateWeeklyPlan([]);
 
 export const PANTRY_INGREDIENTS: string[] = [
   'Pasta',
@@ -358,6 +831,27 @@ export const PANTRY_INGREDIENTS: string[] = [
   'Peanut butter',
   'Tuna',
 ];
+
+// Scores how well a recipe matches the ingredients someone says they have,
+// via simple case-insensitive substring matching against each ingredient
+// name. Used by Cupboard Cooker to pick a real match instead of always
+// returning the same hardcoded recipe.
+export function scoreIngredientMatch(recipe: Recipe, selectedIngredients: string[]): number {
+  if (selectedIngredients.length === 0) return 0;
+  const lowerSelected = selectedIngredients.map((s) => s.toLowerCase());
+  return recipe.ingredients.filter((ing) =>
+    lowerSelected.some((sel) => ing.name.toLowerCase().includes(sel) || sel.includes(ing.name.toLowerCase()))
+  ).length;
+}
+
+export function generateCupboardRecipe(selectedIngredients: string[], restrictionIds: string[] = []): Recipe {
+  const pool = filterByRestrictions(RECIPE_LIBRARY, restrictionIds);
+  const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
+  const ranked = [...safePool].sort(
+    (a, b) => scoreIngredientMatch(b, selectedIngredients) - scoreIngredientMatch(a, selectedIngredients)
+  );
+  return ranked[0];
+}
 
 export const HOUSEHOLD_MEMBERS: HouseholdMember[] = [
   { id: 'you', name: 'You', initials: 'IW' },
@@ -400,12 +894,17 @@ export const WEEKLY_BUDGET = {
   target: 30,
 };
 
-// Three meals the plan has already picked out for today, shown on Home.
-export const TODAY_MEALS: TodayMeal[] = [
-  { slot: 'Breakfast', recipe: { ...SAVED_RECIPES[0], prepMinutes: 10 } },
-  { slot: 'Lunch', recipe: { ...SAVED_RECIPES[1], prepMinutes: 20 } },
-  { slot: 'Dinner', recipe: CUPBOARD_HERO },
-];
+// Generates today's Breakfast/Lunch/Dinner from RECIPE_LIBRARY, filtered by
+// dietary restrictions.
+export function generateTodayMeals(restrictionIds: string[] = []): TodayMeal[] {
+  const pool = filterByRestrictions(RECIPE_LIBRARY, restrictionIds);
+  const safePool = pool.length > 0 ? pool : RECIPE_LIBRARY;
+  const slots = ['Breakfast', 'Lunch', 'Dinner'];
+  return slots.map((slot, i) => ({ slot, recipe: safePool[i % safePool.length] }));
+}
+
+// Kept for anything that wants a default, unfiltered set.
+export const TODAY_MEALS: TodayMeal[] = generateTodayMeals([]);
 
 export const NOTIFICATIONS: NotificationItem[] = [
   {

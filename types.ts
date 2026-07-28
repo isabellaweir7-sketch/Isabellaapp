@@ -8,12 +8,24 @@ export interface DietaryRestriction {
   label: string;
 }
 
+export interface DietaryFlags {
+  vegan: boolean;
+  vegetarian: boolean;
+  pescatarian: boolean;
+  glutenFree: boolean;
+  dairyFree: boolean;
+  halal: boolean;
+  kosher: boolean;
+  nutFree: boolean;
+}
+
 export interface SampleDish {
   id: string;
   name: string;
   tags: string[];
   photo: string;
   fallback: string;
+  dietary: DietaryFlags;
 }
 
 export interface OnboardingAnswers {
@@ -75,6 +87,7 @@ export interface Recipe {
   author?: string;
   upvotes?: number;
   preservationTip?: string;
+  dietary: DietaryFlags;
 }
 
 export interface TodayMeal {

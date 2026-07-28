@@ -92,11 +92,11 @@ export default function App() {
   }
 
   if (view === 'plan') {
-    return <ForkitWeeklyPlan onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
+    return <ForkitWeeklyPlan answers={answers} onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
   }
 
   if (view === 'pantry') {
-    return <ForkitPantry onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
+    return <ForkitPantry answers={answers} onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
   }
 
   if (view === 'community') {
@@ -158,6 +158,7 @@ export default function App() {
 
   return (
     <ForkitHome
+      answers={answers}
       onOpenRecipe={setOpenRecipe}
       onOpenSaved={() => setView('saved')}
       onOpenPlan={() => setView('plan')}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Sparkles, CheckCircle2, Utensils, Timer, Zap } from 'lucide-react';
-import { PANTRY_INGREDIENTS, CUPBOARD_HERO, SAVED_RECIPES } from './mockData';
+import { PANTRY_INGREDIENTS, SAVED_RECIPES, generateCupboardRecipe } from './mockData';
 
 function Chip({ label, selected, onClick }) {
   return (
@@ -16,7 +16,7 @@ function Chip({ label, selected, onClick }) {
   );
 }
 
-export default function ForkitPantry({ onBack, onOpenRecipe }) {
+export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
   const [selected, setSelected] = useState([]);
   const [staples, setStaples] = useState(true);
 
@@ -82,7 +82,7 @@ export default function ForkitPantry({ onBack, onOpenRecipe }) {
             <button
               type="button"
               disabled={selected.length === 0}
-              onClick={() => onOpenRecipe(CUPBOARD_HERO)}
+              onClick={() => onOpenRecipe(generateCupboardRecipe(selected, answers?.restrictions ?? []))}
               className="w-full py-3.5 rounded-xl font-semibold text-lg tracking-wider transition-opacity bg-primary-container text-on-primary-container flex items-center justify-center gap-2"
               style={{ opacity: selected.length === 0 ? 0.4 : 1 }}
             >

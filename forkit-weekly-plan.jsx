@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronLeft, Zap, Wallet } from 'lucide-react';
-import { WEEKLY_PLAN, WEEKLY_BUDGET } from './mockData';
+import { WEEKLY_BUDGET, generateWeeklyPlan } from './mockData';
 
 function EmptyPlan({ onBack }) {
   return (
@@ -26,7 +26,8 @@ function EmptyPlan({ onBack }) {
   );
 }
 
-export default function ForkitWeeklyPlan({ onBack, onOpenRecipe }) {
+export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe }) {
+  const WEEKLY_PLAN = generateWeeklyPlan(answers?.restrictions ?? []);
   if (WEEKLY_PLAN.length === 0) return <EmptyPlan onBack={onBack} />;
 
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;

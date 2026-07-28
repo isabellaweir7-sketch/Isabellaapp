@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, Sparkles, ArrowRight, ChevronRight, GraduationCap } from 'lucide-react';
-import { TODAY_MEALS, COMMUNITY_RECIPES, WEEKLY_BUDGET, SHOPPING_LIST } from './mockData';
+import { COMMUNITY_RECIPES, WEEKLY_BUDGET, SHOPPING_LIST, generateTodayMeals } from './mockData';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', icon: HomeIcon },
@@ -33,7 +33,7 @@ function Header({ onOpenAuth, onOpenNotifications, session }) {
   );
 }
 
-function TodayPlan({ onOpenPlan, onOpenRecipe }) {
+function TodayPlan({ meals, onOpenPlan, onOpenRecipe }) {
   return (
     <section>
       <div className="flex items-end justify-between mb-md">
@@ -43,7 +43,7 @@ function TodayPlan({ onOpenPlan, onOpenRecipe }) {
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
-        {TODAY_MEALS.map(({ slot, recipe }) => (
+        {meals.map(({ slot, recipe }) => (
           <div key={slot} className="group cursor-pointer" onClick={() => onOpenRecipe(recipe)}>
             <div
               className="relative aspect-[4/5] overflow-hidden rounded-xl mb-xs"
@@ -206,6 +206,7 @@ function BottomNav({ active, onChange, onNavigate }) {
 }
 
 export default function ForkitHome({
+  answers,
   onOpenRecipe,
   onOpenSaved,
   onOpenPlan,
@@ -219,6 +220,7 @@ export default function ForkitHome({
   session,
 }) {
   const [activeTab, setActiveTab] = useState('home');
+  const todayMeals = generateTodayMeals(answers?.restrictions ?? []);
 
   const handleNavTap = (id) => {
     if (id === 'pantry') onOpenPantry();
@@ -231,7 +233,7 @@ export default function ForkitHome({
     <div className="bg-surface min-h-screen pb-32">
       <Header onOpenAuth={onOpenAuth} onOpenNotifications={onOpenNotifications} session={session} />
       <main className="max-w-[1200px] mx-auto px-gutter py-md space-y-xl">
-        <TodayPlan onOpenPlan={onOpenPlan} onOpenRecipe={onOpenRecipe} />
+        <TodayPlan meals={todayMeals} onOpenPlan={onOpenPlan} onOpenRecipe={onOpenRecipe} />
         <CupboardBudgetRow onOpenPantry={onOpenPantry} onOpenBudget={onOpenBudget} />
         <Trending onOpenCommunity={onOpenCommunity} onOpenRecipe={onOpenRecipe} />
         <HouseholdCard onClick={onOpenHousehold} />

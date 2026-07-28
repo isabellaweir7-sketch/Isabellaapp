@@ -27,6 +27,7 @@ import {
   Building2,
   Home as HomeIcon,
   Users,
+  Fish,
 } from 'lucide-react';
 import {
   ONBOARDING_REASONS,
@@ -35,6 +36,7 @@ import {
   EQUIPMENT_ITEMS,
   STUDENT_STATUS_OPTIONS,
   ACCOMMODATION_OPTIONS,
+  filterByRestrictions,
 } from './mockData';
 
 const STEP_META = [
@@ -61,6 +63,7 @@ const RESTRICTION_ICONS = {
   none: Utensils,
   vegetarian: Salad,
   vegan: Leaf,
+  pescatarian: Fish,
   'gluten-free': Wheat,
   'dairy-free': Droplet,
   halal: BadgeCheck,
@@ -370,10 +373,10 @@ function SwipeCard({ dish, onSwipe, isTop }) {
   );
 }
 
-function SwipeStep({ dishIndex, onSwipe }) {
-  const visible = SAMPLE_DISHES.slice(dishIndex, dishIndex + 2);
-  const done = dishIndex >= SAMPLE_DISHES.length;
-  const progressed = Math.min(dishIndex, SAMPLE_DISHES.length);
+function SwipeStep({ dishes, dishIndex, onSwipe }) {
+  const visible = dishes.slice(dishIndex, dishIndex + 2);
+  const done = dishIndex >= dishes.length;
+  const progressed = Math.min(dishIndex, dishes.length);
 
   return (
     <div className="flex flex-col items-center gap-6">
@@ -417,13 +420,13 @@ function SwipeStep({ dishIndex, onSwipe }) {
         <div className="flex justify-between items-end mb-1">
           <span className="text-xs font-medium text-primary">Your Palate</span>
           <span className="text-xs font-medium text-on-surface-variant">
-            {progressed}/{SAMPLE_DISHES.length}
+            {progressed}/{dishes.length}
           </span>
         </div>
         <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
           <div
             className="h-full bg-tertiary-container"
-            style={{ width: `${(progressed / SAMPLE_DISHES.length) * 100}%` }}
+            style={{ width: `${(progressed / dishes.length) * 100}%` }}
           />
         </div>
       </div>
@@ -450,6 +453,11 @@ export default function ForkitOnboarding({ onComplete }) {
 
   const handleMacroChange = (key, value) => setMacros((prev) => ({ ...prev, [key]: value }));
 
+  const dishes = (() => {
+    const filtered = filterByRestrictions(SAMPLE_DISHES, restrictions);
+    return filtered.length > 0 ? filtered : SAMPLE_DISHES;
+  })();
+
   const finish = (finalLiked, finalDisliked) => {
     onComplete({
       reasons,
@@ -466,7 +474,7 @@ export default function ForkitOnboarding({ onComplete }) {
   };
 
   const handleSwipe = (direction) => {
-    const dish = SAMPLE_DISHES[dishIndex];
+    const dish = dishes[dishIndex];
     if (!dish) return;
     const nextLiked = direction === 'like' ? [...liked, dish.id] : liked;
     const nextDisliked = direction === 'dislike' ? [...disliked, dish.id] : disliked;
@@ -474,7 +482,7 @@ export default function ForkitOnboarding({ onComplete }) {
     setDisliked(nextDisliked);
     const nextIndex = dishIndex + 1;
     setDishIndex(nextIndex);
-    if (nextIndex >= SAMPLE_DISHES.length) {
+    if (nextIndex >= dishes.length) {
       setTimeout(() => finish(nextLiked, nextDisliked), 500);
     }
   };
@@ -537,7 +545,7 @@ export default function ForkitOnboarding({ onComplete }) {
               onAccommodation={setAccommodation}
             />
           )}
-          {step === 5 && <SwipeStep dishIndex={dishIndex} onSwipe={handleSwipe} />}
+          {step === 5 && <SwipeStep dishes={dishes} dishIndex={dishIndex} onSwipe={handleSwipe} />}
         </div>
       </div>
 
