@@ -9,6 +9,7 @@ import {
   HouseholdMember,
   CookingNight,
   ShoppingListItem,
+  PantryStatus,
   TodayMeal,
   NotificationItem,
   BudgetTip,
@@ -10131,21 +10132,28 @@ export const COOKING_NIGHTS: CookingNight[] = [
   { day: 'Tuesday', memberId: 'dan' },
   { day: 'Wednesday', memberId: 'freya' },
   { day: 'Thursday', memberId: 'alex' },
-  { day: 'Friday', memberId: 'you' },
+  { day: 'Friday', memberId: 'you', takeaway: true },
   { day: 'Saturday', memberId: 'dan' },
   { day: 'Sunday', memberId: 'freya' },
 ];
 
 export const SHOPPING_LIST: ShoppingListItem[] = [
-  { id: 'item-milk', name: 'Milk (2L)', price: 1.3, addedBy: 'freya', aisle: 'Dairy & Chilled' },
+  { id: 'item-milk', name: 'Milk (2L)', price: 1.3, addedBy: 'freya', aisle: 'Dairy & Chilled', urgent: true },
   { id: 'item-bread', name: 'Bread', price: 1.1, addedBy: 'dan', aisle: 'Grains & Pantry' },
-  { id: 'item-pasta', name: 'Pasta (2kg)', price: 2.4, addedBy: 'you', aisle: 'Grains & Pantry' },
+  { id: 'item-pasta', name: 'Pasta (2kg)', price: 2.4, addedBy: 'you', aisle: 'Grains & Pantry', inCart: true },
   { id: 'item-washingup', name: 'Washing-up liquid', price: 1.5, addedBy: 'alex', aisle: 'Household' },
   { id: 'item-loo-roll', name: 'Loo roll (9-pack)', price: 4.2, addedBy: 'freya', aisle: 'Household' },
   { id: 'item-bin-bags', name: 'Bin bags', price: 2.0, addedBy: 'you', aisle: 'Household' },
-  { id: 'item-spinach', name: 'Spinach', price: 0.9, addedBy: 'dan', aisle: 'Produce' },
+  { id: 'item-spinach', name: 'Spinach', price: 0.9, addedBy: 'dan', aisle: 'Produce', inCart: true },
   { id: 'item-onions', name: 'Onions (net)', price: 0.7, addedBy: 'you', aisle: 'Produce' },
 ];
+
+// Shared-kitchen pantry-staple check-in, shown on the Household Hub.
+export const PANTRY_STATUS: PantryStatus = {
+  updatedByMemberId: 'alex',
+  hoursAgo: 2,
+  lowItemCount: 3,
+};
 
 // The same shared list, grouped by aisle for the full-screen Shopping Mode view.
 export const SHOPPING_AISLES: ShoppingAisle[] = ['Produce', 'Dairy & Chilled', 'Grains & Pantry', 'Household'].map(

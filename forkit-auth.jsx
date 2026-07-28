@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart, GraduationCap, ChevronRight, Award } from 'lucide-react';
+import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart, GraduationCap, ChevronRight, Award, Camera } from 'lucide-react';
 import { supabase } from './supabaseClient';
 import { SAVED_RECIPES, DIETARY_RESTRICTIONS, ALLERGENS } from './mockData';
+import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
 
 const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
 
@@ -37,10 +38,21 @@ function TextField({ icon: Icon, ...props }) {
   );
 }
 
-function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut }) {
+function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut, onOpenHousehold }) {
   const email = session.user.email || '';
   const provider = session.user.app_metadata?.provider === 'google' ? 'Google' : 'email';
   const initial = email.trim()[0]?.toUpperCase() || '?';
+  const [photoUrl, setPhotoUrl] = useState(null);
+
+  const handlePhotoChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setPhotoUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return URL.createObjectURL(file);
+    });
+  };
+
   const restrictionLabels = (answers?.restrictions || [])
     .map((id) => DIETARY_RESTRICTIONS.find((r) => r.id === id)?.label)
     .filter(Boolean);
@@ -57,17 +69,33 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
-      <header className="flex items-center gap-3 px-5 py-4">
-        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
-          <ChevronLeft size={18} className="text-primary" />
-        </button>
-        <h1 className="font-display text-2xl font-semibold text-primary">Profile</h1>
+      <header className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="flex items-center gap-3">
+          <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
+            <ChevronLeft size={18} className="text-primary" />
+          </button>
+          <h1 className="font-display text-2xl font-semibold text-primary">Profile</h1>
+        </div>
+        {onOpenHousehold && <HouseholdHeaderButton onClick={onOpenHousehold} />}
       </header>
 
       <div className="flex-1 px-5 pb-10 max-w-2xl mx-auto w-full flex flex-col gap-6">
         <section className="flex flex-col items-center text-center gap-2 mt-2">
-          <div className="w-20 h-20 rounded-full bg-primary text-on-primary flex items-center justify-center font-display text-3xl soft-shadow">
-            {initial}
+          <div className="relative">
+            <div
+              className="w-20 h-20 rounded-full bg-primary text-on-primary flex items-center justify-center font-display text-3xl soft-shadow overflow-hidden bg-cover bg-center"
+              style={photoUrl ? { backgroundImage: `url("${photoUrl}")` } : undefined}
+            >
+              {!photoUrl && initial}
+            </div>
+            <label
+              htmlFor="profile-photo-input"
+              className="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center border-2 border-surface cursor-pointer"
+              aria-label="Change profile photo"
+            >
+              <Camera size={13} />
+            </label>
+            <input id="profile-photo-input" type="file" accept="image/*" onChange={handlePhotoChange} className="hidden" />
           </div>
           <p className="text-base font-semibold text-primary">{email}</p>
           <p className="text-xs font-medium text-on-surface-variant">Signed in with {provider}</p>
@@ -168,7 +196,7 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
   );
 }
 
-export default function ForkitAuth({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut }) {
+export default function ForkitAuth({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut, onOpenHousehold }) {
   const [mode, setMode] = useState('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -186,6 +214,7 @@ export default function ForkitAuth({ session, answers, freshersMode, onOpenFresh
         onOpenFreshers={onOpenFreshers}
         onBack={onBack}
         onLogOut={onLogOut}
+        onOpenHousehold={onOpenHousehold}
       />
     );
   }

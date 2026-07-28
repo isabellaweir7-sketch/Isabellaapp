@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, Sparkles, ArrowRight, ChevronRight, GraduationCap, Search } from 'lucide-react';
-import { COMMUNITY_RECIPES, WEEKLY_BUDGET, SHOPPING_LIST, generateTodayMeals } from './mockData';
+import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, ArrowRight, GraduationCap, Search, Building2 } from 'lucide-react';
+import { COMMUNITY_RECIPES, WEEKLY_BUDGET, generateTodayMeals } from './mockData';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', icon: HomeIcon },
@@ -10,7 +10,20 @@ const NAV_ITEMS = [
   { id: 'community', label: 'Community', icon: Users },
 ];
 
-function Header({ onOpenAuth, onOpenNotifications, session }) {
+export function HouseholdHeaderButton({ onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-surface-container-high transition-colors shrink-0"
+      aria-label="Household"
+    >
+      <Building2 size={18} />
+    </button>
+  );
+}
+
+function Header({ onOpenAuth, onOpenNotifications, onOpenHousehold, session }) {
   return (
     <header className="bg-surface sticky top-0 z-40 w-full">
       <div className="flex items-center justify-between px-gutter py-sm w-full max-w-[1200px] mx-auto">
@@ -23,6 +36,7 @@ function Header({ onOpenAuth, onOpenNotifications, session }) {
           >
             {session ? session.user.email.trim()[0]?.toUpperCase() : <User size={20} />}
           </button>
+          <HouseholdHeaderButton onClick={onOpenHousehold} />
         </div>
         <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">ForkIt</h1>
         <button type="button" onClick={onOpenNotifications} className="text-primary" aria-label="Notifications">
@@ -94,38 +108,16 @@ function TodayPlan({ meals, onOpenPlan, onOpenRecipe }) {
   );
 }
 
-function CupboardBudgetRow({ onOpenPantry, onOpenBudget }) {
+function BudgetRow({ onOpenBudget }) {
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;
   const pct = Math.min(100, Math.round((WEEKLY_BUDGET.spent / WEEKLY_BUDGET.target) * 100));
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-2 gap-md items-stretch">
-      <div className="bg-primary-container text-white p-lg rounded-xl flex flex-col justify-between soft-shadow min-h-[300px]">
-        <div>
-          <span className="font-semibold text-sm tracking-wider text-on-primary-container uppercase mb-xs block">
-            From your cupboard
-          </span>
-          <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold mb-md leading-tight">
-            Cupboard Cooker
-          </h2>
-          <p className="text-lg opacity-90 max-w-[24rem]">
-            Tell us what's left in your kitchen and we'll turn it into a recipe. No waste, just taste.
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={onOpenPantry}
-          className="bg-tertiary-fixed text-on-tertiary-fixed font-semibold text-sm tracking-wider py-md px-lg rounded-full w-fit press-effect mt-lg transition-colors hover:bg-tertiary-fixed-dim flex items-center gap-xs"
-        >
-          <Sparkles size={18} />
-          Cook with what you have
-        </button>
-      </div>
-
+    <section>
       <button
         type="button"
         onClick={onOpenBudget}
-        className="bg-surface-container-low p-lg rounded-xl flex flex-col justify-between border border-outline-variant text-left"
+        className="w-full bg-surface-container-low p-lg rounded-xl flex flex-col justify-between border border-outline-variant text-left"
       >
         <div>
           <div className="flex justify-between items-center mb-md">
@@ -179,24 +171,6 @@ function Trending({ onOpenCommunity, onOpenRecipe }) {
         ))}
       </div>
     </section>
-  );
-}
-
-function HouseholdCard({ onClick }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="rounded-xl border border-outline-variant bg-surface-container-lowest p-md flex items-center justify-between text-left"
-    >
-      <div className="min-w-0">
-        <p className="font-display text-lg text-primary leading-tight">Household</p>
-        <p className="text-xs font-semibold text-on-surface-variant mt-1">
-          Dan's cooking tonight · {SHOPPING_LIST.length} items on the shared list
-        </p>
-      </div>
-      <ChevronRight size={20} className="text-secondary" />
-    </button>
   );
 }
 
@@ -260,13 +234,12 @@ export default function ForkitHome({
 
   return (
     <div className="bg-surface min-h-screen pb-32">
-      <Header onOpenAuth={onOpenAuth} onOpenNotifications={onOpenNotifications} session={session} />
+      <Header onOpenAuth={onOpenAuth} onOpenNotifications={onOpenNotifications} onOpenHousehold={onOpenHousehold} session={session} />
       <SearchBar onSearch={onOpenSearch} />
       <main className="max-w-[1200px] mx-auto px-gutter py-md space-y-xl">
         <TodayPlan meals={todayMeals} onOpenPlan={onOpenPlan} onOpenRecipe={onOpenRecipe} />
-        <CupboardBudgetRow onOpenPantry={onOpenPantry} onOpenBudget={onOpenBudget} />
+        <BudgetRow onOpenBudget={onOpenBudget} />
         <Trending onOpenCommunity={onOpenCommunity} onOpenRecipe={onOpenRecipe} />
-        <HouseholdCard onClick={onOpenHousehold} />
       </main>
       <BottomNav active={activeTab} onChange={setActiveTab} onNavigate={handleNavTap} />
     </div>

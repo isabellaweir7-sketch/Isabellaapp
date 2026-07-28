@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronLeft, Zap, Wallet } from 'lucide-react';
 import { WEEKLY_BUDGET, generateWeeklyPlan } from './mockData';
+import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
 
 function EmptyPlan({ onBack }) {
   return (
@@ -26,7 +27,7 @@ function EmptyPlan({ onBack }) {
   );
 }
 
-export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe }) {
+export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpenHousehold }) {
   const WEEKLY_PLAN = generateWeeklyPlan(answers?.restrictions ?? [], answers?.allergies ?? [], {
     nutritionGoals: answers?.nutritionGoals ?? [],
     likedDishes: answers?.likedDishes ?? [],
@@ -40,11 +41,14 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
-      <header className="flex items-center gap-3 px-5 py-4">
-        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
-          <ChevronLeft size={18} className="text-primary" />
-        </button>
-        <h1 className="font-display text-2xl font-semibold text-primary">This Week's Plan</h1>
+      <header className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="flex items-center gap-3">
+          <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Back">
+            <ChevronLeft size={18} className="text-primary" />
+          </button>
+          <h1 className="font-display text-2xl font-semibold text-primary">This Week's Plan</h1>
+        </div>
+        {onOpenHousehold && <HouseholdHeaderButton onClick={onOpenHousehold} />}
       </header>
 
       <div className="flex-1 px-5 pb-8 max-w-2xl mx-auto w-full flex flex-col gap-6">

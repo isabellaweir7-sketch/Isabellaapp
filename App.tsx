@@ -95,7 +95,14 @@ export default function App() {
   }
 
   if (view === 'plan') {
-    return <ForkitWeeklyPlan answers={answers} onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
+    return (
+      <ForkitWeeklyPlan
+        answers={answers}
+        onBack={() => setView('home')}
+        onOpenRecipe={setOpenRecipe}
+        onOpenHousehold={() => setView('household')}
+      />
+    );
   }
 
   if (view === 'pantry') {
@@ -113,7 +120,13 @@ export default function App() {
   }
 
   if (view === 'household') {
-    return <ForkitHousehold onBack={() => setView('home')} onOpenShopping={() => setView('shopping')} />;
+    return (
+      <ForkitHousehold
+        onBack={() => setView('home')}
+        onOpenShopping={() => setView('shopping')}
+        onOpenRecipe={setOpenRecipe}
+      />
+    );
   }
 
   if (view === 'auth') {
@@ -125,6 +138,7 @@ export default function App() {
         onOpenFreshers={() => setView('freshers')}
         onBack={() => setView('home')}
         onLogOut={handleLogOut}
+        onOpenHousehold={() => setView('household')}
       />
     );
   }
@@ -165,6 +179,7 @@ export default function App() {
         initialQuery={searchQuery}
         onBack={() => setView('home')}
         onOpenRecipe={setOpenRecipe}
+        onOpenHousehold={() => setView('household')}
       />
     );
   }

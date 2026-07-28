@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Search as SearchIcon, X, Timer } from 'lucide-react';
 import { RECIPE_LIBRARY } from './mockData';
+import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
 
 const FILTERS = [
   { id: 'vegan', label: 'Vegan' },
@@ -121,7 +122,7 @@ function ResultCard({ recipe, variant, onOpen }) {
   );
 }
 
-export default function ForkitSearchResults({ initialQuery, onBack, onOpenRecipe }) {
+export default function ForkitSearchResults({ initialQuery, onBack, onOpenRecipe, onOpenHousehold }) {
   const [query, setQuery] = useState(initialQuery ?? '');
   const [activeFilters, setActiveFilters] = useState([]);
 
@@ -141,16 +142,19 @@ export default function ForkitSearchResults({ initialQuery, onBack, onOpenRecipe
 
   return (
     <div className="min-h-screen flex flex-col bg-surface pb-16">
-      <header className="flex items-center gap-3 px-5 py-4">
-        <button
-          type="button"
-          onClick={onBack}
-          className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0"
-          aria-label="Back"
-        >
-          <ChevronLeft size={18} className="text-primary" />
-        </button>
-        <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">ForkIt</h1>
+      <header className="flex items-center justify-between gap-3 px-5 py-4">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onBack}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container shrink-0"
+            aria-label="Back"
+          >
+            <ChevronLeft size={18} className="text-primary" />
+          </button>
+          <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">ForkIt</h1>
+        </div>
+        {onOpenHousehold && <HouseholdHeaderButton onClick={onOpenHousehold} />}
       </header>
 
       <div className="flex-1 px-5 pb-8 max-w-3xl mx-auto w-full">

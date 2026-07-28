@@ -150,6 +150,7 @@ export interface HouseholdMember {
 export interface CookingNight {
   day: string;
   memberId: string;
+  takeaway?: boolean;
 }
 
 export interface ShoppingListItem {
@@ -158,4 +159,12 @@ export interface ShoppingListItem {
   price: number;
   addedBy: string;
   aisle: string;
+  urgent?: boolean;
+  inCart?: boolean;
+}
+
+export interface PantryStatus {
+  updatedByMemberId: string;
+  hoursAgo: number;
+  lowItemCount: number;
 }
