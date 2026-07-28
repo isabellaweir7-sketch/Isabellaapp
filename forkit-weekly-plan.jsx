@@ -13,7 +13,7 @@ function EmptyPlan({ onBack }) {
       </header>
       <main className="flex-1 flex flex-col items-center justify-center px-6 text-center gap-4">
         <h2 className="font-display text-2xl text-primary">A week of effortless eating starts here</h2>
-        <p className="text-sm text-on-surface-variant max-w-sm">
+        <p className="text-sm text-on-surface-variant max-w-[24rem]">
           Generate a plan and we'll pick a recipe for every day, budget included.
         </p>
         <button type="button" className="bg-primary text-on-primary font-semibold px-6 py-3 rounded-xl">

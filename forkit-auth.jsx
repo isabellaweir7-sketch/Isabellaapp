@@ -166,7 +166,7 @@ export default function ForkitAuth({ session, answers, onBack, onLogOut }) {
         <h1 className="font-display text-xl text-primary">{mode === 'signin' ? 'Sign in' : 'Create account'}</h1>
       </header>
 
-      <div className="flex-1 px-5 pt-4 pb-10 max-w-md mx-auto w-full flex flex-col">
+      <div className="flex-1 px-5 pt-4 pb-10 max-w-[28rem] mx-auto w-full flex flex-col">
         <div className="flex rounded-full p-1 mb-6 bg-surface-container-lowest border border-outline-variant">
           {['signin', 'signup'].map((m) => (
             <button

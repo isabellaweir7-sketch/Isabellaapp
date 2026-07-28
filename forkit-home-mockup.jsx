@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
-import { Home as HomeIcon, ShoppingBasket, ChefHat, Users, Bell, User, ChevronRight, Timer, Banknote, Sparkles } from 'lucide-react';
-import { CUPBOARD_HERO, TODAY_MEALS, COMMUNITY_RECIPES, WEEKLY_BUDGET, SHOPPING_LIST } from './mockData';
+import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, Sparkles, ArrowRight, ChevronRight } from 'lucide-react';
+import { TODAY_MEALS, COMMUNITY_RECIPES, WEEKLY_BUDGET, SHOPPING_LIST } from './mockData';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', icon: HomeIcon },
-  { id: 'pantry', label: 'Pantry', icon: ShoppingBasket },
-  { id: 'recipes', label: 'Recipes', icon: ChefHat },
+  { id: 'pantry', label: 'Pantry', icon: ChefHat },
+  { id: 'recipes', label: 'Recipes', icon: BookOpen },
   { id: 'community', label: 'Community', icon: Users },
 ];
 
 function Header({ onOpenAuth, onOpenNotifications, session }) {
   return (
     <header className="bg-surface sticky top-0 z-40 w-full">
-      <div className="flex items-center justify-between px-5 py-4 max-w-3xl mx-auto">
-        <button
-          type="button"
-          onClick={onOpenAuth}
-          className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-surface-container-high border border-outline-variant text-primary font-display overflow-hidden"
-          aria-label="Account"
-        >
-          {session ? session.user.email.trim()[0]?.toUpperCase() : <User size={18} />}
-        </button>
-        <h1 className="font-display text-2xl text-primary">ForkIt</h1>
-        <button type="button" onClick={onOpenNotifications} className="text-primary hover:opacity-70 transition-opacity" aria-label="Notifications">
-          <Bell size={22} />
+      <div className="flex items-center justify-between px-gutter py-sm w-full max-w-[1200px] mx-auto">
+        <div className="flex items-center gap-xs">
+          <button
+            type="button"
+            onClick={onOpenAuth}
+            className="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant flex items-center justify-center text-sm font-semibold font-display text-primary"
+            aria-label="Account"
+          >
+            {session ? session.user.email.trim()[0]?.toUpperCase() : <User size={20} />}
+          </button>
+        </div>
+        <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">ForkIt</h1>
+        <button type="button" onClick={onOpenNotifications} className="text-primary" aria-label="Notifications">
+          <Bell size={24} />
         </button>
       </div>
     </header>
@@ -33,36 +35,35 @@ function Header({ onOpenAuth, onOpenNotifications, session }) {
 function TodayPlan({ onOpenPlan, onOpenRecipe }) {
   return (
     <section>
-      <div className="flex items-end justify-between mb-3">
-        <h2 className="font-display text-xl text-primary">Today's Plan</h2>
-        <button type="button" onClick={onOpenPlan} className="text-xs font-semibold text-secondary">
+      <div className="flex items-end justify-between mb-md">
+        <h2 className="font-display text-2xl font-semibold text-primary">Today's Plan</h2>
+        <button type="button" onClick={onOpenPlan} className="text-sm font-semibold tracking-wider text-secondary cursor-pointer">
           View Week
         </button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
         {TODAY_MEALS.map(({ slot, recipe }) => (
-          <button
-            key={slot}
-            type="button"
-            onClick={() => onOpenRecipe(recipe)}
-            className="text-left group"
-          >
+          <div key={slot} className="group cursor-pointer" onClick={() => onOpenRecipe(recipe)}>
             <div
-              className="relative aspect-[4/5] overflow-hidden rounded-xl mb-2"
+              className="relative aspect-[4/5] overflow-hidden rounded-xl mb-xs"
               style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
             >
-              <span className="chip-value absolute top-3 left-3">{slot}</span>
+              <div className="absolute top-4 left-4 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider">
+                {slot}
+              </div>
             </div>
-            <h3 className="font-display text-base text-on-background leading-tight">{recipe.title}</h3>
-            <div className="flex items-center gap-3 mt-1 text-xs font-medium text-on-surface-variant">
-              <span className="flex items-center gap-1">
-                <Timer size={14} /> {recipe.prepMinutes ?? 15}m
-              </span>
-              <span className="flex items-center gap-1">
-                <Banknote size={14} /> £{recipe.pricePerServing.toFixed(2)}
-              </span>
+            <div className="space-y-base">
+              <h3 className="font-display text-lg text-on-background leading-tight">{recipe.title}</h3>
+              <div className="flex items-center gap-md text-base text-on-surface-variant opacity-80">
+                <span className="flex items-center gap-1">
+                  <Timer size={18} /> {recipe.prepMinutes ?? 15}m
+                </span>
+                <span className="flex items-center gap-1">
+                  <Banknote size={18} /> £{recipe.pricePerServing.toFixed(2)}
+                </span>
+              </div>
             </div>
-          </button>
+          </div>
         ))}
       </div>
     </section>
@@ -74,50 +75,53 @@ function CupboardBudgetRow({ onOpenPantry, onOpenBudget }) {
   const pct = Math.min(100, Math.round((WEEKLY_BUDGET.spent / WEEKLY_BUDGET.target) * 100));
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-stretch">
-      <div className="bg-primary-container text-on-primary p-6 rounded-xl flex flex-col justify-between soft-shadow min-h-[260px]">
+    <section className="grid grid-cols-1 lg:grid-cols-2 gap-md items-stretch">
+      <div className="bg-primary-container text-white p-lg rounded-xl flex flex-col justify-between soft-shadow min-h-[300px]">
         <div>
-          <span className="block mb-2 text-xs font-semibold uppercase tracking-widest text-on-primary-container">
+          <span className="font-semibold text-sm tracking-wider text-on-primary-container uppercase mb-xs block">
             From your cupboard
           </span>
-          <h2 className="font-display text-2xl mb-2 leading-tight">Cupboard Cooker</h2>
-          <p className="text-sm opacity-90 max-w-sm">
+          <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold mb-md leading-tight">
+            Cupboard Cooker
+          </h2>
+          <p className="text-lg opacity-90 max-w-[24rem]">
             Tell us what's left in your kitchen and we'll turn it into a recipe. No waste, just taste.
           </p>
         </div>
         <button
           type="button"
           onClick={onOpenPantry}
-          className="chip-value mt-6 w-fit press-effect flex items-center gap-1"
+          className="bg-tertiary-fixed text-on-tertiary-fixed font-semibold text-sm tracking-wider py-md px-lg rounded-full w-fit press-effect mt-lg transition-colors hover:bg-tertiary-fixed-dim flex items-center gap-xs"
         >
-          <Sparkles size={14} /> Cook with what you have
+          <Sparkles size={18} />
+          Cook with what you have
         </button>
       </div>
 
       <button
         type="button"
         onClick={onOpenBudget}
-        className="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between border border-outline-variant text-left"
+        className="bg-surface-container-low p-lg rounded-xl flex flex-col justify-between border border-outline-variant text-left"
       >
         <div>
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="font-display text-lg text-primary">This Week's Budget</h2>
-            <span className="font-display text-lg text-primary">
-              £{remaining.toFixed(0)} <small className="text-xs font-body opacity-60">left</small>
+          <div className="flex justify-between items-center mb-md">
+            <h2 className="font-display text-2xl font-semibold text-primary">This Week's Budget</h2>
+            <span className="font-display text-2xl font-semibold text-primary">
+              £{remaining.toFixed(0)} <small className="text-xs opacity-60 font-body">left</small>
             </span>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-sm">
             <div className="h-2 w-full rounded-full overflow-hidden bg-primary">
               <div className="h-full rounded-full bg-tertiary-fixed" style={{ width: `${pct}%` }} />
             </div>
-            <div className="flex justify-between text-xs font-semibold uppercase tracking-wide text-outline">
+            <div className="flex justify-between text-xs font-semibold tracking-wider text-outline uppercase">
               <span>Spent: £{WEEKLY_BUDGET.spent.toFixed(2)}</span>
               <span>Budget: £{WEEKLY_BUDGET.target.toFixed(2)}</span>
             </div>
           </div>
         </div>
-        <div className="mt-6 tonal-layer p-3 rounded-lg">
-          <p className="text-sm italic leading-relaxed text-on-surface-variant">
+        <div className="mt-xl tonal-layer p-md rounded-lg">
+          <p className="text-base text-on-surface-variant italic leading-relaxed">
             You're under your average spend this week. Nice work.
           </p>
         </div>
@@ -130,27 +134,24 @@ function Trending({ onOpenCommunity, onOpenRecipe }) {
   const trending = [...COMMUNITY_RECIPES].sort((a, b) => (b.upvotes ?? 0) - (a.upvotes ?? 0));
   return (
     <section>
-      <div className="flex items-end justify-between mb-3">
-        <h2 className="font-display text-xl text-primary">Trending on Campus</h2>
-        <button type="button" onClick={onOpenCommunity} className="text-outline" aria-label="See all">
-          <ChevronRight size={20} />
+      <div className="flex items-end justify-between mb-md">
+        <h2 className="font-display text-2xl font-semibold text-primary">Trending on Campus</h2>
+        <button type="button" onClick={onOpenCommunity} className="text-outline cursor-pointer" aria-label="See all">
+          <ArrowRight size={22} />
         </button>
       </div>
-      <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-5 px-5">
+      <div className="flex gap-md overflow-x-auto no-scrollbar pb-sm -mx-gutter px-gutter">
         {trending.map((recipe) => (
-          <button
-            key={recipe.id}
-            type="button"
-            onClick={() => onOpenRecipe(recipe)}
-            className="flex-shrink-0 w-56 text-left"
-          >
+          <div key={recipe.id} className="flex-shrink-0 w-64 group cursor-pointer" onClick={() => onOpenRecipe(recipe)}>
             <div
-              className="relative h-40 overflow-hidden rounded-lg mb-2"
+              className="relative h-48 overflow-hidden rounded-lg mb-xs"
               style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
             />
-            <h4 className="font-semibold text-sm text-primary truncate">{recipe.title}</h4>
-            <p className="text-xs text-outline">@{recipe.author?.split(',')[0].toLowerCase()} • {recipe.upvotes} saves</p>
-          </button>
+            <h4 className="text-base font-semibold tracking-wider text-primary truncate">{recipe.title}</h4>
+            <p className="text-xs font-medium text-outline">
+              @{recipe.author?.split(',')[0].toLowerCase()} • {recipe.upvotes} saves
+            </p>
+          </div>
         ))}
       </div>
     </section>
@@ -162,22 +163,22 @@ function HouseholdCard({ onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="rounded-xl border border-outline-variant bg-surface-container-lowest p-4 flex items-center justify-between text-left"
+      className="rounded-xl border border-outline-variant bg-surface-container-lowest p-md flex items-center justify-between text-left"
     >
       <div className="min-w-0">
-        <p className="font-display text-lg leading-tight text-primary">Household</p>
-        <p className="text-xs font-semibold mt-1 text-on-surface-variant">
+        <p className="font-display text-lg text-primary leading-tight">Household</p>
+        <p className="text-xs font-semibold text-on-surface-variant mt-1">
           Dan's cooking tonight · {SHOPPING_LIST.length} items on the shared list
         </p>
       </div>
-      <ChevronRight size={18} className="text-secondary" />
+      <ChevronRight size={20} className="text-secondary" />
     </button>
   );
 }
 
 function BottomNav({ active, onChange, onNavigate }) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 flex items-center justify-between px-6 py-3 bg-surface border-t border-outline-variant">
+    <nav className="fixed bottom-0 w-full z-50 bg-surface flex justify-between items-center px-lg py-md border-t border-outline-variant">
       {NAV_ITEMS.map(({ id, label, icon: Icon }) => {
         const isActive = active === id;
         return (
@@ -188,12 +189,14 @@ function BottomNav({ active, onChange, onNavigate }) {
               onChange(id);
               onNavigate(id);
             }}
-            className={`flex items-center justify-center rounded-full transition-colors ${
-              isActive ? 'bg-primary text-on-primary w-12 h-12' : 'text-primary-container opacity-40 w-12 h-12'
+            className={`flex flex-col items-center justify-center transition-transform active:scale-90 duration-200 ${
+              isActive
+                ? 'bg-primary text-on-primary rounded-full w-12 h-12'
+                : 'text-primary-container opacity-40 hover:bg-primary-container hover:text-on-primary-container transition-colors p-2 rounded-full'
             }`}
             aria-label={label}
           >
-            <Icon size={20} />
+            <Icon size={22} />
           </button>
         );
       })}
@@ -222,14 +225,14 @@ export default function ForkitHome({
   };
 
   return (
-    <div className="min-h-screen pb-28 bg-surface">
+    <div className="bg-surface min-h-screen pb-32">
       <Header onOpenAuth={onOpenAuth} onOpenNotifications={onOpenNotifications} session={session} />
-      <div className="px-5 pt-6 max-w-3xl mx-auto flex flex-col gap-8">
+      <main className="max-w-[1200px] mx-auto px-gutter py-md space-y-xl">
         <TodayPlan onOpenPlan={onOpenPlan} onOpenRecipe={onOpenRecipe} />
         <CupboardBudgetRow onOpenPantry={onOpenPantry} onOpenBudget={onOpenBudget} />
         <Trending onOpenCommunity={onOpenCommunity} onOpenRecipe={onOpenRecipe} />
         <HouseholdCard onClick={onOpenHousehold} />
-      </div>
+      </main>
       <BottomNav active={activeTab} onChange={setActiveTab} onNavigate={handleNavTap} />
     </div>
   );

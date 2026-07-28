@@ -276,7 +276,7 @@ function SwipeStep({ dishIndex, onSwipe }) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <div className="relative w-full max-w-xs h-[26rem]">
+      <div className="relative w-full max-w-[20rem] h-[26rem]">
         {done ? (
           <div className="rounded-xl border border-outline-variant bg-surface-container-lowest h-full flex flex-col items-center justify-center gap-2 px-6 text-center">
             <span className="font-display text-xl text-primary">That's the taste test done</span>

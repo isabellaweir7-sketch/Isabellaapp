@@ -40,7 +40,7 @@ export default function ForkitPantry({ onBack, onOpenRecipe }) {
       <div className="flex-1 px-5 pb-8 max-w-3xl mx-auto w-full">
         <section className="mt-4 mb-6">
           <h2 className="font-display text-3xl leading-tight mb-2 text-primary">Cupboard Cooker</h2>
-          <p className="text-base text-on-surface-variant max-w-xl">
+          <p className="text-base text-on-surface-variant max-w-[36rem]">
             What's left in your cupboard? We'll turn it into a recipe you can actually cook tonight.
           </p>
         </section>

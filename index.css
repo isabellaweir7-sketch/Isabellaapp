@@ -65,11 +65,17 @@
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
-  /* Corner radii: substantial softness */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
+  /* Named spacing scale, matching the import 1:1 (base 4px unit) */
+  --spacing-base: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 64px;
+  --spacing-gutter: 20px;
+
+  /* Corner radii are Tailwind's stock scale (0.25/0.5/0.75rem, full) —
+     the import doesn't customise these, so no overrides here. */
 }
 
 @layer base {

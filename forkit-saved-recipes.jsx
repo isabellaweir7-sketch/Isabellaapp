@@ -16,7 +16,7 @@ function EmptySaved({ onBack }) {
           <BookOpen size={36} className="text-primary" />
         </div>
         <h2 className="font-display text-2xl text-primary">Your digital cookbook is empty</h2>
-        <p className="text-sm text-on-surface-variant max-w-sm">
+        <p className="text-sm text-on-surface-variant max-w-[24rem]">
           Save recipes you love so they're easy to find again when it's time to cook.
         </p>
         <button type="button" onClick={onBack} className="bg-primary text-on-primary font-semibold px-6 py-3 rounded-xl">

@@ -112,7 +112,7 @@ export default function ForkitHousehold({ onBack, onOpenShopping }) {
       </header>
 
       <div className="flex-1 px-5 pb-10 max-w-3xl mx-auto w-full flex flex-col gap-6">
-        <p className="text-sm text-on-surface-variant max-w-lg">
+        <p className="text-sm text-on-surface-variant max-w-[32rem]">
           Manage your shared kitchen — who's cooking, and who's paying for what.
         </p>
 
