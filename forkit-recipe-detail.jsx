@@ -94,6 +94,30 @@ function BatchCookRow({ servings, onSetServings }) {
   );
 }
 
+// Required by the Unsplash API Guidelines: credit the photographer (linked
+// to their profile) and Unsplash itself, wherever a sourced photo is shown.
+// Renders nothing for photos without credit data (the original hand-picked
+// stock photos predate this and have none).
+function PhotoCredit({ credit }) {
+  if (!credit) return null;
+  const profileUrl = `https://unsplash.com/@${credit.photographerUsername}?utm_source=forkit&utm_medium=referral`;
+  const unsplashUrl = 'https://unsplash.com/?utm_source=forkit&utm_medium=referral';
+  return (
+    <div className="absolute bottom-2 right-2 bg-black/40 backdrop-blur-sm rounded-full px-2.5 py-1">
+      <p className="text-[10px] font-medium text-white/90 leading-none">
+        Photo:{' '}
+        <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="underline">
+          {credit.photographerName}
+        </a>{' '}
+        /{' '}
+        <a href={unsplashUrl} target="_blank" rel="noopener noreferrer" className="underline">
+          Unsplash
+        </a>
+      </p>
+    </div>
+  );
+}
+
 function NutritionCard({ macros }) {
   if (!macros) return null;
   const stats = [
@@ -154,6 +178,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
           style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-surface to-transparent" />
+          <PhotoCredit credit={recipe.photoCredit} />
         </div>
 
         <div className="px-5 -mt-10 relative z-10 flex flex-col gap-6">

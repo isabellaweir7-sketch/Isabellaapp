@@ -84,6 +84,17 @@ export interface Macros {
   fat: number;
 }
 
+// Required by the Unsplash API Guidelines whenever a photo sourced through
+// the API is displayed: credit to the photographer (linked to their
+// Unsplash profile) and to Unsplash itself. Optional because the current
+// stock photos were hand-picked before this existed and have no photographer
+// record — PhotoCredit renders nothing until this is populated.
+export interface PhotoCredit {
+  photographerName: string;
+  photographerUsername: string;
+  photoPageUrl: string;
+}
+
 export interface Recipe {
   id: string;
   title: string;
@@ -101,6 +112,7 @@ export interface Recipe {
   preservationTip?: string;
   dietary: DietaryFlags;
   macros: Macros;
+  photoCredit?: PhotoCredit;
 }
 
 export interface TodayMeal {
