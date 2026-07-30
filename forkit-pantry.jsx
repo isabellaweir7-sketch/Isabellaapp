@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Search, CheckCircle2, Utensils, Timer, Zap } from 'lucide-react';
 import { SAVED_RECIPES, generateCupboardRecipe } from './mockData';
+import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
   const [ingredientsText, setIngredientsText] = useState('');
@@ -130,6 +131,9 @@ export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
                   style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
                   <span className="chip-value absolute top-3 right-3">{recipe.tags[0]}</span>
+                  <span className="absolute top-3 left-3">
+                    <SkillLevelBadge level={recipe.skillLevel} />
+                  </span>
                 </div>
                 <h4 className="font-display text-lg text-primary">{recipe.title}</h4>
                 <p className="text-xs font-medium text-outline flex items-center gap-2 mt-1">

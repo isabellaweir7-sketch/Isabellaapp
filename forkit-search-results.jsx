@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronLeft, Search as SearchIcon, X, Timer } from 'lucide-react';
 import { RECIPE_LIBRARY } from './mockData';
 import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
+import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 const FILTERS = [
   { id: 'vegan', label: 'Vegan' },
@@ -50,7 +51,10 @@ function ResultCard({ recipe, variant, onOpen }) {
           </div>
           <div className="md:w-1/2 p-4 flex flex-col justify-between">
             <div>
-              <h3 className="font-display text-2xl text-primary leading-tight mb-2">{recipe.title}</h3>
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className="font-display text-2xl text-primary leading-tight">{recipe.title}</h3>
+                <SkillLevelBadge level={recipe.skillLevel} />
+              </div>
               <p className="text-base text-on-surface-variant mb-4">{recipeSnippet(recipe)}</p>
             </div>
             <div className="flex items-center justify-between border-t border-outline-variant pt-3">
@@ -80,6 +84,9 @@ function ResultCard({ recipe, variant, onOpen }) {
             <span className="absolute bottom-3 right-3 px-3 py-1 bg-surface/90 backdrop-blur-sm text-primary rounded-full text-xs font-semibold">
               £{recipe.pricePerServing.toFixed(2)} per serving
             </span>
+            <span className="absolute top-3 left-3">
+              <SkillLevelBadge level={recipe.skillLevel} />
+            </span>
           </div>
           <div className="p-4 flex-grow">
             <h3 className="font-display text-lg text-primary mb-1">{recipe.title}</h3>
@@ -106,7 +113,8 @@ function ResultCard({ recipe, variant, onOpen }) {
             <span className="text-sm font-semibold text-secondary shrink-0">£{recipe.pricePerServing.toFixed(2)}/serve</span>
           </div>
           <p className="text-base text-on-surface-variant mb-3">{recipeSnippet(recipe)}</p>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap items-center">
+            <SkillLevelBadge level={recipe.skillLevel} />
             {recipe.tags.slice(0, 2).map((t) => (
               <span
                 key={t}

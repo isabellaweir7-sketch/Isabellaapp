@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Search, ThumbsUp, Lightbulb } from 'lucide-react';
 import { COMMUNITY_RECIPES } from './mockData';
+import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 const CATEGORIES = ['All Recipes', 'Budget Hacks', 'Dorm Friendly', 'Bulk Prep', '15 Min Meals', 'Vegan'];
 
@@ -92,7 +93,10 @@ export default function ForkitCommunity({ onBack, onOpenRecipe, onOpenTips }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-5 flex justify-between items-end">
               <div>
-                <span className="chip-value mb-2 inline-block">{featured.tags[0]}</span>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="chip-value inline-block">{featured.tags[0]}</span>
+                  <SkillLevelBadge level={featured.skillLevel} />
+                </div>
                 <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-white mb-1">
                   {featured.title}
                 </h2>
@@ -138,6 +142,9 @@ export default function ForkitCommunity({ onBack, onOpenRecipe, onOpenTips }) {
                   >
                     <ThumbsUp size={15} fill={isVoted ? 'currentColor' : 'none'} />
                   </button>
+                  <span className="absolute top-2 left-2">
+                    <SkillLevelBadge level={recipe.skillLevel} />
+                  </span>
                 </div>
                 <div className="px-1 pb-1">
                   <h3 className="font-display text-lg text-primary mb-1 truncate">{recipe.title}</h3>
