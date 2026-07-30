@@ -58,6 +58,7 @@ const STEP_META = [
 ];
 
 const ALLERGEN_ICONS = {
+  none: Ban,
   peanuts: Nut,
   'tree-nuts': Leaf,
   dairy: Milk,
@@ -133,32 +134,18 @@ function AllergyCard({ label, Icon, selected, onClick }) {
   );
 }
 
-function AllergiesStep({ selected, onToggle, onClearAll }) {
+function AllergiesStep({ selected, onToggle }) {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-2 gap-sm">
-        {ALLERGENS.map((a) => (
-          <AllergyCard
-            key={a.id}
-            label={a.label}
-            Icon={ALLERGEN_ICONS[a.id] ?? Utensils}
-            selected={selected.includes(a.id)}
-            onClick={() => onToggle(a.id)}
-          />
-        ))}
-      </div>
-      <div className="flex justify-center">
-        <button
-          type="button"
-          onClick={onClearAll}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-semibold tracking-wider transition-colors ${
-            selected.length === 0 ? 'bg-primary text-on-primary border-primary' : 'border-outline text-primary'
-          }`}
-        >
-          <Ban size={18} />
-          I don't have any allergies
-        </button>
-      </div>
+    <div className="grid grid-cols-2 gap-sm">
+      {ALLERGENS.map((a) => (
+        <AllergyCard
+          key={a.id}
+          label={a.label}
+          Icon={ALLERGEN_ICONS[a.id] ?? Utensils}
+          selected={selected.includes(a.id)}
+          onClick={() => onToggle(a.id)}
+        />
+      ))}
     </div>
   );
 }
@@ -296,18 +283,33 @@ function NutritionGoalsStep({ selected, onToggle, macros, onMacroChange }) {
   );
 }
 
-function KitchenEssentialsStep({ selected, onToggle }) {
+function KitchenEssentialsStep({ selected, onToggle, onSelectAll }) {
+  const allSelected = selected.length === EQUIPMENT_ITEMS.length;
   return (
-    <div className="grid grid-cols-2 gap-sm">
-      {EQUIPMENT_ITEMS.map((item) => (
-        <RestrictionCard
-          key={item.id}
-          label={item.label}
-          Icon={EQUIPMENT_ICONS[item.id] ?? Utensils}
-          selected={selected.includes(item.id)}
-          onClick={() => onToggle(item.id)}
-        />
-      ))}
+    <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-2 gap-sm">
+        {EQUIPMENT_ITEMS.map((item) => (
+          <RestrictionCard
+            key={item.id}
+            label={item.label}
+            Icon={EQUIPMENT_ICONS[item.id] ?? Utensils}
+            selected={selected.includes(item.id)}
+            onClick={() => onToggle(item.id)}
+          />
+        ))}
+      </div>
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={onSelectAll}
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-semibold tracking-wider transition-colors ${
+            allSelected ? 'bg-primary text-on-primary border-primary' : 'border-outline text-primary'
+          }`}
+        >
+          <CheckCircle2 size={18} />
+          {allSelected ? 'All Selected' : 'Select All'}
+        </button>
+      </div>
     </div>
   );
 }
@@ -522,7 +524,8 @@ export default function ForkitOnboarding({ onComplete }) {
     setArr((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const handleMacroChange = (key, value) => setMacros((prev) => ({ ...prev, [key]: value }));
-  const handleClearAllergies = () => setAllergies([]);
+  const handleSelectAllEquipment = () =>
+    setEquipment((prev) => (prev.length === EQUIPMENT_ITEMS.length ? [] : EQUIPMENT_ITEMS.map((item) => item.id)));
 
   const dishes = generateSwipeDeck(restrictions, allergies);
 
@@ -593,9 +596,7 @@ export default function ForkitOnboarding({ onComplete }) {
         <p className="text-lg mb-6 text-on-surface-variant">{STEP_META[step].subtitle}</p>
 
         <div className="flex-1">
-          {step === 0 && (
-            <AllergiesStep selected={allergies} onToggle={toggleIn(setAllergies)} onClearAll={handleClearAllergies} />
-          )}
+          {step === 0 && <AllergiesStep selected={allergies} onToggle={toggleIn(setAllergies)} />}
           {step === 1 && <ReasonsStep selected={reasons} onToggle={toggleIn(setReasons)} />}
           {step === 2 && <RestrictionsStep selected={restrictions} onToggle={toggleIn(setRestrictions)} />}
           {step === 3 && (
@@ -606,7 +607,9 @@ export default function ForkitOnboarding({ onComplete }) {
               onMacroChange={handleMacroChange}
             />
           )}
-          {step === 4 && <KitchenEssentialsStep selected={equipment} onToggle={toggleIn(setEquipment)} />}
+          {step === 4 && (
+            <KitchenEssentialsStep selected={equipment} onToggle={toggleIn(setEquipment)} onSelectAll={handleSelectAllEquipment} />
+          )}
           {step === 5 && (
             <StudentContextStep
               studentStatus={studentStatus}

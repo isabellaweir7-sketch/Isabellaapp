@@ -94,6 +94,7 @@ export function filterByRestrictions<T extends { dietary: DietaryFlags }>(items:
 }
 
 export const ALLERGENS = [
+  { id: 'none', label: 'No Allergies' },
   { id: 'peanuts', label: 'Peanuts' },
   { id: 'tree-nuts', label: 'Tree Nuts' },
   { id: 'dairy', label: 'Dairy' },
