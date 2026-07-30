@@ -12159,8 +12159,19 @@ export const WEEKLY_BUDGET = {
   target: 30,
 };
 
+// A student is far likelier to actually cook a planned, sit-down meal for
+// dinner than for breakfast or lunch (lectures, work, eating out) — so
+// those two get real, but genuinely quick, suggestions (15 min or less, or
+// already tagged Quick/5 min/15 min) rather than the same full-weight
+// recipe treatment as dinner.
+function isQuickMeal(recipe: Recipe): boolean {
+  return (recipe.prepMinutes ?? 99) <= 15 || recipe.tags.some((t) => t === 'Quick' || t === '5 min' || t === '15 min');
+}
+
 // Generates today's Breakfast/Lunch/Dinner from RECIPE_LIBRARY, filtered by
-// dietary restrictions.
+// dietary restrictions. Dinner is the main event (best profile match from
+// the full pool); breakfast and lunch are pulled from a quick-only subset
+// so they stay low-effort rather than full recipes.
 export function generateTodayMeals(
   restrictionIds: string[] = [],
   allergyIds: string[] = [],
@@ -12172,8 +12183,18 @@ export function generateTodayMeals(
   const dislikePool = filterByFirmDislikes(dietPool.length > 0 ? dietPool : RECIPE_LIBRARY, firmDislikeIds);
   const pool = filterByEquipment(dislikePool.length > 0 ? dislikePool : RECIPE_LIBRARY, equipmentIds);
   const safePool = rankByProfile(pool.length > 0 ? pool : RECIPE_LIBRARY, profile);
-  const slots = ['Breakfast', 'Lunch', 'Dinner'];
-  return slots.map((slot, i) => ({ slot, recipe: safePool[i % safePool.length] }));
+  const dinnerRecipe = safePool[0];
+
+  // Excludes whatever got picked for dinner so breakfast/lunch never just
+  // repeat it back.
+  const quickPool = safePool.filter((r) => isQuickMeal(r) && r.id !== dinnerRecipe.id);
+  const safeQuickPool = quickPool.length > 0 ? quickPool : safePool.filter((r) => r.id !== dinnerRecipe.id);
+
+  return [
+    { slot: 'Breakfast', recipe: safeQuickPool[0] },
+    { slot: 'Lunch', recipe: safeQuickPool[1 % safeQuickPool.length] },
+    { slot: 'Dinner', recipe: dinnerRecipe },
+  ];
 }
 
 // Kept for anything that wants a default, unfiltered set.

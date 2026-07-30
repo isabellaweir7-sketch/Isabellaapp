@@ -72,7 +72,14 @@ function SearchBar({ onSearch }) {
   );
 }
 
+// Dinner is the one meal students actually plan for, so it keeps the full
+// hero-card treatment. Breakfast and lunch are real suggestions too (already
+// filtered to genuinely quick ones by generateTodayMeals), just shown as
+// small, low-ceremony rows instead of matching dinner's visual weight.
 function TodayPlan({ meals, onOpenPlan, onOpenRecipe }) {
+  const dinner = meals.find((m) => m.slot === 'Dinner');
+  const lighterMeals = meals.filter((m) => m.slot !== 'Dinner');
+
   return (
     <section>
       <div className="flex items-end justify-between mb-md">
@@ -81,29 +88,56 @@ function TodayPlan({ meals, onOpenPlan, onOpenRecipe }) {
           View Week
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-md">
-        {meals.map(({ slot, recipe }) => (
-          <div key={slot} className="group cursor-pointer" onClick={() => onOpenRecipe(recipe)}>
-            <div
-              className="relative aspect-[4/5] overflow-hidden rounded-xl mb-xs"
-              style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-            >
-              <div className="absolute top-4 left-4 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider">
-                {slot}
-              </div>
-            </div>
-            <div className="space-y-base">
-              <h3 className="font-display text-lg text-on-background leading-tight">{recipe.title}</h3>
-              <div className="flex items-center gap-md text-base text-on-surface-variant opacity-80">
-                <span className="flex items-center gap-1">
-                  <Timer size={18} /> {recipe.prepMinutes ?? 15}m
-                </span>
-                <span className="flex items-center gap-1">
-                  <Banknote size={18} /> £{recipe.pricePerServing.toFixed(2)}
-                </span>
-              </div>
+
+      {dinner && (
+        <div className="group cursor-pointer mb-md" onClick={() => onOpenRecipe(dinner.recipe)}>
+          <div
+            className="relative aspect-[4/5] md:aspect-[21/9] overflow-hidden rounded-xl mb-xs"
+            style={{
+              backgroundColor: dinner.recipe.fallback,
+              backgroundImage: `url("${dinner.recipe.photo}")`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <div className="absolute top-4 left-4 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider">
+              Dinner
             </div>
           </div>
+          <div className="space-y-base">
+            <h3 className="font-display text-lg text-on-background leading-tight">{dinner.recipe.title}</h3>
+            <div className="flex items-center gap-md text-base text-on-surface-variant opacity-80">
+              <span className="flex items-center gap-1">
+                <Timer size={18} /> {dinner.recipe.prepMinutes ?? 15}m
+              </span>
+              <span className="flex items-center gap-1">
+                <Banknote size={18} /> £{dinner.recipe.pricePerServing.toFixed(2)}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-2 gap-sm">
+        {lighterMeals.map(({ slot, recipe }) => (
+          <button
+            key={slot}
+            type="button"
+            onClick={() => onOpenRecipe(recipe)}
+            className="flex items-center gap-3 bg-surface-container-low rounded-xl p-3 text-left"
+          >
+            <div
+              className="w-14 h-14 rounded-lg shrink-0 bg-cover bg-center"
+              style={{ backgroundImage: `url("${recipe.photo}")`, backgroundColor: recipe.fallback }}
+            />
+            <div className="min-w-0">
+              <span className="text-xs font-semibold uppercase tracking-wider text-outline">{slot}</span>
+              <h4 className="text-sm font-semibold text-on-background truncate">{recipe.title}</h4>
+              <span className="flex items-center gap-1 text-xs text-on-surface-variant opacity-80">
+                <Timer size={12} /> {recipe.prepMinutes ?? 15}m
+              </span>
+            </div>
+          </button>
         ))}
       </div>
     </section>
