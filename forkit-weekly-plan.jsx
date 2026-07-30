@@ -41,6 +41,7 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpen
   const WEEKLY_PLAN = generateWeeklyPlan(
     answers?.restrictions ?? [],
     answers?.allergies ?? [],
+    answers?.firmDislikes ?? [],
     answers?.equipment ?? [],
     {
       nutritionGoals: answers?.nutritionGoals ?? [],

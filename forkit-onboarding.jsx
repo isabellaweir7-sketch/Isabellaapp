@@ -44,17 +44,21 @@ import {
   STUDENT_STATUS_OPTIONS,
   ACCOMMODATION_OPTIONS,
   ALLERGENS,
+  FLAVOR_PROFILES,
   generateSwipeDeck,
 } from './mockData';
+
+const LIKES_TARGET = 7;
 
 const STEP_META = [
   { title: 'Any Allergies?', subtitle: "We'll filter out recipes that aren't safe for you. You can update these anytime in your profile." },
   { title: 'What brings you to ForkIt?', subtitle: "Pick as many as apply — there's no wrong answer." },
   { title: 'Any deal-breakers?', subtitle: "We'll only suggest meals that fit." },
+  { title: 'Anything you\'d rather skip?', subtitle: "Pick any flavours you're just not into — we won't suggest these at all." },
   { title: 'What are your goals?', subtitle: 'Tell us what to optimise for so your plan actually fits your week.' },
   { title: 'Kitchen Essentials', subtitle: "Select what you've got — we'll only suggest recipes you can actually cook." },
   { title: 'A bit about your setup', subtitle: 'This helps us tailor suggestions to where and how you live.' },
-  { title: 'Would you eat this?', subtitle: 'Swipe through a few so we learn your taste.' },
+  { title: 'Would you eat this?', subtitle: `Swipe until you've liked ${LIKES_TARGET} dishes so we learn your taste.` },
 ];
 
 const ALLERGEN_ICONS = {
@@ -193,6 +197,21 @@ function RestrictionsStep({ selected, onToggle }) {
           Icon={RESTRICTION_ICONS[r.id] ?? Utensils}
           selected={selected.includes(r.id)}
           onClick={() => onToggle(r.id)}
+        />
+      ))}
+    </div>
+  );
+}
+
+function FirmDislikesStep({ selected, onToggle }) {
+  return (
+    <div className="flex flex-wrap gap-sm">
+      {FLAVOR_PROFILES.map((flavor) => (
+        <Chip
+          key={flavor.id}
+          label={flavor.label}
+          selected={selected.includes(flavor.id)}
+          onClick={() => onToggle(flavor.id)}
         />
       ))}
     </div>
@@ -447,10 +466,10 @@ function SwipeCard({ dish, onSwipe, isTop }) {
   );
 }
 
-function SwipeStep({ dishes, dishIndex, onSwipe }) {
+function SwipeStep({ dishes, dishIndex, likedCount, onSwipe }) {
   const visible = dishes.slice(dishIndex, dishIndex + 2);
-  const done = dishIndex >= dishes.length;
-  const progressed = Math.min(dishIndex, dishes.length);
+  const done = dishIndex >= dishes.length || likedCount >= LIKES_TARGET;
+  const progressed = Math.min(likedCount, LIKES_TARGET);
 
   return (
     <div className="flex flex-col items-center gap-6">
@@ -492,15 +511,15 @@ function SwipeStep({ dishes, dishIndex, onSwipe }) {
       )}
       <div className="w-full max-w-[200px]">
         <div className="flex justify-between items-end mb-1">
-          <span className="text-xs font-medium text-primary">Your Palate</span>
+          <span className="text-xs font-medium text-primary">Liked</span>
           <span className="text-xs font-medium text-on-surface-variant">
-            {progressed}/{dishes.length}
+            {progressed}/{LIKES_TARGET}
           </span>
         </div>
         <div className="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
           <div
             className="h-full bg-tertiary-container"
-            style={{ width: `${(progressed / dishes.length) * 100}%` }}
+            style={{ width: `${(progressed / LIKES_TARGET) * 100}%` }}
           />
         </div>
       </div>
@@ -513,6 +532,7 @@ export default function ForkitOnboarding({ onComplete }) {
   const [allergies, setAllergies] = useState([]);
   const [reasons, setReasons] = useState([]);
   const [restrictions, setRestrictions] = useState([]);
+  const [firmDislikes, setFirmDislikes] = useState([]);
   const [nutritionGoals, setNutritionGoals] = useState([]);
   const [macros, setMacros] = useState({ protein: 40, carbs: 35, fat: 25 });
   const [equipment, setEquipment] = useState([]);
@@ -530,13 +550,14 @@ export default function ForkitOnboarding({ onComplete }) {
   const handleSelectAllEquipment = () =>
     setEquipment((prev) => (prev.length === EQUIPMENT_ITEMS.length ? [] : EQUIPMENT_ITEMS.map((item) => item.id)));
 
-  const dishes = generateSwipeDeck(restrictions, allergies);
+  const dishes = generateSwipeDeck(restrictions, allergies, firmDislikes);
 
   const finish = (finalLiked, finalDisliked) => {
     onComplete({
       allergies,
       reasons,
       restrictions,
+      firmDislikes,
       nutritionGoals,
       macros,
       likedDishes: finalLiked,
@@ -557,7 +578,9 @@ export default function ForkitOnboarding({ onComplete }) {
     setDisliked(nextDisliked);
     const nextIndex = dishIndex + 1;
     setDishIndex(nextIndex);
-    if (nextIndex >= dishes.length) {
+    // Stops once we've got a good taste read (7 liked dishes), or sooner if
+    // the deck runs out first (e.g. someone dislikes almost everything).
+    if (nextLiked.length >= LIKES_TARGET || nextIndex >= dishes.length) {
       setTimeout(() => finish(nextLiked, nextDisliked), 500);
     }
   };
@@ -602,7 +625,8 @@ export default function ForkitOnboarding({ onComplete }) {
           {step === 0 && <AllergiesStep selected={allergies} onToggle={toggleIn(setAllergies)} />}
           {step === 1 && <ReasonsStep selected={reasons} onToggle={toggleIn(setReasons)} />}
           {step === 2 && <RestrictionsStep selected={restrictions} onToggle={toggleIn(setRestrictions)} />}
-          {step === 3 && (
+          {step === 3 && <FirmDislikesStep selected={firmDislikes} onToggle={toggleIn(setFirmDislikes)} />}
+          {step === 4 && (
             <NutritionGoalsStep
               selected={nutritionGoals}
               onToggle={toggleIn(setNutritionGoals)}
@@ -610,10 +634,10 @@ export default function ForkitOnboarding({ onComplete }) {
               onMacroChange={handleMacroChange}
             />
           )}
-          {step === 4 && (
+          {step === 5 && (
             <KitchenEssentialsStep selected={equipment} onToggle={toggleIn(setEquipment)} onSelectAll={handleSelectAllEquipment} />
           )}
-          {step === 5 && (
+          {step === 6 && (
             <StudentContextStep
               studentStatus={studentStatus}
               onStatus={setStudentStatus}
@@ -623,7 +647,7 @@ export default function ForkitOnboarding({ onComplete }) {
               onAccommodation={setAccommodation}
             />
           )}
-          {step === 6 && <SwipeStep dishes={dishes} dishIndex={dishIndex} onSwipe={handleSwipe} />}
+          {step === 7 && <SwipeStep dishes={dishes} dishIndex={dishIndex} likedCount={liked.length} onSwipe={handleSwipe} />}
         </div>
       </div>
 
