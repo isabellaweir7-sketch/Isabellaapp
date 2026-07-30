@@ -151,6 +151,20 @@ export function filterByRestrictionsAndAllergies(
   return filterByRestrictions(recipes, combinedRestrictions).filter((r) => matchesAllergies(r, allergyIds));
 }
 
+// An air fryer is functionally a compact convection oven, so a recipe
+// tagged 'oven' (a traybake, roast veg, etc.) is genuinely cookable by
+// someone who only has an air fryer, and vice versa — this isn't a stretch,
+// it's the same cooking method at a different scale. Treated as symmetric.
+const EQUIPMENT_SUBSTITUTES: Record<string, string[]> = {
+  oven: ['air-fryer'],
+  'air-fryer': ['oven'],
+};
+
+function ownsOrHasSubstitute(needed: string, owned: Set<string>): boolean {
+  if (owned.has(needed)) return true;
+  return (EQUIPMENT_SUBSTITUTES[needed] ?? []).some((sub) => owned.has(sub));
+}
+
 // Only shows recipes the student can actually cook with what they told us
 // they own. No selection at all (onboarding skipped/not yet reached) means
 // no filtering, rather than showing nothing. If a specific combo (e.g.
@@ -160,7 +174,7 @@ export function filterByRestrictionsAndAllergies(
 export function filterByEquipment(recipes: Recipe[], equipmentIds: string[] = []): Recipe[] {
   if (equipmentIds.length === 0) return recipes;
   const owned = new Set(equipmentIds);
-  const matches = recipes.filter((r) => r.equipment.every((needed) => owned.has(needed)));
+  const matches = recipes.filter((r) => r.equipment.every((needed) => ownsOrHasSubstitute(needed, owned)));
   return matches.length > 0 ? matches : recipes;
 }
 
