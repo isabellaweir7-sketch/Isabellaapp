@@ -28,7 +28,7 @@ function EmptyPlan({ onBack }) {
 }
 
 export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpenHousehold }) {
-  const WEEKLY_PLAN = generateWeeklyPlan(answers?.restrictions ?? [], answers?.allergies ?? [], {
+  const WEEKLY_PLAN = generateWeeklyPlan(answers?.restrictions ?? [], answers?.allergies ?? [], answers?.equipment ?? [], {
     nutritionGoals: answers?.nutritionGoals ?? [],
     likedDishes: answers?.likedDishes ?? [],
     dislikedDishes: answers?.dislikedDishes ?? [],

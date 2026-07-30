@@ -113,6 +113,11 @@ export interface Recipe {
   dietary: DietaryFlags;
   macros: Macros;
   photoCredit?: PhotoCredit;
+  // Equipment ids (matching EquipmentItem) actually needed to cook this,
+  // inferred from its real steps — e.g. a traybake needs 'oven', a smoothie
+  // needs only 'blender'. Almost everything needs 'hob' at minimum unless
+  // it's oven-only, no-cook, or a single-appliance dish.
+  equipment: string[];
 }
 
 export interface TodayMeal {
