@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart, GraduationCap, ChevronRight, Award, Camera } from 'lucide-react';
+import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart, GraduationCap, ChevronRight, Award, Camera, Settings } from 'lucide-react';
 import { supabase } from './supabaseClient';
 import { SAVED_RECIPES, DIETARY_RESTRICTIONS, ALLERGENS } from './mockData';
 import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
@@ -38,7 +38,7 @@ function TextField({ icon: Icon, ...props }) {
   );
 }
 
-function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut, onOpenHousehold }) {
+function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut, onOpenHousehold, onEditPreferences }) {
   const email = session.user.email || '';
   const provider = session.user.app_metadata?.provider === 'google' ? 'Google' : 'email';
   const initial = email.trim()[0]?.toUpperCase() || '?';
@@ -185,6 +185,23 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
 
         <button
           type="button"
+          onClick={onEditPreferences}
+          className="flex items-center justify-between gap-3 bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4 text-left"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+              <Settings size={18} className="text-on-secondary-container" />
+            </div>
+            <div>
+              <p className="text-base font-semibold text-primary">Edit Allergies, Diet & Kitchen Setup</p>
+              <p className="text-sm text-on-surface-variant">Retake the setup questions to update your answers</p>
+            </div>
+          </div>
+          <ChevronRight size={18} className="text-outline shrink-0" />
+        </button>
+
+        <button
+          type="button"
           onClick={onLogOut}
           className="mt-2 flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest font-semibold tracking-wider text-sm text-on-surface"
         >
@@ -196,7 +213,7 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
   );
 }
 
-export default function ForkitAuth({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut, onOpenHousehold }) {
+export default function ForkitAuth({ session, answers, freshersMode, onOpenFreshers, onBack, onLogOut, onOpenHousehold, onEditPreferences }) {
   const [mode, setMode] = useState('signin');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -215,6 +232,7 @@ export default function ForkitAuth({ session, answers, freshersMode, onOpenFresh
         onBack={onBack}
         onLogOut={onLogOut}
         onOpenHousehold={onOpenHousehold}
+        onEditPreferences={onEditPreferences}
       />
     );
   }

@@ -82,6 +82,11 @@ export default function App() {
     setFreshersMode(value);
   };
 
+  const handleEditPreferences = () => {
+    localStorage.removeItem(ONBOARDING_KEY);
+    setAnswers(null);
+  };
+
   if (!answers) {
     return <ForkitOnboarding onComplete={handleOnboardingComplete} />;
   }
@@ -139,6 +144,7 @@ export default function App() {
         onBack={() => setView('home')}
         onLogOut={handleLogOut}
         onOpenHousehold={() => setView('household')}
+        onEditPreferences={handleEditPreferences}
       />
     );
   }
