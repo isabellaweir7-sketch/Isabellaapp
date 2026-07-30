@@ -1,12 +1,48 @@
 import React, { useState } from 'react';
-import { ChevronLeft, PlayCircle, Lock, CheckCircle2, Lightbulb } from 'lucide-react';
+import { ChevronLeft, PlayCircle, Lock, CheckCircle2, Lightbulb, X } from 'lucide-react';
 import { TECHNIQUES, SKILL_LEVELS, PRO_TIPS } from './mockData';
 
 const CURRENT_LEVEL_INDEX = 0;
 
-function TechniqueCard({ technique }) {
+// Real YouTube embed — plays inline in the app rather than redirecting out
+// to youtube.com. Shared between Skill Lab's modal and Recipe Detail's
+// inline technique section.
+export function TechniqueVideoEmbed({ technique }) {
   return (
-    <button type="button" className="text-left group">
+    <div className="aspect-video rounded-lg overflow-hidden bg-black">
+      <iframe
+        className="w-full h-full"
+        src={`https://www.youtube.com/embed/${technique.youtubeId}?rel=0`}
+        title={technique.name}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+  );
+}
+
+function TechniqueVideoModal({ technique, onClose }) {
+  return (
+    <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-5" onClick={onClose}>
+      <div className="bg-surface rounded-xl overflow-hidden w-full max-w-2xl" onClick={(e) => e.stopPropagation()}>
+        <TechniqueVideoEmbed technique={technique} />
+        <div className="p-4 flex items-start justify-between gap-3">
+          <div>
+            <h4 className="text-base font-semibold text-primary">{technique.name}</h4>
+            <p className="text-xs font-medium text-on-surface-variant">{technique.youtubeChannel}</p>
+          </div>
+          <button type="button" onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-surface-container shrink-0" aria-label="Close">
+            <X size={16} className="text-primary" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TechniqueCard({ technique, onSelect }) {
+  return (
+    <button type="button" className="text-left group" onClick={() => onSelect(technique)}>
       <div
         className="relative aspect-video rounded-lg overflow-hidden mb-2"
         style={{ backgroundColor: technique.fallback, backgroundImage: `url("${technique.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -54,6 +90,7 @@ function SkillPath() {
 
 export default function ForkitSkillLab({ onBack }) {
   const [tab, setTab] = useState('techniques');
+  const [activeTechnique, setActiveTechnique] = useState(null);
 
   return (
     <div className="min-h-screen flex flex-col bg-surface pb-28">
@@ -87,7 +124,7 @@ export default function ForkitSkillLab({ onBack }) {
         {tab === 'techniques' ? (
           <div className="grid grid-cols-2 gap-4">
             {TECHNIQUES.map((technique) => (
-              <TechniqueCard key={technique.id} technique={technique} />
+              <TechniqueCard key={technique.id} technique={technique} onSelect={setActiveTechnique} />
             ))}
           </div>
         ) : (
@@ -104,6 +141,7 @@ export default function ForkitSkillLab({ onBack }) {
           </div>
         )}
       </div>
+      {activeTechnique && <TechniqueVideoModal technique={activeTechnique} onClose={() => setActiveTechnique(null)} />}
     </div>
   );
 }
