@@ -57,7 +57,17 @@ export interface Technique {
   durationLabel: string;
   photo: string;
   fallback: string;
+  // Real YouTube video ID (the part after ?v=) embedded inline via the
+  // standard YouTube embed player — not an AI-generated or stock clip.
+  youtubeId: string;
+  youtubeChannel: string;
 }
+
+// A recipe's own difficulty — separate from SKILL_LEVELS below, which
+// tracks the student's overall progress across the whole app. 'Easy' needs
+// no technique beyond basic chopping; 'Advanced' is where Skill Lab's
+// technique videos actually help, so Recipe Detail surfaces them there.
+export type RecipeSkillLevel = 'Easy' | 'Intermediate' | 'Advanced';
 
 export interface SkillLevel {
   id: string;
@@ -124,6 +134,14 @@ export interface Recipe {
   // and anything cooked as one big tray of liquid/components are NOT marked
   // — those don't fit or cook the same way in a small air fryer basket.
   airFryerAdaptable?: boolean;
+  // How fiddly this recipe actually is to cook, inferred from prep time and
+  // step count — not the student's own skill rank (see SKILL_LEVELS).
+  skillLevel: RecipeSkillLevel;
+  // Technique ids (matching Technique) this recipe's steps genuinely call
+  // for — e.g. a recipe that deglazes the pan links 'technique-deglaze'.
+  // Recipe Detail only surfaces the technique video section for Advanced
+  // recipes, so this is empty on Easy/Intermediate ones even if detected.
+  relatedTechniques: string[];
 }
 
 export interface TodayMeal {

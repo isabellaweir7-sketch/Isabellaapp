@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User, Flame } from 'lucide-react';
+import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User, Flame, GraduationCap } from 'lucide-react';
+import { TECHNIQUES } from './mockData';
+import { TechniqueVideoEmbed } from './forkit-skill-lab.jsx';
 
 const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
 
@@ -118,6 +120,46 @@ function PhotoCredit({ credit }) {
   );
 }
 
+const SKILL_LEVEL_STYLES = {
+  Easy: 'bg-tertiary-fixed text-on-tertiary-fixed',
+  Intermediate: 'bg-secondary-container text-on-secondary-container',
+  Advanced: 'bg-primary-container text-on-primary-container',
+};
+
+function SkillLevelBadge({ level }) {
+  if (!level) return null;
+  return (
+    <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider ${SKILL_LEVEL_STYLES[level]}`}>
+      <GraduationCap size={12} /> {level}
+    </span>
+  );
+}
+
+// Only shown for Advanced recipes — a quick refresher on whichever real
+// technique(s) this specific recipe's steps actually call for, so a
+// difficult recipe doesn't just say "good luck" without pointing at how.
+function TechniqueHelp({ techniqueIds }) {
+  const techniques = TECHNIQUES.filter((t) => techniqueIds.includes(t.id));
+  if (techniques.length === 0) return null;
+  return (
+    <section className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
+      <div className="flex items-center gap-2 mb-3">
+        <GraduationCap size={18} className="text-primary" />
+        <h4 className="text-sm font-semibold uppercase tracking-widest text-primary">This one's a bit trickier — quick refresher</h4>
+      </div>
+      <div className="flex flex-col gap-4">
+        {techniques.map((t) => (
+          <div key={t.id}>
+            <TechniqueVideoEmbed technique={t} />
+            <p className="text-sm font-semibold text-primary mt-2">{t.name}</p>
+            <p className="text-xs font-medium text-on-surface-variant">{t.youtubeChannel}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function NutritionCard({ macros }) {
   if (!macros) return null;
   const stats = [
@@ -186,9 +228,10 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
             <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold mb-2 text-primary">
               {recipe.title}
             </h2>
-            {recipe.ingredients.length <= 5 && (
-              <span className="chip-value mb-2 inline-flex">Fresher Friendly</span>
-            )}
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              {recipe.ingredients.length <= 5 && <span className="chip-value inline-flex">Fresher Friendly</span>}
+              <SkillLevelBadge level={recipe.skillLevel} />
+            </div>
             <div className="flex items-center gap-4 text-sm font-semibold tracking-wider text-on-surface-variant">
               <span className="flex items-center gap-1">
                 <Clock size={16} /> {recipe.prepMinutes ?? 15} mins
@@ -273,6 +316,8 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
               <p className="text-base opacity-90">{recipe.preservationTip}</p>
             </section>
           )}
+
+          {recipe.skillLevel === 'Advanced' && <TechniqueHelp techniqueIds={recipe.relatedTechniques} />}
         </div>
       </div>
     </div>
