@@ -26,12 +26,12 @@ jobs:
       - run: npm ci
       - run: npx vite build
         env:
-          # Placeholder Supabase project — matches local dev's .env.local.
-          # No real backend is wired up yet, so sign-in won't work, but the
-          # app needs *some* value here or supabaseClient.ts throws on load
-          # and the whole page stays blank.
-          VITE_SUPABASE_URL: https://placeholder.supabase.co
-          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_placeholder0000000000
+          # Real Supabase project. The publishable key is meant to be
+          # public (it ships in the client bundle either way) — actual
+          # access control lives in Supabase's Row Level Security policies,
+          # not in keeping this value secret.
+          VITE_SUPABASE_URL: https://cbsktghlpfveulwexcav.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_Z04pBHwgHa-uHmP-qZaOdg_6Uow5rx5
       - uses: actions/configure-pages@v5
         with:
           enablement: true
