@@ -11082,19 +11082,110 @@ export const HOME_TILES: FeatureTile[] = [
 
 const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+// Perishables that are typically sold in a pack/bunch bigger than one
+// recipe's portion (a whole broccoli, a bag of spinach, a bunch of
+// coriander) and spoil within a few days if left in the fridge. Leftover
+// Mode uses this list to nudge the next day's pick toward using up what's
+// already open, rather than letting the rest go to waste.
+const LEFTOVER_PRONE_KEYWORDS = [
+  'broccoli', 'spinach', 'kale', 'coriander', 'parsley', 'basil', 'mint',
+  'dill', 'chives', 'rocket', 'watercress', 'mixed salad', 'lettuce',
+  'mushroom', 'pepper', 'cucumber', 'courgette', 'aubergine', 'cauliflower',
+  'cabbage', 'leek', 'celery', 'spring onion', 'butternut squash',
+  'sweet potato', 'avocado', 'lime', 'lemon', 'cream', 'creme fraiche',
+  'crème fraîche', 'yoghurt', 'yogurt', 'cream cheese', 'feta', 'halloumi',
+  'tofu', 'buttermilk',
+];
+
+function normalizeIngredientName(name: string): string {
+  return name.toLowerCase().replace(/\([^)]*\)/g, '').replace(/,.*/, '').trim();
+}
+
+// The specific perishable keyword(s) a recipe's ingredient list touches —
+// e.g. a stir-fry with "Broccoli florets" and "Red pepper, sliced" returns
+// {'broccoli', 'pepper'}.
+function leftoverProneIngredients(recipe: Recipe): Set<string> {
+  const found = new Set<string>();
+  for (const ing of recipe.ingredients) {
+    const norm = normalizeIngredientName(ing.name);
+    for (const kw of LEFTOVER_PRONE_KEYWORDS) {
+      if (norm.includes(kw)) found.add(kw);
+    }
+  }
+  return found;
+}
+
+// First perishable keyword `candidate` shares with `previous`, or null.
+function sharedLeftoverKeyword(previous: Recipe, candidate: Recipe): string | null {
+  const proneKeywords = leftoverProneIngredients(previous);
+  if (proneKeywords.size === 0) return null;
+  for (const ing of candidate.ingredients) {
+    const norm = normalizeIngredientName(ing.name);
+    for (const kw of proneKeywords) {
+      if (norm.includes(kw)) return kw;
+    }
+  }
+  return null;
+}
+
 // Generates a 7-day plan from RECIPE_LIBRARY, filtered by dietary
 // restrictions, cycling through the filtered pool so days vary without
-// repeating until the pool runs out.
+// repeating until the pool runs out. With leftoverMode on, each day after
+// the first prefers the best-ranked not-yet-used recipe that shares a
+// perishable ingredient with the day before — so half a broccoli or an open
+// pack of coriander gets used up within a day or two — falling back to the
+// normal best-ranked pick whenever no such match exists nearby.
 export function generateWeeklyPlan(
   restrictionIds: string[] = [],
   allergyIds: string[] = [],
   equipmentIds: string[] = [],
-  profile?: TasteProfile
+  profile?: TasteProfile,
+  leftoverMode = false
 ): DayPlan[] {
   const dietPool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const pool = filterByEquipment(dietPool.length > 0 ? dietPool : RECIPE_LIBRARY, equipmentIds);
   const safePool = rankByProfile(pool.length > 0 ? pool : RECIPE_LIBRARY, profile);
-  return DAY_NAMES.map((day, i) => ({ day, recipe: safePool[i % safePool.length] }));
+
+  if (!leftoverMode) {
+    return DAY_NAMES.map((day, i) => ({ day, recipe: safePool[i % safePool.length] }));
+  }
+
+  const LOOKAHEAD = Math.min(safePool.length, 60);
+  const used = new Set<number>();
+  const plan: DayPlan[] = [];
+  let previous: Recipe | null = null;
+
+  for (let i = 0; i < DAY_NAMES.length; i++) {
+    let chosenIndex = -1;
+    let matchedKeyword: string | null = null;
+    if (previous) {
+      for (let j = 0; j < LOOKAHEAD; j++) {
+        const idx = j % safePool.length;
+        if (used.has(idx)) continue;
+        const shared = sharedLeftoverKeyword(previous, safePool[idx]);
+        if (shared) {
+          chosenIndex = idx;
+          matchedKeyword = shared;
+          break;
+        }
+      }
+    }
+    if (chosenIndex === -1) {
+      for (let j = 0; j < safePool.length; j++) {
+        const idx = (i + j) % safePool.length;
+        if (!used.has(idx)) {
+          chosenIndex = idx;
+          break;
+        }
+      }
+    }
+    if (chosenIndex === -1) chosenIndex = i % safePool.length; // pool smaller than 7 days: repeats are fine
+    used.add(chosenIndex);
+    const recipe = safePool[chosenIndex];
+    plan.push({ day: DAY_NAMES[i], recipe, ...(matchedKeyword ? { usesLeftoverFrom: matchedKeyword } : {}) });
+    previous = recipe;
+  }
+  return plan;
 }
 
 // Kept for anything that wants a default, unfiltered plan.

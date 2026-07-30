@@ -1,7 +1,9 @@
-import React from 'react';
-import { ChevronLeft, Zap, Wallet } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronLeft, Zap, Wallet, Recycle } from 'lucide-react';
 import { WEEKLY_BUDGET, generateWeeklyPlan } from './mockData';
 import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
+
+const LEFTOVER_MODE_KEY = 'forkit_leftover_mode';
 
 function EmptyPlan({ onBack }) {
   return (
@@ -28,12 +30,26 @@ function EmptyPlan({ onBack }) {
 }
 
 export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpenHousehold }) {
-  const WEEKLY_PLAN = generateWeeklyPlan(answers?.restrictions ?? [], answers?.allergies ?? [], answers?.equipment ?? [], {
-    nutritionGoals: answers?.nutritionGoals ?? [],
-    likedDishes: answers?.likedDishes ?? [],
-    dislikedDishes: answers?.dislikedDishes ?? [],
-    macroPriority: answers?.macros,
-  });
+  const [leftoverMode, setLeftoverMode] = useState(() => localStorage.getItem(LEFTOVER_MODE_KEY) === 'true');
+
+  const toggleLeftoverMode = () => {
+    const next = !leftoverMode;
+    localStorage.setItem(LEFTOVER_MODE_KEY, String(next));
+    setLeftoverMode(next);
+  };
+
+  const WEEKLY_PLAN = generateWeeklyPlan(
+    answers?.restrictions ?? [],
+    answers?.allergies ?? [],
+    answers?.equipment ?? [],
+    {
+      nutritionGoals: answers?.nutritionGoals ?? [],
+      likedDishes: answers?.likedDishes ?? [],
+      dislikedDishes: answers?.dislikedDishes ?? [],
+      macroPriority: answers?.macros,
+    },
+    leftoverMode
+  );
   if (WEEKLY_PLAN.length === 0) return <EmptyPlan onBack={onBack} />;
 
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;
@@ -65,8 +81,29 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpen
           ))}
         </div>
 
+        <div className="flex items-center justify-between p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
+          <div className="flex items-center gap-2 min-w-0">
+            <Recycle size={18} className="text-primary shrink-0" />
+            <div className="min-w-0">
+              <span className="text-base text-on-surface">Leftover Mode</span>
+              <p className="text-xs text-on-surface-variant truncate">Groups meals to use up perishables before they spoil</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={toggleLeftoverMode}
+            className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${leftoverMode ? 'bg-primary' : 'bg-outline-variant'}`}
+            aria-label="Toggle leftover mode"
+          >
+            <span
+              className="absolute top-[2px] left-[2px] w-5 h-5 rounded-full bg-white transition-transform"
+              style={{ transform: leftoverMode ? 'translateX(20px)' : 'translateX(0)' }}
+            />
+          </button>
+        </div>
+
         <div className="flex flex-col gap-3">
-          {WEEKLY_PLAN.map(({ day, recipe }) => (
+          {WEEKLY_PLAN.map(({ day, recipe, usesLeftoverFrom }, i) => (
             <div key={day}>
               <p className="text-sm font-semibold uppercase tracking-wider mb-1.5 text-outline">{day}</p>
               <button
@@ -85,6 +122,11 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpen
                     <span>{recipe.prepMinutes ?? 15} mins</span>
                   </div>
                   <span className="chip-value mt-1.5 inline-flex">£{recipe.pricePerServing.toFixed(2)} / serving</span>
+                  {usesLeftoverFrom && (
+                    <p className="mt-1 flex items-center gap-1 text-xs font-medium text-tertiary">
+                      <Recycle size={12} /> Uses up {WEEKLY_PLAN[i - 1]?.day}'s {usesLeftoverFrom}
+                    </p>
+                  )}
                 </div>
               </button>
             </div>

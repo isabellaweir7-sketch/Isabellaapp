@@ -162,6 +162,10 @@ export interface FeatureTile {
 export interface DayPlan {
   day: string;
   recipe: Recipe;
+  // Set when Leftover Mode picked this recipe specifically because it shares
+  // a perishable ingredient with the day before (e.g. 'broccoli') — lets the
+  // UI show a small "uses up yesterday's..." hint instead of staying silent.
+  usesLeftoverFrom?: string;
 }
 
 export interface HouseholdMember {
