@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Home as HomeIcon, ChefHat, BookOpen, Users, Bell, User, Timer, Banknote, ArrowRight, GraduationCap, Search, Building2 } from 'lucide-react';
 import { COMMUNITY_RECIPES, WEEKLY_BUDGET, generateTodayMeals } from './mockData';
+import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', icon: HomeIcon },
@@ -103,6 +104,9 @@ function TodayPlan({ meals, onOpenPlan, onOpenRecipe }) {
             <div className="absolute top-4 left-4 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider">
               Dinner
             </div>
+            <div className="absolute top-4 right-4">
+              <SkillLevelBadge level={dinner.recipe.skillLevel} />
+            </div>
           </div>
           <div className="space-y-base">
             <h3 className="font-display text-lg text-on-background leading-tight">{dinner.recipe.title}</h3>
@@ -133,9 +137,12 @@ function TodayPlan({ meals, onOpenPlan, onOpenRecipe }) {
             <div className="min-w-0">
               <span className="text-xs font-semibold uppercase tracking-wider text-outline">{slot}</span>
               <h4 className="text-sm font-semibold text-on-background truncate">{recipe.title}</h4>
-              <span className="flex items-center gap-1 text-xs text-on-surface-variant opacity-80">
-                <Timer size={12} /> {recipe.prepMinutes ?? 15}m
-              </span>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="flex items-center gap-1 text-xs text-on-surface-variant opacity-80">
+                  <Timer size={12} /> {recipe.prepMinutes ?? 15}m
+                </span>
+                <SkillLevelBadge level={recipe.skillLevel} compact />
+              </div>
             </div>
           </button>
         ))}
@@ -198,7 +205,11 @@ function Trending({ onOpenCommunity, onOpenRecipe }) {
             <div
               className="relative h-48 overflow-hidden rounded-lg mb-xs"
               style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-            />
+            >
+              <span className="absolute top-2 left-2">
+                <SkillLevelBadge level={recipe.skillLevel} />
+              </span>
+            </div>
             <h4 className="text-base font-semibold tracking-wider text-primary truncate">{recipe.title}</h4>
             <p className="text-xs font-medium text-outline">
               @{recipe.author?.split(',')[0].toLowerCase()} • {recipe.upvotes} saves

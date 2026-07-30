@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChevronLeft, Heart, BookOpen } from 'lucide-react';
 import { SAVED_RECIPES } from './mockData';
+import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 function EmptySaved({ onBack }) {
   return (
@@ -51,6 +52,9 @@ export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
               >
                 <span className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-full">
                   <Heart size={16} className="text-primary" fill="currentColor" />
+                </span>
+                <span className="absolute top-2 left-2">
+                  <SkillLevelBadge level={recipe.skillLevel} />
                 </span>
               </div>
               <h4 className="font-display text-base text-primary leading-tight">{recipe.title}</h4>

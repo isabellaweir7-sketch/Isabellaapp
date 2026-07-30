@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronLeft, Zap, Wallet, Recycle } from 'lucide-react';
 import { WEEKLY_BUDGET, generateWeeklyPlan } from './mockData';
 import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
+import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 const LEFTOVER_MODE_KEY = 'forkit_leftover_mode';
 
@@ -122,7 +123,10 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpen
                     <Zap size={12} className="text-tertiary" />
                     <span>{recipe.prepMinutes ?? 15} mins</span>
                   </div>
-                  <span className="chip-value mt-1.5 inline-flex">£{recipe.pricePerServing.toFixed(2)} / serving</span>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <span className="chip-value inline-flex">£{recipe.pricePerServing.toFixed(2)} / serving</span>
+                    <SkillLevelBadge level={recipe.skillLevel} />
+                  </div>
                   {usesLeftoverFrom && (
                     <p className="mt-1 flex items-center gap-1 text-xs font-medium text-tertiary">
                       <Recycle size={12} /> Uses up {WEEKLY_PLAN[i - 1]?.day}'s {usesLeftoverFrom}

@@ -126,8 +126,19 @@ const SKILL_LEVEL_STYLES = {
   Advanced: 'bg-primary-container text-on-primary-container',
 };
 
-function SkillLevelBadge({ level }) {
+const COMPACT_SKILL_LABELS = { Easy: 'Easy', Intermediate: 'Mid', Advanced: 'Adv' };
+
+// `compact` drops the icon and shortens the label for tight spots (small
+// thumbnail rows) where the full pill genuinely doesn't fit.
+export function SkillLevelBadge({ level, compact = false }) {
   if (!level) return null;
+  if (compact) {
+    return (
+      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide ${SKILL_LEVEL_STYLES[level]}`}>
+        {COMPACT_SKILL_LABELS[level]}
+      </span>
+    );
+  }
   return (
     <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold tracking-wider ${SKILL_LEVEL_STYLES[level]}`}>
       <GraduationCap size={12} /> {level}
