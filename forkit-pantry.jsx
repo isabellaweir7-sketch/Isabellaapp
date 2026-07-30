@@ -75,7 +75,7 @@ export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
               disabled={parsedIngredients.length === 0}
               onClick={() =>
                 onOpenRecipe(
-                  generateCupboardRecipe(parsedIngredients, answers?.restrictions ?? [], answers?.allergies ?? [], answers?.equipment ?? [], {
+                  generateCupboardRecipe(parsedIngredients, answers?.restrictions ?? [], answers?.allergies ?? [], answers?.firmDislikes ?? [], answers?.equipment ?? [], {
                     nutritionGoals: answers?.nutritionGoals ?? [],
                     likedDishes: answers?.likedDishes ?? [],
                     dislikedDishes: answers?.dislikedDishes ?? [],

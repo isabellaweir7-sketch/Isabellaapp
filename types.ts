@@ -30,6 +30,10 @@ export interface TasteProfile {
   // not required to sum to 100). Relative weights, not literal gram targets:
   // scoring compares them against each recipe's real calorie-share split.
   macroPriority?: { protein: number; carbs: number; fat: number };
+  // Flavor-profile tags (matching FLAVOR_PROFILES) picked upfront in
+  // onboarding as a hard "don't suggest this" — stronger than a swiped
+  // dislike, which just deprioritises rather than excludes.
+  firmDislikes?: string[];
 }
 
 export interface OnboardingAnswers {
@@ -40,6 +44,7 @@ export interface OnboardingAnswers {
   macros: { protein: number; carbs: number; fat: number };
   likedDishes: string[];
   dislikedDishes: string[];
+  firmDislikes: string[];
   equipment: string[];
   studentStatus: string;
   school: string;

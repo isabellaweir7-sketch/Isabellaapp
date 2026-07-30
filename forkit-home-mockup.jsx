@@ -220,7 +220,7 @@ export default function ForkitHome({
   session,
 }) {
   const [activeTab, setActiveTab] = useState('home');
-  const todayMeals = generateTodayMeals(answers?.restrictions ?? [], answers?.allergies ?? [], answers?.equipment ?? [], {
+  const todayMeals = generateTodayMeals(answers?.restrictions ?? [], answers?.allergies ?? [], answers?.firmDislikes ?? [], answers?.equipment ?? [], {
     nutritionGoals: answers?.nutritionGoals ?? [],
     likedDishes: answers?.likedDishes ?? [],
     dislikedDishes: answers?.dislikedDishes ?? [],
