@@ -116,14 +116,15 @@ function Chip({ label, selected, onClick }) {
   );
 }
 
-function AllergyCard({ label, Icon, selected, onClick }) {
+function AllergyCard({ label, Icon, selected, disabled, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       className={`flex flex-col justify-between h-28 rounded-lg border p-4 text-left transition-all ${
         selected ? 'bg-primary-fixed border-primary scale-[0.98]' : 'bg-surface-container-low border-outline-variant text-on-surface'
-      }`}
+      } ${disabled ? 'opacity-40' : ''}`}
     >
       <div className="flex items-center justify-between w-full">
         <Icon size={26} className="text-secondary" />
@@ -135,6 +136,7 @@ function AllergyCard({ label, Icon, selected, onClick }) {
 }
 
 function AllergiesStep({ selected, onToggle }) {
+  const noneSelected = selected.includes('none');
   return (
     <div className="grid grid-cols-2 gap-sm">
       {ALLERGENS.map((a) => (
@@ -143,6 +145,7 @@ function AllergiesStep({ selected, onToggle }) {
           label={a.label}
           Icon={ALLERGEN_ICONS[a.id] ?? Utensils}
           selected={selected.includes(a.id)}
+          disabled={noneSelected && a.id !== 'none'}
           onClick={() => onToggle(a.id)}
         />
       ))}
