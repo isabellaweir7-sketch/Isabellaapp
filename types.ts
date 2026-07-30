@@ -84,6 +84,17 @@ export interface Macros {
   fat: number;
 }
 
+// Required by the Unsplash API Guidelines whenever a photo sourced through
+// the API is displayed: credit to the photographer (linked to their
+// Unsplash profile) and to Unsplash itself. Optional because the current
+// stock photos were hand-picked before this existed and have no photographer
+// record — PhotoCredit renders nothing until this is populated.
+export interface PhotoCredit {
+  photographerName: string;
+  photographerUsername: string;
+  photoPageUrl: string;
+}
+
 export interface Recipe {
   id: string;
   title: string;
@@ -101,6 +112,18 @@ export interface Recipe {
   preservationTip?: string;
   dietary: DietaryFlags;
   macros: Macros;
+  photoCredit?: PhotoCredit;
+  // Equipment ids (matching EquipmentItem) actually needed to cook this,
+  // inferred from its real steps — e.g. a traybake needs 'oven', a smoothie
+  // needs only 'blender'. Almost everything needs 'hob' at minimum unless
+  // it's oven-only, no-cook, or a single-appliance dish.
+  equipment: string[];
+  // Only set on oven recipes that are dry, individually-sized, crisp-finish
+  // dishes (chips, wings, skewers, breaded bites) that genuinely also work
+  // in an air fryer basket. Traybakes, bakes with sauce, pies, casseroles,
+  // and anything cooked as one big tray of liquid/components are NOT marked
+  // — those don't fit or cook the same way in a small air fryer basket.
+  airFryerAdaptable?: boolean;
 }
 
 export interface TodayMeal {
@@ -139,6 +162,10 @@ export interface FeatureTile {
 export interface DayPlan {
   day: string;
   recipe: Recipe;
+  // Set when Leftover Mode picked this recipe specifically because it shares
+  // a perishable ingredient with the day before (e.g. 'broccoli') — lets the
+  // UI show a small "uses up yesterday's..." hint instead of staying silent.
+  usesLeftoverFrom?: string;
 }
 
 export interface HouseholdMember {
