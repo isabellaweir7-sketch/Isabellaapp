@@ -151,18 +151,19 @@ export function filterByRestrictionsAndAllergies(
   return filterByRestrictions(recipes, combinedRestrictions).filter((r) => matchesAllergies(r, allergyIds));
 }
 
-// An air fryer is functionally a compact convection oven, so a recipe
-// tagged 'oven' (a traybake, roast veg, etc.) is genuinely cookable by
-// someone who only has an air fryer, and vice versa — this isn't a stretch,
-// it's the same cooking method at a different scale. Treated as symmetric.
-const EQUIPMENT_SUBSTITUTES: Record<string, string[]> = {
-  oven: ['air-fryer'],
-  'air-fryer': ['oven'],
-};
-
-function ownsOrHasSubstitute(needed: string, owned: Set<string>): boolean {
+// A full-size oven can always do what an air fryer does (it's strictly more
+// capable — more space, more heat control), so anything tagged 'air-fryer'
+// is fine for an oven-only student. The reverse isn't true: an air fryer's
+// basket is small, so only dishes that are dry, crisp, individual pieces
+// (chips, wings, skewers, breaded bites) genuinely transfer — a traybake or
+// a sauce-based bake doesn't fit or cook the same way. Those specific oven
+// recipes are marked recipe.airFryerAdaptable individually rather than
+// assumed for the whole 'oven' category.
+function ownsOrHasSubstitute(needed: string, owned: Set<string>, recipe: Recipe): boolean {
   if (owned.has(needed)) return true;
-  return (EQUIPMENT_SUBSTITUTES[needed] ?? []).some((sub) => owned.has(sub));
+  if (needed === 'air-fryer') return owned.has('oven');
+  if (needed === 'oven') return owned.has('air-fryer') && !!recipe.airFryerAdaptable;
+  return false;
 }
 
 // Only shows recipes the student can actually cook with what they told us
@@ -174,7 +175,7 @@ function ownsOrHasSubstitute(needed: string, owned: Set<string>): boolean {
 export function filterByEquipment(recipes: Recipe[], equipmentIds: string[] = []): Recipe[] {
   if (equipmentIds.length === 0) return recipes;
   const owned = new Set(equipmentIds);
-  const matches = recipes.filter((r) => r.equipment.every((needed) => ownsOrHasSubstitute(needed, owned)));
+  const matches = recipes.filter((r) => r.equipment.every((needed) => ownsOrHasSubstitute(needed, owned, r)));
   return matches.length > 0 ? matches : recipes;
 }
 
@@ -1865,6 +1866,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven'],
+    airFryerAdaptable: true,
     macros: { calories: 630, protein: 87.7, carbs: 37.1, fat: 11.5 },
     ingredients: [
       { name: 'Fish fingers', qtyPerServing: 3, unit: '' },
@@ -2454,6 +2456,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 570, protein: 28.7, carbs: 41.6, fat: 31 },
     ingredients: [
       { name: 'Lamb mince', qtyPerServing: 120, unit: 'g' },
@@ -2504,6 +2507,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 1,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 500, protein: 38.2, carbs: 37, fat: 20.3 },
     ingredients: [
       { name: 'Frying steak', qtyPerServing: 1, unit: '' },
@@ -3853,6 +3857,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 320, protein: 21, carbs: 9.8, fat: 22 },
     ingredients: [
       { name: 'Paneer', qtyPerServing: 100, unit: 'g' },
@@ -3978,6 +3983,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 635, protein: 43.6, carbs: 78, fat: 14.7 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
@@ -4127,6 +4133,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven'],
+    airFryerAdaptable: true,
     macros: { calories: 160, protein: 29.3, carbs: 6.3, fat: 2.1 },
     ingredients: [
       { name: 'White fish fillets', qtyPerServing: 1, unit: '' },
@@ -4475,6 +4482,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: false },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 350, protein: 51.6, carbs: 4.5, fat: 12.9 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
@@ -4650,6 +4658,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 275, protein: 48, carbs: 6.1, fat: 5.9 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
@@ -4700,6 +4709,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 445, protein: 48.6, carbs: 13.6, fat: 21 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
@@ -6304,6 +6314,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 280, protein: 7.2, carbs: 44.1, fat: 8 },
     ingredients: [
       { name: 'Filo pastry', qtyPerServing: 2, unit: 'sheet' },
@@ -6379,6 +6390,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 455, protein: 19.4, carbs: 13.9, fat: 35.4 },
     ingredients: [
       { name: 'Halloumi', qtyPerServing: 80, unit: 'g' },
@@ -6428,6 +6440,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 640, protein: 29.6, carbs: 80.4, fat: 21.7 },
     ingredients: [
       { name: 'Frozen oven chips', qtyPerServing: 150, unit: 'g' },
@@ -6453,6 +6466,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 1,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 550, protein: 26.3, carbs: 66.9, fat: 19 },
     ingredients: [
       { name: 'Egg', qtyPerServing: 2, unit: '' },
@@ -6476,6 +6490,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven'],
+    airFryerAdaptable: true,
     macros: { calories: 385, protein: 16.8, carbs: 59.8, fat: 7.5 },
     ingredients: [
       { name: 'Cooked risotto rice (leftover)', qtyPerServing: 120, unit: 'g' },
@@ -7126,6 +7141,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 310, protein: 36.6, carbs: 5.6, fat: 14.8 },
     ingredients: [
       { name: 'Chicken thighs', qtyPerServing: 1.5, unit: '' },
@@ -7149,6 +7165,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
     equipment: ['oven'],
+    airFryerAdaptable: true,
     macros: { calories: 1250, protein: 95.3, carbs: 5.9, fat: 82.2 },
     ingredients: [
       { name: 'Chicken wings', qtyPerServing: 6, unit: '' },
@@ -7197,6 +7214,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 3,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: false, dairyFree: false, halal: true, kosher: false, nutFree: true },
     equipment: ['oven'],
+    airFryerAdaptable: true,
     macros: { calories: 765, protein: 45.9, carbs: 62.1, fat: 36.4 },
     ingredients: [
       { name: 'Cooked chicken breast', qtyPerServing: 100, unit: 'g' },
@@ -7248,6 +7266,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 305, protein: 48.5, carbs: 12.5, fat: 5.7 },
     ingredients: [
       { name: 'Chicken breast', qtyPerServing: 150, unit: 'g' },
@@ -7519,6 +7538,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 430, protein: 30.4, carbs: 12.3, fat: 28.4 },
     ingredients: [
       { name: 'Beef steak, cubed', qtyPerServing: 130, unit: 'g' },
@@ -7642,6 +7662,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 465, protein: 35.8, carbs: 4.8, fat: 32.7 },
     ingredients: [
       { name: 'Beef steak, cubed', qtyPerServing: 100, unit: 'g' },
@@ -7863,6 +7884,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: true, dairyFree: true, halal: true, kosher: true, nutFree: false },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 275, protein: 23.7, carbs: 7.7, fat: 18 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 120, unit: 'g' },
@@ -9260,6 +9282,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 340, protein: 7, carbs: 43.4, fat: 16.1 },
     ingredients: [
       { name: 'Spring roll wrappers', qtyPerServing: 4, unit: '' },
@@ -9386,6 +9409,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: true, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: true, halal: true, kosher: true, nutFree: true },
     equipment: ['oven'],
+    airFryerAdaptable: true,
     macros: { calories: 395, protein: 25.5, carbs: 46.6, fat: 12.3 },
     ingredients: [
       { name: 'Firm tofu', qtyPerServing: 120, unit: 'g' },
@@ -9559,6 +9583,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 465, protein: 14.5, carbs: 40.4, fat: 26.7 },
     ingredients: [
       { name: 'Frozen oven chips', qtyPerServing: 150, unit: 'g' },
@@ -9584,6 +9609,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 3,
     dietary: { vegan: false, vegetarian: true, pescatarian: true, glutenFree: false, dairyFree: false, halal: true, kosher: true, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 400, protein: 17.7, carbs: 48.3, fat: 14 },
     ingredients: [
       { name: 'Potatoes', qtyPerServing: 150, unit: 'g' },
@@ -10081,6 +10107,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: true, halal: true, kosher: false, nutFree: true },
     equipment: ['oven'],
+    airFryerAdaptable: true,
     macros: { calories: 380, protein: 31.1, carbs: 15.1, fat: 21.6 },
     ingredients: [
       { name: 'Beef strips', qtyPerServing: 130, unit: 'g' },
@@ -10106,6 +10133,7 @@ export const RECIPE_LIBRARY: Recipe[] = [
     baseServings: 2,
     dietary: { vegan: false, vegetarian: false, pescatarian: false, glutenFree: true, dairyFree: false, halal: true, kosher: false, nutFree: true },
     equipment: ['oven', 'hob'],
+    airFryerAdaptable: true,
     macros: { calories: 340, protein: 27.8, carbs: 5.4, fat: 21.2 },
     ingredients: [
       { name: 'Lamb, cubed', qtyPerServing: 130, unit: 'g' },

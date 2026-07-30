@@ -118,6 +118,12 @@ export interface Recipe {
   // needs only 'blender'. Almost everything needs 'hob' at minimum unless
   // it's oven-only, no-cook, or a single-appliance dish.
   equipment: string[];
+  // Only set on oven recipes that are dry, individually-sized, crisp-finish
+  // dishes (chips, wings, skewers, breaded bites) that genuinely also work
+  // in an air fryer basket. Traybakes, bakes with sauce, pies, casseroles,
+  // and anything cooked as one big tray of liquid/components are NOT marked
+  // — those don't fit or cook the same way in a small air fryer basket.
+  airFryerAdaptable?: boolean;
 }
 
 export interface TodayMeal {
