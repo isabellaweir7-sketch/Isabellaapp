@@ -6,30 +6,6 @@ import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 const LEFTOVER_MODE_KEY = 'forkit_leftover_mode';
 
-function EmptyPlan({ onBack }) {
-  return (
-    <div className="min-h-screen flex flex-col bg-surface">
-      <header className="flex items-center gap-3 px-5 py-4">
-        <button type="button" onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-surface-container" aria-label="Back">
-          <ChevronLeft size={18} className="text-primary" />
-        </button>
-        <h1 className="font-display text-2xl font-semibold text-primary">Grocery List</h1>
-      </header>
-      <main className="flex-1 flex flex-col items-center justify-center px-6 text-center gap-4">
-        <h2 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary">
-          A week of effortless eating starts here
-        </h2>
-        <p className="text-lg text-on-surface-variant max-w-[24rem]">
-          Generate a plan and we'll pick a recipe for every day, budget included.
-        </p>
-        <button type="button" className="bg-primary text-on-primary font-semibold px-6 py-3 rounded-xl">
-          Generate First Plan
-        </button>
-      </main>
-    </div>
-  );
-}
-
 export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpenHousehold }) {
   const [leftoverMode, setLeftoverMode] = useState(() => localStorage.getItem(LEFTOVER_MODE_KEY) === 'true');
 
@@ -52,8 +28,6 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpen
     },
     leftoverMode
   );
-  if (WEEKLY_PLAN.length === 0) return <EmptyPlan onBack={onBack} />;
-
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;
   const pct = Math.min(100, Math.round((WEEKLY_BUDGET.spent / WEEKLY_BUDGET.target) * 100));
 

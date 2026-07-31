@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronLeft, Heart, BookOpen } from 'lucide-react';
-import { SAVED_RECIPES } from './mockData';
+import { getSavedRecipes, toggleSavedRecipe } from './mockData';
 import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 function EmptySaved({ onBack }) {
@@ -31,7 +31,15 @@ function EmptySaved({ onBack }) {
 }
 
 export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
-  if (SAVED_RECIPES.length === 0) return <EmptySaved onBack={onBack} />;
+  const [savedRecipes, setSavedRecipes] = useState(() => getSavedRecipes());
+
+  const handleUnsave = (e, recipeId) => {
+    e.stopPropagation();
+    toggleSavedRecipe(recipeId);
+    setSavedRecipes((prev) => prev.filter((r) => r.id !== recipeId));
+  };
+
+  if (savedRecipes.length === 0) return <EmptySaved onBack={onBack} />;
 
   return (
     <div className="min-h-screen flex flex-col bg-surface">
@@ -44,15 +52,20 @@ export default function ForkitSavedRecipes({ onBack, onOpenRecipe }) {
 
       <div className="flex-1 px-5 pb-8 max-w-2xl mx-auto w-full">
         <div className="grid grid-cols-2 gap-4">
-          {SAVED_RECIPES.map((recipe) => (
+          {savedRecipes.map((recipe) => (
             <button key={recipe.id} type="button" onClick={() => onOpenRecipe(recipe)} className="text-left group">
               <div
                 className="relative aspect-square rounded-lg overflow-hidden mb-2"
                 style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
               >
-                <span className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-full">
+                <button
+                  type="button"
+                  onClick={(e) => handleUnsave(e, recipe.id)}
+                  className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm p-1.5 rounded-full"
+                  aria-label="Remove from saved recipes"
+                >
                   <Heart size={16} className="text-primary" fill="currentColor" />
-                </span>
+                </button>
                 <span className="absolute top-2 left-2">
                   <SkillLevelBadge level={recipe.skillLevel} />
                 </span>

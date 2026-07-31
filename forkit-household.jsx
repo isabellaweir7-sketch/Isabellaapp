@@ -136,6 +136,28 @@ export default function ForkitHousehold({ onBack, onOpenShopping, onOpenRecipe }
   const [items, setItems] = useState(SHOPPING_LIST);
   const [newItem, setNewItem] = useState('');
   const [settled, setSettled] = useState(false);
+  const [pantryStatus, setPantryStatus] = useState(PANTRY_STATUS);
+  const [editingPantry, setEditingPantry] = useState(false);
+  const [inviteCopied, setInviteCopied] = useState(false);
+
+  const handleInvite = async () => {
+    const link = window.location.origin + import.meta.env.BASE_URL;
+    try {
+      await navigator.clipboard.writeText(link);
+    } catch {
+      // Clipboard API unavailable/blocked — nothing more we can do here.
+    }
+    setInviteCopied(true);
+    setTimeout(() => setInviteCopied(false), 2000);
+  };
+
+  const handleConfirmPantryUpdate = () => {
+    setPantryStatus((prev) => ({ ...prev, updatedByMemberId: 'you', hoursAgo: 0 }));
+    setEditingPantry(false);
+  };
+
+  const adjustLowItemCount = (delta) =>
+    setPantryStatus((prev) => ({ ...prev, lowItemCount: Math.max(0, prev.lowItemCount + delta) }));
 
   const openNight = (day) => setNights((prev) => prev.map((n) => (n.day === day ? { ...n, open: true } : n)));
   const assignNight = (day, memberId) =>
@@ -166,7 +188,7 @@ export default function ForkitHousehold({ onBack, onOpenShopping, onOpenRecipe }
   })).sort((a, b) => b.total - a.total);
   const totalAdded = memberTotals.reduce((sum, m) => sum + m.total, 0);
 
-  const pantryUpdatedBy = memberById(PANTRY_STATUS.updatedByMemberId);
+  const pantryUpdatedBy = memberById(pantryStatus.updatedByMemberId);
   const suggestion = generateCupboardRecipe(items.map((i) => i.name), [], []);
 
   return (
@@ -191,10 +213,11 @@ export default function ForkitHousehold({ onBack, onOpenShopping, onOpenRecipe }
           </div>
           <button
             type="button"
+            onClick={handleInvite}
             className="flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold tracking-wider text-sm bg-primary text-on-primary shrink-0 w-fit"
           >
-            <UserPlus size={16} />
-            Invite Roommates
+            {inviteCopied ? <Check size={16} /> : <UserPlus size={16} />}
+            {inviteCopied ? 'Link copied!' : 'Invite Roommates'}
           </button>
         </section>
 
@@ -287,14 +310,51 @@ export default function ForkitHousehold({ onBack, onOpenShopping, onOpenRecipe }
             <div className="w-10 h-10 rounded-full bg-white/40 flex items-center justify-center shrink-0">
               <Package size={18} className="text-on-secondary-container" />
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <h4 className="text-sm font-semibold uppercase tracking-widest text-on-secondary-container mb-1">Pantry Check</h4>
               <p className="text-sm text-on-secondary-container mb-1">
-                Last update {PANTRY_STATUS.hoursAgo} hours ago by {pantryUpdatedBy.name}. {PANTRY_STATUS.lowItemCount} items running low.
+                Last update {pantryStatus.hoursAgo === 0 ? 'just now' : `${pantryStatus.hoursAgo} hours ago`} by{' '}
+                {pantryUpdatedBy.name}. {pantryStatus.lowItemCount} items running low.
               </p>
-              <button type="button" className="text-sm font-semibold underline text-on-secondary-container">
-                Update status
-              </button>
+              {editingPantry ? (
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-xs font-semibold text-on-secondary-container">Items running low:</span>
+                  <button
+                    type="button"
+                    onClick={() => adjustLowItemCount(-1)}
+                    className="w-6 h-6 rounded-full bg-white/40 flex items-center justify-center text-on-secondary-container"
+                    aria-label="Decrease"
+                  >
+                    −
+                  </button>
+                  <span className="text-sm font-semibold text-on-secondary-container w-4 text-center">
+                    {pantryStatus.lowItemCount}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => adjustLowItemCount(1)}
+                    className="w-6 h-6 rounded-full bg-white/40 flex items-center justify-center text-on-secondary-container"
+                    aria-label="Increase"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleConfirmPantryUpdate}
+                    className="ml-1 text-sm font-semibold underline text-on-secondary-container"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setEditingPantry(true)}
+                  className="text-sm font-semibold underline text-on-secondary-container"
+                >
+                  Update status
+                </button>
+              )}
             </div>
           </div>
 

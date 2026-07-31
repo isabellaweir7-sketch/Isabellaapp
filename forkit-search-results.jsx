@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Search as SearchIcon, X, Timer } from 'lucide-react';
-import { RECIPE_LIBRARY } from './mockData';
+import { RECIPE_LIBRARY, filterByRestrictionsAndAllergies, filterByFirmDislikes } from './mockData';
 import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
 import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
@@ -130,15 +130,21 @@ function ResultCard({ recipe, variant, onOpen }) {
   );
 }
 
-export default function ForkitSearchResults({ initialQuery, onBack, onOpenRecipe, onOpenHousehold }) {
+export default function ForkitSearchResults({ initialQuery, answers, onBack, onOpenRecipe, onOpenHousehold }) {
   const [query, setQuery] = useState(initialQuery ?? '');
   const [activeFilters, setActiveFilters] = useState([]);
 
   const toggleFilter = (id) =>
     setActiveFilters((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
+  // Restrictions/allergies are a hard safety filter — applied before the
+  // query and on-screen chips so an allergy or diet can never be searched
+  // around, same as every other recipe-surfacing screen in the app.
+  const safePool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, answers?.restrictions ?? [], answers?.allergies ?? []);
+  const dislikeFilteredPool = filterByFirmDislikes(safePool, answers?.firmDislikes ?? []);
+
   const q = query.trim().toLowerCase();
-  const results = RECIPE_LIBRARY.filter((recipe) => {
+  const results = dislikeFilteredPool.filter((recipe) => {
     const matchesQuery =
       q.length === 0 ||
       recipe.title.toLowerCase().includes(q) ||

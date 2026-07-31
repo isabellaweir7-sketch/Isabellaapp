@@ -11924,13 +11924,51 @@ export const COMMUNITY_RECIPES: Recipe[] = [
   },
 ];
 
-// A curated starting point for "Saved Recipes" screens — a mix of diets,
+// A curated starting point for "Trending" placeholders — a mix of diets,
 // pulled straight from the shared library so tags/dietary data stay in sync.
+// Not the user's own saved recipes — see isRecipeSaved/toggleSavedRecipe/
+// getSavedRecipes below for that (a real, persisted, per-user list).
 export const SAVED_RECIPES: Recipe[] = [
   RECIPE_LIBRARY.find((r) => r.id === 'recipe-tomato-pasta')!,
   RECIPE_LIBRARY.find((r) => r.id === 'recipe-lentil-curry')!,
   RECIPE_LIBRARY.find((r) => r.id === 'recipe-sausage-traybake')!,
 ];
+
+const SAVED_RECIPE_IDS_KEY = 'forkit_saved_recipe_ids';
+
+function readSavedRecipeIds(): string[] {
+  try {
+    const raw = localStorage.getItem(SAVED_RECIPE_IDS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function isRecipeSaved(recipeId: string): boolean {
+  return readSavedRecipeIds().includes(recipeId);
+}
+
+// Toggles the given recipe's saved state and returns the new state, so
+// callers can update their own UI state from the single return value
+// instead of re-reading storage right after writing to it.
+export function toggleSavedRecipe(recipeId: string): boolean {
+  const ids = readSavedRecipeIds();
+  const nextIds = ids.includes(recipeId) ? ids.filter((id) => id !== recipeId) : [...ids, recipeId];
+  try {
+    localStorage.setItem(SAVED_RECIPE_IDS_KEY, JSON.stringify(nextIds));
+  } catch {
+    // ignore storage errors (private browsing, etc.) — state just won't persist
+  }
+  return nextIds.includes(recipeId);
+}
+
+// Real per-user saved recipes, resolved against RECIPE_LIBRARY — stale ids
+// (a recipe that no longer exists) are silently dropped rather than erroring.
+export function getSavedRecipes(): Recipe[] {
+  const ids = new Set(readSavedRecipeIds());
+  return RECIPE_LIBRARY.filter((r) => ids.has(r.id));
+}
 
 // The hero cupboard-mode result shown on Home — the app's original
 // differentiator. Cupboard Cooker itself now generates a real match from
