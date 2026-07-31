@@ -183,6 +183,7 @@ export default function App() {
     return (
       <ForkitSearchResults
         initialQuery={searchQuery}
+        answers={answers}
         onBack={() => setView('home')}
         onOpenRecipe={setOpenRecipe}
         onOpenHousehold={() => setView('household')}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Mail, Lock, Eye, EyeOff, LogOut, Heart, GraduationCap, ChevronRight, Award, Camera, Settings } from 'lucide-react';
 import { supabase } from './supabaseClient';
-import { SAVED_RECIPES, DIETARY_RESTRICTIONS, ALLERGENS } from './mockData';
+import { getSavedRecipes, DIETARY_RESTRICTIONS, ALLERGENS } from './mockData';
 import { HouseholdHeaderButton } from './forkit-home-mockup.jsx';
 
 const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
@@ -53,6 +53,7 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
     });
   };
 
+  const savedRecipes = getSavedRecipes();
   const restrictionLabels = (answers?.restrictions || [])
     .map((id) => DIETARY_RESTRICTIONS.find((r) => r.id === id)?.label)
     .filter(Boolean);
@@ -101,26 +102,28 @@ function AccountView({ session, answers, freshersMode, onOpenFreshers, onBack, o
           <p className="text-xs font-medium text-on-surface-variant">Signed in with {provider}</p>
         </section>
 
-        <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
-          <div className="flex justify-between items-end mb-3">
-            <h3 className="font-display text-2xl font-semibold text-primary">Saved Recipes</h3>
-          </div>
-          <div className="grid grid-cols-3 gap-3">
-            {SAVED_RECIPES.slice(0, 3).map((recipe) => (
-              <div key={recipe.id}>
-                <div
-                  className="relative aspect-square rounded-lg overflow-hidden mb-1"
-                  style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-                >
-                  <span className="absolute top-1.5 right-1.5 bg-white/90 p-1 rounded-full">
-                    <Heart size={12} className="text-primary" fill="currentColor" />
-                  </span>
+        {savedRecipes.length > 0 && (
+          <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-4">
+            <div className="flex justify-between items-end mb-3">
+              <h3 className="font-display text-2xl font-semibold text-primary">Saved Recipes</h3>
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {savedRecipes.slice(0, 3).map((recipe) => (
+                <div key={recipe.id}>
+                  <div
+                    className="relative aspect-square rounded-lg overflow-hidden mb-1"
+                    style={{ backgroundColor: recipe.fallback, backgroundImage: `url("${recipe.photo}")`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                  >
+                    <span className="absolute top-1.5 right-1.5 bg-white/90 p-1 rounded-full">
+                      <Heart size={12} className="text-primary" fill="currentColor" />
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium text-primary truncate">{recipe.title}</p>
                 </div>
-                <p className="text-sm font-medium text-primary truncate">{recipe.title}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
 
         {restrictionLabels.length > 0 && (
           <section className="bg-primary text-on-primary rounded-xl p-4">

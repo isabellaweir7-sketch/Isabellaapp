@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User, Flame, GraduationCap } from 'lucide-react';
-import { TECHNIQUES } from './mockData';
+import { TECHNIQUES, isRecipeSaved, toggleSavedRecipe } from './mockData';
 import { TechniqueVideoEmbed } from './forkit-skill-lab.jsx';
 
 const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
@@ -208,7 +208,15 @@ function NutritionCard({ macros }) {
 export default function ForkitRecipeDetail({ recipe, onBack }) {
   const [servings, setServings] = useState(recipe.baseServings);
   const [checked, setChecked] = useState([]);
+  const [saved, setSaved] = useState(() => isRecipeSaved(recipe.id));
   const total = recipe.pricePerServing * servings;
+
+  // Re-syncs when navigating straight from one recipe to another, since the
+  // component doesn't remount in that case (useState's initializer only
+  // runs once).
+  useEffect(() => {
+    setSaved(isRecipeSaved(recipe.id));
+  }, [recipe.id]);
 
   const toggleChecked = (name) =>
     setChecked((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]));
@@ -222,7 +230,14 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
         <h1 className="font-display text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary truncate max-w-[60%]">
           {recipe.title}
         </h1>
-        <Bookmark size={22} className="text-primary" />
+        <button
+          type="button"
+          onClick={() => setSaved(toggleSavedRecipe(recipe.id))}
+          className="text-primary"
+          aria-label={saved ? 'Remove from saved recipes' : 'Save recipe'}
+        >
+          <Bookmark size={22} fill={saved ? 'currentColor' : 'none'} />
+        </button>
       </header>
 
       <div className="flex-1 overflow-y-auto pb-10 max-w-2xl mx-auto w-full">
