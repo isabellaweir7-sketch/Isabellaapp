@@ -4,7 +4,7 @@
 //   1. In the terminal, run this, replacing YOUR_KEY_HERE with your real
 //      Unsplash Access Key (keep everything else exactly as it is):
 //
-//        UNSPLASH_ACCESS_KEY=YOUR_KEY_HERE node scripts/fetch-photos.js
+//        UNSPLASH_ACCESS_KEY=YOUR_KEY_HERE node scripts/fetch-photos.cjs
 //
 //   2. Watch it print progress. It saves as it goes, so it's completely safe
 //      to stop it (close the tab, let it time out, whatever) and run the
@@ -105,7 +105,7 @@ function saveCheckpoint(matches) {
 async function main() {
   if (!ACCESS_KEY) {
     console.log('No Access Key found. Run the command like this, with your real key in place of YOUR_KEY_HERE:');
-    console.log('  UNSPLASH_ACCESS_KEY=YOUR_KEY_HERE node scripts/fetch-photos.js');
+    console.log('  UNSPLASH_ACCESS_KEY=YOUR_KEY_HERE node scripts/fetch-photos.cjs');
     return;
   }
 
