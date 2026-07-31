@@ -266,9 +266,14 @@ export default function ForkitAuth({ session, answers, freshersMode, onOpenFresh
 
   const continueWithGoogle = async () => {
     setError('');
+    // window.location.origin never includes a path, so on the deployed
+    // GitHub Pages project site (served from /Isabellaapp/, not the bare
+    // domain) that alone redirects back to a URL with no Pages content —
+    // import.meta.env.BASE_URL adds back whatever base Vite actually built
+    // this under (/Isabellaapp/ in production, / in dev).
     const { error: authError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: window.location.origin },
+      options: { redirectTo: window.location.origin + import.meta.env.BASE_URL },
     });
     if (authError) setError(authError.message);
   };
