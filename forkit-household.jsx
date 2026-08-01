@@ -5,7 +5,7 @@ import {
   UtensilsCrossed,
   User,
   ShoppingCart,
-  UserPlus,
+  Share2,
   ShoppingBag,
   Plus,
   Check,
@@ -142,6 +142,22 @@ export default function ForkitHousehold({ onBack, onOpenShopping, onOpenRecipe }
 
   const handleInvite = async () => {
     const link = window.location.origin + import.meta.env.BASE_URL;
+    const shareData = {
+      title: 'ForkIt',
+      text: 'Join our household on ForkIt so we can plan meals and split the shopping together!',
+      url: link,
+    };
+    // Opens the real OS share sheet (WhatsApp, Messages, etc.) on phones.
+    // Falls back to a clipboard copy on desktop browsers that don't support it.
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        if (err?.name === 'AbortError') return; // they cancelled the share sheet — nothing more to do
+        // any other failure — fall through to the clipboard copy below
+      }
+    }
     try {
       await navigator.clipboard.writeText(link);
     } catch {
@@ -216,7 +232,7 @@ export default function ForkitHousehold({ onBack, onOpenShopping, onOpenRecipe }
             onClick={handleInvite}
             className="flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold tracking-wider text-sm bg-primary text-on-primary shrink-0 w-fit"
           >
-            {inviteCopied ? <Check size={16} /> : <UserPlus size={16} />}
+            {inviteCopied ? <Check size={16} /> : <Share2 size={16} />}
             {inviteCopied ? 'Link copied!' : 'Invite Roommates'}
           </button>
         </section>
