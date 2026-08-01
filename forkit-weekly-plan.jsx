@@ -6,7 +6,7 @@ import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
 const LEFTOVER_MODE_KEY = 'forkit_leftover_mode';
 
-export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpenHousehold }) {
+export default function ForkitWeeklyPlan({ answers, freshersMode, onBack, onOpenRecipe, onOpenHousehold }) {
   const [leftoverMode, setLeftoverMode] = useState(() => localStorage.getItem(LEFTOVER_MODE_KEY) === 'true');
 
   const toggleLeftoverMode = () => {
@@ -26,7 +26,8 @@ export default function ForkitWeeklyPlan({ answers, onBack, onOpenRecipe, onOpen
       dislikedDishes: answers?.dislikedDishes ?? [],
       macroPriority: answers?.macros,
     },
-    leftoverMode
+    leftoverMode,
+    !!freshersMode
   );
   const remaining = WEEKLY_BUDGET.target - WEEKLY_BUDGET.spent;
   const pct = Math.min(100, Math.round((WEEKLY_BUDGET.spent / WEEKLY_BUDGET.target) * 100));

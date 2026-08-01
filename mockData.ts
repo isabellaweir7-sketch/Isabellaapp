@@ -207,6 +207,16 @@ export function filterByFirmDislikes(recipes: Recipe[], firmDislikeIds: string[]
   return matches.length > 0 ? matches : recipes;
 }
 
+// Freshers Mode nudges recommendations toward simpler dishes for students
+// still learning to cook — Advanced recipes (the ones with a dedicated
+// technique refresher on Recipe Detail) are excluded, Easy/Intermediate
+// stay in. Same safe-fallback pattern as everywhere else in this file.
+export function filterByFreshersMode(recipes: Recipe[], freshersMode: boolean): Recipe[] {
+  if (!freshersMode) return recipes;
+  const matches = recipes.filter((r) => r.skillLevel !== 'Advanced');
+  return matches.length > 0 ? matches : recipes;
+}
+
 // The single master pool every screen draws from: Home's Today's Plan, the
 // Weekly Plan, and Cupboard Cooker all filter this list by dietary
 // restrictions (and, for Cupboard Cooker, by ingredient overlap) rather than
@@ -11970,6 +11980,66 @@ export function getSavedRecipes(): Recipe[] {
   return RECIPE_LIBRARY.filter((r) => ids.has(r.id));
 }
 
+// Skill Lab's "Skill Path" is driven by real cooked recipes, not swipes or
+// saves — tracked separately (marking a recipe "cooked" is a stronger,
+// deliberate signal than saving it for later).
+const COOKED_RECIPE_IDS_KEY = 'forkit_cooked_recipe_ids';
+
+function readCookedRecipeIds(): string[] {
+  try {
+    const raw = localStorage.getItem(COOKED_RECIPE_IDS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function isRecipeCooked(recipeId: string): boolean {
+  return readCookedRecipeIds().includes(recipeId);
+}
+
+export function toggleCookedRecipe(recipeId: string): boolean {
+  const ids = readCookedRecipeIds();
+  const nextIds = ids.includes(recipeId) ? ids.filter((id) => id !== recipeId) : [...ids, recipeId];
+  try {
+    localStorage.setItem(COOKED_RECIPE_IDS_KEY, JSON.stringify(nextIds));
+  } catch {
+    // ignore storage errors (private browsing, etc.) — state just won't persist
+  }
+  return nextIds.includes(recipeId);
+}
+
+// The full set of technique ids at least one real recipe is actually tagged
+// with — used as the "every technique" bar for Kitchen Master, since
+// requiring a technique no recipe currently calls for would make that tier
+// impossible to reach (as of writing, no recipe needs deglazing).
+const ACHIEVABLE_TECHNIQUE_IDS = new Set(RECIPE_LIBRARY.flatMap((r) => r.relatedTechniques));
+
+export interface SkillProgress {
+  cookedCount: number;
+  techniquesUsed: number;
+  achievableTechniques: number;
+  levelIndex: number; // index into SKILL_LEVELS
+}
+
+// Matches SKILL_LEVELS' own stated requirements: Sous Chef needs 5 cooked
+// recipes spanning 3+ techniques, Kitchen Master needs 20 cooked recipes
+// spanning every technique the library actually uses.
+export function getSkillProgress(): SkillProgress {
+  const cookedIds = new Set(readCookedRecipeIds());
+  const cookedRecipes = RECIPE_LIBRARY.filter((r) => cookedIds.has(r.id));
+  const techniquesUsed = new Set(cookedRecipes.flatMap((r) => r.relatedTechniques)).size;
+  const achievableTechniques = ACHIEVABLE_TECHNIQUE_IDS.size;
+
+  let levelIndex = 0;
+  if (achievableTechniques > 0 && cookedRecipes.length >= 20 && techniquesUsed >= achievableTechniques) {
+    levelIndex = 2;
+  } else if (cookedRecipes.length >= 5 && techniquesUsed >= 3) {
+    levelIndex = 1;
+  }
+  return { cookedCount: cookedRecipes.length, techniquesUsed, achievableTechniques, levelIndex };
+}
+
 // The hero cupboard-mode result shown on Home — the app's original
 // differentiator. Cupboard Cooker itself now generates a real match from
 // RECIPE_LIBRARY based on selected ingredients, this is just the default.
@@ -12063,11 +12133,13 @@ export function generateWeeklyPlan(
   firmDislikeIds: string[] = [],
   equipmentIds: string[] = [],
   profile?: TasteProfile,
-  leftoverMode = false
+  leftoverMode = false,
+  freshersMode = false
 ): DayPlan[] {
   const dietPool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const dislikePool = filterByFirmDislikes(dietPool.length > 0 ? dietPool : RECIPE_LIBRARY, firmDislikeIds);
-  const pool = filterByEquipment(dislikePool.length > 0 ? dislikePool : RECIPE_LIBRARY, equipmentIds);
+  const equipmentPool = filterByEquipment(dislikePool.length > 0 ? dislikePool : RECIPE_LIBRARY, equipmentIds);
+  const pool = filterByFreshersMode(equipmentPool.length > 0 ? equipmentPool : RECIPE_LIBRARY, freshersMode);
   const safePool = rankByProfile(pool.length > 0 ? pool : RECIPE_LIBRARY, profile);
 
   if (!leftoverMode) {
@@ -12133,12 +12205,14 @@ export function generateCupboardRecipe(
   allergyIds: string[] = [],
   firmDislikeIds: string[] = [],
   equipmentIds: string[] = [],
-  profile?: TasteProfile
+  profile?: TasteProfile,
+  freshersMode = false
 ): Recipe {
   const dietPool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const dislikePool = filterByFirmDislikes(dietPool.length > 0 ? dietPool : RECIPE_LIBRARY, firmDislikeIds);
   const equipmentPool = filterByEquipment(dislikePool.length > 0 ? dislikePool : RECIPE_LIBRARY, equipmentIds);
-  const safePool = equipmentPool.length > 0 ? equipmentPool : RECIPE_LIBRARY;
+  const freshersPool = filterByFreshersMode(equipmentPool.length > 0 ? equipmentPool : RECIPE_LIBRARY, freshersMode);
+  const safePool = freshersPool.length > 0 ? freshersPool : RECIPE_LIBRARY;
   // Ingredient match comes first (that's the point of Cupboard Cooker) —
   // taste profile only breaks ties between equally-good ingredient matches.
   const ranked = [...safePool].sort((a, b) => {
@@ -12215,11 +12289,13 @@ export function generateTodayMeals(
   allergyIds: string[] = [],
   firmDislikeIds: string[] = [],
   equipmentIds: string[] = [],
-  profile?: TasteProfile
+  profile?: TasteProfile,
+  freshersMode = false
 ): TodayMeal[] {
   const dietPool = filterByRestrictionsAndAllergies(RECIPE_LIBRARY, restrictionIds, allergyIds);
   const dislikePool = filterByFirmDislikes(dietPool.length > 0 ? dietPool : RECIPE_LIBRARY, firmDislikeIds);
-  const pool = filterByEquipment(dislikePool.length > 0 ? dislikePool : RECIPE_LIBRARY, equipmentIds);
+  const equipmentPool = filterByEquipment(dislikePool.length > 0 ? dislikePool : RECIPE_LIBRARY, equipmentIds);
+  const pool = filterByFreshersMode(equipmentPool.length > 0 ? equipmentPool : RECIPE_LIBRARY, freshersMode);
   const safePool = rankByProfile(pool.length > 0 ? pool : RECIPE_LIBRARY, profile);
   const dinnerRecipe = safePool[0];
 

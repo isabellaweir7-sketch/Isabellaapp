@@ -251,6 +251,7 @@ function BottomNav({ active, onChange, onNavigate }) {
 
 export default function ForkitHome({
   answers,
+  freshersMode,
   onOpenRecipe,
   onOpenSaved,
   onOpenPlan,
@@ -265,12 +266,19 @@ export default function ForkitHome({
   session,
 }) {
   const [activeTab, setActiveTab] = useState('home');
-  const todayMeals = generateTodayMeals(answers?.restrictions ?? [], answers?.allergies ?? [], answers?.firmDislikes ?? [], answers?.equipment ?? [], {
-    nutritionGoals: answers?.nutritionGoals ?? [],
-    likedDishes: answers?.likedDishes ?? [],
-    dislikedDishes: answers?.dislikedDishes ?? [],
-    macroPriority: answers?.macros,
-  });
+  const todayMeals = generateTodayMeals(
+    answers?.restrictions ?? [],
+    answers?.allergies ?? [],
+    answers?.firmDislikes ?? [],
+    answers?.equipment ?? [],
+    {
+      nutritionGoals: answers?.nutritionGoals ?? [],
+      likedDishes: answers?.likedDishes ?? [],
+      dislikedDishes: answers?.dislikedDishes ?? [],
+      macroPriority: answers?.macros,
+    },
+    !!freshersMode
+  );
 
   const handleNavTap = (id) => {
     if (id === 'pantry') onOpenPantry();

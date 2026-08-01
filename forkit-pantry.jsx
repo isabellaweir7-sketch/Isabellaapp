@@ -3,7 +3,7 @@ import { ChevronLeft, Search, CheckCircle2, Utensils, Timer, Zap } from 'lucide-
 import { SAVED_RECIPES, generateCupboardRecipe } from './mockData';
 import { SkillLevelBadge } from './forkit-recipe-detail.jsx';
 
-export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
+export default function ForkitPantry({ answers, freshersMode, onBack, onOpenRecipe }) {
   const [ingredientsText, setIngredientsText] = useState('');
   const [staples, setStaples] = useState(true);
 
@@ -76,12 +76,20 @@ export default function ForkitPantry({ answers, onBack, onOpenRecipe }) {
               disabled={parsedIngredients.length === 0}
               onClick={() =>
                 onOpenRecipe(
-                  generateCupboardRecipe(parsedIngredients, answers?.restrictions ?? [], answers?.allergies ?? [], answers?.firmDislikes ?? [], answers?.equipment ?? [], {
-                    nutritionGoals: answers?.nutritionGoals ?? [],
-                    likedDishes: answers?.likedDishes ?? [],
-                    dislikedDishes: answers?.dislikedDishes ?? [],
-                    macroPriority: answers?.macros,
-                  })
+                  generateCupboardRecipe(
+                    parsedIngredients,
+                    answers?.restrictions ?? [],
+                    answers?.allergies ?? [],
+                    answers?.firmDislikes ?? [],
+                    answers?.equipment ?? [],
+                    {
+                      nutritionGoals: answers?.nutritionGoals ?? [],
+                      likedDishes: answers?.likedDishes ?? [],
+                      dislikedDishes: answers?.dislikedDishes ?? [],
+                      macroPriority: answers?.macros,
+                    },
+                    !!freshersMode
+                  )
                 )
               }
               className="w-full py-3.5 rounded-xl font-semibold text-lg tracking-wider transition-opacity bg-primary-container text-on-primary-container flex items-center justify-center gap-2"

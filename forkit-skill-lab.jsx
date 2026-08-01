@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, PlayCircle, Lock, CheckCircle2, Lightbulb, X } from 'lucide-react';
-import { TECHNIQUES, SKILL_LEVELS, PRO_TIPS } from './mockData';
-
-const CURRENT_LEVEL_INDEX = 0;
+import { TECHNIQUES, SKILL_LEVELS, PRO_TIPS, getSkillProgress } from './mockData';
 
 // Real YouTube embed — plays inline in the app rather than redirecting out
 // to youtube.com. Shared between Skill Lab's modal and Recipe Detail's
@@ -59,14 +57,26 @@ function TechniqueCard({ technique, onSelect }) {
   );
 }
 
-function SkillPath() {
+// Thresholds for each locked tier, matching SKILL_LEVELS' own requirement
+// text — Kitchen Master's technique target is dynamic (every technique the
+// library actually uses), not a fixed number.
+function tierTarget(levelId, achievableTechniques) {
+  if (levelId === 'sous-chef') return { recipes: 5, techniques: 3 };
+  if (levelId === 'kitchen-master') return { recipes: 20, techniques: achievableTechniques };
+  return null;
+}
+
+function SkillPath({ progress }) {
+  const { cookedCount, techniquesUsed, achievableTechniques, levelIndex } = progress;
   return (
     <div className="bg-surface-container-low rounded-xl p-4 border border-outline-variant/40">
       <h3 className="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Skill Path</h3>
       <div className="flex flex-col gap-3">
         {SKILL_LEVELS.map((level, i) => {
-          const achieved = i < CURRENT_LEVEL_INDEX;
-          const current = i === CURRENT_LEVEL_INDEX;
+          const achieved = i < levelIndex;
+          const current = i === levelIndex;
+          const nextUp = i === levelIndex + 1;
+          const target = nextUp ? tierTarget(level.id, achievableTechniques) : null;
           return (
             <div key={level.id} className="flex items-center gap-3">
               <div
@@ -79,6 +89,12 @@ function SkillPath() {
               <div className="min-w-0">
                 <p className={`text-base font-semibold ${current || achieved ? 'text-primary' : 'text-outline'}`}>{level.name}</p>
                 <p className="text-xs font-medium text-on-surface-variant">{level.requirement}</p>
+                {target && (
+                  <p className="text-xs font-semibold text-primary mt-0.5">
+                    {Math.min(cookedCount, target.recipes)}/{target.recipes} recipes cooked ·{' '}
+                    {Math.min(techniquesUsed, target.techniques)}/{target.techniques} techniques used
+                  </p>
+                )}
               </div>
             </div>
           );
@@ -91,6 +107,7 @@ function SkillPath() {
 export default function ForkitSkillLab({ onBack }) {
   const [tab, setTab] = useState('techniques');
   const [activeTechnique, setActiveTechnique] = useState(null);
+  const [progress] = useState(() => getSkillProgress());
 
   return (
     <div className="min-h-screen flex flex-col bg-surface pb-28">
@@ -104,7 +121,7 @@ export default function ForkitSkillLab({ onBack }) {
       <div className="flex-1 px-5 pb-10 max-w-2xl mx-auto w-full flex flex-col gap-6">
         <p className="text-lg text-on-surface-variant">Move beyond following recipes — master the techniques behind them.</p>
 
-        <SkillPath />
+        <SkillPath progress={progress} />
 
         <div className="flex items-center gap-2">
           {['techniques', 'tips'].map((t) => (
