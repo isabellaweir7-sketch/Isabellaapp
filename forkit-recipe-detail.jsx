@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User, Flame, GraduationCap } from 'lucide-react';
-import { TECHNIQUES, isRecipeSaved, toggleSavedRecipe } from './mockData';
+import { ArrowLeft, Bookmark, Minus, Plus, Clock, ShoppingBasket, Banknote, Circle, CheckCircle2, Lightbulb, Refrigerator, Users, User, Flame, GraduationCap, ChefHat } from 'lucide-react';
+import { TECHNIQUES, isRecipeSaved, toggleSavedRecipe, isRecipeCooked, toggleCookedRecipe } from './mockData';
 import { TechniqueVideoEmbed } from './forkit-skill-lab.jsx';
 
 const BATCH_PRO_KEY = 'forkit_batch_pro_unlocked';
@@ -209,6 +209,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
   const [servings, setServings] = useState(recipe.baseServings);
   const [checked, setChecked] = useState([]);
   const [saved, setSaved] = useState(() => isRecipeSaved(recipe.id));
+  const [cooked, setCooked] = useState(() => isRecipeCooked(recipe.id));
   const total = recipe.pricePerServing * servings;
 
   // Re-syncs when navigating straight from one recipe to another, since the
@@ -216,6 +217,7 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
   // runs once).
   useEffect(() => {
     setSaved(isRecipeSaved(recipe.id));
+    setCooked(isRecipeCooked(recipe.id));
   }, [recipe.id]);
 
   const toggleChecked = (name) =>
@@ -322,6 +324,17 @@ export default function ForkitRecipeDetail({ recipe, onBack }) {
               ))}
             </div>
           </section>
+
+          <button
+            type="button"
+            onClick={() => setCooked(toggleCookedRecipe(recipe.id))}
+            className={`w-full py-3.5 rounded-xl font-semibold text-base tracking-wide flex items-center justify-center gap-2 transition-colors ${
+              cooked ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-surface-container border border-outline-variant text-primary'
+            }`}
+          >
+            <ChefHat size={18} />
+            {cooked ? "You've cooked this — counts toward your Skill Path" : 'Mark as Cooked'}
+          </button>
 
           <section className="bg-secondary-container rounded-xl p-4 relative overflow-hidden">
             <div className="flex items-center gap-2 mb-1">

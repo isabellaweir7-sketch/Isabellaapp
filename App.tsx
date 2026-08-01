@@ -103,6 +103,7 @@ export default function App() {
     return (
       <ForkitWeeklyPlan
         answers={answers}
+        freshersMode={freshersMode}
         onBack={() => setView('home')}
         onOpenRecipe={setOpenRecipe}
         onOpenHousehold={() => setView('household')}
@@ -111,7 +112,9 @@ export default function App() {
   }
 
   if (view === 'pantry') {
-    return <ForkitPantry answers={answers} onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />;
+    return (
+      <ForkitPantry answers={answers} freshersMode={freshersMode} onBack={() => setView('home')} onOpenRecipe={setOpenRecipe} />
+    );
   }
 
   if (view === 'community') {
@@ -194,6 +197,7 @@ export default function App() {
   return (
     <ForkitHome
       answers={answers}
+      freshersMode={freshersMode}
       onOpenRecipe={setOpenRecipe}
       onOpenSaved={() => setView('saved')}
       onOpenPlan={() => setView('plan')}
